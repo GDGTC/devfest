@@ -1,1 +1,109 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+}
+a {
+    text-decoration: none;
+}
+.all-caps {
+    text-transform: uppercase;
+}
+
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+}
+
+.center {
+    text-align:center;
+}
+section {
+    margin: 32px 0;
+    color: #333;
+    text-align: center;
+}
+section h2 {
+    text-transform: uppercase;
+    font-size:20px;
+    font-weight:normal;
+    color: #777;
+}
+section h2:after {
+    margin: 17px auto 0;
+    width:140px;
+    height:1px;
+    background:#19a9e5;
+    content: "";
+    display: block;
+}
+section .callout {
+    margin:32px 0;
+    font-size: 36px;
+    color: #222;
+    font-weight:bold;
+}
+section p {
+    margin:16px;
+}
+.cta {
+    display: flex;
+    margin-top: 20px;
+    padding: 8px 22px;
+    border-radius: 25px;
+    color: #fff;
+    background: #19a9e5;
+    font-size: 18px;
+    font-family: Montserrat,sans-serif;
+}
+
+.cta:active,.cta:focus,.cta:hover {
+    color: #fff;
+    text-decoration: none
+}
+
+.cta-stroke,.cta-stroke:focus,.cta-stroke:hover {
+    color: #19a9e5
+}
+
+.cta-transparent {
+    border: 2px solid rgba(255,255,255,0);
+    background-color: rgba(34,34,34,.14);
+    background-clip: padding-box
+}
+
+.cta-transparent:hover {
+    border: 2px solid #fff;
+    background-color: rgba(34,34,34,.05)
+}
+
+footer {
+    padding-top: 20px;
+    border-top: 1px solid #e5e5e5;
+    font-size: 12px;
+    text-align:center;
+}
+footer .blocks {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    margin-top:32px;
+}
+footer .blocks h5 {
+    font-size: 16px;
+    color: #222;
+    line-height:1.5em;
+}
+footer .blocks>div {
+    min-width:200px;
+    height:200px;
+    text-align:left;
+}
+footer .blocks a {
+    display:block;
+}
+.social-links {
+    display:flex;
+    justify-content:center;
+}

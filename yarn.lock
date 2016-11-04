@@ -13,13 +13,21 @@
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@angular-cli/base-href-webpack/-/base-href-webpack-1.0.6.tgz#a4082cbdf1b7648a59f89dbb366c7fc53772dc73"
 
-"@angular/common@^2.0.0":
+"@angular/common", "@angular/common@^2.0.0":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@angular/common/-/common-2.1.2.tgz#5c5b37c21d6e573def1670f43962c262bc9be82e"
 
-"@angular/common@~2.0.0":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@angular/common/-/common-2.0.2.tgz#b4a28f7568a511f596dc2dd4e2551830642cd4f4"
+"@angular/compiler", "@angular/compiler@^2.0.0":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-2.1.2.tgz#bd2a6c558de5350bdd43aa8e8de757943ac01d2a"
+
+"@angular/compiler-cli":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-2.1.2.tgz#9c34433af2183f294b9c63a035c785e002edc792"
+  dependencies:
+    "@angular/tsc-wrapped" "^0.3.0"
+    minimist "^1.2.0"
+    reflect-metadata "^0.1.2"
 
 "@angular/compiler-cli@^0.6.0":
   version "0.6.4"
@@ -30,43 +38,27 @@
     parse5 "^2.2.1"
     reflect-metadata "^0.1.2"
 
-"@angular/compiler@^2.0.0":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-2.1.2.tgz#bd2a6c558de5350bdd43aa8e8de757943ac01d2a"
-
-"@angular/compiler@~2.0.0":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-2.0.2.tgz#4ca4e53956cd6a36b223ce12682ba0bc289326bb"
-
-"@angular/core@^2.0.0":
+"@angular/core", "@angular/core@^2.0.0":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@angular/core/-/core-2.1.2.tgz#ce39521643f3d97bc5923d5a7aa76604e973dac8"
 
-"@angular/core@~2.0.0":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-2.0.2.tgz#f6ace071fecac27f9ac490cabfb17d6634aeee12"
+"@angular/forms":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-2.1.2.tgz#c55539ea5da6d60f64475f39392ae5dd76a7e990"
 
-"@angular/forms@~2.0.0":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-2.0.2.tgz#b762b8d86fa576147f6221482d90b3e94e8fe26c"
+"@angular/http":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@angular/http/-/http-2.1.2.tgz#50aa96c3b68a44b98e3f837886c96e5930eb543a"
 
-"@angular/http@~2.0.0":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@angular/http/-/http-2.0.2.tgz#c74b03125162f470b84e52c3a496b8fcda7085eb"
-
-"@angular/platform-browser-dynamic@~2.0.0":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-2.0.2.tgz#089272c349f78850690f15c4c81f5089f7271e88"
-
-"@angular/platform-browser@^2.0.0":
+"@angular/platform-browser", "@angular/platform-browser@^2.0.0":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-2.1.2.tgz#1f07c3a5668ac2381a7324f9001521deede159bc"
 
-"@angular/platform-browser@~2.0.0":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-2.0.2.tgz#25b754bfc426ee5a761b0b47fc677cd7d8ae41d2"
+"@angular/platform-browser-dynamic":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-2.1.2.tgz#3d51b494cfe0a29354c8c1f28369883679982af4"
 
-"@angular/platform-server@^2.0.0":
+"@angular/platform-server", "@angular/platform-server@^2.0.0":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@angular/platform-server/-/platform-server-2.1.2.tgz#31345f76a055713d418cf4c525f6a1915638500b"
   dependencies:
@@ -273,10 +265,6 @@ ansi-escapes@^1.1.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e"
 
-ansi-regex@*, ansi-regex@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.0.0.tgz#c5061b6e0ef8a81775e50f5d66151bf6bf371107"
-
 ansi-regex@^0.2.0, ansi-regex@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-0.2.1.tgz#0d8e946967a3d8143f93e24e298525fc1b2235f9"
@@ -284,6 +272,10 @@ ansi-regex@^0.2.0, ansi-regex@^0.2.1:
 ansi-regex@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-1.1.1.tgz#41c847194646375e6a1a5d10c3ca054ef9fc980d"
+
+ansi-regex@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.0.0.tgz#c5061b6e0ef8a81775e50f5d66151bf6bf371107"
 
 ansi-styles@^1.1.0:
   version "1.1.0"
@@ -3460,7 +3452,7 @@ image-size@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.5.0.tgz#be7aed1c37b5ac3d9ba1d66a24b4c47ff8397651"
 
-imurmurhash@*, imurmurhash@^0.1.4:
+imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
 
@@ -6990,12 +6982,6 @@ stringstream@~0.0.4:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"
 
-strip-ansi@*, strip-ansi@^3.0.0, strip-ansi@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf"
-  dependencies:
-    ansi-regex "^2.0.0"
-
 strip-ansi@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-0.3.0.tgz#25f48ea22ca79187f3174a4db8759347bb126220"
@@ -7007,6 +6993,12 @@ strip-ansi@^2.0.1:
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-2.0.1.tgz#df62c1aa94ed2f114e1d0f21fd1d50482b79a60e"
   dependencies:
     ansi-regex "^1.0.0"
+
+strip-ansi@^3.0.0, strip-ansi@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf"
+  dependencies:
+    ansi-regex "^2.0.0"
 
 strip-bom@^2.0.0:
   version "2.0.0"

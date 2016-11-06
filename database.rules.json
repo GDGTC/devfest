@@ -1,0 +1,70 @@
+{
+    "rules": {
+      "images": {
+        ".read": true,
+        ".write": true
+      },
+      "hunt": {
+        "users": {
+          "$user_id": {
+            ".write": "$user_id === auth.uid"
+          }
+        },
+        "leaderboard" : {
+            ".read": true,
+            ".write" : true
+          }
+        
+      },
+      "admin": {
+        ".read":"root.child('admin/'+auth.uid).exists()"// true
+      },
+      "users": {
+        ".read": true,
+//        ".write": true //,
+        "$user_id": {
+          ".write": "$user_id === auth.uid"
+        }
+      },
+      "devfest2016": {
+        "sponsors":{
+        ".read":true,
+        ".write":"root.child('admin/'+auth.uid).exists()"// true
+        },
+        "speakers":{
+          ".read":true,
+          ".write":"root.child('admin/'+auth.uid).exists()"// true
+        },
+        "schedule": {
+          ".read": true,
+          ".write":"root.child('admin/'+auth.uid).exists()"// true
+        , ".indexOn": ["timeslot", "startTime"]
+        },
+        "comments": {
+          ".read": true,
+          ".write": true
+        }
+      },
+      "agendas": {
+        ".read": true,
+        "$year": {
+          "$user_id": {
+            ".read": "$user_id === auth.uid",
+            ".write": "$user_id === auth.uid"
+          }
+        }
+      },
+      "feedback": {
+        "2016":{
+          ".read": true,
+          "$user_id": {
+            ".write": "$user_id === auth.uid"
+          }
+        },
+        "2016mobile":{
+          ".write": true
+        }
+      },
+      ".read": true
+    }
+}

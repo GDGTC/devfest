@@ -65,6 +65,6 @@
         ".write": true
       }
     },
-    ".read": true,
+    ".read": true
   }
 }

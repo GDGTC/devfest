@@ -28,7 +28,7 @@ import { PastComponent } from './past.component';
       {path: 'tickets', component: TicketsComponent},
       {path: 'sponsors', component: SponsorsComponent},
       {path: 'past', component: PastComponent},
-      {path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule'}
+      {path: 'admin', loadChildren: './admin/admin.module#AdminModule'}
     ]),
   ],
   providers: [],

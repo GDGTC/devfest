@@ -11,6 +11,7 @@ import { TicketsComponent } from './tickets.component';
 import { SponsorsComponent } from './sponsors.component';
 import { PastComponent } from './past.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +29,7 @@ import { PastComponent } from './past.component';
       {path: 'tickets', component: TicketsComponent},
       {path: 'sponsors', component: SponsorsComponent},
       {path: 'past', component: PastComponent},
+      {path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule'}
     ]),
   ],
   providers: [],

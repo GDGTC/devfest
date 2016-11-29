@@ -11,7 +11,6 @@ import { TicketsComponent } from './tickets.component';
 import { SponsorsComponent } from './sponsors.component';
 import { PastComponent } from './past.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

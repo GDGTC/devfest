@@ -58,7 +58,7 @@ const PATH = 'devfest2017'
             </md-input>
             <md-input [(ngModel)]="editSpeaker.imageUrl" placeholder="Image URL"></md-input>
             <md-input [(ngModel)]="editSpeaker.website" placeholder="Website"></md-input>
-            <button type="submit">Create Speaker</button>
+            <button type="submit">Create/Save Speaker</button>
         </form>
 
     </div>
@@ -99,6 +99,7 @@ export class AdminComponent {
         this.af.auth.login();
     }
     saveSession(session) {
+        event.preventDefault();
         if(session.$key) {
             let key = session.$key;
 
@@ -108,12 +109,12 @@ export class AdminComponent {
 
             this.schedule.update(key, session);
         } else {
-            event.preventDefault();
             this.schedule.push(session);
             this.editSession = {};
         }
     }
     saveSpeaker(speaker) {
+        event.preventDefault();
         if(speaker.$key) {
             let key = speaker.$key;
             
@@ -123,7 +124,6 @@ export class AdminComponent {
 
             this.speakers.update(key, speaker);
         } else {
-            event.preventDefault();
             this.speakers.push(speaker);
             this.editSpeaker = {};
         }

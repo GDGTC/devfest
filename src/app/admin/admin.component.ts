@@ -47,7 +47,7 @@ const PATH = 'devfest2017'
             <div>@{{speaker.twitter}}</div>
             <div>{{speaker.imageUrl}}</div>
             <div>{{speaker.website}}</div>
-            <button (click)="editSession = session">Edit</button>
+            <button (click)="editSpeaker = speaker">Edit</button>
         </div>
         <form ngNoForm (submit)="saveSpeaker(editSpeaker)">
             <md-input [(ngModel)]="editSpeaker.name" placeholder="Name"></md-input>

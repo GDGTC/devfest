@@ -27,7 +27,8 @@ const PATH = 'devfest2017'
             <div>{{session.slidesUrl}}</div>
             <div>{{session.videoUrl}}</div>
             <div>{{session.speakers | json}}</div>
-            <button (click)="editSession = session">Edit</button>
+            <button (click)="editSession = session" md-raised-button color="primary">Edit</button>
+            <button (click)="deleteSession(session.$key)" md-raised-button color="secondary">Delete</button>
         </div>
         <h3>New Session</h3>
         <form ngNoForm (submit)="saveSession(editSession)">
@@ -49,8 +50,8 @@ const PATH = 'devfest2017'
             <div>@{{speaker.twitter}}</div>
             <div>{{speaker.imageUrl}}</div>
             <div>{{speaker.website}}</div>
-            <button (click)="editSpeaker = speaker">Edit</button>
-            <button (click)="deleteSpeaker(speaker.$key)" md-raised-button color="primary">Delete</button>
+            <button (click)="editSpeaker = speaker" md-raised-button color="primary">Edit</button>
+            <button (click)="deleteSpeaker(speaker.$key)" md-raised-button color="secondary">Delete</button>
         </div>
         <form ngNoForm (submit)="saveSpeaker(editSpeaker)">
             <md-input [(ngModel)]="editSpeaker.name" placeholder="Name"></md-input>
@@ -134,6 +135,9 @@ export class AdminComponent {
     }
     deleteSpeaker(key){
         this.speakers.remove(key);
+    }
+    deleteSession(key){
+        this.schedule.remove(key);
     }
 
 }

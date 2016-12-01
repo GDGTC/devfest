@@ -34,7 +34,9 @@ const PATH = 'devfest2017'
             <md-input [(ngModel)]="editSession.title" placeholder="Title"></md-input>
             <md-input [(ngModel)]="editSession.description" placeholder="Description"></md-input>
             <md-input [(ngModel)]="editSession.room" placeholder="Room"></md-input>
-            <button type="submit">Create Session</button>
+            <md-input [(ngModel)]="editSession.startTime" placeholder="Start Time"></md-input>
+            <button type="submit" *ngIf="!editSession.$key">Create Session</button>
+            <button type="submit" *ngIf="editSession.$key">Save Session</button>
         </form>
 
 
@@ -48,6 +50,7 @@ const PATH = 'devfest2017'
             <div>{{speaker.imageUrl}}</div>
             <div>{{speaker.website}}</div>
             <button (click)="editSpeaker = speaker">Edit</button>
+            <button (click)="deleteSpeaker(speaker.$key)" md-raised-button color="primary">Delete</button>
         </div>
         <form ngNoForm (submit)="saveSpeaker(editSpeaker)">
             <md-input [(ngModel)]="editSpeaker.name" placeholder="Name"></md-input>
@@ -58,7 +61,8 @@ const PATH = 'devfest2017'
             </md-input>
             <md-input [(ngModel)]="editSpeaker.imageUrl" placeholder="Image URL"></md-input>
             <md-input [(ngModel)]="editSpeaker.website" placeholder="Website"></md-input>
-            <button type="submit">Create/Save Speaker</button>
+            <button type="submit" *ngIf="editSpeaker.$key">Save Speaker</button>
+            <button type="submit" *ngIf="!editSpeaker.$key">Create Speaker</button>
         </form>
 
     </div>
@@ -79,14 +83,14 @@ export class AdminComponent {
 
     constructor(public af: AngularFire) {
         this.uid = af.auth.map(authState => {
-            if(authState && authState.google) {
+            if (authState && authState.google) {
                 return authState.google.uid;
             } else {
                 return null;
             }
         });
         this.name = af.auth.map(authState => {
-            if(authState && authState.google) {
+            if (authState && authState.google) {
                 return authState.google.displayName;
             } else {
                 return null;
@@ -100,7 +104,7 @@ export class AdminComponent {
     }
     saveSession(session) {
         event.preventDefault();
-        if(session.$key) {
+        if (session.$key) {
             let key = session.$key;
 
             delete session.$key;
@@ -110,14 +114,14 @@ export class AdminComponent {
             this.schedule.update(key, session);
         } else {
             this.schedule.push(session);
-            this.editSession = {};
         }
+        this.editSession = {};
     }
     saveSpeaker(speaker) {
         event.preventDefault();
-        if(speaker.$key) {
+        if (speaker.$key) {
             let key = speaker.$key;
-            
+
             delete speaker.$key;
             delete speaker.$exists;
             delete speaker.$value;
@@ -125,8 +129,11 @@ export class AdminComponent {
             this.speakers.update(key, speaker);
         } else {
             this.speakers.push(speaker);
-            this.editSpeaker = {};
         }
+        this.editSpeaker = {};
+    }
+    deleteSpeaker(key){
+        this.speakers.remove(key);
     }
 
 }

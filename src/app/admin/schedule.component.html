@@ -1,0 +1,35 @@
+<div style="padding:16px;pading-top:60px;">
+    <h1>Admin DevFestMN - Speakers</h1>
+    <div *ngIf="(this.uid | async) === null">
+        <button type="button" (click)="af.auth.login()">Login</button>
+    </div>
+    <div *ngIf="(this.uid | async) !== null">
+        Welcome {{name | async}} ({{uid | async}})
+        <admin-nav></admin-nav>
+        <h2>Schedule</h2>
+        <div *ngFor="let session of schedule | async " style="border:1px solid #CCC;padding:16px;">
+            <div>{{session.title}}</div>
+            <div>{{session.description}}</div>
+            <div>{{session.room}}</div>
+            <div>{{session.endTime}}</div>
+            <div>{{session.startTime}}</div>
+            <div>{{session.category}}</div>
+            <div>{{session.all}}</div>
+            <div>{{session.slidesUrl}}</div>
+            <div>{{session.videoUrl}}</div>
+            <div>{{session.speakers | json}}</div>
+            <button (click)="editSession = session" md-raised-button color="primary">Edit</button>
+            <button (click)="deleteSession(session.$key)" md-raised-button color="secondary">Delete</button>
+        </div>
+        <h3>New Session</h3>
+        <form ngNoForm (submit)="saveSession(editSession)">
+            <md-input [(ngModel)]="editSession.title" placeholder="Title"></md-input>
+            <md-input [(ngModel)]="editSession.description" placeholder="Description"></md-input>
+            <md-input [(ngModel)]="editSession.room" placeholder="Room"></md-input>
+            <md-input [(ngModel)]="editSession.startTime" placeholder="Start Time"></md-input>
+            <button type="submit" *ngIf="!editSession.$key">Create Session</button>
+            <button type="submit" *ngIf="editSession.$key">Save Session</button>
+        </form>
+
+    </div>
+</div>

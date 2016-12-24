@@ -12,8 +12,7 @@ import { Component, Input } from '@angular/core';
         position: fixed;
     background: white;
     margin-top: -40px;
-}
-    `,
+  }   `],
 })
 export class AdminNavComponent {
 }

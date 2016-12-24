@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AdminComponent } from './admin.component';
 import { SpeakersComponent } from './speakers.component';
-
+import { AdminNavComponent } from './admin-nav.component';
 
 @NgModule({
     imports: [
@@ -27,7 +27,8 @@ import { SpeakersComponent } from './speakers.component';
     ],
     declarations: [
         AdminComponent,
-        SpeakersComponent
+        SpeakersComponent,
+        AdminNavComponent
     ]
 })
 export class AdminModule {}

@@ -5,6 +5,7 @@
     </div>
     <div *ngIf="(this.uid | async) !== null">
         Welcome {{name | async}} ({{uid | async}})
+        <admin-nav></admin-nav>
         <h2>Speakers</h2>
         <h3>New Speaker</h3>
         <div *ngFor="let speaker of speakers | async" style="border:1px solid #CCC;padding:16px;">

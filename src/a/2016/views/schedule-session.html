@@ -1,3 +1,116 @@
-<div ng-hide="editMode"> <div class="modal-header"> <button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button> <h3 class="modal-title">{{ session.title ? session.title : 'Other Session' }}</h3> </div> <div class="modal-body"> <form role="form"> <div class="form-group"> <label for="room">Room:</label> {{rooms[session.room] ? rooms[session.room] : session.room}} </div> <div class="form-group"> <label for="time">Time:</label> {{session.startTime | date : 'h:mm a'}} - {{session.endTime | date : 'h:mm a'}} </div> <div class="form-group" ng-show="session.speakers"> <label for="speaker">Speaker:</label> <div ng-repeat="id in session.speakers" style="font-style:italic"> <a ng-click="viewSpeaker(id);">{{speakersAsObject[id].name}}</a> </div> </div> <div class="form-group" ng-show="session.description"> <label for="description">Description:</label> <div>{{session.description}}</div> </div> <div class="form-group" ng-show="session.youtubeUrl"> <label for="slides">Video:</label> <a href="{{session.youtubeUrl}}">{{session.youtubeUrl}}</a> </div> <div class="form-group" ng-show="session.slidesUrl"> <label for="slides">Slides:</label> <a href="{{session.slidesUrl}}">{{session.slidesUrl}}</a> </div> <!-- Only show session feedback during conference and right after @TODO --> <div ng-show="user.uid && false"> <div><strong>Session Feedback</strong></div> <a ng-click="giveFeedback();">Provide Feedback</a> </div> </form> </div> <div class="modal-footer" style="display:flex;justify-content:flex-end;align-items:center"> <p ng-show="err" class="bg-danger">{{ err }}</p> <div ng-show="user.uid" style="display:flex;align-items:center;margin-right:15px" ng-click="favorite.$value = !favorite.$value"> <svg ng-hide="favorite.$value" style="width:24px;height:24px" viewBox="0 0 24 24"> <path fill="#000000" d="M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z"/> </svg> <svg ng-show="favorite.$value" style="width:24px;height:24px" viewBox="0 0 24 24"> <path fill="#000000" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/> </svg> <span style="margin-left:6px"> <span ng-show="favorite.$value">On</span> <span ng-hide="favorite.$value">Add To</span> My Agenda </span> </div> <!-- Edit/Delete (Auth required) --> <a ng-show-admin="" class="btn btn-sm btn-primary" ng-click="editMode = true;">Edit</a> <a ng-show-admin="" class="btn btn-sm btn-danger" ng-click="deleteSession(session)">Delete</a> <button class="btn btn-default" type="button" ng-click="cancel()">back</button> </div> </div> <div ng-show="editMode"> <div class="modal-header"> <button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button> <h3 class="modal-title">{{ session.title ? 'Edit' : 'Add' }} Session</h3> </div> <div class="modal-body"> <form id="speakerForm" role="form"> <div class="form-group"> <label for="name">Title:</label> <input type="text" id="title" class="form-control" ng-model="session.title" placeholder="Session Title" required> </div> <!-- You can't add speakers until the session is in the DB --> <div class="form-group" ng-show="session.$id"> <label><span>Speakers</span> <div ng-repeat="(key, id) in session.speakers" style="font-style:italic"> {{speakersAsObject[id].name}} <span ng-show="session.$id">(<a ng-click="removeSpeaker(session,key)" style="color:red">X</a>)</span> </div> <div ng-hide="newSpeakerToggle[id]" ng-click="newSpeakerToggle[id] = true;">+</div> <div ng-show="newSpeakerToggle[id]"> <select ng-model="newSpeaker"> <option ng-repeat="speaker in speakers" ng-value="speaker.$id"> {{speaker.name}}  <option>Add a new speaker </select> <button ng-click="addSpeaker(session, newSpeaker);newSpeakerToggle[id]=false;">Add</button> </div> </label> </div> <div class="form-group"> <label for="description">Description:</label> <textarea name="description" id="description" class="form-control" ng-model="session.description" placeholder="What is the session about? What will we learn?"></textarea> </div> <div class="form-group"> <label><span>Room</span> <input ng-model="session.room" list="rooms"> All Rooms? <input type="checkbox" ng-model="session.all"></label> </div> <div class="form-group"> <label><span>Category</span> <input ng-model="session.category" placeholder="{{categories}}"></label> </div> <div class="form-group"> <label> <span>Time</span> <!-- I, Stephen Fluin, of sound mind and body do hereby
-					commit this programming heresy in the name of short term
-					speed and lunacy. --> <select ng-model="session.startTime" ng-change="console.log(session.startTime);"> <option value="2016-02-06T14:00Z">8AM <option value="2016-02-06T15:00Z">9AM <option value="2016-02-06T16:00Z">10AM <option value="2016-02-06T17:00Z">11AM <option value="2016-02-06T18:00Z">12PM <option value="2016-02-06T19:00Z">1PM <option value="2016-02-06T20:00Z">2PM <option value="2016-02-06T21:00Z">3PM <option value="2016-02-06T22:00Z">4PM <option value="2016-02-06T23:00Z">5PM <option value="2016-02-07T00:00Z">6PM </select> - <select ng-model="session.endTime"> <option value="2016-02-06T14:00Z">8AM <option value="2016-02-06T15:00Z">9AM <option value="2016-02-06T16:00Z">10AM <option value="2016-02-06T17:00Z">11AM <option value="2016-02-06T18:00Z">12PM <option value="2016-02-06T19:00Z">1PM <option value="2016-02-06T20:00Z">2PM <option value="2016-02-06T21:00Z">3PM <option value="2016-02-06T22:00Z">4PM <option value="2016-02-06T23:00Z">5PM <option value="2016-02-07T00:00Z">6PM </select> </label> </div> <div class="form-group"> <label><span>Slides URL</span> <input ng-model="session.slidesUrl" class="form-control" placeholder="https://slideshare.com/fragglemonster"></label> </div> <div class="form-group"> <label><span>YouTube URL</span> <input ng-model="session.youtubeUrl" class="form-control" placeholder="https://youtube.com/awesomejob"></label> </div> </form> </div> <div class="modal-footer"> <p ng-show="err" class="bg-danger">{{ err }}</p> <button class="btn btn-success" type="submit" ng-click="saveSession(session)">Save</button> <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button> </div> </div>
+<div ng-hide="editMode">
+	<div class="modal-header">
+		<button type="button" class="close" ng-click="cancel()" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+		</button> 
+		<h3 class="modal-title">{{ session.title ? session.title : 'Other Session' }}</h3>
+	</div>
+	<div class="modal-body">
+		<form role="form">
+			<div class="form-group"> 
+				<label for="room">Room:</label> {{rooms[session.room] ? rooms[session.room] : session.room}} 
+			</div>
+			<div class="form-group"> 
+				<label for="time">Time:</label> {{session.startTime | date : 'h:mm a'}} - {{session.endTime | date : 'h:mm a'}} 
+			</div>
+			<div class="form-group" ng-show="session.speakers">
+				<label for="speaker">Speaker:</label> 
+				<div ng-repeat="id in session.speakers" style="font-style:italic"> <a ng-click="viewSpeaker(id);">{{speakersAsObject[id].name}}</a> 
+				</div>
+			</div>
+			<div class="form-group" ng-show="session.description">
+				<label for="description">Description:</label> 
+				<div>{{session.description}}</div>
+			</div>
+			<div class="form-group" ng-show="session.youtubeUrl"> <label for="slides">Video:</label> <a href="{{session.youtubeUrl}}">{{session.youtubeUrl}}</a> </div>
+			<div class="form-group" ng-show="session.slidesUrl"> <label for="slides">Slides:</label> <a href="{{session.slidesUrl}}">{{session.slidesUrl}}</a> </div>
+			<!-- Only show session feedback during conference and right after @TODO --> 
+			<div ng-show="user.uid && false">
+				<div><strong>Session Feedback</strong></div>
+				<a ng-click="giveFeedback();">Provide Feedback</a> 
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer" style="display:flex;justify-content:flex-end;align-items:center">
+		<p ng-show="err" class="bg-danger">{{ err }}</p>
+		<div ng-show="user.uid" style="display:flex;align-items:center;margin-right:15px" ng-click="favorite.$value = !favorite.$value">
+			<svg ng-hide="favorite.$value" style="width:24px;height:24px" viewBox="0 0 24 24">
+				<path fill="#000000" d="M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z"/>
+			</svg>
+			<svg ng-show="favorite.$value" style="width:24px;height:24px" viewBox="0 0 24 24">
+				<path fill="#000000" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/>
+			</svg>
+			<span style="margin-left:6px"> <span ng-show="favorite.$value">On</span> <span ng-hide="favorite.$value">Add To</span> My Agenda </span> 
+		</div>
+		<!-- Edit/Delete (Auth required) --> <a ng-show-admin="" class="btn btn-sm btn-primary" ng-click="editMode = true;">Edit</a> <a ng-show-admin="" class="btn btn-sm btn-danger" ng-click="deleteSession(session)">Delete</a> <button class="btn btn-default" type="button" ng-click="cancel()">back</button> 
+	</div>
+</div>
+<div ng-show="editMode">
+	<div class="modal-header">
+		<button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+		<h3 class="modal-title">{{ session.title ? 'Edit' : 'Add' }} Session</h3>
+	</div>
+	<div class="modal-body">
+		<form id="speakerForm" role="form">
+			<div class="form-group"> <label for="name">Title:</label> <input type="text" id="title" class="form-control" ng-model="session.title" placeholder="Session Title" required> </div>
+			<!-- You can't add speakers until the session is in the DB --> 
+			<div class="form-group" ng-show="session.$id">
+				<label>
+					<span>Speakers</span> 
+					<div ng-repeat="(key, id) in session.speakers" style="font-style:italic"> {{speakersAsObject[id].name}} <span ng-show="session.$id">(<a ng-click="removeSpeaker(session,key)" style="color:red">X</a>)</span> </div>
+					<div ng-hide="newSpeakerToggle[id]" ng-click="newSpeakerToggle[id] = true;">+</div>
+					<div ng-show="newSpeakerToggle[id]">
+						<select ng-model="newSpeaker">
+							<option ng-repeat="speaker in speakers" ng-value="speaker.$id"> {{speaker.name}}  
+							<option>Add a new speaker 
+						</select>
+						<button ng-click="addSpeaker(session, newSpeaker);newSpeakerToggle[id]=false;">Add</button> 
+					</div>
+				</label>
+			</div>
+			<div class="form-group"> <label for="description">Description:</label> <textarea name="description" id="description" class="form-control" ng-model="session.description" placeholder="What is the session about? What will we learn?"></textarea> </div>
+			<div class="form-group"> <label><span>Room</span> <input ng-model="session.room" list="rooms"> All Rooms? <input type="checkbox" ng-model="session.all"></label> </div>
+			<div class="form-group"> <label><span>Category</span> <input ng-model="session.category" placeholder="{{categories}}"></label> </div>
+			<div class="form-group">
+				<label>
+					<span>Time</span> <!-- I, Stephen Fluin, of sound mind and body do hereby
+						commit this programming heresy in the name of short term
+						speed and lunacy. --> 
+					<select ng-model="session.startTime" ng-change="console.log(session.startTime);">
+						<option value="2016-02-06T14:00Z">8AM 
+						<option value="2016-02-06T15:00Z">9AM 
+						<option value="2016-02-06T16:00Z">10AM 
+						<option value="2016-02-06T17:00Z">11AM 
+						<option value="2016-02-06T18:00Z">12PM 
+						<option value="2016-02-06T19:00Z">1PM 
+						<option value="2016-02-06T20:00Z">2PM 
+						<option value="2016-02-06T21:00Z">3PM 
+						<option value="2016-02-06T22:00Z">4PM 
+						<option value="2016-02-06T23:00Z">5PM 
+						<option value="2016-02-07T00:00Z">6PM 
+					</select>
+					- 
+					<select ng-model="session.endTime">
+						<option value="2016-02-06T14:00Z">8AM 
+						<option value="2016-02-06T15:00Z">9AM 
+						<option value="2016-02-06T16:00Z">10AM 
+						<option value="2016-02-06T17:00Z">11AM 
+						<option value="2016-02-06T18:00Z">12PM 
+						<option value="2016-02-06T19:00Z">1PM 
+						<option value="2016-02-06T20:00Z">2PM 
+						<option value="2016-02-06T21:00Z">3PM 
+						<option value="2016-02-06T22:00Z">4PM 
+						<option value="2016-02-06T23:00Z">5PM 
+						<option value="2016-02-07T00:00Z">6PM 
+					</select>
+				</label>
+			</div>
+			<div class="form-group"> <label><span>Slides URL</span> <input ng-model="session.slidesUrl" class="form-control" placeholder="https://slideshare.com/fragglemonster"></label> </div>
+			<div class="form-group"> <label><span>YouTube URL</span> <input ng-model="session.youtubeUrl" class="form-control" placeholder="https://youtube.com/awesomejob"></label> </div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<p ng-show="err" class="bg-danger">{{ err }}</p>
+		<button class="btn btn-success" type="submit" ng-click="saveSession(session)">Save</button> <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button> 
+	</div>
+</div>

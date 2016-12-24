@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AdminComponent } from './admin.component';
+import { SpeakersComponent } from './speakers.component';
 
 
 @NgModule({
@@ -19,12 +20,14 @@ import { AdminComponent } from './admin.component';
             storageBucket: "firebase-devfestmn.appspot.com",
         }, {method: AuthMethods.Popup, provider: AuthProviders.Google}),
         RouterModule.forChild([
-            {path: '', component: AdminComponent}
+            {path: '', component: AdminComponent},
+            {path: 'speakers', component: SpeakersComponent}            
         ]),
         FormsModule
     ],
     declarations: [
         AdminComponent,
+        SpeakersComponent
     ]
 })
 export class AdminModule {}

@@ -1,0 +1,60 @@
+<div style="padding:16px;pading-top:60px;">
+    <h1>Admin DevFestMN</h1>
+    <div *ngIf="(this.uid | async) === null">
+        <button type="button" (click)="af.auth.login()">Login</button>
+    </div>
+    <div *ngIf="(this.uid | async) !== null">
+        Welcome {{name | async}} ({{uid | async}})
+        <h2>Schedule</h2>
+        <div *ngFor="let session of schedule | async" style="border:1px solid #CCC;padding:16px;">
+            <div>{{session.title}}</div>
+            <div>{{session.description}}</div>
+            <div>{{session.room}}</div>
+            <div>{{session.endTime}}</div>
+            <div>{{session.startTime}}</div>
+            <div>{{session.category}}</div>
+            <div>{{session.all}}</div>
+            <div>{{session.slidesUrl}}</div>
+            <div>{{session.videoUrl}}</div>
+            <div>{{session.speakers | json}}</div>
+            <button (click)="editSession = session" md-raised-button color="primary">Edit</button>
+            <button (click)="deleteSession(session.$key)" md-raised-button color="secondary">Delete</button>
+        </div>
+        <h3>New Session</h3>
+        <form ngNoForm (submit)="saveSession(editSession)">
+            <md-input [(ngModel)]="editSession.title" placeholder="Title"></md-input>
+            <md-input [(ngModel)]="editSession.description" placeholder="Description"></md-input>
+            <md-input [(ngModel)]="editSession.room" placeholder="Room"></md-input>
+            <md-input [(ngModel)]="editSession.startTime" placeholder="Start Time"></md-input>
+            <button type="submit" *ngIf="!editSession.$key">Create Session</button>
+            <button type="submit" *ngIf="editSession.$key">Save Session</button>
+        </form>
+
+
+        <h2>Speakers</h2>
+        <h3>New Speaker</h3>
+        <div *ngFor="let speaker of speakers | async" style="border:1px solid #CCC;padding:16px;">
+            <div>{{speaker.name}}</div>
+            <div>{{speaker.bio}}</div>
+            <div>{{speaker.company}}</div>
+            <div>@{{speaker.twitter}}</div>
+            <div>{{speaker.imageUrl}}</div>
+            <div>{{speaker.website}}</div>
+            <button (click)="editSpeaker = speaker" md-raised-button color="primary">Edit</button>
+            <button (click)="deleteSpeaker(speaker.$key)" md-raised-button color="secondary">Delete</button>
+        </div>
+        <form ngNoForm (submit)="saveSpeaker(editSpeaker)">
+            <md-input [(ngModel)]="editSpeaker.name" placeholder="Name"></md-input>
+            <md-input [(ngModel)]="editSpeaker.bio" placeholder="Bio"></md-input>
+            <md-input [(ngModel)]="editSpeaker.company" placeholder="Company"></md-input>
+            <md-input [(ngModel)]="editSpeaker.twitter" placeholder="Twitter">
+                <span md-prefix>@</span>
+            </md-input>
+            <md-input [(ngModel)]="editSpeaker.imageUrl" placeholder="Image URL"></md-input>
+            <md-input [(ngModel)]="editSpeaker.website" placeholder="Website"></md-input>
+            <button type="submit" *ngIf="editSpeaker.$key">Save Speaker</button>
+            <button type="submit" *ngIf="!editSpeaker.$key">Create Speaker</button>
+        </form>
+
+    </div>
+</div>

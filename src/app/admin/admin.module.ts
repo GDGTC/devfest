@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AdminComponent } from './admin.component';
 import { SpeakersComponent } from './speakers.component';
+import { ScheduleComponent } from './schedule.component';
 import { AdminNavComponent } from './admin-nav.component';
 
 @NgModule({
@@ -21,14 +22,16 @@ import { AdminNavComponent } from './admin-nav.component';
         }, {method: AuthMethods.Popup, provider: AuthProviders.Google}),
         RouterModule.forChild([
             {path: '', component: AdminComponent},
-            {path: 'speakers', component: SpeakersComponent}            
+            {path: 'speakers', component: SpeakersComponent},
+            {path: 'schedule', component: ScheduleComponent},
         ]),
         FormsModule
     ],
     declarations: [
         AdminComponent,
         SpeakersComponent,
-        AdminNavComponent
+        AdminNavComponent,
+        ScheduleComponent
     ]
 })
 export class AdminModule {}

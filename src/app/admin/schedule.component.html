@@ -7,6 +7,7 @@
         Welcome {{name | async}} ({{uid | async}})
         <admin-nav></admin-nav>
         <h2>Schedule</h2>
+        <button (click)="editSession = {}; showDialog = true" md-raised-button color="primary">New Session</button>
         <div *ngFor="let session of schedule | async " style="border:1px solid #CCC;padding:16px;">
             <div>{{session.title}}</div>
             <div>{{session.description}}</div>
@@ -18,18 +19,23 @@
             <div>{{session.slidesUrl}}</div>
             <div>{{session.videoUrl}}</div>
             <div>{{session.speakers | json}}</div>
-            <button (click)="editSession = session" md-raised-button color="primary">Edit</button>
+            <button (click)="editSession = session; showDialog = true" md-raised-button color="primary">Edit</button>
             <button (click)="deleteSession(session.$key)" md-raised-button color="secondary">Delete</button>
         </div>
-        <h3>New Session</h3>
+
+<app-dialog [(visible)]="showDialog">
+  <h1>Edit Session</h1>
         <form ngNoForm (submit)="saveSession(editSession)">
             <md-input [(ngModel)]="editSession.title" placeholder="Title"></md-input>
             <md-input [(ngModel)]="editSession.description" placeholder="Description"></md-input>
             <md-input [(ngModel)]="editSession.room" placeholder="Room"></md-input>
             <md-input [(ngModel)]="editSession.startTime" placeholder="Start Time"></md-input>
-            <button type="submit" *ngIf="!editSession.$key">Create Session</button>
-            <button type="submit" *ngIf="editSession.$key">Save Session</button>
+            <button md-raised-button type="submit" *ngIf="!editSession.$key">Create Session</button>
+            <button md-raised-button type="submit" *ngIf="editSession.$key">Save Session</button>
         </form>
+  <button (click)="showDialog = !showDialog" class="btn">Close</button>
+</app-dialog>
+
 
     </div>
 </div>

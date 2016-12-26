@@ -9,6 +9,7 @@ import { AdminComponent } from './admin.component';
 import { SpeakersComponent } from './speakers.component';
 import { ScheduleComponent } from './schedule.component';
 import { AdminNavComponent } from './admin-nav.component';
+import { DialogComponent } from './dialog.component';
 
 @NgModule({
     imports: [
@@ -31,7 +32,8 @@ import { AdminNavComponent } from './admin-nav.component';
         AdminComponent,
         SpeakersComponent,
         AdminNavComponent,
-        ScheduleComponent
+        ScheduleComponent,
+        DialogComponent,
     ]
 })
 export class AdminModule {}

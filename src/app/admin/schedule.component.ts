@@ -20,6 +20,8 @@ export class ScheduleComponent {
     editSession = {};
     editSpeaker = {};
 
+    showDialog = false;
+
     constructor(public af: AngularFire) {
         this.uid = af.auth.map(authState => {
             if (authState && authState.google) {

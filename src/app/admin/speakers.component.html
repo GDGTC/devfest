@@ -7,7 +7,7 @@
         Welcome {{name | async}} ({{uid | async}})
         <admin-nav></admin-nav>
         <h2>Speakers</h2>
-        <h3>New Speaker</h3>
+        <button (click)="editSpeaker = {}; showDialog = true" md-raised-button color="primary">New Speaker</button>
         <div *ngFor="let speaker of speakers | async" style="border:1px solid #CCC;padding:16px;">
             <div>{{speaker.name}}</div>
             <div>{{speaker.bio}}</div>
@@ -15,21 +15,23 @@
             <div>@{{speaker.twitter}}</div>
             <div>{{speaker.imageUrl}}</div>
             <div>{{speaker.website}}</div>
-            <button (click)="editSpeaker = speaker" md-raised-button color="primary">Edit</button>
+            <button (click)="editSpeaker = speaker;; showDialog = true" md-raised-button color="primary">Edit</button>
             <button (click)="deleteSpeaker(speaker.$key)" md-raised-button color="secondary">Delete</button>
         </div>
-        <form ngNoForm (submit)="saveSpeaker(editSpeaker)">
-            <md-input [(ngModel)]="editSpeaker.name" placeholder="Name"></md-input>
-            <md-input [(ngModel)]="editSpeaker.bio" placeholder="Bio"></md-input>
-            <md-input [(ngModel)]="editSpeaker.company" placeholder="Company"></md-input>
-            <md-input [(ngModel)]="editSpeaker.twitter" placeholder="Twitter">
-                <span md-prefix>@</span>
-            </md-input>
-            <md-input [(ngModel)]="editSpeaker.imageUrl" placeholder="Image URL"></md-input>
-            <md-input [(ngModel)]="editSpeaker.website" placeholder="Website"></md-input>
-            <button type="submit" *ngIf="editSpeaker.$key">Save Speaker</button>
-            <button type="submit" *ngIf="!editSpeaker.$key">Create Speaker</button>
-        </form>
-
+    <app-dialog [(visible)]="showDialog">
+    <h1>Edit Speaker</h1>
+            <form ngNoForm (submit)="saveSpeaker(editSpeaker)">
+                <md-input [(ngModel)]="editSpeaker.name" placeholder="Name"></md-input>
+                <md-input [(ngModel)]="editSpeaker.bio" placeholder="Bio"></md-input>
+                <md-input [(ngModel)]="editSpeaker.company" placeholder="Company"></md-input>
+                <md-input [(ngModel)]="editSpeaker.twitter" placeholder="Twitter">
+                    <span md-prefix>@</span>
+                </md-input>
+                <md-input [(ngModel)]="editSpeaker.imageUrl" placeholder="Image URL"></md-input>
+                <md-input [(ngModel)]="editSpeaker.website" placeholder="Website"></md-input>
+                <button type="submit" *ngIf="editSpeaker.$key" md-raised-button>Save Speaker</button>
+                <button type="submit" *ngIf="!editSpeaker.$key" md-raised-button>Create Speaker</button>
+            </form>
+    </app-dialog>
     </div>
 </div>

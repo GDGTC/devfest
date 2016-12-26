@@ -3,15 +3,15 @@ import { Component, Input } from '@angular/core';
   selector: 'admin-nav',
   template: `
     <div class='admin-nav-container'>
-		<a routerLink="/admin">Admin</a>
-		<a routerLink="/admin/speakers">speakers</a>
-		<a routerLink="/admin/schedule">schedule</a>
+		<button md-raised-button routerLink="/admin">Admin</button>
+		<button md-raised-button routerLink="/admin/speakers">speakers</button>
+		<button md-raised-button routerLink="/admin/schedule">schedule</button>
     </div>
   `,
   styles: [`.admin-nav-container {
         position: fixed;
     background: white;
-    margin-top: -40px;
+    top: 4px;
   }   `],
 })
 export class AdminNavComponent {

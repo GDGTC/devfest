@@ -60,24 +60,7 @@ export class ScheduleComponent {
             this.schedule.push(session);
         }
         this.editSession = {};
-    }
-    saveSpeaker(speaker) {
-        event.preventDefault();
-        if (speaker.$key) {
-            let key = speaker.$key;
-
-            delete speaker.$key;
-            delete speaker.$exists;
-            delete speaker.$value;
-
-            this.speakers.update(key, speaker);
-        } else {
-            this.speakers.push(speaker);
-        }
-        this.editSpeaker = {};
-    }
-    deleteSpeaker(key){
-        this.speakers.remove(key);
+        this.showDialog = false;
     }
     deleteSession(key){
         this.schedule.remove(key);

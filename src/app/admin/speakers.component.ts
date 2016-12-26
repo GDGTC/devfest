@@ -20,6 +20,8 @@ export class SpeakersComponent {
     editSession = {};
     editSpeaker = {};
 
+    showDialog = false;
+
     constructor(public af: AngularFire) {
         this.uid = af.auth.map(authState => {
             if (authState && authState.google) {
@@ -41,21 +43,6 @@ export class SpeakersComponent {
     login() {
         this.af.auth.login();
     }
-    saveSession(session) {
-        event.preventDefault();
-        if (session.$key) {
-            let key = session.$key;
-
-            delete session.$key;
-            delete session.$exists;
-            delete session.$value;
-
-            this.schedule.update(key, session);
-        } else {
-            this.schedule.push(session);
-        }
-        this.editSession = {};
-    }
     saveSpeaker(speaker) {
         event.preventDefault();
         if (speaker.$key) {
@@ -70,9 +57,7 @@ export class SpeakersComponent {
             this.speakers.push(speaker);
         }
         this.editSpeaker = {};
-    }
-    deleteSpeaker(key){
-        this.speakers.remove(key);
+        this.showDialog = false;
     }
     deleteSession(key){
         this.schedule.remove(key);

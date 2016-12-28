@@ -14,7 +14,7 @@ import { DialogComponent } from './dialog.component';
 @NgModule({
     imports: [
         CommonModule,
-        MaterialModule,
+        MaterialModule.forRoot(),
         AngularFireModule.initializeApp({
             apiKey: "AIzaSyBrWJx91j512T3q6AaTGNxu_3fq47bYhfg",
             authDomain: "devfestmn.firebaseapp.com",

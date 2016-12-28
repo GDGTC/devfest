@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 const PATH = 'devfest2017'
 
 @Component({
-    templateUrl: 'admin.component.html'
+    templateUrl: './admin.component.html'
 })
 export class AdminComponent {
     isAdmin: Observable<boolean>;

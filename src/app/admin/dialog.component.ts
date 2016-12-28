@@ -4,8 +4,8 @@ import {
 
 @Component({
   selector: 'app-dialog',
-  templateUrl: 'dialog.component.html',
-  styleUrls: ['dialog.component.css'],
+  templateUrl: './dialog.component.html',
+  styleUrls: ['./dialog.component.css'],
   animations: [
     trigger('dialog', [
       transition('void => *', [

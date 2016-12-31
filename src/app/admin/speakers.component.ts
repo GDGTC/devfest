@@ -59,8 +59,8 @@ export class SpeakersComponent {
         this.editSpeaker = {};
         this.showDialog = false;
     }
-    deleteSession(key){
-        this.schedule.remove(key);
+    deleteSpeaker(key){
+        this.speakers.remove(key);
     }
 
 }

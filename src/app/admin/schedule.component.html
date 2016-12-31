@@ -11,6 +11,7 @@
         <div *ngFor="let session of schedule | async " style="border:1px solid #CCC;padding:16px;">
             <div>{{session.title}}</div>
             <div>{{session.description}}</div>
+            <div>{{session.track}}</div>            
             <div>{{session.room}}</div>
             <div>{{session.endTime}}</div>
             <div>{{session.startTime}}</div>
@@ -29,6 +30,7 @@
             <md-input [(ngModel)]="editSession.title" placeholder="Title"></md-input>
             <md-input [(ngModel)]="editSession.description" placeholder="Description"></md-input>
             <md-input [(ngModel)]="editSession.room" placeholder="Room"></md-input>
+            <md-input [(ngModel)]="editSession.track" placeholder="Track"></md-input>
             <md-input [(ngModel)]="editSession.startTime" placeholder="Start Time"></md-input>
             <button md-raised-button type="submit" *ngIf="!editSession.$key">Create Session</button>
             <button md-raised-button type="submit" *ngIf="editSession.$key">Save Session</button>

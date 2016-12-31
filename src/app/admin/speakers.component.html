@@ -15,7 +15,7 @@
             <div>@{{speaker.twitter}}</div>
             <div>{{speaker.imageUrl}}</div>
             <div>{{speaker.website}}</div>
-            <button (click)="editSpeaker = speaker;; showDialog = true" md-raised-button color="primary">Edit</button>
+            <button (click)="editSpeaker = speaker; showDialog = true" md-raised-button color="primary">Edit</button>
             <button (click)="deleteSpeaker(speaker.$key)" md-raised-button color="secondary">Delete</button>
         </div>
     <app-dialog [(visible)]="showDialog">

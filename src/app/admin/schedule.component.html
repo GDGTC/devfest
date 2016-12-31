@@ -32,8 +32,10 @@
             <md-input [(ngModel)]="editSession.room" placeholder="Room"></md-input>
             <md-input [(ngModel)]="editSession.track" placeholder="Track"></md-input>
             <md-input [(ngModel)]="editSession.startTime" placeholder="Start Time"></md-input>
+            <div>Speakers: {{editSession.speakers | json}}</div>
             <button md-raised-button type="submit" *ngIf="!editSession.$key">Create Session</button>
             <button md-raised-button type="submit" *ngIf="editSession.$key">Save Session</button>
+            <speaker-selector [session]=editSession></speaker-selector>
         </form>
   <button (click)="showDialog = !showDialog" class="btn">Close</button>
 </app-dialog>

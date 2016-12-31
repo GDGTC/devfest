@@ -41,7 +41,7 @@ export class ScheduleComponent {
             .list(PATH + '/schedule')
             .map(items => items.sort((a, b) => a.startTime - b.startTime)) as Observable<any[]>
         ;
-        this.speakers = af.database.list(PATH + '/speakers');
+//        this.speakers = af.database.list(PATH + '/speakers');
     }
     login() {
         this.af.auth.login();

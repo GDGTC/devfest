@@ -11,6 +11,7 @@ import { ScheduleComponent } from './schedule.component';
 import { AdminNavComponent } from './admin-nav.component';
 import { DialogComponent } from './dialog.component';
 import { SpeakerSelector } from './speaker-selector.component';
+import { PickerComponent } from '../shared/picker.component';
 
 @NgModule({
     imports: [
@@ -36,6 +37,7 @@ import { SpeakerSelector } from './speaker-selector.component';
         ScheduleComponent,
         DialogComponent,
         SpeakerSelector,
+        PickerComponent,
     ]
 })
 export class AdminModule {}

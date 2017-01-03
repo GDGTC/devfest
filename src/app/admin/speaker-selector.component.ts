@@ -28,17 +28,18 @@ export class SpeakerSelector {
 
     constructor(public af: AngularFire) {
         this.speakers = af.database
-            .list(PATH + '/speakers')
-            .map(items => items.sort((a, b) => b.name - a.name)) as Observable<any[]>;
+            .list(PATH + '/speakers',{ query: { orderByChild: 'name' } })
+            .map(items => items.sort((a, b) => a.name - b.name)) as Observable<any[]>;
         //console.log('SpeakerSelector constructor');
         this.schedule = af.database.list(PATH + '/schedule');
     }
     addSpeakerToSession(speaker) {
-        if (this.session.speakers){
-            this.currentSpeakers = this.session.speakers;
-        } else {
-            this.currentSpeakers = [];
-        }
+            if (this.session.speakers){
+                this.currentSpeakers = this.session.speakers;
+                console.log(this.currentSpeakers);
+            } else {
+                this.currentSpeakers = [];
+            }
         this.currentSpeakers.push(speaker.$key);
         //this.session.speakerstest.push(speaker.$key);
         this.session.speakers = this.currentSpeakers;

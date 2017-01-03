@@ -59,7 +59,7 @@ export class ScheduleComponent {
 //             }) as Observable<any[]>
 //         ;
 
-        this.speakers = af.database.list(PATH + '/speakers');
+        this.speakers = af.database.list(PATH + '/speakers', { query: { orderByChild: 'name' } });
 
     }
     login() {

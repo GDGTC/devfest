@@ -37,8 +37,8 @@ export class SpeakersComponent {
                 return null;
             }
         });
-        this.schedule = af.database.list(PATH + '/schedule');
-        this.speakers = af.database.list(PATH + '/speakers');
+        this.schedule = af.database.list(PATH + '/schedule', { query: { orderByChild: 'startTime' } });
+        this.speakers = af.database.list(PATH + '/speakers', { query: { orderByChild: 'name' } });
     }
     login() {
         this.af.auth.login();

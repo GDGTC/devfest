@@ -27,10 +27,7 @@ export class SpeakerSelector {
     currentSpeakers = [];
 
     constructor(public af: AngularFire) {
-        this.speakers = af.database
-            .list(PATH + '/speakers',{ query: { orderByChild: 'name' } })
-            .map(items => items.sort((a, b) => a.name - b.name)) as Observable<any[]>;
-        //console.log('SpeakerSelector constructor');
+        this.speakers = af.database.list(PATH + '/speakers', { query: { orderByChild: 'name' } });
         this.schedule = af.database.list(PATH + '/schedule');
     }
     addSpeakerToSession(speaker) {

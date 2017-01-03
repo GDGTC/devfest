@@ -60,7 +60,7 @@
             </picker>-->
             <br>
             <em>Add speakers from the list below</em>
-            <speaker-selector [session]=editSession></speaker-selector>
+            <speaker-selector [session]=editSession style="overflow: scroll; max-height: 300px; display:block"></speaker-selector>
         </form>
   <button (click)="showDialog = !showDialog" class="btn">Close</button>
 </app-dialog>

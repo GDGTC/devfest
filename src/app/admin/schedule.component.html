@@ -35,8 +35,10 @@
 <app-dialog [(visible)]="showDialog">
   <h1>Edit Session</h1>
         <form ngNoForm (submit)="saveSession(editSession)">
-            <md-input [(ngModel)]="editSession.title" placeholder="Title"></md-input>
-            <md-input [(ngModel)]="editSession.description" placeholder="Description"></md-input>
+            <md-input [(ngModel)]="editSession.title" placeholder="Title" style="width: 100%"></md-input>
+            <br>
+            <textarea [(ngModel)]="editSession.description" placeholder="Description" style="width:100%; height: 4em;"></textarea>
+            <br>
             <md-input [(ngModel)]="editSession.room" placeholder="Room"></md-input>
             <md-input [(ngModel)]="editSession.track" placeholder="Track"></md-input>
             <md-input [(ngModel)]="editSession.startTime" placeholder="Start Time"></md-input>

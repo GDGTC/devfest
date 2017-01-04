@@ -23,8 +23,8 @@
     <app-dialog [(visible)]="showDialog">
     <h1>Edit Speaker</h1>
             <form ngNoForm (submit)="saveSpeaker(editSpeaker)">
-                <md-input [(ngModel)]="editSpeaker.name" placeholder="Name"></md-input>
-                <md-input [(ngModel)]="editSpeaker.bio" placeholder="Bio"></md-input>
+                <md-input [(ngModel)]="editSpeaker.name" placeholder="Name" style="width: 100%"></md-input>
+                <textarea [(ngModel)]="editSpeaker.bio" placeholder="Bio" style="width: 100%; height: 5em;"></textarea>
                 <md-input [(ngModel)]="editSpeaker.company" placeholder="Company"></md-input>
                 <md-input [(ngModel)]="editSpeaker.twitter" placeholder="Twitter">
                     <span md-prefix>@</span>

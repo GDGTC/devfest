@@ -13,7 +13,7 @@
                 <img src="{{speaker.imageUrl}}" style="width:50px; float: left;"/>
                 {{speaker.name}}
             </div>
-            <div style="clear: both;">{{speaker.bio}}</div>
+            <div style="clear: both;" [innerHTML]=speaker.bio></div>
             <div>{{speaker.company}}</div>
             <div>@{{speaker.twitter}}</div>
             <div>{{speaker.website}}</div>

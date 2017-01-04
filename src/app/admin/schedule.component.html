@@ -10,7 +10,7 @@
         <button (click)="editSession = {}; showDialog = true" md-raised-button color="primary">New Session</button>
         <div *ngFor="let session of schedule | async " style="border:1px solid #CCC;padding:16px;">
             <div style="font-weight: bold">{{session.title}}</div>
-            <div>{{session.description}}</div>
+            <div [innerHTML]=session.description></div>
             <div><em>track:</em>{{session.track}}            
             <em>room:</em>{{session.room}}</div>
             <div>{{session.startTime}} {{session.endTime}}</div>
@@ -52,13 +52,6 @@
             </div>
             <button md-raised-button type="submit" *ngIf="!editSession.$key">Create Session</button>
             <button md-raised-button type="submit" *ngIf="editSession.$key">Save Session</button>
-            <!--<picker
-                [list]="'/devfest2017/speakers'"
-                [selectedObservable]="speakers"
-                [order]="'name'"
-                [confirmDelete]="true"
-                (update)="update($event)">
-            </picker>-->
             <br>
             <em>Add speakers from the list below</em>
             <speaker-selector [session]=editSession style="overflow: scroll; max-height: 300px; display:block"></speaker-selector>

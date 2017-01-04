@@ -12,6 +12,8 @@ import { AdminNavComponent } from './admin-nav.component';
 import { DialogComponent } from './dialog.component';
 import { SpeakerSelector } from './speaker-selector.component';
 import { PickerComponent } from '../shared/picker.component';
+import { FirebaseService, FirebaseTypedService } from '../shared/firebase.service';
+import { FireJoinPipe } from '../shared/fire-join.pipe';
 
 @NgModule({
     imports: [
@@ -38,6 +40,7 @@ import { PickerComponent } from '../shared/picker.component';
         DialogComponent,
         SpeakerSelector,
         PickerComponent,
+        FireJoinPipe,
     ]
 })
 export class AdminModule {}

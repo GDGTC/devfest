@@ -11,20 +11,20 @@
         <div *ngFor="let session of schedule | async " style="border:1px solid #CCC;padding:16px;">
             <div style="font-weight: bold">{{session.title}}</div>
             <div>{{session.description}}</div>
-            <div>{{session.track}}</div>            
-            <div>{{session.room}}</div>
-            <div>{{session.endTime}}</div>
-            <div>{{session.startTime}}</div>
+            <div><em>track:</em>{{session.track}}            
+            <em>room:</em>{{session.room}}</div>
+            <div>{{session.startTime}} {{session.endTime}}</div>
             <div>{{session.category}}</div>
             <div>{{session.all}}</div>
             <div>{{session.slidesUrl}}</div>
             <div>{{session.videoUrl}}</div>
             <div>
                 <em>speakers (name lookup pending)</em>  
-                <ul>
+                <ul class="speakerlist">
                     <li *ngFor="let speaker of session.speakers">
-                        {{speaker}}
-                        <!--{{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.name}}-->
+                        <!--{{speaker}}-->
+                        <img src="{{(speaker | fireJoin: '/devfest2017/speakers/' | async)?.imageUrl}}"/>
+                        {{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.name}}
                     </li>
                 </ul>
             </div>
@@ -42,9 +42,10 @@
             <md-input [(ngModel)]="editSession.startTime" placeholder="Start Time"></md-input>
             <div>
                 <em>speakers</em>
-                <ul>
+                <ul class="speakerlist">
                     <li *ngFor="let speaker of editSession.speakers">
-                        {{speaker}}
+                        <img src="{{(speaker | fireJoin: '/devfest2017/speakers/' | async)?.imageUrl}}"/>
+                        {{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.name}}
                         <button type="button" (click)="deleteSpeakerFromSession(speaker)"> -X-</button>
                     </li>
                 </ul>

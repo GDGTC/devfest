@@ -14,6 +14,7 @@
                 {{speaker.name}}
             </div>
             <div style="clear: both;" [innerHTML]=speaker.bio></div>
+            <div>Confirmed: {{speaker.confirmed}}</div>
             <div>{{speaker.company}}</div>
             <div>@{{speaker.twitter}}</div>
             <div>{{speaker.website}}</div>
@@ -25,6 +26,7 @@
             <form ngNoForm (submit)="saveSpeaker(editSpeaker)">
                 <md-input [(ngModel)]="editSpeaker.name" placeholder="Name" style="width: 100%"></md-input>
                 <textarea [(ngModel)]="editSpeaker.bio" placeholder="Bio" style="width: 100%; height: 5em;"></textarea>
+                <md-checkbox [(ngModel)]="editSpeaker.confirmed" [checked]=editSpeaker.confirmed >Confirmed</md-checkbox>
                 <md-input [(ngModel)]="editSpeaker.company" placeholder="Company"></md-input>
                 <md-input [(ngModel)]="editSpeaker.twitter" placeholder="Twitter">
                     <span md-prefix>@</span>

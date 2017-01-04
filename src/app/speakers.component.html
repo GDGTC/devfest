@@ -1,0 +1,31 @@
+
+<section id="" class=" ">
+    <div>
+        <img src="/a/images/2017bluegreen.jpg" style="width: 60%; padding-top: 2em;">
+    </div>
+	<h2></h2>
+
+	<div class="callout">Confirmed Speakers</div>
+
+
+        <div *ngFor="let speaker of speakers | async" class="bigspeakerlist">
+            <div class="bigspeakerlistimg">
+                <img src="{{speaker.imageUrl}}" />
+            </div>
+            <div class="bigspeakerlistdeets">
+                <h2>{{speaker.name}}</h2>
+                <div>{{speaker.company}}</div>
+                <div>@{{speaker.twitter}}</div>
+            </div>
+        </div>
+
+
+
+</section>
+
+<p style="clear: both;"></p>
+
+
+
+
+

@@ -15,3 +15,25 @@
   padding: 10px;
   overflow: auto;
 }
+
+.bigspeakerlist{
+    float:left;
+    display: block;
+    height: 8em;
+    width: 345px;
+    margin: 3px;
+    border-radius: 2px;
+    border:1px solid #CCC;
+    padding:16px;
+}
+.bigspeakerlistdeets {
+    float: left;
+}
+
+.bigspeakerlistimg img {
+    width: 50px;
+    margin-right: 20px;
+}
+.bigspeakerlistimg {
+    float: left;
+}

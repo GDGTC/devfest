@@ -18,7 +18,7 @@ export class ScheduleComponent {
     times;
 
     constructor(public af: AngularFire) {
-        this.schedule = af.database.list(PATH + '/schedule', { query: { orderByChild: 'startTime', lessThan: 'UNK' } });
+        this.schedule = af.database.list(PATH + '/schedule', { query: { orderByChild: 'title'} });
         this.times = af.database.list(PATH + "/scheduletimes");
     }
 

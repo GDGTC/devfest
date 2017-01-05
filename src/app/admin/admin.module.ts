@@ -13,7 +13,7 @@ import { DialogComponent } from './dialog.component';
 import { SpeakerSelector } from './speaker-selector.component';
 import { PickerComponent } from '../shared/picker.component';
 import { FirebaseService, FirebaseTypedService } from '../shared/firebase.service';
-import { FireJoinPipe } from '../shared/fire-join.pipe';
+import { CustomPipesModule } from '../shared/custom-pipes.module';
 
 @NgModule({
     imports: [
@@ -30,7 +30,8 @@ import { FireJoinPipe } from '../shared/fire-join.pipe';
             {path: 'speakers', component: SpeakersComponent},
             {path: 'schedule', component: ScheduleComponent},
         ]),
-        FormsModule
+        FormsModule,
+        CustomPipesModule
     ],
     declarations: [
         AdminComponent,
@@ -40,7 +41,6 @@ import { FireJoinPipe } from '../shared/fire-join.pipe';
         DialogComponent,
         SpeakerSelector,
         PickerComponent,
-        FireJoinPipe,
     ]
 })
 export class AdminModule {}

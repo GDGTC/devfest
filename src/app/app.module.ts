@@ -16,7 +16,8 @@ import { SpeakersComponent } from './speakers.component';
 import { ScheduleComponent } from './schedule.component';
 import { PastComponent } from './past.component';
 
-import { FireJoinPipe } from './shared/fire-join.pipe';
+//import { FireJoinPipe } from './shared/fire-join.pipe';
+import { CustomPipesModule } from './shared/custom-pipes.module';
 
 @NgModule({
   declarations: [
@@ -27,12 +28,13 @@ import { FireJoinPipe } from './shared/fire-join.pipe';
     SpeakersComponent,
     ScheduleComponent,
     PastComponent,
-    FireJoinPipe
+  //  FireJoinPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    CustomPipesModule,
     AngularFireModule.initializeApp({
         apiKey: "AIzaSyBrWJx91j512T3q6AaTGNxu_3fq47bYhfg",
         authDomain: "devfestmn.firebaseapp.com",

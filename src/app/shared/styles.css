@@ -27,13 +27,43 @@
     padding:16px;
 }
 .bigspeakerlistdeets {
-    float: left;
+    float: right;
+    width: 250px;
+    overflow: hidden;
+    height: 6em;
 }
 
 .bigspeakerlistimg img {
     width: 50px;
-    margin-right: 20px;
+    /*margin-right: 20px;*/
 }
 .bigspeakerlistimg {
     float: left;
 }
+
+
+.bigschedulelist{
+    float:left;
+    display: block;
+    height: 12em;
+    width: 345px;
+    margin: 3px;
+    border-radius: 2px;
+    border:1px solid #CCC;
+    padding:4px;    
+    overflow: hidden;
+}
+.bigschedulelist h2 {
+    font-size: 1.1em;
+}
+
+.Keynote, .Keynote h2 {
+    background: cadetblue;
+    color: white;
+    width: 100%;
+    }
+.Web {background: lavenderblush;}
+.Android {background: lightgreen;}
+.Design {background: #CCC;}
+.Cloud  {background: lightblue;}
+.all {width: 100%;}

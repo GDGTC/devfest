@@ -13,7 +13,10 @@ import { HomeComponent } from './home.component';
 import { TicketsComponent } from './tickets.component';
 import { SponsorsComponent } from './sponsors.component';
 import { SpeakersComponent } from './speakers.component';
+import { ScheduleComponent } from './schedule.component';
 import { PastComponent } from './past.component';
+
+import { FireJoinPipe } from './shared/fire-join.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { PastComponent } from './past.component';
     TicketsComponent,
     SponsorsComponent,
     SpeakersComponent,
+    ScheduleComponent,
     PastComponent,
+    FireJoinPipe
   ],
   imports: [
     BrowserModule,
@@ -40,6 +45,7 @@ import { PastComponent } from './past.component';
       {path: 'sponsors', component: SponsorsComponent},
       {path: 'past', component: PastComponent},
       {path: 'speakers', component: SpeakersComponent},
+      {path: 'schedule', component: ScheduleComponent},
       {path: 'admin', loadChildren: './admin/admin.module#AdminModule'}
     ]),
   ],

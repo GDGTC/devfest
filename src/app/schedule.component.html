@@ -1,0 +1,37 @@
+
+<section id="" class=" ">
+    <div>
+        <img src="/a/images/2017bluegreen.jpg" style="width: 60%; padding-top: 2em;">
+    </div>
+
+    <h2>Schedule times and rooms will be updated often. <br />This page will be the most current and accurate.</h2>
+	<div class="callout">Current Schedule</div>
+
+    <div *ngFor="let time of times | async" style="clear:both">
+        <h2>{{time.label}}</h2>
+        <div *ngFor="let session of schedule | async" [hidden]="!(session.startTime==time.time)">
+            <div  class="bigschedulelist {{session.track}}" [hidden]="!(session.startTime==time.time)" >
+            <div class="bigsschduledeets" [hidden]="!(session.startTime==time.time)">
+                <h2>{{session.title}}</h2>
+                <div>{{session.room}}</div>
+                <div style="display:flex;flex-direction:row;">
+                <div *ngFor="let speaker of session.speakers" style="flex: 1 1 auto;text-align:center;">
+                        <img src="{{(speaker | fireJoin: '/devfest2017/speakers/' | async)?.imageUrl}}" style="width:40px;"/><br>
+                        {{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.name}}
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </div>
+
+</section>
+
+<p style="clear: both;"></p>
+
+
+
+
+

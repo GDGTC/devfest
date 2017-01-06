@@ -8,14 +8,16 @@
 	<div class="callout">Confirmed Speakers</div>
 
 
-        <div *ngFor="let speaker of speakers | async" class="bigspeakerlist">
-            <div class="bigspeakerlistimg">
-                <img src="{{speaker.imageUrl}}" />
-            </div>
-            <div class="bigspeakerlistdeets">
-                <h2>{{speaker.name}}</h2>
-                <div>{{speaker.company}}</div>
-                <div [hidden]="!speaker.twitter"><a href="https://twitter.com/{{speaker.twitter}}" target="_new">@{{speaker.twitter}}</a></div>
+        <div *ngFor="let speaker of speakers | async" [hidden]="!speaker.confirmed">
+            <div class="bigspeakerlist">
+                <div class="bigspeakerlistimg">
+                    <img src="{{speaker.imageUrl}}" />
+                </div>
+                <div class="bigspeakerlistdeets">
+                    <h2>{{speaker.name}}</h2>
+                    <div>{{speaker.company}}</div>
+                    <div [hidden]="!speaker.twitter"><a href="https://twitter.com/{{speaker.twitter}}" target="_new">@{{speaker.twitter}}</a></div>
+                </div>
             </div>
         </div>
 

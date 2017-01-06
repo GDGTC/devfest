@@ -15,7 +15,7 @@ export class SpeakersComponent {
     speakers;
 
     constructor(public af: AngularFire) {
-        this.speakers = af.database.list(PATH + '/speakers', { query: { orderByChild: 'confirmed', equalTo: true } });
+        this.speakers = af.database.list(PATH + '/speakers', { query: { orderByChild: 'name'} });
     }
 
 }

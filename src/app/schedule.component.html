@@ -7,6 +7,25 @@
     <h2>Schedule times and rooms will be updated often. <br />This page will be the most current and accurate.</h2>
 	<div class="callout">Current Schedule</div>
 
+    <div style="display:flex;flex-direction:row;    border: solid gray 1px;">
+        <div  style="flex: 1 1 auto;text-align:center;" class="" (click)="updateTrack('Keynote')">Keynote</div>
+        <div  style="flex: 1 1 auto;text-align:center;" class="Android" (click)="updateTrack('Android')">Android</div>
+        <div  style="flex: 1 1 auto;text-align:center;" class="Web" (click)="updateTrack('Web')">Web</div>
+        <div  style="flex: 1 1 auto;text-align:center;" class="Cloud" (click)="updateTrack('Cloud')">Cloud</div>
+        <div  style="flex: 1 1 auto;text-align:center;" class="Design" (click)="updateTrack('Design')">Design</div>
+        <div  style="flex: 1 1 auto;text-align:center;" class="IoT" (click)="updateTrack('IoT')">IoT</div>
+    </div>
+
+
+    <!--<md-button-toggle-group multiple>
+        <md-button-toggle>Keynote</md-button-toggle>
+        <md-button-toggle class='Android'>Android</md-button-toggle>
+        <md-button-toggle class='Web'>Web</md-button-toggle>
+        <md-button-toggle class='Cloud'>Cloud</md-button-toggle>
+        <md-button-toggle class='Design'>Design</md-button-toggle>
+        <md-button-toggle class='IoT'>IoT</md-button-toggle>        
+    </md-button-toggle-group>-->
+
     <div *ngFor="let time of times | async" style="clear:both">
         <h2>{{time.label}}</h2>
         <div *ngFor="let session of schedule | async" [hidden]="!(session.startTime==time.time)">

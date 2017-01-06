@@ -22,7 +22,7 @@ export class ScheduleComponent {
     schedule;
     speakers;
 
-    editSession = {};
+    editSession:any = {};
     editSpeaker = {};
 
     showDialog = false;

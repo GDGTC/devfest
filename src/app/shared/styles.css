@@ -55,16 +55,21 @@
 }
 .bigschedulelist h2 {
     font-size: 1.1em;
+    color: #000;
 }
 
 .bigsschduledeets{
-    
+    opacity: 1;
+    height: 100%;
+    background: rgba(255,255,255,.25);
 }
 
-.Keynote, .Keynote h2 {
+.Keynote {
     background: #189aaa;
-    color: white;
     width: 100%;
+}
+.Keynote h2 {
+    color: white;
     }
 .Android {background: #70E85F;}
 .Web {background: #5FC9E8;}

@@ -62,12 +62,13 @@
 }
 
 .Keynote, .Keynote h2 {
-    background: cadetblue;
+    background: #189aaa;
     color: white;
     width: 100%;
     }
-.Web {background: lavenderblush;}
-.Android {background: lightgreen;}
-.Design {background: #CCC;}
-.Cloud  {background: lightblue;}
+.Android {background: #70E85F;}
+.Web {background: #5FC9E8;}
+.Design {background: #75FFC3;}
+.Cloud  {background: #F8FF68;}
+.IoT {background: #8C9DFF;}
 .all {width: 100%;}

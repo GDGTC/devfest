@@ -1,0 +1,34 @@
+<div style="padding:16px;pading-top:60px;">
+    <h1>Admin DevFestMN - Speakers</h1>
+    <div *ngIf="(this.uid | async) === null">
+        <button type="button" (click)="af.auth.login()">Login</button>
+    </div>
+    <div *ngIf="(this.uid | async) !== null">
+        Welcome {{name | async}} ({{uid | async}})
+        <admin-nav></admin-nav>
+        <h2>Tracks</h2>
+        <button (click)="editTrack = {}; showDialog = true" md-raised-button color="primary">New track</button>
+        <div *ngFor="let track of tracks | async " style="border:1px solid #CCC;padding:16px;">
+            <div [style]=track.style>
+                <div style="font-weight: bold">{{track.name}}</div>
+                <div [innerHTML]=track.style></div>
+                <button (click)="editTrack = track; showDialog = true" md-raised-button color="primary">Edit</button>
+                <button (click)="deleteTrack(track.$key)" md-raised-button color="secondary">Delete</button>
+            </div>
+        </div>
+
+<app-dialog [(visible)]="showDialog">
+  <h1>Edit track</h1>
+        <form ngNoForm (submit)="saveTrack(editTrack)">
+            <md-input [(ngModel)]="editTrack.name" placeholder="Title" style="width: 100%"></md-input>
+            <br>
+            <textarea [(ngModel)]="editTrack.style" placeholder="Style" style="width:100%; height: 4em;"></textarea>
+            <button md-raised-button type="submit" *ngIf="!editTrack.$key">Create track</button>
+            <button md-raised-button type="submit" *ngIf="editTrack.$key">Save track</button>
+        </form>
+  <button (click)="showDialog = !showDialog" class="btn">Close</button>
+</app-dialog>
+
+
+    </div>
+</div>

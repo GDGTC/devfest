@@ -1,0 +1,34 @@
+<div style="padding:16px;pading-top:60px;">
+    <h1>Admin DevFestMN - Times</h1>
+    <div *ngIf="(this.uid | async) === null">
+        <button type="button" (click)="af.auth.login()">Login</button>
+    </div>
+    <div *ngIf="(this.uid | async) !== null">
+        Welcome {{name | async}} ({{uid | async}})
+        <admin-nav></admin-nav>
+        <h2>times</h2>
+        <button (click)="editTime = {}; showDialog = true" md-raised-button color="primary">New Time</button>
+        <div *ngFor="let time of times | async " style="border:1px solid #CCC;padding:16px;">
+            <div [style]=time.style>
+                <div style="font-weight: bold">{{time.name}}</div>
+                <div [innerHTML]=time.time></div>
+                <button (click)="editTime = time; showDialog = true" md-raised-button color="primary">Edit</button>
+                <button (click)="deleteTime(time.$key)" md-raised-button color="secondary">Delete</button>
+            </div>
+        </div>
+
+<app-dialog [(visible)]="showDialog">
+  <h1>Edit time</h1>
+        <form ngNoForm (submit)="saveTime(editTime)">
+            <md-input [(ngModel)]="editTime.name" placeholder="Title" style="width: 100%"></md-input>
+            <br>
+            <textarea [(ngModel)]="editTime.style" placeholder="Style" style="width:100%; height: 4em;"></textarea>
+            <button md-raised-button type="submit" *ngIf="!editTime.$key">Create time</button>
+            <button md-raised-button type="submit" *ngIf="editTime.$key">Save time</button>
+        </form>
+  <button (click)="showDialog = !showDialog" class="btn">Close</button>
+</app-dialog>
+
+
+    </div>
+</div>

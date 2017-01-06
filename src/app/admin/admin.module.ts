@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { AdminComponent } from './admin.component';
 import { SpeakersComponent } from './speakers.component';
 import { ScheduleComponent } from './schedule.component';
+import { TimesComponent } from './times.component';
 import { AdminNavComponent } from './admin-nav.component';
 import { DialogComponent } from './dialog.component';
 import { SpeakerSelector } from './speaker-selector.component';
@@ -29,6 +30,7 @@ import { CustomPipesModule } from '../shared/custom-pipes.module';
             {path: '', component: AdminComponent},
             {path: 'speakers', component: SpeakersComponent},
             {path: 'schedule', component: ScheduleComponent},
+            {path: 'times', component: TimesComponent},
         ]),
         FormsModule,
         CustomPipesModule
@@ -41,6 +43,7 @@ import { CustomPipesModule } from '../shared/custom-pipes.module';
         DialogComponent,
         SpeakerSelector,
         PickerComponent,
+        TimesComponent,
     ]
 })
 export class AdminModule {}

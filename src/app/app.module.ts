@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from '@angular/material';
 
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 
@@ -50,6 +51,7 @@ import { CustomPipesModule } from './shared/custom-pipes.module';
       {path: 'schedule', component: ScheduleComponent},
       {path: 'admin', loadChildren: './admin/admin.module#AdminModule'}
     ]),
+    MaterialModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

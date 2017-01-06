@@ -45,7 +45,7 @@ export class PickerComponent implements OnInit {
     }
     ngOnInit() {
         // retreive the configuration for available options and lookup in fb
-        this.available = this.af.database.list(this.list, { query: { orderByChild: this.order } }).cache(1);
+        this.available = this.af.database.list(this.list, { query: { orderByChild: this.order } }); //.cache(1);
         if (!this.selected) {
             this.selected = [];
         }

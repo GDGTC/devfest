@@ -9,11 +9,11 @@
 
     <div style="display:flex;flex-direction:row;    border: solid gray 1px;">
         <div  style="flex: 1 1 auto;text-align:center;" class="" (click)="updateTrack('Keynote')">Keynote</div>
-        <div  style="flex: 1 1 auto;text-align:center;" class="Android" (click)="updateTrack('Android')">Android</div>
-        <div  style="flex: 1 1 auto;text-align:center;" class="Web" (click)="updateTrack('Web')">Web</div>
-        <div  style="flex: 1 1 auto;text-align:center;" class="Cloud" (click)="updateTrack('Cloud')">Cloud</div>
-        <div  style="flex: 1 1 auto;text-align:center;" class="Design" (click)="updateTrack('Design')">Design</div>
-        <div  style="flex: 1 1 auto;text-align:center;" class="IoT" (click)="updateTrack('IoT')">IoT</div>
+        <div  style="flex: 1 1 auto;text-align:center;" class="Android" (click)="updateTrack('Android')"><md-icon>android</md-icon> Android </div>
+        <div  style="flex: 1 1 auto;text-align:center;" class="Web" (click)="updateTrack('Web')"><md-icon>web</md-icon> Web </div>
+        <div  style="flex: 1 1 auto;text-align:center;" class="Cloud" (click)="updateTrack('Cloud')"><md-icon>cloud</md-icon> Cloud </div>
+        <div  style="flex: 1 1 auto;text-align:center;" class="Design" (click)="updateTrack('Design')"><md-icon>create</md-icon> Design </div>
+        <div  style="flex: 1 1 auto;text-align:center;" class="IoT" (click)="updateTrack('IoT')"><md-icon>router</md-icon> IoT </div>
     </div>
 
 
@@ -31,7 +31,10 @@
         <div *ngFor="let session of schedule | async" [hidden]="!(session.startTime==time.time)">
             <div  class="bigschedulelist {{session.track}}" [hidden]="!(session.startTime==time.time)" >
             <div class="bigsschduledeets" [hidden]="!(session.startTime==time.time)">
-                <h2>{{session.title}}</h2>
+                <h2>
+                    <md-icon style="position:relative; float: right; top: 130px">{{(session.track | fireJoin:'devfest2017/tracks/' | async)?.materialicon}}</md-icon> 
+                    {{session.title}} 
+                </h2>
                 <div>{{session.room}}</div>
                 <div style="display:flex;flex-direction:row;">
                 <div *ngFor="let speaker of session.speakers" style="flex: 1 1 auto;text-align:center;">

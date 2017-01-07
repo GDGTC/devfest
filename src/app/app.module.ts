@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 
+import 'hammerjs';
+
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 
 

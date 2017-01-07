@@ -17,14 +17,16 @@
     </div>
 
 
-    <!--<md-button-toggle-group multiple>
+    <!--
+        <md-button-toggle-group multiple>
         <md-button-toggle>Keynote</md-button-toggle>
-        <md-button-toggle class='Android'>Android</md-button-toggle>
-        <md-button-toggle class='Web'>Web</md-button-toggle>
-        <md-button-toggle class='Cloud'>Cloud</md-button-toggle>
-        <md-button-toggle class='Design'>Design</md-button-toggle>
-        <md-button-toggle class='IoT'>IoT</md-button-toggle>        
-    </md-button-toggle-group>-->
+        <md-button-toggle>Android</md-button-toggle>
+        <md-button-toggle>Web</md-button-toggle>
+        <md-button-toggle>Cloud</md-button-toggle>
+        <md-button-toggle>Design</md-button-toggle>
+        <md-button-toggle>IoT</md-button-toggle>        
+    </md-button-toggle-group>
+    -->
 
     <div *ngFor="let time of times | async" style="clear:both">
         <h2>{{time.label}}</h2>

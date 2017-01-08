@@ -84,6 +84,7 @@ section h2:after {
     content: "";
     display: block;
 }
+
 section .callout {
     margin:32px 0;
     font-size: 36px;
@@ -209,23 +210,29 @@ footer .blocks a {
     float: left;
 }
 
+.schedule-timeslot-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .schedule-announcement {
   font-size: 1em;
   text-transform: none;
 }
 
-.bigschedulelist{
-    float:left;
+.bigschedulelist {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    display: block;
-    height: 14em;
-    width: 345px;
+    overflow: hidden;
+    height: 13.2em;
+    width: 325px;
     margin: 3px;
     border-radius: 2px;
-    border:1px solid #CCC;
-    overflow: hidden;
     background-color: #f6f6f6;
 }
+
 .bigschedulelist h2 {
     font-size: 1em;
     font-weight: bold;
@@ -234,12 +241,17 @@ footer .blocks a {
     margin-top: 5px;
 }
 
+.timeslot-block h2:after {
+  margin-bottom: 17px;
+}
+
 .bigschedulelist p {
     margin: 3px auto;
 }
 
 .bigschedulelist h2:after {
     margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .bigsschduledeets{
@@ -249,37 +261,69 @@ footer .blocks a {
 }
 
 .session-content {
-  padding: 5px;
+    padding: 5px;
+}
+
+.timeslot-header {
+    justify-content: center;
+    margin: 32px;
 }
 
 .all, .Keynote {
   width: 100%;
   height: 100%;
-  background-color: #fcfcfc;
   font-size: 18px;
 }
 
+.all {
+    background-color: #656F78;
+}
+
+.Keynote {
+  background-color: #19a9e5;
+}
+
+.Keynote, .all, .Keynote h2, .all h2 {
+  color: white;
+}
+
+.Keynote h2:after, .all h2:after {
+  content: none;
+}
+
+.room-tag {
+  height: 40px;
+  width: 100%;
+  background-color: #c1c5c9;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .track-tag {
+  width: 100%;
   height: 40px;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .Android .track-tag, #track-legend .Android {background-color: #7bc043;}
 .Web .track-tag, #track-legend .Web {background-color: #ffbb00;}
 .Design .track-tag, #track-legend .Design {background-color: #f37736;}
 .Cloud .track-tag, #track-legend .Cloud {background-color: #ee4035;}
 .IoT .track-tag, #track-legend .IoT {background-color: #6380ea;}
 .General .track-tag {background-color: darkgray;}
-.all .track-tag, .Keynote .track-tag {background-color: #656F78; text-transform: uppercase; margin-left: -24px;}
-.Keynote-leg {background-color: #656F78;}
+.all .track-tag {background-color: #656F78; text-transform: uppercase;}
+.Keynote .track-tag {background-color: #19a9e5; text-transform: uppercase;}
+.Keynote-leg {background-color: #19a9e5;}
 
 #track-legend {
   display:flex;
   flex-direction:row;
   border-radius: 2px;
-  margin-bottom: 32px;
+  margin: 32px auto;
 }
 
 #track-legend div {

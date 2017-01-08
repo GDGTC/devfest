@@ -1,11 +1,8 @@
 
 <section id="" class=" ">
-    <div>
-        <img src="/a/images/2017bluegreen.jpg" style="width: 40%; margin-top: 2em; margin-bottom: 1em;">
-    </div>
-    <h2 class="schedule-announcement">Schedule times and rooms will be updated often. <br />This page will be the most current and accurate.</h2>
 	  <div class="callout">Current Schedule</div>
-
+    <h2 class="schedule-announcement">Schedule times and rooms will be updated often. <br />This page will be the most current and accurate.</h2>
+    <h3 style="margin-top: 17px;">Track Legend</h3>
     <div id="track-legend">
         <div class="Keynote-leg" (click)="updateTrack('Keynote')">Keynote</div>
         <div class="Android" (click)="updateTrack('Android')"><md-icon>android</md-icon>Android</div>
@@ -24,25 +21,29 @@
         <md-button-toggle>IoT</md-button-toggle>
     </md-button-toggle-group>
     -->
-    <div *ngFor="let time of (timeSlots | async)?.slots" style="clear:both">
-        <h2>{{ customDateFormatter(time)}}</h2>
-        <div *ngFor="let session of (timeSlots | async)?.sessions[time]" class="bigschedulelist {{session.track}}">
-          <div class="track-tag">
-              <md-icon>
-              {{(session.track | fireJoin:'devfest2017/tracks/' | async)?.materialicon}}
+    <div *ngFor="let time of (timeSlots | async)?.slots" class="timeslot-block">
+        <div class="timeslot-header cta all-caps">{{ customDateFormatter(time)}}</div>
+        <div class="schedule-timeslot-container">
+          <div *ngFor="let session of (timeSlots | async)?.sessions[time]" class="bigschedulelist {{session.track}}">
+            <div class="track-tag" *ngIf="session.track != 'all'">
+                <md-icon *ngIf="session.track != 'Keynote'">
+                {{(session.track | fireJoin:'devfest2017/tracks/' | async)?.materialicon}}
               </md-icon>{{session.track}}
-          </div>
-          <div class="session-content">
-            <h2>{{session.title}}</h2>
-            <p>{{session.room}}</p>
-            <div style="display:flex; flex-direction:row;">
-                <div *ngFor="let speaker of session.speakers" style="flex: 1 1 auto; text-align:center;">
-                        <img src="{{(speaker | fireJoin: '/devfest2017/speakers/' | async)?.imageUrl}}" class="session-img"/><br>
-                        {{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.name}}
-                </div>
+            </div>
+            <div class="session-content">
+              <h2>{{session.title}}</h2>
+              <div style="display:flex; flex-direction:row;">
+                  <div *ngFor="let speaker of session.speakers" style="flex: 1 1 auto; text-align:center;">
+                          <!-- <img src="{{(speaker | fireJoin: '/devfest2017/speakers/' | async)?.imageUrl}}" class="session-img"/><br> -->
+                          {{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.name}}
+                  </div>
+              </div>
+            </div>
+            <div class="room-tag">
+              <p>{{session.room}}</p>
             </div>
           </div>
-        </div>
+      </div>
     </div>
 
 </section>

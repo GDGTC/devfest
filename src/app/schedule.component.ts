@@ -47,6 +47,7 @@ export class ScheduleComponent {
                 }
 
             }
+            delete times['UNK'];
             let sortedSlots = Object.keys(times).sort();
             return {slots: sortedSlots, sessions: times};
         }).shareResults();

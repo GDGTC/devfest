@@ -4,6 +4,8 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import { FirebaseService, FirebaseTypedService } from './shared/firebase.service';
 
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import "rxjs/add/operator/startWith";
 import "./shared/shareResults";
 
 import { MdRipple } from '@angular/material/core/core';
@@ -50,7 +52,16 @@ export class ScheduleComponent {
             delete times['UNK'];
             let sortedSlots = Object.keys(times).sort();
             return {slots: sortedSlots, sessions: times};
-        }).shareResults();
+        });
+        
+        // Local Cache
+        this.timeSlots.subscribe(next => {
+            localStorage.setItem("scheduleCache", JSON.stringify(next));
+        });
+
+        this.timeSlots = this.timeSlots
+        .startWith(localStorage.getItem("scheduleCache"))
+        .shareResults();
 
     }
 

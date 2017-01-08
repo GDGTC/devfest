@@ -7,27 +7,19 @@
 
 	<div class="callout">Confirmed Speakers</div>
 
-
-        <div *ngFor="let speaker of speakers | async" [hidden]="!speaker.confirmed">
-            <div class="bigspeakerlist">
-                <div class="bigspeakerlistimg">
-                    <img src="{{speaker.imageUrl}}" />
-                </div>
-                <div class="bigspeakerlistdeets">
+      <div class="speaker-list-container">
+        <div *ngFor="let speaker of speakers | async" [hidden]="!speaker.confirmed" class="speaker-card">
+                <div class="speaker-card-img" [style.background-image]="'url('+speaker.imageUrl+')'" style="background-size: cover; width: 70px; height: 70px;"></div>
+                <div class="speaker-content">
                     <h2>{{speaker.name}}</h2>
                     <div>{{speaker.company}}</div>
                     <div [hidden]="!speaker.twitter"><a href="https://twitter.com/{{speaker.twitter}}" target="_new">@{{speaker.twitter}}</a></div>
                 </div>
-            </div>
         </div>
+      </div>
 
 
 
 </section>
 
 <p style="clear: both;"></p>
-
-
-
-
-

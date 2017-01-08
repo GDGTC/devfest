@@ -1,22 +1,19 @@
 
 <section id="" class=" ">
     <div>
-        <img src="/a/images/2017bluegreen.jpg" style="width: 60%; padding-top: 2em;">
+        <img src="/a/images/2017bluegreen.jpg" style="width: 40%; margin-top: 2em; margin-bottom: 1em;">
     </div>
+    <h2 class="schedule-announcement">Schedule times and rooms will be updated often. <br />This page will be the most current and accurate.</h2>
+	  <div class="callout">Current Schedule</div>
 
-    <h2>Schedule times and rooms will be updated often. <br />This page will be the most current and accurate.</h2>
-	<div class="callout">Current Schedule</div>
-
-    <div style="display:flex; flex-direction:row; border: solid gray 1px;">
-        <div  style="flex: 1 1 auto;text-align:center;" class="" (click)="updateTrack('Keynote')">Keynote</div>
-        <div  style="flex: 1 1 auto;text-align:center;" class="Android" (click)="updateTrack('Android')"><md-icon>android</md-icon> Android </div>
-        <div  style="flex: 1 1 auto;text-align:center;" class="Web" (click)="updateTrack('Web')"><md-icon>web</md-icon> Web </div>
-        <div  style="flex: 1 1 auto;text-align:center;" class="Cloud" (click)="updateTrack('Cloud')"><md-icon>cloud</md-icon> Cloud </div>
-        <div  style="flex: 1 1 auto;text-align:center;" class="Design" (click)="updateTrack('Design')"><md-icon>create</md-icon> Design </div>
-        <div  style="flex: 1 1 auto;text-align:center;" class="IoT" (click)="updateTrack('IoT')"><md-icon>router</md-icon> IoT </div>
+    <div id="track-legend">
+        <div class="Keynote-leg" (click)="updateTrack('Keynote')">Keynote</div>
+        <div class="Android" (click)="updateTrack('Android')"><md-icon>android</md-icon>Android</div>
+        <div class="Web" (click)="updateTrack('Web')"><md-icon>web</md-icon>Web</div>
+        <div class="Cloud" (click)="updateTrack('Cloud')"><md-icon>cloud</md-icon>Cloud</div>
+        <div class="Design" (click)="updateTrack('Design')"><md-icon>create</md-icon>Design</div>
+        <div class="IoT" (click)="updateTrack('IoT')"><md-icon>router</md-icon>IoT</div>
     </div>
-
-
     <!--
         <md-button-toggle-group multiple>
         <md-button-toggle>Keynote</md-button-toggle>
@@ -30,19 +27,21 @@
     <div *ngFor="let time of (timeSlots | async)?.slots" style="clear:both">
         <h2>{{ customDateFormatter(time)}}</h2>
         <div *ngFor="let session of (timeSlots | async)?.sessions[time]" class="bigschedulelist {{session.track}}">
-            <h2>
-                <md-icon style="position:relative; float: right; top: 130px">
-                    {{(session.track | fireJoin:'devfest2017/tracks/' | async)?.materialicon}}
-                </md-icon>
-                {{session.title}}
-            </h2>
-            <div>{{session.room}}</div>
-            <div style="display:flex;flex-direction:row;">
-                <div *ngFor="let speaker of session.speakers" style="flex: 1 1 auto;text-align:center;">
-                        <img src="{{(speaker | fireJoin: '/devfest2017/speakers/' | async)?.imageUrl}}" style="width:40px;"/><br>
+          <div class="track-tag">
+              <md-icon>
+              {{(session.track | fireJoin:'devfest2017/tracks/' | async)?.materialicon}}
+              </md-icon>{{session.track}}
+          </div>
+          <div class="session-content">
+            <h2>{{session.title}}</h2>
+            <p>{{session.room}}</p>
+            <div style="display:flex; flex-direction:row;">
+                <div *ngFor="let speaker of session.speakers" style="flex: 1 1 auto; text-align:center;">
+                        <img src="{{(speaker | fireJoin: '/devfest2017/speakers/' | async)?.imageUrl}}" class="session-img"/><br>
                         {{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.name}}
                 </div>
             </div>
+          </div>
         </div>
     </div>
 

@@ -8,7 +8,6 @@ const PATH = 'devfest2017'
 
 @Component({
     templateUrl: './speakers.component.html',
-    styleUrls: ['./shared/styles.css']
 })
 export class SpeakersComponent {
 

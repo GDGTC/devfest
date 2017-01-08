@@ -20,7 +20,6 @@ export interface Session {
 
 @Component({
     templateUrl: './schedule.component.html',
-    styleUrls: ['./shared/styles.css'],
     providers: [FirebaseService],
 })
 export class ScheduleComponent {
@@ -46,12 +45,12 @@ export class ScheduleComponent {
                 } else {
                     times[index] = [session];
                 }
-                
+
             }
             let sortedSlots = Object.keys(times).sort();
             return {slots: sortedSlots, sessions: times};
         }).shareResults();
-            
+
     }
 
     updateTrack(trackName) {

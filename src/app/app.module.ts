@@ -19,6 +19,9 @@ import { SpeakersComponent } from './speakers.component';
 import { ScheduleComponent } from './schedule.component';
 import { PastComponent } from './past.component';
 
+import { DataService } from './shared/data.service';
+import { FirebaseService } from './shared/firebase.service';
+
 //import { FireJoinPipe } from './shared/fire-join.pipe';
 import { CustomPipesModule } from './shared/custom-pipes.module';
 
@@ -55,7 +58,10 @@ import { CustomPipesModule } from './shared/custom-pipes.module';
     ]),
     MaterialModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    DataService,
+    FirebaseService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,7 +23,6 @@ import { SessionViewComponent } from './session-view.component';
 import { DataService } from './shared/data.service';
 import { FirebaseService } from './shared/firebase.service';
 
-//import { FireJoinPipe } from './shared/fire-join.pipe';
 import { CustomPipesModule } from './shared/custom-pipes.module';
 
 @NgModule({
@@ -36,7 +35,6 @@ import { CustomPipesModule } from './shared/custom-pipes.module';
     ScheduleComponent,
     PastComponent,
     SessionViewComponent,
-  //  FireJoinPipe
   ],
   imports: [
     BrowserModule,

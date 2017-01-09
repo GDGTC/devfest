@@ -23,7 +23,7 @@ import { SessionViewComponent } from './session-view.component';
 import { DataService } from './shared/data.service';
 import { FirebaseService } from './shared/firebase.service';
 
-import { CustomPipesModule } from './shared/custom-pipes.module';
+import { CustomPipesModule } from './shared/custom-components.module';
 
 @NgModule({
   declarations: [

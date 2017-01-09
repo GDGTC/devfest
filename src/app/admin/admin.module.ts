@@ -12,7 +12,7 @@ import { AdminNavComponent } from './admin-nav.component';
 import { SpeakerSelector } from './speaker-selector.component';
 import { PickerComponent } from '../shared/picker.component';
 import { FirebaseService, FirebaseTypedService } from '../shared/firebase.service';
-import { CustomPipesModule } from '../shared/custom-pipes.module';
+import { CustomPipesModule } from '../shared/custom-components.module';
 
 @NgModule({
     imports: [

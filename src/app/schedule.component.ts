@@ -11,6 +11,11 @@ export class ScheduleComponent {
 
     timeSlots;
 
+    thisSession = {};
+
+    showDialog = false;
+
+
     constructor(public ds: DataService ) {
         this.timeSlots = ds.timeSlots;
     }

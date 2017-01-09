@@ -10,21 +10,12 @@
         <div class="Design" (click)="updateTrack('Design')"><md-icon>create</md-icon>Design</div>
         <div class="IoT" (click)="updateTrack('IoT')"><md-icon>router</md-icon>IoT</div>
     </div>
-    <!--
-        <md-button-toggle-group multiple>
-        <md-button-toggle>Keynote</md-button-toggle>
-        <md-button-toggle>Android</md-button-toggle>
-        <md-button-toggle>Web</md-button-toggle>
-        <md-button-toggle>Cloud</md-button-toggle>
-        <md-button-toggle>Design</md-button-toggle>
-        <md-button-toggle>IoT</md-button-toggle>
-    </md-button-toggle-group>
-    -->
     <div *ngFor="let time of (timeSlots | async)?.slots" class="timeslot-block">
         <div class="timeslot-header cta all-caps">{{ ds.customDateFormatter(time)}}</div>
         <div class="schedule-timeslot-container">
           <div *ngFor="let session of (timeSlots | async)?.sessions[time]" 
                class="bigschedulelist {{session.track}}"
+               (click)="showDialog=true; thisSession=session"
                > <!-- [routerLink]="[session.$key,session.title]" -->
             <div class="track-tag" *ngIf="session.track != 'all'">
                 <md-icon *ngIf="session.track != 'Keynote'">
@@ -46,6 +37,28 @@
           </div>
       </div>
     </div>
+
+    <app-dialog [(visible)]="showDialog">
+        <div class="sessionlinks">
+            <md-icon [routerLink]="[thisSession.$key,thisSession.title]">link</md-icon>
+            <md-icon>twitter</md-icon>
+        </div>
+        <div class="callout">{{thisSession.title}} </div>
+        <div>{{ds.customDateFormatter(thisSession.startTime)}} | {{ thisSession.room}} | {{ thisSession.track}}</div>
+        <div class="speaker-list-container">
+            <div *ngFor="let speaker of thisSession.speakers"  [hidden]="!speaker.confirmed" class="speaker-card">
+                <div class="speaker-card-img" [style.background-image]="'url('+(speaker | fireJoin: '/devfest2017/speakers/' | async)?.imageUrl+')'" style="background-size: cover; width: 70px; height: 70px;"></div>
+                <div class="speaker-content">
+                    <h2>{{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.name}}</h2>
+                    <div>{{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.company}}</div>
+                    <div [hidden]="!(speaker | fireJoin:'/devfest2017/speakers/' | async)?.twitter"><a href="https://twitter.com/{{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.twitter}}" target="_new">@{{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.twitter}}</a></div>
+                </div>
+            </div>
+        </div>
+        <p style="border:1px solid #CCC;margin:32px;padding:32px;" [innerHTML]="thisSession.description"></p>
+
+    </app-dialog>
+
 
 </section>
 

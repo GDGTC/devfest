@@ -23,7 +23,9 @@
     <div *ngFor="let time of (timeSlots | async)?.slots" class="timeslot-block">
         <div class="timeslot-header cta all-caps">{{ ds.customDateFormatter(time)}}</div>
         <div class="schedule-timeslot-container">
-          <div *ngFor="let session of (timeSlots | async)?.sessions[time]" class="bigschedulelist {{session.track}}">
+          <div *ngFor="let session of (timeSlots | async)?.sessions[time]" 
+               class="bigschedulelist {{session.track}}"
+               > <!-- [routerLink]="[session.$key,session.title]" -->
             <div class="track-tag" *ngIf="session.track != 'all'">
                 <md-icon *ngIf="session.track != 'Keynote'">
                 {{(session.track | fireJoin:'devfest2017/tracks/' | async)?.materialicon}}

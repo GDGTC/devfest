@@ -1,5 +1,4 @@
-
-<section id="" class=" ">
+<section>
 	  <div class="callout">Current Schedule</div>
     <h2 class="schedule-announcement">Schedule times and rooms will be updated often. <br />This page will be the most current and accurate.</h2>
     <h3 style="margin-top: 17px;">Track Legend</h3>
@@ -22,7 +21,7 @@
     </md-button-toggle-group>
     -->
     <div *ngFor="let time of (timeSlots | async)?.slots" class="timeslot-block">
-        <div class="timeslot-header cta all-caps">{{ customDateFormatter(time)}}</div>
+        <div class="timeslot-header cta all-caps">{{ ds.customDateFormatter(time)}}</div>
         <div class="schedule-timeslot-container">
           <div *ngFor="let session of (timeSlots | async)?.sessions[time]" class="bigschedulelist {{session.track}}">
             <div class="track-tag" *ngIf="session.track != 'all'">

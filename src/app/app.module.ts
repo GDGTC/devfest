@@ -18,9 +18,12 @@ import { SponsorsComponent } from './sponsors.component';
 import { SpeakersComponent } from './speakers.component';
 import { ScheduleComponent } from './schedule.component';
 import { PastComponent } from './past.component';
+import { SessionViewComponent } from './session-view.component';
 
-//import { FireJoinPipe } from './shared/fire-join.pipe';
-import { CustomPipesModule } from './shared/custom-pipes.module';
+import { DataService } from './shared/data.service';
+import { FirebaseService } from './shared/firebase.service';
+
+import { CustomPipesModule } from './shared/custom-components.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,7 @@ import { CustomPipesModule } from './shared/custom-pipes.module';
     SpeakersComponent,
     ScheduleComponent,
     PastComponent,
-  //  FireJoinPipe
+    SessionViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,11 +54,15 @@ import { CustomPipesModule } from './shared/custom-pipes.module';
       {path: 'past', component: PastComponent},
       {path: 'speakers', component: SpeakersComponent},
       {path: 'schedule', component: ScheduleComponent},
+      {path: 'schedule/:id/:seo', component: SessionViewComponent},
       {path: 'admin', loadChildren: './admin/admin.module#AdminModule'}
     ]),
     MaterialModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    DataService,
+    FirebaseService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

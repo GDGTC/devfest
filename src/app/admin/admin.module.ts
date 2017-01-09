@@ -9,7 +9,7 @@ import { AdminComponent } from './admin.component';
 import { SpeakersComponent } from './speakers.component';
 import { ScheduleComponent } from './schedule.component';
 import { AdminNavComponent } from './admin-nav.component';
-import { DialogComponent } from './dialog.component';
+import { DialogComponent } from '../shared/dialog.component';
 import { SpeakerSelector } from './speaker-selector.component';
 import { PickerComponent } from '../shared/picker.component';
 import { FirebaseService, FirebaseTypedService } from '../shared/firebase.service';

@@ -1,9 +1,21 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Pipe } from '@angular/core';
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 import { FirebaseService, FirebaseTypedService } from '../shared/firebase.service';
 import { FireJoinPipe } from '../shared/fire-join.pipe';
 import { CommonModule } from '@angular/common';
 import { DialogComponent } from '../shared/dialog.component';
+
+@Pipe({
+	name : "removeSpaces"
+})
+ 
+export class RemoveSpaces{
+	transform(value){
+        if(value){
+    		return value.replace(/ /g, "-");
+        }
+	}
+}
 
 @NgModule({
     imports: [
@@ -16,11 +28,14 @@ import { DialogComponent } from '../shared/dialog.component';
         }, {method: AuthMethods.Popup, provider: AuthProviders.Google})
     ],
     exports: [
-        FireJoinPipe, DialogComponent,
+        FireJoinPipe, 
+        DialogComponent,
+        RemoveSpaces,
     ],
     declarations: [
         FireJoinPipe,
-        DialogComponent
+        DialogComponent,
+        RemoveSpaces,
     ]
 })
 export class CustomPipesModule {}

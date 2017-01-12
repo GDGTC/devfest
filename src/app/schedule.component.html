@@ -40,7 +40,7 @@
 
     <app-dialog [(visible)]="showDialog">
         <div class="sessionlinks">
-            <md-icon [routerLink]="[thisSession.$key,thisSession.title]">link</md-icon>
+            <md-icon [routerLink]="[thisSession.$key,(thisSession.title | removeSpaces)]">link</md-icon>
             <md-icon>twitter</md-icon>
         </div>
         <div class="callout">{{thisSession.title}} </div>

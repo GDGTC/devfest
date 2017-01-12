@@ -169,6 +169,7 @@ footer .blocks a {
 .speaker-list-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .speaker-card{
@@ -203,6 +204,7 @@ footer .blocks a {
 .schedule-timeslot-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .schedule-announcement {

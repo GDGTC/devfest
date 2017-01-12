@@ -45,7 +45,7 @@
         </div>
         <div class="callout">{{thisSession.title}} </div>
         <div>{{ds.customDateFormatter(thisSession.startTime)}} | {{ thisSession.room}} | {{ thisSession.track}}</div>
-        <div class="speaker-list-container">
+        <div style="display: flex;align-items: center;justify-content: center;">
             <div *ngFor="let speaker of thisSession.speakers"  [hidden]="!speaker.confirmed" class="speaker-card">
                 <div class="speaker-card-img" [style.background-image]="'url('+(speaker | fireJoin: '/devfest2017/speakers/' | async)?.imageUrl+')'" style="background-size: cover; width: 70px; height: 70px;"></div>
                 <div class="speaker-content">

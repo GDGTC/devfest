@@ -19,6 +19,7 @@ import { SpeakersComponent } from './speakers.component';
 import { ScheduleComponent } from './schedule.component';
 import { PastComponent } from './past.component';
 import { SessionViewComponent } from './session-view.component';
+import { SpeakersViewComponent } from './speakers-view.component';
 
 import { DataService } from './shared/data.service';
 import { FirebaseService } from './shared/firebase.service';
@@ -35,6 +36,7 @@ import { CustomPipesModule } from './shared/custom-components.module';
     ScheduleComponent,
     PastComponent,
     SessionViewComponent,
+    SpeakersViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +55,7 @@ import { CustomPipesModule } from './shared/custom-components.module';
       {path: 'sponsors', component: SponsorsComponent},
       {path: 'past', component: PastComponent},
       {path: 'speakers', component: SpeakersComponent},
+      {path: 'speakers/:id/:seo', component: SpeakersViewComponent},
       {path: 'schedule', component: ScheduleComponent},
       {path: 'schedule/:id/:seo', component: SessionViewComponent},
       {path: 'admin', loadChildren: './admin/admin.module#AdminModule'}

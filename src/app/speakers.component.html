@@ -8,7 +8,11 @@
 	<div class="callout">Confirmed Speakers</div>
 
       <div class="speaker-list-container">
-        <div *ngFor="let speaker of speakers | async" [hidden]="!speaker.confirmed" class="speaker-card">
+        <div *ngFor="let speaker of speakers | async" 
+             [hidden]="!speaker.confirmed" 
+             class="speaker-card" 
+             (click)="showDialog=true; thisSpeaker=speaker"
+             >
                 <div class="speaker-card-img" [style.background-image]="'url('+speaker.imageUrl+')'" style="background-size: cover; width: 70px; height: 70px;"></div>
                 <div class="speaker-content">
                     <h2>{{speaker.name}}</h2>
@@ -19,6 +23,19 @@
       </div>
 
 
+    <app-dialog [(visible)]="showDialog">
+        <div class="sessionlinks">
+            <md-icon [routerLink]="[thisSpeaker.$key,(thisSpeaker.name | removeSpaces)]">link</md-icon>
+        </div>
+        <div class="callout">{{thisSpeaker.name}} </div>
+        <div style="display: flex;flex-wrap: wrap;align-items: center;justify-content: center;">
+            <div class="" [style.background-image]="'url('+thisSpeaker.imageUrl+')'" style="background-size: cover; width: 125px; height: 125px;border-radius: 50%"></div>
+        </div>
+        <div>{{thisSpeaker.company}}</div>
+        <div *ngIf="thisSpeaker.twitter"><a href="https://twitter.com/{{thisSpeaker.twitter}}" target="_new">@{{thisSpeaker.twitter}}</a></div>
+        <p style="border:1px solid #CCC;margin:32px;padding:32px;" [innerHTML]="thisSpeaker.bio"></p>
+
+    </app-dialog>
 
 </section>
 

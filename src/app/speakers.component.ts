@@ -13,6 +13,9 @@ export class SpeakersComponent {
 
     speakers;
 
+    thisSpeaker = {};
+    showDialog = false;
+
     constructor(public af: AngularFire) {
         this.speakers = af.database.list(PATH + '/speakers', { query: { orderByChild: 'name'} });
     }

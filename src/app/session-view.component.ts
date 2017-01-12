@@ -22,7 +22,7 @@ import "rxjs/add/operator/switchMap";
             </div>
         </div>
     </div>
-    <p style="border:1px solid #CCC;margin:32px;padding:32px;" [innerHTML]="(session | async)?.description"></p>
+    <div style="border:1px solid #CCC;margin:32px;padding:32px;" [innerHTML]="(session | async)?.description"></div>
 
 </section>
     `

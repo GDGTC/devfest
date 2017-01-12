@@ -6,6 +6,20 @@
     <div *ngIf="(this.uid | async) !== null">
         Welcome {{name | async}} ({{uid | async}})
         <admin-nav></admin-nav>
+
+        <h2>Agenda</h2>
+        <table>
+            <tr>
+                <td></td>
+                <td *ngFor="let room of (timeSlots | async)?.rooms">{{room}}</td>
+            </tr>
+            <tr *ngFor="let time of (timeSlots | async)?.slots">
+                <td> {{time}}</td>
+                <td *ngFor="let room of (timeSlots | async)?.rooms">
+                    <div *ngFor="let roomsession of (timeSlots | async)?.sessiongrid[time][room]">{{roomsession.title}}</div>
+                </td>
+            </tr>
+        </table>
         <h2>Schedule</h2>
         <button (click)="editSession = {}; showDialog = true" md-raised-button color="primary">New Session</button>
         <div *ngFor="let session of schedule | async " style="border:1px solid #CCC;padding:16px;">

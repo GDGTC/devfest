@@ -67,6 +67,7 @@ export class DataService {
             time -= 12;
             indicator = "PM";
         }
+        if (time == 12) {indicator = "PM";}
         return `${time} ${indicator}`;
 
     }

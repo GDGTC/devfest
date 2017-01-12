@@ -33,7 +33,7 @@
         </div>
         <div>{{thisSpeaker.company}}</div>
         <div *ngIf="thisSpeaker.twitter"><a href="https://twitter.com/{{thisSpeaker.twitter}}" target="_new">@{{thisSpeaker.twitter}}</a></div>
-        <p style="border:1px solid #CCC;margin:32px;padding:32px;" [innerHTML]="thisSpeaker.bio"></p>
+        <div style="border:1px solid #CCC;margin:32px;padding:32px;" [innerHTML]="thisSpeaker.bio"></div>
 
     </app-dialog>
 

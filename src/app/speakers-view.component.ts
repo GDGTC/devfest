@@ -15,7 +15,7 @@ import "rxjs/add/operator/switchMap";
         </div>
         <div>{{(thisSpeaker | async)?.company}}</div>
         <div *ngIf="(thisSpeaker | async)?.twitter"><a href="https://twitter.com/{{(thisSpeaker | async)?.twitter}}" target="_new">@{{(thisSpeaker | async)?.twitter}}</a></div>
-        <p style="border:1px solid #CCC;margin:32px;padding:32px;" [innerHTML]="(thisSpeaker | async)?.bio"></p>
+        <div style="border:1px solid #CCC;margin:32px;padding:32px;" [innerHTML]="(thisSpeaker | async)?.bio"></div>
 </section>
     `
 })

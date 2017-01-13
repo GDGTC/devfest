@@ -62,12 +62,10 @@ export class DataService {
         let dateTime = new Date(isoDateTime);
         let time = dateTime.getHours();
         time -= (6 - dateTime.getTimezoneOffset() / 60)
-        let indicator = "AM";
+        let indicator = (time >= 12 && time < 24) ? "PM" : "AM";
         if (time > 12) {
             time -= 12;
-            indicator = "PM";
         }
-        if (time == 12) {indicator = "PM";}
         return `${time} ${indicator}`;
 
     }

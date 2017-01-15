@@ -25,6 +25,7 @@ export class SpeakersViewComponent {
 
     constructor(router: Router, route: ActivatedRoute, public af: AngularFire) { 
         this.thisSpeaker = af.database.object(FIREPATH + '/speakers/' + route.snapshot.params['id']);
+        document.body.scrollTop = 0;
     }
 
 }

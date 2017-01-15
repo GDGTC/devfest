@@ -38,6 +38,7 @@ export class SessionViewComponent {
                 )
             )
         );
+        document.body.scrollTop = 0;
     }
 
 }

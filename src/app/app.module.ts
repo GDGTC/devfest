@@ -78,7 +78,8 @@ import { CustomPipesModule } from './shared/custom-components.module';
       },
       {
         path: 'speakers/:id/:seo', 
-        component: SpeakersViewComponent
+        component: SpeakersViewComponent,
+        data: {title: false},
       },
       {
         path: 'schedule', 
@@ -87,7 +88,8 @@ import { CustomPipesModule } from './shared/custom-components.module';
       },
       {
         path: 'schedule/:id/:seo', 
-        component: SessionViewComponent
+        component: SessionViewComponent,
+        data: {title: false},
       },
       {
         path: 'admin', 

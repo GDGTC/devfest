@@ -19,7 +19,9 @@ export class AppComponent {
                 title.setTitle(pageTitle + " | DevFestMN 2017");
             } else if (pageTitle !== false) {
                 title.setTitle("DevFestMN 2017");
-                
+               console.log("Setting because pageTitle was",pageTitle); 
+            } else {
+                console.log("not setting because pageTitle was",pageTitle);
             }
             window.scrollTo(0, 0);
             ga('send', 'pageview', n.urlAfterRedirects);

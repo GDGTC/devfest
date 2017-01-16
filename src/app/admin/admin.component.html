@@ -1,10 +1,10 @@
 <div style="padding:16px;pading-top:60px;">
     <h1>Admin DevFestMN</h1>
-    <div *ngIf="(this.uid | async) === null">
-        <button type="button" (click)="af.auth.login()">Login</button>
+    <div *ngIf="(auth.uid | async) === null">
+        <button type="button" (click)="auth.login()">Login</button>
     </div>
-    <div *ngIf="(this.uid | async) !== null">
-        Welcome {{name | async}} ({{uid | async}})
+    <div *ngIf="(auth.uid | async) !== null">
+        Welcome {{auth.name | async}} ({{auth.uid | async}}) (<a (click)="auth.logout()" href="#">logout</a>)
 
 
         <admin-nav></admin-nav>

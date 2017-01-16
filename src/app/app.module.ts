@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { MaterialModule } from '@angular/material';
+
+import { MdIconModule, MdButtonModule } from '@angular/material';
 
 import 'hammerjs';
 
@@ -21,6 +22,7 @@ import { PastComponent } from './past.component';
 import { SessionViewComponent } from './session-view.component';
 import { SpeakersViewComponent } from './speakers-view.component';
 
+import { AuthService } from './shared/auth.service';
 import { DataService } from './shared/data.service';
 import { FirebaseService } from './shared/firebase.service';
 
@@ -60,9 +62,11 @@ import { CustomPipesModule } from './shared/custom-components.module';
       {path: 'schedule/:id/:seo', component: SessionViewComponent},
       {path: 'admin', loadChildren: './admin/admin.module#AdminModule'}
     ]),
-    MaterialModule.forRoot(),
+    MdIconModule.forRoot(),
+    MdButtonModule.forRoot(),
   ],
   providers: [
+    AuthService,
     DataService,
     FirebaseService,
   ],

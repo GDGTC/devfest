@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { AngularFire } from 'angularfire2';
+
+import { AuthService } from './shared/auth.service';
 import { DataService } from './shared/data.service';
 
+import "rxjs/add/operator/map";
 import "rxjs/add/operator/switchMap";
 
 @Component({
@@ -23,22 +27,48 @@ import "rxjs/add/operator/switchMap";
         </div>
     </div>
     <div style="border:1px solid #CCC;margin:32px;padding:32px;" [innerHTML]="(session | async)?.description"></div>
+    <div *ngIf="auth.uid | async">
 
+        <button *ngIf="!((sessionAgenda | async)?.value)" (click)="addToAgenda()">Add to my Agenda</button>
+        <button *ngIf="(sessionAgenda | async)?.value" (click)="removeFromAgenda()">Remove from my Agenda</button>
+    </div>
 </section>
     `
 })
 export class SessionViewComponent {
     session;
 
-    constructor(router: Router, route: ActivatedRoute, public ds: DataService) {
-        this.session = route.params.switchMap(params =>
-            ds.sessionList.map(list => 
+    sessionAgenda;
+    agendaInfo;
+
+    constructor(router: Router, route: ActivatedRoute, public ds: DataService, public auth: AuthService, public af: AngularFire) {
+        this.session = route.params.switchMap(params => {
+            return ds.sessionList.map(list =>
                 list.find(item =>
                     item.$key == params['id']
                 )
             )
-        );
-        document.body.scrollTop = 0;
-    }
 
+        });
+
+        this.agendaInfo = route.params.switchMap(params => {
+            return auth.uid.map(uid => 
+                [params['id'], uid]
+            );
+        });
+
+        this.agendaInfo.subscribe(agendaData => {
+            let [session, uid] = agendaData;
+            this.sessionAgenda = this.af.database.object(`/devfest2017/agendas/${uid}/${session}/`);
+        });
+
+    }
+        
+    addToAgenda() {
+        console.log("sessionAgenda is ",this.sessionAgenda);
+        this.sessionAgenda.set({value:true});
+    }
+    removeFromAgenda() {
+        this.sessionAgenda.remove();
+    }
 }

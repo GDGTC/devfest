@@ -45,6 +45,11 @@
       },
       "speakers": {
         ".write": "root.child('admin/'+auth.uid).exists()"
+      },
+      "agendas": {
+        "$user_id": {
+          ".write": "$user_id === auth.uid"
+        }
       }
     },
     "agendas": {

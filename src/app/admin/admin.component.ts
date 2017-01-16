@@ -4,15 +4,15 @@ import { AngularFire } from 'angularfire2';
 
 import { Observable } from 'rxjs/Observable';
 
+import { AuthService } from '../shared/auth.service';
+
 const PATH = 'devfest2017'
 
 @Component({
     templateUrl: './admin.component.html'
 })
 export class AdminComponent {
-    isAdmin: Observable<boolean>;
-    uid: Observable<string>;
-    name: Observable<string>;
+   
 
     schedule;
     speakers;
@@ -20,27 +20,12 @@ export class AdminComponent {
     editSession = {};
     editSpeaker = {};
 
-    constructor(public af: AngularFire) {
-        this.uid = af.auth.map(authState => {
-            if (authState && authState.google) {
-                return authState.google.uid;
-            } else {
-                return null;
-            }
-        });
-        this.name = af.auth.map(authState => {
-            if (authState && authState.google) {
-                return authState.google.displayName;
-            } else {
-                return null;
-            }
-        });
+    constructor(public af: AngularFire, public auth: AuthService) {
+
         this.schedule = af.database.list(PATH + '/schedule');
         this.speakers = af.database.list(PATH + '/speakers');
     }
-    login() {
-        this.af.auth.login();
-    }
+
     saveSession(session) {
         event.preventDefault();
         if (session.$key) {

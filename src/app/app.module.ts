@@ -52,15 +52,48 @@ import { CustomPipesModule } from './shared/custom-components.module';
         storageBucket: "firebase-devfestmn.appspot.com",
     }, {method: AuthMethods.Popup, provider: AuthProviders.Google}),
     RouterModule.forRoot([
-      {path: '', component: HomeComponent},
-      {path: 'tickets', component: TicketsComponent},
-      {path: 'sponsors', component: SponsorsComponent},
-      {path: 'past', component: PastComponent},
-      {path: 'speakers', component: SpeakersComponent},
-      {path: 'speakers/:id/:seo', component: SpeakersViewComponent},
-      {path: 'schedule', component: ScheduleComponent},
-      {path: 'schedule/:id/:seo', component: SessionViewComponent},
-      {path: 'admin', loadChildren: './admin/admin.module#AdminModule'}
+      {
+        path: '', 
+        component: HomeComponent,
+      },
+      {
+        path: 'tickets', 
+        component: TicketsComponent,
+        data: {title: 'Tickets'},
+      },
+      {
+        path: 'sponsors', 
+        component: SponsorsComponent,
+        data: {title: 'Sponsors'},
+      },
+      {
+        path: 'past', 
+        component: PastComponent,
+        data: {title: 'Past DevFestMN Events'},
+      },
+      {
+        path: 'speakers', 
+        component: SpeakersComponent,
+        data: {title: 'Speakers'},
+      },
+      {
+        path: 'speakers/:id/:seo', 
+        component: SpeakersViewComponent
+      },
+      {
+        path: 'schedule', 
+        component: ScheduleComponent,
+        data: {title: 'Schedule'},
+      },
+      {
+        path: 'schedule/:id/:seo', 
+        component: SessionViewComponent
+      },
+      {
+        path: 'admin', 
+        loadChildren: './admin/admin.module#AdminModule',
+        data: {title: 'Admin'},
+      }
     ]),
     MdIconModule.forRoot(),
     MdButtonModule.forRoot(),

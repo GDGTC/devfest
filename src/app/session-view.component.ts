@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AngularFire } from 'angularfire2';
@@ -41,7 +42,7 @@ export class SessionViewComponent {
     sessionAgenda;
     agendaInfo;
 
-    constructor(router: Router, route: ActivatedRoute, public ds: DataService, public auth: AuthService, public af: AngularFire) {
+    constructor(router: Router, route: ActivatedRoute, public ds: DataService, public auth: AuthService, public af: AngularFire, title: Title) {
         this.session = route.params.switchMap(params => {
             return ds.sessionList.map(list =>
                 list.find(item =>
@@ -49,6 +50,10 @@ export class SessionViewComponent {
                 )
             )
 
+        });
+
+        this.session.subscribe(sessionData => {
+             title.setTitle(sessionData.title + ' | DevFestMN 2017');
         });
 
         this.agendaInfo = route.params.switchMap(params => {

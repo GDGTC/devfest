@@ -25,7 +25,7 @@
 
     <app-dialog [(visible)]="showDialog">
         <div class="sessionlinks">
-            <md-icon [routerLink]="[thisSpeaker.$key,(thisSpeaker.name | removeSpaces)]">link</md-icon>
+            <md-icon [routerLink]="[thisSpeaker.$key, (thisSpeaker.name | encodeURI)]">link</md-icon>
         </div>
         <div class="callout">{{thisSpeaker.name}} </div>
         <div style="display: flex;flex-wrap: wrap;align-items: center;justify-content: center;">

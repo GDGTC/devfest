@@ -6,13 +6,12 @@ import { CommonModule } from '@angular/common';
 import { DialogComponent } from '../shared/dialog.component';
 
 @Pipe({
-	name : "removeSpaces"
+	name : "encodeURI"
 })
- 
-export class RemoveSpaces{
+export class EncodeURI{
 	transform(value){
         if(value){
-    		return value.replace(/ /g, "-");
+            return value.replace(/[()]/g,'').replace(/ /g, '-');
         }
 	}
 }
@@ -30,12 +29,12 @@ export class RemoveSpaces{
     exports: [
         FireJoinPipe, 
         DialogComponent,
-        RemoveSpaces,
+        EncodeURI,
     ],
     declarations: [
         FireJoinPipe,
         DialogComponent,
-        RemoveSpaces,
+        EncodeURI,
     ]
 })
 export class CustomPipesModule {}

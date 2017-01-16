@@ -17,6 +17,8 @@
   margin-right: auto;
   margin-left: auto;
   min-height: 200px;
+  max-height: 95%;
+  overflow: scroll;
   width: 90%;
   max-width: 520px;
   background-color: #fff;

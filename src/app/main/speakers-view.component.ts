@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AngularFire } from 'angularfire2';
 
-import { DataService, FIREPATH } from './shared/data.service';
+import { DataService, FIREPATH } from '../shared/data.service';
 
 import "rxjs/add/operator/switchMap";
 

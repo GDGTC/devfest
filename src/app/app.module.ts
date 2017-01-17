@@ -1,95 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-import { MdIconModule, MdButtonModule } from '@angular/material';
-
-import 'hammerjs';
-
-import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
-
-
-
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home.component';
-import { TicketsComponent } from './tickets.component';
-import { SponsorsComponent } from './sponsors.component';
-import { SpeakersComponent } from './speakers.component';
-import { ScheduleComponent } from './schedule.component';
-import { PastComponent } from './past.component';
-import { SessionViewComponent } from './session-view.component';
-import { SpeakersViewComponent } from './speakers-view.component';
 
-import { AuthService } from './shared/auth.service';
-import { DataService } from './shared/data.service';
-import { FirebaseService } from './shared/firebase.service';
-
-import { CustomPipesModule } from './shared/custom-components.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    TicketsComponent,
-    SponsorsComponent,
-    SpeakersComponent,
-    ScheduleComponent,
-    PastComponent,
-    SessionViewComponent,
-    SpeakersViewComponent,
+    
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule,
-    CustomPipesModule,
-    AngularFireModule.initializeApp({
-        apiKey: "AIzaSyBrWJx91j512T3q6AaTGNxu_3fq47bYhfg",
-        authDomain: "devfestmn.firebaseapp.com",
-        databaseURL: "https://devfestmn.firebaseio.com",
-        storageBucket: "firebase-devfestmn.appspot.com",
-    }, {method: AuthMethods.Popup, provider: AuthProviders.Google}),
-    RouterModule.forRoot([
+     RouterModule.forRoot([
       {
-        path: '', 
-        component: HomeComponent,
-      },
-      {
-        path: 'tickets', 
-        component: TicketsComponent,
-        data: {title: 'Tickets'},
-      },
-      {
-        path: 'sponsors', 
-        component: SponsorsComponent,
-        data: {title: 'Sponsors'},
-      },
-      {
-        path: 'past', 
-        component: PastComponent,
-        data: {title: 'Past DevFestMN Events'},
-      },
-      {
-        path: 'speakers', 
-        component: SpeakersComponent,
-        data: {title: 'Speakers'},
-      },
-      {
-        path: 'speakers/:id/:seo', 
-        component: SpeakersViewComponent,
-        data: {title: false},
-      },
-      {
-        path: 'schedule', 
-        component: ScheduleComponent,
-        data: {title: 'Schedule'},
-      },
-      {
-        path: 'schedule/:id/:seo', 
-        component: SessionViewComponent,
-        data: {title: false},
+        path: '',
+        loadChildren: './main/main.module#MainModule',
       },
       {
         path: 'admin', 
@@ -97,13 +23,7 @@ import { CustomPipesModule } from './shared/custom-components.module';
         data: {title: 'Admin'},
       }
     ]),
-    MdIconModule.forRoot(),
-    MdButtonModule.forRoot(),
-  ],
-  providers: [
-    AuthService,
-    DataService,
-    FirebaseService,
+
   ],
   bootstrap: [AppComponent]
 })

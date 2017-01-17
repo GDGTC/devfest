@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { AngularFire,FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { FirebaseService, FirebaseTypedService } from '../shared/firebase.service';
-import { Speaker } from '../shared/models';
+import { Speaker } from '../main/shared/models';
 
 
 import { Observable } from 'rxjs/Observable';
@@ -11,7 +11,6 @@ const PATH = 'devfest2017'
 
 @Component({
     templateUrl: './schedule.component.html',
-    styleUrls: ['../shared/styles.css'],
     providers: [FirebaseService],
 })
 export class ScheduleComponent {

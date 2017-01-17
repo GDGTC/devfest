@@ -5,14 +5,13 @@ import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+import { SharedModule } from '../shared/shared.module';
+
 import { AdminComponent } from './admin.component';
 import { SpeakersComponent } from './speakers.component';
 import { ScheduleComponent } from './schedule.component';
 import { AdminNavComponent } from './admin-nav.component';
 import { SpeakerSelector } from './speaker-selector.component';
-import { PickerComponent } from '../shared/picker.component';
-import { FirebaseService, FirebaseTypedService } from '../shared/firebase.service';
-import { CustomPipesModule } from '../shared/custom-components.module';
 
 @NgModule({
     imports: [
@@ -30,7 +29,7 @@ import { CustomPipesModule } from '../shared/custom-components.module';
             {path: 'schedule', component: ScheduleComponent},
         ]),
         FormsModule,
-        CustomPipesModule
+        SharedModule,
     ],
     declarations: [
         AdminComponent,
@@ -38,7 +37,6 @@ import { CustomPipesModule } from '../shared/custom-components.module';
         AdminNavComponent,
         ScheduleComponent,
         SpeakerSelector,
-        PickerComponent,
     ]
 })
 export class AdminModule {}

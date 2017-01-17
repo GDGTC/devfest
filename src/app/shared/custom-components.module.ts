@@ -3,7 +3,6 @@ import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 import { FirebaseService, FirebaseTypedService } from '../shared/firebase.service';
 import { FireJoinPipe } from '../shared/fire-join.pipe';
 import { CommonModule } from '@angular/common';
-import { DialogComponent } from '../shared/dialog.component';
 
 @Pipe({
 	name : "encodeURI"
@@ -28,12 +27,10 @@ export class EncodeURI{
     ],
     exports: [
         FireJoinPipe, 
-        DialogComponent,
         EncodeURI,
     ],
     declarations: [
         FireJoinPipe,
-        DialogComponent,
         EncodeURI,
     ]
 })

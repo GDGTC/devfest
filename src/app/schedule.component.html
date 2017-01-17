@@ -11,8 +11,8 @@
         <div class="IoT" (click)="updateTrack('IoT')"><md-icon>router</md-icon>IoT</div>
     </div>
     <div *ngIf="auth.uid | async">
-        <button (click)="filteredSlots = myAgenda">Show only my Agenda</button>
-        <button (click)="filteredSlots = allSessions">Show the entire Schedule</button>
+        <button (click)="filteredSlots = myAgenda" md-raised-button [color]="filteredSlots == myAgenda ? 'primary' : ''">My Agenda</button>
+        <button (click)="filteredSlots = allSessions" md-raised-button [color]="filteredSlots == myAgenda ? '' : 'primary'">Full Schedule</button>
     </div>
     <div *ngFor="let time of (allSessions | async)?.slots" class="timeslot-block">
         <div class="timeslot-header cta all-caps">{{ ds.customDateFormatter(time)}}</div>

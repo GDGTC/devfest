@@ -21,7 +21,6 @@ export class ScheduleComponent {
     constructor(public ds: DataService, public auth: AuthService) {
         this.filteredSlots = this.allSessions = ds.timeSlots;
         this.myAgenda = this.allSessions.combineLatest(this.auth.agenda, (sessions, agenda) => {
-            console.log("sessions:",sessions," agenda: ",agenda);
             let resultSessions = {};
             let keys = [];
             
@@ -46,9 +45,6 @@ export class ScheduleComponent {
 
         });
 
-        this.myAgenda.subscribe(next => {
-            console.log("Agenda of mine!",next);
-        })
     }
 
     updateTrack(trackName) {

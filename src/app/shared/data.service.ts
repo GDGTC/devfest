@@ -11,7 +11,20 @@ export interface Session {
     room: string;
     startTime: string;
     title: string;
+    description: string;
     track: string;
+    speakers: any[];
+}
+
+export interface Speaker {
+    $key: string;
+    name: string;
+    bio: string;
+    confirmed: boolean;
+    company: string;
+    twitter: string;
+    imageUrl: string;
+    website: string;
 }
 
 export const FIREPATH = 'devfest2017'

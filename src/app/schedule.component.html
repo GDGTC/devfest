@@ -10,12 +10,16 @@
         <div class="Design" (click)="updateTrack('Design')"><md-icon>create</md-icon>Design</div>
         <div class="IoT" (click)="updateTrack('IoT')"><md-icon>router</md-icon>IoT</div>
     </div>
-    <div *ngFor="let time of (timeSlots | async)?.slots" class="timeslot-block">
+    <div *ngIf="auth.uid | async">
+        <button (click)="filteredSlots = myAgenda">Show only my Agenda</button>
+        <button (click)="filteredSlots = allSessions">Show the entire Schedule</button>
+    </div>
+    <div *ngFor="let time of (allSessions | async)?.slots" class="timeslot-block">
         <div class="timeslot-header cta all-caps">{{ ds.customDateFormatter(time)}}</div>
         <div class="schedule-timeslot-container">
-          <div *ngFor="let session of (timeSlots | async)?.sessions[time]" 
+          <div *ngFor="let session of (filteredSlots | async)?.sessions[time]" 
                class="bigschedulelist {{session.track}}"
-               (click)="showDialog=true; thisSession=session"
+               (click)="dialogSession=session"
                > <!-- [routerLink]="[session.$key,session.title]" -->
             <div class="track-tag" *ngIf="session.track != 'all'">
                 <md-icon *ngIf="session.track != 'Keynote'">
@@ -38,15 +42,15 @@
       </div>
     </div>
 
-    <app-dialog [(visible)]="showDialog">
+    <app-dialog *ngIf="dialogSession" [visible]="dialogSession">
         <div class="sessionlinks">
-            <md-icon [routerLink]="[thisSession.$key,(thisSession.title | encodeURI)]">link</md-icon>
+            <md-icon [routerLink]="[dialogSession.$key, (dialogSession.title | encodeURI)]">link</md-icon>
             <md-icon>twitter</md-icon>
         </div>
-        <div class="callout">{{thisSession.title}} </div>
-        <div>{{ds.customDateFormatter(thisSession.startTime)}} | {{ thisSession.room}} | {{ thisSession.track}}</div>
+        <div class="callout">{{dialogSession.title}} </div>
+        <div>{{ds.customDateFormatter(dialogSession.startTime)}} | {{ dialogSession.room}} | {{ dialogSession.track}}</div>
         <div style="display: flex;align-items: center;justify-content: center;">
-            <div *ngFor="let speaker of thisSession.speakers"  [hidden]="!speaker.confirmed" class="speaker-card">
+            <div *ngFor="let speaker of dialogSession.speakers"  [hidden]="!speaker.confirmed" class="speaker-card">
                 <div class="speaker-card-img" [style.background-image]="'url('+(speaker | fireJoin: '/devfest2017/speakers/' | async)?.imageUrl+')'" style="background-size: cover; width: 70px; height: 70px;"></div>
                 <div class="speaker-content">
                     <h2>{{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.name}}</h2>
@@ -55,7 +59,7 @@
                 </div>
             </div>
         </div>
-        <p style="border:1px solid #CCC;margin:32px;padding:32px;" [innerHTML]="thisSession.description"></p>
+        <p style="border:1px solid #CCC;margin:32px;padding:32px;" [innerHTML]="dialogSession.description"></p>
         
 
     </app-dialog>

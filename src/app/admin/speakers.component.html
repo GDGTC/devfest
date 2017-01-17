@@ -1,4 +1,4 @@
-<div style="padding:16px;pading-top:60px;">
+<div style="padding:16px;padding-top:60px;">
     <h1>Admin DevFestMN - Speakers</h1>
     <div *ngIf="(this.uid | async) === null">
         <button type="button" (click)="af.auth.login()">Login</button>
@@ -7,7 +7,7 @@
         Welcome {{name | async}} ({{uid | async}})
         <admin-nav></admin-nav>
         <h2>Speakers</h2>
-        <button (click)="editSpeaker = {}; showDialog = true" md-raised-button color="primary">New Speaker</button>
+        <button (click)="editSpeaker = {}" md-raised-button color="primary">New Speaker</button>
         <div *ngFor="let speaker of speakers | async" style="border:1px solid #CCC;padding:16px;">
             <div>
                 <img src="{{speaker.imageUrl}}" style="width:50px; float: left;"/>
@@ -18,10 +18,10 @@
             <div>{{speaker.company}}</div>
             <div>@{{speaker.twitter}}</div>
             <div>{{speaker.website}}</div>
-            <button (click)="editSpeaker = speaker; showDialog = true" md-raised-button color="primary">Edit</button>
+            <button (click)="editSpeaker = speaker" md-raised-button color="primary">Edit</button>
             <button (click)="deleteSpeaker(speaker.$key)" md-raised-button color="secondary">Delete</button>
         </div>
-    <app-dialog [(visible)]="showDialog">
+    <app-dialog *ngIf="editSpeaker" [(visible)]="editSpeaker">
     <h1>Edit Speaker</h1>
             <form ngNoForm (submit)="saveSpeaker(editSpeaker)">
                 <md-input [(ngModel)]="editSpeaker.name" placeholder="Name" style="width: 100%"></md-input>

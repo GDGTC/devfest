@@ -23,7 +23,7 @@
       </div>
 
 
-    <app-dialog [(visible)]="showDialog">
+    <app-dialog *ngIf="showDialog">
         <div class="sessionlinks">
             <md-icon [routerLink]="[thisSpeaker.$key, (thisSpeaker.name | encodeURI)]">link</md-icon>
         </div>

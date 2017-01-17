@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Speaker } from '../shared/data.service';
 
 import { AngularFire } from 'angularfire2';
 
@@ -14,11 +15,9 @@ export class SpeakersComponent {
     uid: Observable<string>;
     name: Observable<string>;
 
-    schedule;
     speakers;
 
-    editSession = {};
-    editSpeaker = {};
+    editSpeaker = null;
 
     showDialog = false;
 
@@ -37,7 +36,6 @@ export class SpeakersComponent {
                 return null;
             }
         });
-        this.schedule = af.database.list(PATH + '/schedule', { query: { orderByChild: 'startTime' } });
         this.speakers = af.database.list(PATH + '/speakers', { query: { orderByChild: 'name' } });
     }
     login() {

@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-import { MdIconModule, MdButtonModule } from '@angular/material';
+import { MdIconModule } from '@angular/material/icon';
+import { MdButtonModule } from '@angular/material/button';
 
 import 'hammerjs';
 

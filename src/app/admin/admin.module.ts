@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '@angular/material';
+
+
+import { MdInputModule } from '@angular/material/input';
+import { MdButtonModule } from '@angular/material/button';
+import { MdCheckboxModule } from '@angular/material/checkbox';
+
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +21,9 @@ import { SpeakerSelector } from './speaker-selector.component';
 @NgModule({
     imports: [
         CommonModule,
-        MaterialModule.forRoot(),
+        MdInputModule.forRoot(),
+        MdButtonModule.forRoot(),
+        MdCheckboxModule.forRoot(),
         AngularFireModule.initializeApp({
             apiKey: "AIzaSyBrWJx91j512T3q6AaTGNxu_3fq47bYhfg",
             authDomain: "devfestmn.firebaseapp.com",

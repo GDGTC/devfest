@@ -18,16 +18,11 @@ import "rxjs/add/operator/switchMap";
     <div>{{ (session | async)?.room}}</div>
     <div *ngIf="(session | async)?.track !== 'all'">{{ (session | async)?.track}} Track</div>
     <div class="speaker-list-container">
-        <div *ngFor="let speaker of (session | async)?.speakers"  [hidden]="!speaker.confirmed" class="speaker-card">
-            <div class="speaker-card-img" [style.background-image]="'url('+(speaker | fireJoin: '/devfest2017/speakers/' | async)?.imageUrl+')'" style="background-size: cover; width: 70px; height: 70px;"></div>
-            <div class="speaker-content">
-                <h2>{{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.name}}</h2>
-                <div>{{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.company}}</div>
-                <div [hidden]="!(speaker | fireJoin:'/devfest2017/speakers/' | async)?.twitter"><a href="https://twitter.com/{{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.twitter}}" target="_new">@{{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.twitter}}</a></div>
-            </div>
+        <div *ngFor="let speaker of (session | async)?.speakers">
+            <speaker-container [speaker]="speaker | fireJoin: '/devfest2017/speakers/' | async"></speaker-container>
         </div>
     </div>
-    <div style="border:1px solid #CCC;margin:32px;padding:32px;" [innerHTML]="(session | async)?.description"></div>
+    <div style="border:1px solid #CCC;margin:32px;padding:32px;" [innerHTML]="(session | async)?.description" *ngIf="(session | async)?.description"></div>
     <div *ngIf="auth.uid | async">
 
         <button *ngIf="!((sessionAgenda | async)?.value)" (click)="addToAgenda()">Add to my Agenda</button>
@@ -70,7 +65,6 @@ export class SessionViewComponent {
     }
         
     addToAgenda() {
-        console.log("sessionAgenda is ",this.sessionAgenda);
         this.sessionAgenda.set({value:true});
     }
     removeFromAgenda() {

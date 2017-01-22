@@ -17,10 +17,9 @@
     <div *ngFor="let time of (allSessions | async)?.slots" class="timeslot-block">
         <div class="timeslot-header cta all-caps">{{ ds.customDateFormatter(time)}}</div>
         <div class="schedule-timeslot-container">
-          <div *ngFor="let session of (filteredSlots | async)?.sessions[time]" 
+          <a *ngFor="let session of (filteredSlots | async)?.sessions[time]" 
                class="bigschedulelist {{session.track}}"
-               (click)="dialogSession=session"
-               > <!-- [routerLink]="[session.$key,session.title]" -->
+                [routerLink]="[session.$key,session.title]">
             <div class="track-tag" *ngIf="session.track != 'all'">
                 <md-icon *ngIf="session.track != 'Keynote'">
                 {{(session.track | fireJoin:'devfest2017/tracks/' | async)?.materialicon}}
@@ -38,8 +37,8 @@
             <div class="room-tag">
               <p>{{session.room}}</p>
             </div>
-          </div>
-      </div>
+          </a>
+        </div>
     </div>
 
     <app-dialog *ngIf="dialogSession" [visible]="dialogSession">

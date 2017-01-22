@@ -20,6 +20,8 @@ import { ScheduleComponent } from './schedule.component';
 import { PastComponent } from './past.component';
 import { SessionViewComponent } from './session-view.component';
 import { SpeakersViewComponent } from './speakers-view.component';
+import { SpeakerContainerComponent } from './speaker-container.component';
+import { SpeakerFullComponent } from './speaker-full.component';
 
 // Shared Module
 
@@ -36,6 +38,8 @@ import { SharedModule } from '../shared/shared.module';
         PastComponent,
         SessionViewComponent,
         SpeakersViewComponent,
+        SpeakerContainerComponent,
+        SpeakerFullComponent,
     ],
     imports: [
         CommonModule,

@@ -8,7 +8,7 @@ import "rxjs/add/operator/switchMap";
 
 @Component({
     template: `
-    <section style="padding-top:150px;">
+    <section>
             <speaker-full [speaker]="speaker | async"></speaker-full>
     </section>
     `

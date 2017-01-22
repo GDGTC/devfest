@@ -12,7 +12,7 @@ import "rxjs/add/operator/switchMap";
 
 @Component({
     template: `
-<section style="padding-top:150px;">
+<section>
     <div class="callout">{{(session | async)?.title}}</div>
     <div>{{ds.customDateFormatter((session | async)?.startTime)}}</div>
     <div>{{ (session | async)?.room}}</div>

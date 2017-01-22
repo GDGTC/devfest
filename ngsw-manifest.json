@@ -1,0 +1,19 @@
+{
+    "routing": {
+        "index": "/index.html",
+        "routes": {
+            "/": {
+                "prefix": false
+            },
+            "/schedule": {
+                "prefix": false
+            },
+            "/speakers": {
+                "prefix": false
+            },
+            "/sponsors": {
+                "prefix": false
+            }
+        }
+    }
+}

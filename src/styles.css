@@ -19,6 +19,7 @@ body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
+    padding-top:60px;
 }
 
 .center {
@@ -27,6 +28,7 @@ body {
 
 #header-bar {
     position:fixed;
+    top:0;
     background-color:white;
     width:100%;padding:16px;
     color:#777;
@@ -64,11 +66,15 @@ a {
     letter-spacing:.15em;
 }
 
-
 section {
+    text-align: center;
+    padding: 0 32px 64px;
+}
+
+#home section {
     padding: 32px 32px 64px;
     color: #333;
-    text-align: center;
+    
 }
 section h2 {
     text-transform: uppercase;
@@ -333,8 +339,13 @@ footer .blocks a {
 }
 
 @media (max-width: 600px) {
+
+  body {
+      padding-top:0;
+  }
   #header-bar {
       flex-direction: column;
+      position:relative;
   }
    #header-bar span {
        display:none;

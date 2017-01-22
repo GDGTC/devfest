@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { MdIconModule } from '@angular/material/icon';
 import { MdButtonModule } from '@angular/material/button';
+import { MdCardModule } from '@angular/material/card';
 
 import 'hammerjs';
 
@@ -94,6 +95,7 @@ import { SharedModule } from '../shared/shared.module';
         ]),
         MdIconModule.forRoot(),
         MdButtonModule.forRoot(),
+        MdCardModule.forRoot(),
         SharedModule,        
         
     ],

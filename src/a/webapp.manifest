@@ -1,6 +1,6 @@
 {
-  "name": "devfestmn",
-  "short_name": "DevFestMN 2017",
+  "name": "DevFestMN",
+  "short_name": "DevFestMN",
   "start_url": "/schedule",
   "display": "standalone",
   "orientation": "portrait",

@@ -4,7 +4,7 @@ import { AngularFire } from 'angularfire2';
 
 import { DataService, FIREPATH } from '../shared/data.service';
 
-import "rxjs/add/operator/switchMap";
+import 'rxjs/add/operator/switchMap';
 
 @Component({
     template: `

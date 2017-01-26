@@ -7,8 +7,8 @@ import { AngularFire } from 'angularfire2';
 import { AuthService } from '../shared/auth.service';
 import { DataService } from '../shared/data.service';
 
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/switchMap";
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
     template: `

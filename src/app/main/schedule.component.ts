@@ -4,7 +4,7 @@ import { AuthService } from '../shared/auth.service';
 import { DataService, Session } from '../shared/data.service';
 
 import { Observable } from 'rxjs/Observable';
-import "rxjs/add/operator/combineLatest";
+import 'rxjs/add/operator/combineLatest';
 
 @Component({
     templateUrl: './schedule.component.html',

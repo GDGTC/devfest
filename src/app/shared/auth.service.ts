@@ -3,6 +3,8 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 import { Observable } from 'rxjs/Observable';
 
+import 'rxjs/add/observable/empty';
+
 
 @Injectable()
 export class AuthService {

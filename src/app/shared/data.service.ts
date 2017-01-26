@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFire } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 
-import "./shareResults";
-import "rxjs/add/operator/startWith";
+import './shareResults';
+import 'rxjs/add/operator/startWith';
 
 
 export interface Session {

@@ -9,8 +9,8 @@ import 'rxjs/add/observable/empty';
 @Injectable()
 export class AuthService {
     isAdmin: Observable<boolean>;
-    uid: Observable<string>;
-    name: Observable<string>;
+    uid: Observable<string|false>;
+    name: Observable<string|false>;
 
     agenda: Observable<any>;
     feedback: Observable<any>;
@@ -21,14 +21,14 @@ export class AuthService {
                 
                 return authState.uid;
             } else {
-                return null;
+                return false;
             }
         });
         this.name = af.auth.map(authState => {
             if (authState && authState.google) {
                 return authState.google.displayName;
             } else {
-                return null;
+                return false;
             }
         });
         this.agenda = af.auth.switchMap(authState => {
@@ -38,7 +38,20 @@ export class AuthService {
                 return Observable.empty();
             }
         });
-        //console.log("Agenda is defined.");
+
+        this.isAdmin =  this.af.auth.switchMap( authState => {
+            if(!authState) {
+                return Observable.of(false);
+            } else {
+                return this.af.database.object('/admin/'+authState.uid)
+                .catch((a, b) => {
+                    // This permission error means we aren't an admin
+                    return Observable.of(false)
+                });
+            }
+        }).map( adminObject => 
+             (adminObject && adminObject['$value'] === true)
+        );
 
     }
     login() {

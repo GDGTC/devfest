@@ -20,9 +20,12 @@ import { SpeakersComponent } from './speakers.component';
 import { ScheduleComponent } from './schedule.component';
 import { PastComponent } from './past.component';
 import { SessionViewComponent } from './session-view.component';
+import { SessionFeedbackComponent } from './session-feedback.component';
 import { SpeakersViewComponent } from './speakers-view.component';
 import { SpeakerContainerComponent } from './speaker-container.component';
 import { SpeakerFullComponent } from './speaker-full.component';
+import { UserFeedbackComponent } from './user-feedback.component';
+import { StarBarComponent } from './star-bar.component';
 
 // Shared Module
 
@@ -38,9 +41,12 @@ import { SharedModule } from '../shared/shared.module';
         ScheduleComponent,
         PastComponent,
         SessionViewComponent,
+        SessionFeedbackComponent,
         SpeakersViewComponent,
         SpeakerContainerComponent,
         SpeakerFullComponent,
+        UserFeedbackComponent,
+        StarBarComponent,
     ],
     imports: [
         CommonModule,
@@ -88,6 +94,11 @@ import { SharedModule } from '../shared/shared.module';
                 data: { title: 'Schedule' },
             },
             {
+                path: 'schedule/:id/feedback',
+                component: SessionFeedbackComponent,
+                data: { title: 'Session Feedback' },
+            },
+            {
                 path: 'schedule/:id/:seo',
                 component: SessionViewComponent,
                 data: { title: false },
@@ -96,8 +107,8 @@ import { SharedModule } from '../shared/shared.module';
         MdIconModule.forRoot(),
         MdButtonModule.forRoot(),
         MdCardModule.forRoot(),
-        SharedModule,        
-        
+        SharedModule,
+
     ],
     providers: [
     ],

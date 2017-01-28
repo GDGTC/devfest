@@ -50,6 +50,11 @@
         "$user_id": {
           ".write": "$user_id === auth.uid"
         }
+      },
+      "feedback": {
+        "$user_id": {
+          ".write": "$user_id === auth.uid"
+        }
       }
     },
     "agendas": {

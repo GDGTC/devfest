@@ -7,7 +7,7 @@ import { MdTabChangeEvent } from '@angular/material/tabs';
   selector: 'admin-nav',
   template: `
     <md-tab-group  (focusChange)="select($event)">
-      <md-tab label="Sessions">
+      <md-tab label="Schedule">
       </md-tab>
       <md-tab label="Speakers">
       </md-tab>

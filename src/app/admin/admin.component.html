@@ -1,9 +1,9 @@
 <div style="padding:32px;">
     <h1>Admin DevFestMN</h1>
-    <div *ngIf="(auth.uid | async) === null">
+    <div *ngIf="!(auth.uid | async)">
         <button type="button" (click)="auth.login()">Login</button>
     </div>
-    <div *ngIf="(auth.uid | async) !== null">
+    <div *ngIf="auth.uid | async">
         Welcome {{auth.name | async}} ({{auth.uid | async}}) (<a (click)="auth.logout()" href="#">logout</a>)
 
 

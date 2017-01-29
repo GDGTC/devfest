@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import './shareResults';
 import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/filter';
 
 
 export interface Session {
@@ -44,6 +45,7 @@ export class DataService {
 
         this.sessionList = this.sessionList
             .startWith(JSON.parse(localStorage.getItem('sessionsCache')))
+            .filter(x => !!x)
             .shareResults();
 
         this.timeSlots = this.sessionList
@@ -73,6 +75,7 @@ export class DataService {
         let scheduleCache = localStorage.getItem("scheduleCache");
         this.timeSlots = this.timeSlots
             .startWith(JSON.parse(scheduleCache))
+            .filter(x => !!x)
             .shareResults();
 
 
@@ -83,6 +86,7 @@ export class DataService {
         let speakerCache = localStorage.getItem("speakerCache");
         this.speakers = this.speakers
             .startWith(JSON.parse(speakerCache))
+            .filter(x => !!x)
             .shareResults();
 
     }

@@ -1,17 +1,19 @@
-<h2>Speakers</h2>
-<button (click)="editSpeaker = {}" md-raised-button color="primary">New Speaker</button>
-<div *ngFor="let speaker of speakers | async" style="border:1px solid #CCC;padding:16px;">
-    <div>
-        <img src="{{speaker.imageUrl}}" style="width:50px; float: left;"/>
-        {{speaker.name}}
+<div *ngIf="auth.isAdmin | async">
+    <h2>Speakers</h2>
+    <button (click)="editSpeaker = {}" md-raised-button color="primary">New Speaker</button>
+    <div *ngFor="let speaker of speakers | async" style="border:1px solid #CCC;padding:16px;">
+        <div>
+            <img src="{{speaker.imageUrl}}" style="width:50px; float: left;"/>
+            {{speaker.name}}
+        </div>
+        <div style="clear: both;" [innerHTML]=speaker.bio></div>
+        <div>Confirmed: {{speaker.confirmed}}</div>
+        <div>{{speaker.company}}</div>
+        <div>@{{speaker.twitter}}</div>
+        <div>{{speaker.website}}</div>
+        <button (click)="editSpeaker = speaker" md-raised-button color="primary">Edit</button>
+        <button (click)="deleteSpeaker(speaker.$key)" md-raised-button color="secondary">Delete</button>
     </div>
-    <div style="clear: both;" [innerHTML]=speaker.bio></div>
-    <div>Confirmed: {{speaker.confirmed}}</div>
-    <div>{{speaker.company}}</div>
-    <div>@{{speaker.twitter}}</div>
-    <div>{{speaker.website}}</div>
-    <button (click)="editSpeaker = speaker" md-raised-button color="primary">Edit</button>
-    <button (click)="deleteSpeaker(speaker.$key)" md-raised-button color="secondary">Delete</button>
 </div>
 <app-dialog *ngIf="editSpeaker" [(visible)]="editSpeaker">
 <h1>Edit Speaker</h1>

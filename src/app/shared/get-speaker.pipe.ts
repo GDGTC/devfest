@@ -2,10 +2,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { DataService, Session } from './data.service';
 
 /**
- * Take a spekaer ID and returns a speaker
+ * Take a speaker ID and returns a speaker
  * 
  * example template expression:
- * {{ (community | fireJoin:'/communities/' | async)?.name }}
+ * {{ (community | getSpeaker | async)?.name }}
  */
 @Pipe({ name: 'getSpeaker' })
 export class GetSpeakerPipe implements PipeTransform {
@@ -14,7 +14,13 @@ export class GetSpeakerPipe implements PipeTransform {
     transform(value: string): any {
         if (value) {
             let speakers = this.ds.speakers;
-            return speakers.map(list => list.find(item => item.$key == value));
+            return speakers.map(list => {
+                if(list) {
+                    return list.find(item => item.$key == value);
+                } else {
+                    return null;
+                }
+            });
         }
     }
 }

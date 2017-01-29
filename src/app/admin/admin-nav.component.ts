@@ -20,8 +20,12 @@ export class AdminNavComponent {
   }
 
   select(event: MdTabChangeEvent) {
-    let destination = event.index == 0 ? 'schedule' : 'speakers';
-    this.router.navigate(['admin',destination]);
+    if(event.index == 0) {
+      this.router.navigate(['admin']);
+    } else {
+      this.router.navigate(['admin', 'speakers']);
+    }
+    
   }
 
 }

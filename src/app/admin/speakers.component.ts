@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Speaker } from '../shared/data.service';
-
+import { AuthService } from '../shared/auth.service';
 import { AngularFire } from 'angularfire2';
 
 import { Observable } from 'rxjs/Observable';
@@ -21,7 +21,7 @@ export class SpeakersComponent {
 
     showDialog = false;
 
-    constructor(public af: AngularFire) {
+    constructor(public af: AngularFire, public auth: AuthService) {
         this.uid = af.auth.map(authState => {
             if (authState && authState.google) {
                 return authState.google.uid;

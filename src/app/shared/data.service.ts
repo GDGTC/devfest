@@ -61,8 +61,10 @@ export class DataService {
             localStorage.setItem("scheduleCache", JSON.stringify(next));
         });
 
+
+        let scheduleCache = localStorage.getItem("scheduleCache");
         this.timeSlots = this.timeSlots
-            .startWith(localStorage.getItem("scheduleCache"))
+            .startWith(JSON.parse(scheduleCache))
             .shareResults();
     }
 

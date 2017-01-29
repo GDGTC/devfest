@@ -11,7 +11,7 @@ import { DataService } from '../shared/data.service';
     template: `
     <section>
     
-        <div class="callout">{{(session  |async).title}} Feedback</div>
+        <div class="callout">{{(session  |async)?.title}}</div>
         <user-feedback [session]="session | async"></user-feedback>
     </section>
     `,
@@ -30,7 +30,7 @@ export class SessionFeedbackComponent {
         });
 
         this.session.subscribe(sessionData => {
-             title.setTitle(sessionData.title + ' | DevFestMN 2017');
+             title.setTitle('Feedback on ' + sessionData.title + ' | DevFestMN 2017');
         });
     }
 }

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/empty';
 
 @Component({
     selector: 'user-feedback',
@@ -21,8 +22,6 @@ import 'rxjs/add/operator/map';
     </div>
     <div *ngIf="(auth.uid | async) === false">
         <button (click)="auth.login()" md-raised-button color="primary">Login to provide feedback</button>
-    
-        <div>{{auth.uid | async | json}}</div>
     </div>
     `,
 })
@@ -45,7 +44,7 @@ export class UserFeedbackComponent {
             }
         });
 
-        url.switchMap(url => af.database.object(url))
+        url.switchMap(url => url ?af.database.object(url) : Observable.empty())
         .subscribe(feedback => {
             this.feedback = feedback;
         });

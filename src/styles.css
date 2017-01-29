@@ -36,6 +36,7 @@ body {
     transition: .2s;
     font-size:18px;
     display:flex;
+    z-index: 100;
 }
 #header-bar>div a, #header-bar>div a:visited {
     padding:16px;

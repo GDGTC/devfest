@@ -4,7 +4,9 @@ import { AngularFire } from 'angularfire2';
 
 import { Observable } from 'rxjs/Observable';
 
-const PATH = 'devfest2017'
+import { DataService } from '../shared/data.service';
+
+
 
 @Component({
     templateUrl: './speakers.component.html',
@@ -16,8 +18,8 @@ export class SpeakersComponent {
     thisSpeaker = {};
     showDialog = false;
 
-    constructor(public af: AngularFire) {
-        this.speakers = af.database.list(PATH + '/speakers', { query: { orderByChild: 'name'} });
+    constructor(public ds: DataService) {
+        this.speakers = ds.speakers;
     }
 
 }

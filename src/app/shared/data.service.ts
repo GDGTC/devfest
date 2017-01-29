@@ -33,6 +33,8 @@ export const FIREPATH = 'devfest2017'
 export class DataService {
     sessionList;
     timeSlots;
+    speakers: Observable<Speaker[]>;
+
 
     constructor(public af: AngularFire) {
         this.sessionList = (<Observable<Session[]>>af.database.list(FIREPATH + '/schedule', { query: { orderByChild: 'title' } }))
@@ -66,6 +68,17 @@ export class DataService {
         this.timeSlots = this.timeSlots
             .startWith(JSON.parse(scheduleCache))
             .shareResults();
+
+
+        this.speakers = af.database.list(FIREPATH + '/speakers', { query: { orderByChild: 'name'} });
+        this.speakers.subscribe(next => {
+            localStorage.setItem("speakerCache", JSON.stringify(next));
+        })
+        let speakerCache = localStorage.getItem("speakerCache");
+        this.speakers = this.speakers
+            .startWith(JSON.parse(speakerCache))
+            .shareResults();
+
     }
 
 

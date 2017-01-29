@@ -37,7 +37,13 @@ export class DataService {
 
 
     constructor(public af: AngularFire) {
-        this.sessionList = (<Observable<Session[]>>af.database.list(FIREPATH + '/schedule', { query: { orderByChild: 'title' } }))
+        this.sessionList = (<Observable<Session[]>>af.database.list(FIREPATH + '/schedule', { query: { orderByChild: 'title' } }));
+        this.sessionList.subscribe(next => {
+            localStorage.setItem("sessionsCache", JSON.stringify(next));
+        });
+
+        this.sessionList = this.sessionList
+            .startWith(JSON.parse(localStorage.getItem('sessionsCache')))
             .shareResults();
 
         this.timeSlots = this.sessionList

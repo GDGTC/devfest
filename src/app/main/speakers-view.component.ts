@@ -15,11 +15,12 @@ import 'rxjs/add/operator/switchMap';
 })
 export class SpeakersViewComponent {
     speaker;
+    speakerId;
 
-    constructor(route: ActivatedRoute, public af: AngularFire) { 
+    constructor(route: ActivatedRoute, public af: AngularFire, ds: DataService) { 
         
         this.speaker = route.params.switchMap(params => 
-            af.database.object(FIREPATH + '/speakers/' + params['id'])
+            ds.speakers.map(list => list.find(item => item.$key == params['id']))
         );
     }
 

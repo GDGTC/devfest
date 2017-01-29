@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { AngularFire,FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { FirebaseService, FirebaseTypedService } from '../shared/firebase.service';
+import { AuthService } from '../shared/auth.service';
 import { Speaker } from '../main/shared/models';
 
 
@@ -14,10 +15,6 @@ const PATH = 'devfest2017'
     providers: [FirebaseService],
 })
 export class ScheduleComponent {
-    isAdmin: Observable<boolean>;
-    uid: Observable<string>;
-    name: Observable<string>;
-
     schedule;
     speakers;
 
@@ -28,46 +25,11 @@ export class ScheduleComponent {
 
     speakerService: FirebaseTypedService<Speaker>;
 
-    constructor(public af: AngularFire, public fs: FirebaseService) {
+    constructor(public af: AngularFire, public fs: FirebaseService, public auth: AuthService) {
         this.speakerService = fs.attach<Speaker>(PATH + '/speakers/', {query: {orderByChild: 'name'}});
-        this.uid = af.auth.map(authState => {
-            if (authState && authState.google) {
-                return authState.google.uid;
-            } else {
-                return null;
-            }
-        });
-        this.name = af.auth.map(authState => {
-            if (authState && authState.google) {
-                return authState.google.displayName;
-            } else {
-                return null;
-            }
-        });
         this.schedule = af.database.list(PATH + '/schedule',{ query: { orderByChild: 'startTime' } });
-
-        //  Atempt at mapping the Speakers to the speaker element in the Session.  ... abandoned
-//         this.schedule = af.database.list(PATH + '/schedule')
-// //            .map(items => items.sort((a, b) => a.startTime - b.startTime))
-//             .map(schedule => {
-//                 schedule.map(session=>{
-//                     session.speakers.map(speaker=> {
-//                         this.af.database.list(PATH + '/speakers')
-//                         .subscribe(sp => {
-//                             speaker = sp;
-//                         });
-//                     });
-//                     return session;
-//                 });
-//                 return schedule;
-//             }) as Observable<any[]>
-//         ;
-
         this.speakers = af.database.list(PATH + '/speakers', { query: { orderByChild: 'name' } });
 
-    }
-    login() {
-        this.af.auth.login();
     }
     saveSession(session) {
         event.preventDefault();

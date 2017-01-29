@@ -1,36 +1,30 @@
-<div style="padding:16px;pading-top:60px;">
-    <h1>Admin DevFestMN - Speakers</h1>
-    <div *ngIf="(this.uid | async) === null">
-        <button type="button" (click)="af.auth.login()">Login</button>
-    </div>
-    <div *ngIf="(this.uid | async) !== null">
-        Welcome {{name | async}} ({{uid | async}})
-        <admin-nav></admin-nav>
-        <h2>Schedule</h2>
-        <button (click)="editSession = {}; showDialog = true" md-raised-button color="primary">New Session</button>
-        <div *ngFor="let session of schedule | async " style="border:1px solid #CCC;padding:16px;">
-            <div style="font-weight: bold">{{session.title}}</div>
-            <div [innerHTML]=session.description></div>
-            <div><em>track:</em>{{session.track}}            
-            <em>room:</em>{{session.room}}</div>
-            <div>{{session.startTime}} {{session.endTime}}</div>
-            <div>{{session.category}}</div>
-            <div>{{session.all}}</div>
-            <div>{{session.slidesUrl}}</div>
-            <div>{{session.videoUrl}}</div>
-            <div>
-                <em>speakers</em>  
-                <ul class="speakerlist">
-                    <li *ngFor="let speaker of session.speakers">
-                        <!--{{speaker}}-->
-                        <img src="{{(speaker | fireJoin: '/devfest2017/speakers/' | async)?.imageUrl}}"/>
-                        {{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.name}}
-                    </li>
-                </ul>
-            </div>
-            <button (click)="editSession = session; showDialog = true" md-raised-button color="primary">Edit</button>
-            <button (click)="deleteSession(session.$key)" md-raised-button color="secondary">Delete</button>
+<div *ngIf="auth.isAdmin | async">
+    <h2>Schedule</h2>
+    <button (click)="editSession = {}; showDialog = true" md-raised-button color="primary">New Session</button>
+    <div *ngFor="let session of schedule | async " style="border:1px solid #CCC;padding:16px;">
+        <div style="font-weight: bold">{{session.title}}</div>
+        <div [innerHTML]=session.description></div>
+        <div><em>track:</em>{{session.track}}            
+        <em>room:</em>{{session.room}}</div>
+        <div>{{session.startTime}} {{session.endTime}}</div>
+        <div>{{session.category}}</div>
+        <div>{{session.all}}</div>
+        <div>{{session.slidesUrl}}</div>
+        <div>{{session.videoUrl}}</div>
+        <div>
+            <em>speakers</em>  
+            <ul class="speakerlist">
+                <li *ngFor="let speaker of session.speakers">
+                    <!--{{speaker}}-->
+                    <img src="{{(speaker | fireJoin: '/devfest2017/speakers/' | async)?.imageUrl}}"/>
+                    {{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.name}}
+                </li>
+            </ul>
         </div>
+        <button (click)="editSession = session; showDialog = true" md-raised-button color="primary">Edit</button>
+        <button (click)="deleteSession(session.$key)" md-raised-button color="secondary">Delete</button>
+    </div>
+</div>
 
 <app-dialog [(visible)]="showDialog">
   <h1>Edit Session</h1>
@@ -60,7 +54,3 @@
         </form>
   <button (click)="showDialog = !showDialog" class="btn">Close</button>
 </app-dialog>
-
-
-    </div>
-</div>

@@ -1,18 +1,27 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { MdTabChangeEvent } from '@angular/material/tabs';
+
 @Component({
   selector: 'admin-nav',
   template: `
-    <div class='admin-nav-container'>
-		<button md-raised-button routerLink="/admin">Admin</button>
-		<button md-raised-button routerLink="/admin/speakers">speakers</button>
-		<button md-raised-button routerLink="/admin/schedule">schedule</button>
-    </div>
+    <md-tab-group  (focusChange)="select($event)">
+      <md-tab label="Sessions">
+      </md-tab>
+      <md-tab label="Speakers">
+      </md-tab>
+
+    </md-tab-group>
   `,
-  styles: [`.admin-nav-container {
-        position: fixed;
-    background: white;
-    top: 4px;
-  }   `],
 })
 export class AdminNavComponent {
+  constructor(public router: Router) {
+  }
+
+  select(event: MdTabChangeEvent) {
+    let destination = event.index == 0 ? 'schedule' : 'speakers';
+    this.router.navigate(['admin',destination]);
+  }
+
 }

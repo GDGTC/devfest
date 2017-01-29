@@ -1,4 +1,4 @@
-<div style="padding:16px;pading-top:60px;">
+<div style="padding:32px;">
     <h1>Admin DevFestMN</h1>
     <div *ngIf="(auth.uid | async) === null">
         <button type="button" (click)="auth.login()">Login</button>
@@ -8,7 +8,9 @@
 
 
         <admin-nav></admin-nav>
-
+        
 
     </div>
+
+    <router-outlet></router-outlet>
 </div>

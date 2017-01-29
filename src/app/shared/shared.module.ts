@@ -4,6 +4,7 @@ import { AuthService } from '../shared/auth.service';
 import { DataService } from '../shared/data.service';
 import { FirebaseService } from '../shared/firebase.service';
 import { CustomPipesModule } from '../shared/custom-components.module';
+import { GetSpeakerPipe } from './get-speaker.pipe';
 
 import { DialogComponent } from './dialog.component';
 import { PickerComponent } from './picker.component';
@@ -11,7 +12,8 @@ import { PickerComponent } from './picker.component';
 @NgModule({
     declarations: [
         DialogComponent,
-        PickerComponent
+        PickerComponent,
+        GetSpeakerPipe,
     ],
     providers: [
         AuthService,
@@ -27,6 +29,7 @@ import { PickerComponent } from './picker.component';
         CustomPipesModule,
         PickerComponent,
         DialogComponent,
+        GetSpeakerPipe,
     ],
 })
 export class SharedModule { }

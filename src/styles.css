@@ -188,23 +188,15 @@ footer .blocks a {
     border:1px solid #CCC;
     padding:16px;
 }
-.speaker-content {
-    float: right;
-    width: 250px;
-    overflow: hidden;
-    height: 6em;
-}
 
-.speaker-card-img {
-    display: flex;
-    flex-wrap: wrap;
+.speaker-card .thumb {
     border:1px solid #CCC;
     border-radius: 50%;
+    background-size: cover; width: 70px; height: 70px;
 }
 
-.speaker-card h2:after {
-  margin-top: 5px;
-  margin-bottom: 5px;
+.speaker-content {
+    flex-grow: 1;
 }
 
 .schedule-timeslot-container {

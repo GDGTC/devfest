@@ -1,44 +1,10 @@
 <section>
 	  <div class="callout">Current Schedule</div>
-    <h2 class="schedule-announcement">Schedule times and rooms will be updated often. <br />This page will be the most current and accurate.</h2>
-    <h3 style="margin-top: 17px;">Track Legend</h3>
-    <div id="track-legend">
-        <div class="Keynote-leg" (click)="updateTrack('Keynote')">Keynote</div>
-        <div class="Android" (click)="updateTrack('Android')"><md-icon>android</md-icon>Android</div>
-        <div class="Web" (click)="updateTrack('Web')"><md-icon>web</md-icon>Web</div>
-        <div class="Cloud" (click)="updateTrack('Cloud')"><md-icon>cloud</md-icon>Cloud</div>
-        <div class="Design" (click)="updateTrack('Design')"><md-icon>create</md-icon>Design</div>
-        <div class="IoT" (click)="updateTrack('IoT')"><md-icon>router</md-icon>IoT</div>
+    <p class="schedule-announcement">Schedule times and rooms will be updated often. <br />This page will be the most current and accurate.</p>
+    <div *ngIf="auth.uid | async" style="margin: 40px 0;">
+        <a (click)="filteredData = myAgenda" [class.cta-unselected]="filteredData != myAgenda" class="cta" style="display:inline;border:1px solid #19a9e5;">My Agenda</a>
+        <a (click)="filteredData = allSessions" [class.cta-unselected]="filteredData == myAgenda" class="cta" style="display:inline;border:1px solid #19a9e5;">Full Schedule</a>
     </div>
-    <div *ngIf="auth.uid | async">
-        <button (click)="filteredSlots = myAgenda" md-raised-button [color]="filteredSlots == myAgenda ? 'primary' : ''">My Agenda</button>
-        <button (click)="filteredSlots = allSessions" md-raised-button [color]="filteredSlots == myAgenda ? '' : 'primary'">Full Schedule</button>
-    </div>
-    <div *ngFor="let time of (allSessions | async)?.slots" class="timeslot-block">
-        <div class="timeslot-header cta all-caps">{{ ds.customDateFormatter(time)}}</div>
-        <div class="schedule-timeslot-container">
-          <a *ngFor="let session of (filteredSlots | async)?.sessions[time]" 
-               class="bigschedulelist {{session.track}}"
-                [routerLink]="[session.$key,(session.title | encodeURI)]">
-            <div class="track-tag" *ngIf="session.track != 'all'">
-                <md-icon *ngIf="session.track != 'Keynote'">
-                {{(session.track | fireJoin:'devfest2017/tracks/' | async)?.materialicon}}
-              </md-icon>{{session.track}}
-            </div>
-            <div class="session-content">
-              <h2>{{session.title}}</h2>
-              <div style="display:flex; flex-direction:row;">
-                  <div *ngFor="let speaker of session.speakers" style="flex: 1 1 auto; text-align:center;">
-                          {{(speaker | getSpeaker | async)?.name}}
-                  </div>
-              </div>
-            </div>
-            <div class="room-tag">
-              <p>{{session.room}}</p>
-            </div>
-          </a>
-        </div>
-    </div>
-
-
+    <div></div>
+   <schedule-grid [data]="filteredData | async" [forceMobile]="filteredData == myAgenda"></schedule-grid>
 </section>

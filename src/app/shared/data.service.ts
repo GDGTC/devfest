@@ -15,6 +15,7 @@ export interface Session {
     description: string;
     track: string;
     speakers: any[];
+    blocks?: number;
 }
 
 export interface Speaker {
@@ -28,13 +29,16 @@ export interface Speaker {
     website: string;
 }
 
-export const FIREPATH = 'devfest2017'
+export const FIREPATH = 'devfest2017';
 
 @Injectable()
 export class DataService {
-    sessionList;
+    sessionList: Observable<Session[]>;
     timeSlots;
     speakers: Observable<Speaker[]>;
+
+    ROOMS = ['Large Auditorium', 'Small Auditorium', 'Lab', 'Classroom A', 'Classroom B', 'Classroom C', 'Classroom D'];
+    FLOORS = {'Large Auditorium': 1, 'Small Auditorium': 1, 'Lab': 3, 'Classroom A': 3, 'Classroom B': 3, 'Classroom C': 3, 'Classroom D': 3};
 
 
     constructor(public af: AngularFire) {

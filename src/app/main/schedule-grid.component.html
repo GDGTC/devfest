@@ -1,0 +1,60 @@
+ <div *ngIf="data">
+    <table class="schedule big" [style.display]="forceMobile ? 'none' : ''"><tr><td></td><td *ngFor="let room of data.rooms" style="height:55px;vertical-align:middle;"><div>{{room}}</div><div style="font-size: .75em">Floor {{ds.FLOORS[room]}}</div></td></tr>
+        <tr *ngFor="let time of data.startTimes">
+            <td style="width:55px;">{{ ds.customDateFormatter(time)}}</td>
+            <template [ngIf]="!data.gridData[time].all">
+                <ng-container *ngFor="let room of data.rooms">
+                    <td *ngIf="data.gridData[time][room]" 
+                        [rowSpan]="data.gridData[time][room].blocks"
+                        class="{{data.gridData[time][room].track}} session" [routerLink]="['/schedule',data.gridData[time][room].$key,(data.gridData[time][room].title | encodeURI)]">
+                        <div class="title">{{data.gridData[time][room].title}}</div>
+                        <div *ngFor="let speaker of data.gridData[time][room].speakers">
+                            {{(speaker | getSpeaker | async)?.name}}
+                        </div>
+                    </td>
+                </ng-container>
+            </template>
+            <template [ngIf]="data.gridData[time].all">
+                <td [colSpan]="data.rooms.length" class="{{data.gridData[time].all.track}} session" [routerLink]="['/schedule',data.gridData[time]['all'].$key,(data.gridData[time]['all'].title | encodeURI)]">
+                    <div class="title">{{data.gridData[time]['all'].title}}</div>
+                    <div>{{data.gridData[time]['all'].room}}</div>
+                    <div *ngFor="let speaker of data.gridData[time].all.speakers">
+                        {{(speaker | getSpeaker | async)?.name}}
+                    </div>
+                </td>
+            </template>
+        </tr>
+    </table>
+
+    <div class="schedule small" [style.display]="forceMobile ? 'block' : ''">
+            <div *ngFor="let time of data.startTimes">
+            <div class="time">{{ ds.customDateFormatter(time)}}</div>
+            <template [ngIf]="!data.gridData[time].all">
+                <ng-container *ngFor="let room of data.rooms">
+                    <a *ngIf="data.gridData[time][room]" 
+                        class="{{data.gridData[time][room].track}} session"
+                        [routerLink]="['/schedule',data.gridData[time][room].$key,(data.gridData[time][room].title | encodeURI)]">
+                        <div class="title">{{data.gridData[time][room].title}}</div>
+                        <div>{{data.gridData[time][room].room}}</div>
+                        <div *ngFor="let speaker of data.gridData[time][room].speakers">
+                            {{(speaker | getSpeaker | async)?.name}}
+                        </div>
+                        <div *ngIf="data.gridData[time][room].blocks == 2">
+                            <em>Note: This session is 2 hours long.</em>
+                        </div>
+                    </a>
+                </ng-container>
+            </template>
+            <template [ngIf]="data.gridData[time].all">
+                <div class="{{data.gridData[time].all.track}} session"
+                    [routerLink]="['/schedule',data.gridData[time]['all'].$key,(data.gridData[time]['all'].title | encodeURI)]">
+                    <div class="title">{{data.gridData[time]['all'].title}}</div>
+                    <div>{{data.gridData[time]['all'].room}}</div>
+                    <div *ngFor="let speaker of data.gridData[time].all.speakers">
+                        {{(speaker | getSpeaker | async)?.name}}
+                    </div>
+                </div>
+            </template>
+            </div>
+    </div>
+ </div>

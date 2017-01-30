@@ -112,6 +112,13 @@ section p {
     font-size: 18px;
     font-family: Montserrat,sans-serif;
 }
+.cta-unselected {
+    color:rgb(119,119,119);
+    background:none;
+}
+.cta.cta-unselected:active, .cta.cta-unselected:focus, .cta.cta-unselected:hover {
+    color:rgb(119,119,119);
+}
 
 .cta:active,.cta:focus,.cta:hover {
     color: #fff;
@@ -207,8 +214,7 @@ footer .blocks a {
 }
 
 .schedule-announcement {
-  font-size: 1em;
-  text-transform: none;
+    color: rgb(119,119,119);
 }
 
 .bigschedulelist {
@@ -255,60 +261,24 @@ footer .blocks a {
     padding: 5px;
 }
 
-.timeslot-header {
-    justify-content: center;
-    margin: 32px;
-}
+.schedule .session { color:white; padding:5px;}
+.schedule tr td:first-child, .schedule tr:first-child td, .schedule .time { background-color:#EEE; color:black;font-family: Montserrat,sans-serif; padding:5px; vertical-align:top; }
 
-.all, .Keynote {
-  width: 100%;
-  height: 100%;
-  font-size: 18px;
-}
+.schedule .Android { background-color: rgba(123,192,67,1);}
+.schedule .Web { background-color: #ffbf00;}
+.schedule .Design { background-color: #f37736;}
+.schedule .Cloud { background-color: #ee4035;}
+.schedule .IoT { background-color: #6380ea;}
+.schedule .General { background-color: darkgray;}
+.schedule .all { background-color: #656F78;}
+.schedule .Keynote { background-color: #19a9e5;}
+.schedule .Keynote { background-color: #19a9e5;}
 
-.all {
-    background-color: #656F78;
-}
+.schedule.small .session, .schedule.small .time {border-bottom: 1px solid white;display:block;}
+.schedule .session>div {padding:3px;}
+.schedule.small .time {margin-top:16px;padding:5px;}
 
-.Keynote {
-  background-color: #19a9e5;
-}
-
-.Keynote, .all, .Keynote h2, .all h2 {
-  color: white;
-}
-
-.Keynote h2:after, .all h2:after {
-  content: none;
-}
-
-.room-tag {
-  height: 40px;
-  width: 100%;
-  background-color: #c1c5c9;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.track-tag {
-  width: 100%;
-  height: 40px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.Android .track-tag, #track-legend .Android {background-color: #7bc043;}
-.Web .track-tag, #track-legend .Web {background-color: #ffbb00;}
-.Design .track-tag, #track-legend .Design {background-color: #f37736;}
-.Cloud .track-tag, #track-legend .Cloud {background-color: #ee4035;}
-.IoT .track-tag, #track-legend .IoT {background-color: #6380ea;}
-.General .track-tag {background-color: darkgray;}
-.all .track-tag {background-color: #656F78; text-transform: uppercase;}
-.Keynote .track-tag {background-color: #19a9e5; text-transform: uppercase;}
-.Keynote-leg {background-color: #19a9e5;}
+.schedule .session .title {font-size:1.2em;}
 
 #track-legend {
   display:flex;
@@ -331,6 +301,22 @@ footer .blocks a {
   margin-right: 5px;
 }
 
+.small {
+    display: none;
+}
+.big {
+    display: block;
+}
+
+@media (max-width: 1024px) {
+   .small {
+       display:block;
+   }
+   .big {
+       display: none;
+   }
+}
+
 @media (max-width: 600px) {
 
   body {
@@ -343,4 +329,5 @@ footer .blocks a {
    #header-bar span {
        display:none;
    }
+
 }

@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "2.4.4",
     "@angular/platform-server": "2.4.4",
     "@angular/router": "3.4.4",
-    "@angular/service-worker": "^0.7.5",
+    "@angular/service-worker": "0.8.0",
     "@types/gulp": "^3.8.32",
     "angularfire2": "^2.0.0-beta.7",
     "core-js": "^2.4.1",

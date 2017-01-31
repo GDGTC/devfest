@@ -37,7 +37,13 @@ export class AuthService {
             } else {
                 return Observable.empty();
             }
-        });
+        }).filter(agenda => !!agenda);
+        this.agenda
+            .subscribe(next => localStorage.setItem('agendaCache', JSON.stringify(next)));
+        this.agenda = this.agenda
+            .startWith(JSON.parse(localStorage.getItem('agendaCache')))
+            .filter(x => !!x)
+            .shareResults();
 
         this.isAdmin =  this.af.auth.switchMap( authState => {
             if(!authState) {

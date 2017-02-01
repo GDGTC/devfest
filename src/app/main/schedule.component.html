@@ -2,8 +2,8 @@
 	  <div class="callout">Current Schedule</div>
     <p class="schedule-announcement">Schedule times and rooms will be updated often. <br />This page will be the most current and accurate.</p>
     <div *ngIf="auth.uid | async" style="margin: 40px 0;">
-        <a (click)="filteredData = myAgenda" [class.cta-unselected]="filteredData != myAgenda" class="cta" style="display:inline;border:1px solid #19a9e5;">My Agenda</a>
-        <a (click)="filteredData = allSessions" [class.cta-unselected]="filteredData == myAgenda" class="cta" style="display:inline;border:1px solid #19a9e5;">Full Schedule</a>
+        <a (click)="filteredData = myAgenda" [class.cta-unselected]="filteredData != myAgenda" class="cta" style="cursor:pointer;display:inline;border:1px solid #19a9e5;">My Agenda</a>
+        <a (click)="filteredData = allSessions" [class.cta-unselected]="filteredData == myAgenda" class="cta" style="cursor:pointer;display:inline;border:1px solid #19a9e5;">Full Schedule</a>
     </div>
     <div></div>
    <schedule-grid [data]="filteredData | async" [forceMobile]="filteredData == myAgenda"></schedule-grid>

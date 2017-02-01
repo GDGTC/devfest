@@ -260,7 +260,7 @@ footer .blocks a {
 .session-content {
     padding: 5px;
 }
-
+.schedule a { color:white }
 .schedule .session { color:white; padding:5px;}
 .schedule tr td:first-child, .schedule tr:first-child td, .schedule .time { background-color:#EEE; color:black;font-family: Montserrat,sans-serif; padding:5px; vertical-align:top; }
 

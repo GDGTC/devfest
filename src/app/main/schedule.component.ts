@@ -11,21 +11,15 @@ import 'rxjs/add/operator/combineLatest';
 })
 export class ScheduleComponent {
 
-    data;
-    syncData;
+    // Two versions of the same data, one filtered, one not
     allSessions: Observable<any>;
     myAgenda: Observable<any>;
 
-    dialogSession: Session = null;
+    // Where we store the currently selected data.
     filteredData: Observable<any>;
-
-    rooms: any[];
-
 
     constructor(public ds: DataService, public auth: AuthService) {
         this.filteredData = this.allSessions;
-
-
         
         /**
          * Session data should look like data[time][room] = session;
@@ -63,10 +57,8 @@ export class ScheduleComponent {
                             if(!slot[room]) {
                                 let previous = time.substr(0,11) + pad(parseInt(time.substr(11,2))-2) + time.substr(13)
                                 if(data[previous][room] && data[previous][room].blocks == 1) {
-                                    console.log("This room has nothing in it!",time,room);
+                                    // This room has nothing in it!
                                     data[time][room] = 'placeholder';
-                                } else {
-                                    //console.log("COuldn't find ",previous,room);
                                 }
                             }
                         }

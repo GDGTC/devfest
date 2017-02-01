@@ -51,6 +51,29 @@ export class ScheduleComponent {
 
                     
                 }
+
+
+                let pad = n => (n < 10) ? ("0" + n) : n;
+
+                // Look for holes
+                for(let time in data) {
+                    let slot = data[time];
+                    if(!slot.all) {
+                        for(let room of ds.ROOMS) {
+                            if(!slot[room]) {
+                                let previous = time.substr(0,11) + pad(parseInt(time.substr(11,2))-2) + time.substr(13)
+                                if(data[previous][room] && data[previous][room].blocks == 1) {
+                                    console.log("This room has nothing in it!",time,room);
+                                    data[time][room] = 'placeholder';
+                                } else {
+                                    //console.log("COuldn't find ",previous,room);
+                                }
+                            }
+                        }
+                    }
+            
+                }
+
                 let startTimes = Object.keys(data).sort();
                 return { startTimes: startTimes, gridData: data, rooms: ds.ROOMS };
             })

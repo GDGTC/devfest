@@ -4,7 +4,7 @@
             <td style="width:55px;">{{ ds.customDateFormatter(time)}}</td>
             <template [ngIf]="!data.gridData[time].all">
                 <ng-container *ngFor="let room of data.rooms">
-                    <td *ngIf="data.gridData[time][room]" 
+                    <td *ngIf="data.gridData[time][room] && data.gridData[time][room].title" 
                         [rowSpan]="data.gridData[time][room].blocks"
                         class="{{data.gridData[time][room].track}} session" [routerLink]="['/schedule',data.gridData[time][room].$key,(data.gridData[time][room].title | encodeURI)]">
                         <div class="title">{{data.gridData[time][room].title}}</div>
@@ -12,6 +12,7 @@
                             {{(speaker | getSpeaker | async)?.name}}
                         </div>
                     </td>
+                    <td *ngIf="data.gridData[time][room] == 'placeholder'"></td>
                 </ng-container>
             </template>
             <template [ngIf]="data.gridData[time].all">

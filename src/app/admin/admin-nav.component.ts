@@ -11,6 +11,8 @@ import { MdTabChangeEvent } from '@angular/material/tabs';
       </md-tab>
       <md-tab label="Speakers">
       </md-tab>
+      <md-tab label="Reports">
+      </md-tab>
 
     </md-tab-group>
   `,
@@ -22,8 +24,10 @@ export class AdminNavComponent {
   select(event: MdTabChangeEvent) {
     if(event.index == 0) {
       this.router.navigate(['admin']);
-    } else {
+    } else if(event.index == 1) {
       this.router.navigate(['admin', 'speakers']);
+    } else {
+      this.router.navigate(['admin', 'reports']);
     }
     
   }

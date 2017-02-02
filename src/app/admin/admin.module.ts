@@ -18,6 +18,7 @@ import { SpeakersComponent } from './speakers.component';
 import { ScheduleComponent } from './schedule.component';
 import { AdminNavComponent } from './admin-nav.component';
 import { SpeakerSelector } from './speaker-selector.component';
+import { ReportsComponent } from './reports.component';
 
 @NgModule({
     imports: [
@@ -37,6 +38,7 @@ import { SpeakerSelector } from './speaker-selector.component';
                 path: '', component: AdminComponent, children: [
                     { path: 'speakers', component: SpeakersComponent },
                     { path: '', component: ScheduleComponent },
+                    { path: 'reports', component: ReportsComponent },
                 ]
             },
         ]),
@@ -49,6 +51,7 @@ import { SpeakerSelector } from './speaker-selector.component';
         AdminNavComponent,
         ScheduleComponent,
         SpeakerSelector,
+        ReportsComponent,
     ]
 })
 export class AdminModule { }

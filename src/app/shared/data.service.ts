@@ -29,7 +29,6 @@ export interface Speaker {
     website: string;
 }
 
-export const FIREPATH = 'devfest2017';
 
 @Injectable()
 export class DataService {
@@ -40,9 +39,12 @@ export class DataService {
     ROOMS = ['Large Auditorium', 'Small Auditorium', 'Lab', 'Classroom A', 'Classroom B', 'Classroom C', 'Classroom D'];
     FLOORS = {'Large Auditorium': 1, 'Small Auditorium': 1, 'Lab': 3, 'Classroom A': 3, 'Classroom B': 3, 'Classroom C': 3, 'Classroom D': 3};
 
+    FIREPATH = 'devfest2017';
+    
+
 
     constructor(public af: AngularFire) {
-        this.sessionList = (<Observable<Session[]>>af.database.list(FIREPATH + '/schedule', { query: { orderByChild: 'title' } }));
+        this.sessionList = (<Observable<Session[]>>af.database.list(this.FIREPATH + '/schedule', { query: { orderByChild: 'title' } }));
         this.sessionList.subscribe(next => {
             localStorage.setItem("sessionsCache", JSON.stringify(next));
         });
@@ -52,38 +54,7 @@ export class DataService {
             .filter(x => !!x)
             .shareResults();
 
-        this.timeSlots = this.sessionList
-            // Invert the array to be time-indexed.
-            .map(list => {
-                let times = {};
-                for (let session of list) {
-                    let index = session.startTime;
-                    if (Array.isArray(times[index])) {
-                        times[index].push(session);
-                    } else {
-                        times[index] = [session];
-                    }
-
-                }
-                delete times['UNK'];
-                let sortedSlots = Object.keys(times).sort();
-                return { slots: sortedSlots, sessions: times };
-            });
-
-        // Local Cache
-        this.timeSlots.subscribe(next => {
-            localStorage.setItem("scheduleCache", JSON.stringify(next));
-        });
-
-
-        let scheduleCache = localStorage.getItem("scheduleCache");
-        this.timeSlots = this.timeSlots
-            .startWith(JSON.parse(scheduleCache))
-            .filter(x => !!x)
-            .shareResults();
-
-
-        this.speakers = af.database.list(FIREPATH + '/speakers', { query: { orderByChild: 'name'} });
+        this.speakers = af.database.list(this.FIREPATH + '/speakers', { query: { orderByChild: 'name'} });
         this.speakers.subscribe(next => {
             localStorage.setItem("speakerCache", JSON.stringify(next));
         })

@@ -12,30 +12,37 @@ import { DataService } from '../shared/data.service';
     template: `
     <div *ngIf="session" style="">
         
-        <div *ngIf="session.track !== 'all'" style="font-size:18px;margin-bottom:24px">{{ session.track}}</div>
-        <h1 style="font-size:32px;font-family: Montserrat, sans-serif;">{{session.title}}</h1>
-        <div class="speaker-list-container">
-            <div *ngFor="let speaker of session.speakers" style="margin:16px 0;">
-                <speaker-container [speaker]="speaker | getSpeaker | async"></speaker-container>
+        <h1 style="font-size:32px;font-family: Montserrat, sans-serif;margin-bottom:32px;">{{session.title}}</h1>
+        <div class="session-details">
+            <div>
+                <div class="speaker-list-container" style="margin-top:16px;width:325px;">
+                    <div *ngFor="let speaker of session.speakers" >
+                        <speaker-container [speaker]="speaker | getSpeaker | async"></speaker-container>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div style="margin-bottom:24px;"><span style="font-weight:bold;font-weight:18px;">{{ session.room}}</span> {{ds.customDateFormatter(session.startTime)}}</div>
-        <div 
-            *ngIf="session.description" 
-            [innerHTML]="session.description" style="max-width:500px;display:inline-block;">
-        </div>
-        <div *ngIf="(auth.uid | async) === false" style="margin-top:64px;">
-            <h3>Login for More</h3><p>Login to save this session to your agenda, or to provide feedback after the session ends.</p>
-            <button (click)="auth.login()" class="cta" style="display:inline;">Login</button>
-        </div>
-        
-        <div *ngIf="(auth.uid | async)">
-            <button *ngIf="!((sessionAgenda | async)?.value)" (click)="addToAgenda()"  class="cta" style="display:inline;">Add to my Agenda</button>
-            <button *ngIf="(sessionAgenda | async)?.value" (click)="removeFromAgenda()"  class="cta" style="display:inline;">Remove from my Agenda</button>
+            <div class="session-details-right" style="text-align:left;">
+                <div *ngIf="session.track !== 'all'" style="font-weight:bold;margin-bottom:24px;">Track: {{ session.track }}</div>
+                <div style="font-weight:bold;margin-bottom:8px;">{{ session.room}}</div>
+                <div style="margin-bottom:24px;"> {{ds.customDateFormatter(session.startTime)}}</div>
+                <div 
+                    *ngIf="session.description" 
+                    [innerHTML]="session.description" style="max-width:500px;display:inline-block;">
+                </div>
+                <div *ngIf="(auth.uid | async) === false" style="margin-top:64px;">
+                    <h3>Login for More</h3><p>Login to save this session to your agenda, or to provide feedback after the session ends.</p>
+                    <button (click)="auth.login()" class="cta" style="display:inline;">Login</button>
+                </div>
+                
+                <div *ngIf="(auth.uid | async)">
+                    <button *ngIf="!((sessionAgenda | async)?.value)" (click)="addToAgenda()"  class="cta" style="display:inline;">Add to My Agenda</button>
+                    <button *ngIf="(sessionAgenda | async)?.value" (click)="removeFromAgenda()"  class="cta" style="display:inline;">Remove from My Agenda</button>
 
-            <div *ngIf="(auth.isAdmin | async)">
-                <h3 style="margin-top:32px;">Provide Feedback</h3>
-                <user-feedback [session]="session"></user-feedback>
+                    <div *ngIf="(auth.isAdmin | async)">
+                        <h3 style="margin-top:32px;">Provide Feedback</h3>
+                        <user-feedback [session]="session"></user-feedback>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

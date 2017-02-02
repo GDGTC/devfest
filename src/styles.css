@@ -280,25 +280,17 @@ footer .blocks a {
 
 .schedule .session .title {font-size:1.2em;}
 
-#track-legend {
-  display:flex;
-  flex-direction:row;
-  border-radius: 2px;
-  margin: 32px auto;
-}
 
-#track-legend div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60px;
-  color: white;
-  flex-grow: 1;
-  text-align:center;
+.session-details {
+    display:flex;
+    max-width:800px;
+    margin:0px auto;
 }
-
-#track-legend md-icon, .track-tag md-icon {
-  margin-right: 5px;
+.session-details-right {
+    border-left:5px solid #e5e5e5;
+    margin-left:50px;
+    padding-left:50px;
+    margin-top:16px;
 }
 
 .small {
@@ -328,6 +320,20 @@ footer .blocks a {
   }
    #header-bar span {
        display:none;
+   }
+
+   .session-details {
+       flex-direction: column-reverse;
+       
+   }
+   .session-details-right {
+       margin: 0;
+       padding: 0;
+       border-left: 0px;
+   }
+
+   user-feedback {
+       text-align: center;
    }
 
 }

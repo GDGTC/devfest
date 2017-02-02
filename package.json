@@ -38,19 +38,20 @@
     "zone.js": "0.7.4"
   },
   "devDependencies": {
+    "@angular/cli": "^1.0.0-beta.29",
     "@types/hammerjs": "^2.0.34",
-    "@types/jasmine": "^2.2.30",
+    "@types/jasmine": "^2.5.38",
     "@types/node": "^6.0.42",
-    "angular-cli": "1.0.0-beta.26",
-    "codelyzer": "~0.0.26",
-    "jasmine-core": "2.4.1",
+    "codelyzer": "~2.0.0-beta.1",
+    "jasmine-core": "2.5.2",
     "jasmine-spec-reporter": "2.5.0",
     "karma": "1.2.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-cli": "^1.0.1",
     "karma-jasmine": "^1.0.2",
     "karma-remap-istanbul": "^0.2.1",
-    "protractor": "4.0.9",
-    "tslint": "3.13.0"
+    "protractor": "4.0.13",
+    "ts-node": "1.2.1",
+    "tslint": "4.3.0"
   }
 }

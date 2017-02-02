@@ -27,6 +27,7 @@ import { SpeakerFullComponent } from './speaker-full.component';
 import { UserFeedbackComponent } from './user-feedback.component';
 import { StarBarComponent } from './star-bar.component';
 import { ScheduleGridComponent } from './schedule-grid.component';
+import { SessionDetailsComponent } from './session-details.component';
 
 // Shared Module
 
@@ -49,6 +50,7 @@ import { SharedModule } from '../shared/shared.module';
         UserFeedbackComponent,
         StarBarComponent,
         ScheduleGridComponent,
+        SessionDetailsComponent,
     ],
     imports: [
         CommonModule,

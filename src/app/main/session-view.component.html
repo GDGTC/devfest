@@ -1,28 +1,4 @@
 <section>
-    <div class="callout">{{(session | async)?.title}}</div>
-    <div>{{ds.customDateFormatter((session | async)?.startTime)}}</div>
-    <div>{{ (session | async)?.room}}</div>
-    <div *ngIf="(session | async)?.track !== 'all'">{{ (session | async)?.track}} Track</div>
-    <div class="speaker-list-container">
-        <div *ngFor="let speaker of (session | async)?.speakers">
-            <speaker-container [speaker]="speaker | fireJoin: '/devfest2017/speakers/' | async"></speaker-container>
-        </div>
-    </div>
-    <div style="border:1px solid #CCC;margin:32px;padding:32px;" [innerHTML]="(session | async)?.description" *ngIf="(session | async)?.description"></div>
-    <div style="height:100px;"></div>
-    <div *ngIf="(auth.uid | async) === false">
-        <h3>Login for more</h3><p>Login to save this session to your agenda, or to provide feedback after the session ends.</p>
-        <button (click)="auth.login()" md-raised-button color="primary">Login</button>
-    </div>
+    <session-details [session]="session | async"></session-details>
     
-    <div *ngIf="(auth.uid | async)">
-        <h3>My Agenda</h3>
-        <button *ngIf="!((sessionAgenda | async)?.value)" (click)="addToAgenda()" md-raised-button color="primary">Add to my Agenda</button>
-        <button *ngIf="(sessionAgenda | async)?.value" (click)="removeFromAgenda()" md-raised-button color="primary">Remove from my Agenda</button>
-
-        <div *ngIf="(auth.isAdmin | async)">
-            <h3 style="margin-top:32px;">Provide Feedback</h3>
-            <user-feedback [session]="session | async"></user-feedback>
-        </div>
-    </div>
 </section>

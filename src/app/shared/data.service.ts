@@ -80,6 +80,5 @@ export class DataService {
             time -= 12;
         }
         return `${time} ${indicator}`;
-
     }
 }

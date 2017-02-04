@@ -14,6 +14,7 @@
                                 {{(speaker | getSpeaker | async)?.name}}
                             </div>
                         </a>
+                        <div *ngIf="data.gridData[time][room].notes"><em>{{data.gridData[time][room].notes}}</em></div>
                     </td>
                     <td *ngIf="data.gridData[time][room] == 'placeholder'"></td>
                 </ng-container>
@@ -50,6 +51,7 @@
                         <div *ngIf="data.gridData[time][room].blocks == 2">
                             <em>Note: This session is 2 hours long.</em>
                         </div>
+                        <div *ngIf="data.gridData[time][room].notes"><em>{{data.gridData[time][room].notes}}</em></div>
                     </a>
                 </ng-container>
             </template>

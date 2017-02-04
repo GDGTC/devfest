@@ -9,6 +9,8 @@ import 'rxjs/add/observable/empty';
 @Injectable()
 export class AuthService {
     isAdmin: Observable<boolean>;
+    isVolunteer: Observable<boolean>;
+    isAdminOrVolunteer: Observable<boolean>;
     uid: Observable<string|false>;
     name: Observable<string|false>;
 
@@ -59,6 +61,18 @@ export class AuthService {
              (adminObject && adminObject['$value'] === true)
         );
 
+        this.isVolunteer = this.af.auth.switchMap( authState => {
+            if(!authState) {
+                return Observable.of(false);
+            } else {
+                return this.af.database.object('devfest2017/volunteers/'+authState.uid)
+                .catch((a,b) => {
+                    return Observable.of(false);
+                })
+            }
+        }).map( volunteerObject => (volunteerObject && volunteerObject['$value'] === true));
+
+        this.isAdminOrVolunteer = Observable.combineLatest(this.isAdmin, this.isVolunteer, (x, y) => (x || y))
     }
     login() {
         this.af.auth.login();

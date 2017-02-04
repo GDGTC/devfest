@@ -41,7 +41,11 @@
     },
     "devfest2017": {
       "schedule": {
-        ".write": "root.child('admin/'+auth.uid).exists()"
+        "$session_id": {
+          "$param": {
+            ".write": "($param == 'notes' && (root.child('devfest2017/volunteers/'+auth.uid).exists() || root.child('admin/'+auth.uid).exists())) || ($param != 'notes' && root.child('admin/'+auth.uid).exists())"
+          }
+        }
       },
       "speakers": {
         ".write": "root.child('admin/'+auth.uid).exists()"
@@ -55,6 +59,9 @@
         "$user_id": {
           ".write": "$user_id === auth.uid"
         }
+      },
+      "volunteers": {
+          ".write": "root.child('devfest2017/volunteers/'+auth.uid).exists() || root.child('admin/'+auth.uid).exists()"
       }
     },
     "agendas": {

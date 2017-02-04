@@ -25,10 +25,14 @@ export class ScheduleComponent {
 
     speakerService: FirebaseTypedService<Speaker>;
 
+    isVolunteer;
+
     constructor(public af: AngularFire, public fs: FirebaseService, public auth: AuthService) {
         this.speakerService = fs.attach<Speaker>(PATH + '/speakers/', {query: {orderByChild: 'name'}});
         this.schedule = af.database.list(PATH + '/schedule',{ query: { orderByChild: 'startTime' } });
         this.speakers = af.database.list(PATH + '/speakers', { query: { orderByChild: 'name' } });
+
+        auth.isVolunteer.subscribe(status => this.isVolunteer = status);
 
     }
     saveSession(session) {
@@ -40,7 +44,13 @@ export class ScheduleComponent {
             delete session.$exists;
             delete session.$value;
 
-            this.schedule.update(key, session);
+            if(this.isVolunteer) {
+                // Volunteers can only update the notes
+                console.log("volunteer update happening");
+                this.af.database.object(`${PATH}/schedule/${key}`).update({notes:session.notes});
+            } else {
+                this.schedule.update(key, session);
+            }
         } else {
             this.schedule.push(session);
         }

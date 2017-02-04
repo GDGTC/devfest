@@ -25,6 +25,7 @@ import { DataService } from '../shared/data.service';
                 <div *ngIf="session.track !== 'all'" style="font-weight:bold;margin-bottom:24px;">Track: {{ session.track }}</div>
                 <div style="font-weight:bold;margin-bottom:8px;">{{ session.room}}</div>
                 <div style="margin-bottom:24px;"> {{ds.customDateFormatter(session.startTime)}}</div>
+                <div *ngIf="session.notes" style="margin-bottom:24px;"><strong><em>Note: {{session.notes}}</em></strong></div>
                 <div 
                     *ngIf="session.description" 
                     [innerHTML]="session.description" style="max-width:500px;display:inline-block;">

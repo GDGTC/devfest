@@ -10,7 +10,7 @@ import 'rxjs/add/observable/combineLatest';
 @Component({
     template: `
 <div *ngIf="auth.isAdmin | async">
-    <h2>Reports</h2>
+    <h2>Speaker</h2>
     <div *ngFor="let session of sessions | async">
         <div><strong>{{ session.title}}</strong></div>
         <div *ngIf="session.feedback">{{session.feedback.length}} Reviews
@@ -22,13 +22,23 @@ import 'rxjs/add/observable/combineLatest';
                 <tr *ngFor="let feedback of session.feedback">
                     <td>{{feedback.speaker}}</td>
                     <td>{{feedback.content}}</td>
-                    <td>{{feedback.recommendation}}
+                    <td>{{feedback.recommendation}}</td>
                 </tr>
             </table>
         </div>
         <br/>
 
     </div>
+
+    <h2>Overall Feedback</h2>
+    <ol>
+        <div *ngFor="let session of sessions | async">
+            <div *ngFor="let feedback of session.feedback">
+            
+                <li>{{feedback.speaker}} / {{feedback.content}} / {{feedback.recommendation}} - {{feedback.uid}}</li>
+            </div>
+        </div>
+    </ol>
 </div>
     `
 })
@@ -51,13 +61,17 @@ export class ReportsComponent {
 
             // Add feedback
             for(let uid in feedback) {
+                //console.log("processing user",uid);
                 let user = feedback[uid];
                 for(let sessionKey in user) {
                     let session = sessions.find(item => item.$key == sessionKey);
+                    //console.log(session);
 
-                    if(typeof session.feedback != 'array') {
+
+                    if(!Array.isArray(session.feedback)) {
                         session.feedback = [];
                     }
+                    user[sessionKey].uid = uid;
                     session.feedback.push(user[sessionKey]);
 
                 }

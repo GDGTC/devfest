@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import 'rxjs/add/operator/filter';
 
 declare var ga: any;
@@ -10,8 +10,7 @@ declare var ga: any;
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-
-    constructor(router: Router, activatedRoute: ActivatedRoute, title: Title) {
+    constructor(router: Router, title: Title) {
         router.events.filter(e => e instanceof NavigationEnd).subscribe((n: NavigationEnd) => {
             let pageTitle = router.routerState.snapshot.root.children[0].data['title'];
             if (pageTitle) {

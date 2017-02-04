@@ -39,7 +39,7 @@ import { DataService } from '../shared/data.service';
                     <button *ngIf="!((sessionAgenda | async)?.value)" (click)="addToAgenda()"  class="cta" style="display:inline;">Add to My Agenda</button>
                     <button *ngIf="(sessionAgenda | async)?.value" (click)="removeFromAgenda()"  class="cta" style="display:inline;">Remove from My Agenda</button>
 
-                    <div *ngIf="(auth.isAdmin | async)">
+                    <div>
                         <h3 style="margin-top:32px;">Provide Feedback</h3>
                         <user-feedback [session]="session"></user-feedback>
                     </div>

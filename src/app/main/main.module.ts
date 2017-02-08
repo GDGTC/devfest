@@ -13,7 +13,6 @@ import 'hammerjs';
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 
 // Declarations
-import { HomeComponent } from './home.component';
 import { TicketsComponent } from './tickets.component';
 import { SponsorsComponent } from './sponsors.component';
 import { SpeakersComponent } from './speakers.component';
@@ -36,7 +35,6 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     declarations: [
-        HomeComponent,
         TicketsComponent,
         SponsorsComponent,
         SpeakersComponent,
@@ -63,10 +61,6 @@ import { SharedModule } from '../shared/shared.module';
             storageBucket: "firebase-devfestmn.appspot.com",
         }, { method: AuthMethods.Popup, provider: AuthProviders.Google }),
         RouterModule.forChild([
-            {
-                path: '',
-                component: HomeComponent,
-            },
             {
                 path: 'tickets',
                 component: TicketsComponent,

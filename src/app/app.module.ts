@@ -15,6 +15,11 @@ import { AppComponent } from './app.component';
      RouterModule.forRoot([
       {
         path: '',
+        pathMatch: 'full',
+        loadChildren: './home/home.module#HomeModule',
+      },
+      {
+        path: '',
         loadChildren: './main/main.module#MainModule',
       },
       {

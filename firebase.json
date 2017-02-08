@@ -9,6 +9,12 @@
         "source": "**",
         "destination": "/index.html"
       }
+    ],
+    "headers": [
+      {
+        "source": "/",
+        "headers": [{"key": "Link", "value": "</inline.177fa327325e7cd6cb22.bundle.js>;rel=preload;as=script,</main.dcf30f9e904bd7f2369d.bundle.js>;rel=preload;as=script,</polyfills.1f1b8510ddc4ca9fce46.bundle.js>;rel=preload;as=script,</styles.339d7b8cf0656c99e1fa.bundle.css>;rel=preload;as=style,</vendor.7a8d4a54f4a252ce5400.bundle.js>;rel=preload;as=script"}]
+      }
     ]
   }
 }

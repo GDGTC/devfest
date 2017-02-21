@@ -18,15 +18,13 @@
 <app-dialog *ngIf="editSpeaker" [(visible)]="editSpeaker">
 <h1>Edit Speaker</h1>
     <form ngNoForm (submit)="saveSpeaker(editSpeaker)">
-        <md-input [(ngModel)]="editSpeaker.name" placeholder="Name" style="width: 100%"></md-input>
+        <md-input-container><input mdInput [(ngModel)]="editSpeaker.name" placeholder="Name" style="width: 100%"></md-input-container>
         <textarea [(ngModel)]="editSpeaker.bio" placeholder="Bio" style="width: 100%; height: 5em;"></textarea>
         <md-checkbox [(ngModel)]="editSpeaker.confirmed" [checked]=editSpeaker.confirmed >Confirmed</md-checkbox>
-        <md-input [(ngModel)]="editSpeaker.company" placeholder="Company"></md-input>
-        <md-input [(ngModel)]="editSpeaker.twitter" placeholder="Twitter">
-            <span md-prefix>@</span>
-        </md-input>
-        <md-input [(ngModel)]="editSpeaker.imageUrl" placeholder="Image URL"></md-input>
-        <md-input [(ngModel)]="editSpeaker.website" placeholder="Website"></md-input>
+        <md-input-container><input mdInput [(ngModel)]="editSpeaker.company" placeholder="Company"></md-input-container>
+        <md-input-container><input mdInput [(ngModel)]="editSpeaker.twitter" placeholder="Twitter"><span md-prefix>@</span></md-input-container>
+        <md-input-container><input mdInput [(ngModel)]="editSpeaker.imageUrl" placeholder="Image URL"></md-input-container>
+        <md-input-container><input mdInput [(ngModel)]="editSpeaker.website" placeholder="Website"></md-input-container>
         <button type="submit" *ngIf="editSpeaker.$key" md-raised-button>Save Speaker</button>
         <button type="submit" *ngIf="!editSpeaker.$key" md-raised-button>Create Speaker</button>
     </form>

@@ -29,15 +29,15 @@
 <app-dialog [(visible)]="showDialog">
   <h1>Edit Session</h1>
         <form ngNoForm (submit)="saveSession(editSession)">
-            <md-input [(ngModel)]="editSession.title" placeholder="Title" style="width: 100%"></md-input>
+            <md-input-container><input mdInput [(ngModel)]="editSession.title" placeholder="Title" style="width: 100%"></md-input-container>
             <br>
             <textarea [(ngModel)]="editSession.description" placeholder="Description" style="width:100%; height: 4em;"></textarea>
             <br>
-            <md-input [(ngModel)]="editSession.room" placeholder="Room"></md-input>
-            <md-input [(ngModel)]="editSession.track" placeholder="Track"></md-input>
-            <md-input [(ngModel)]="editSession.startTime" placeholder="Start Time"></md-input>
-            <md-input [(ngModel)]="editSession.blocks" placeholder="# of Blocks"></md-input>
-            <md-input [(ngModel)]="editSession.notes" placeholder="Last Minute Notes"></md-input>
+            <md-input-container><input mdInput [(ngModel)]="editSession.room" placeholder="Room"></md-input-container>
+            <md-input-container><input mdInput [(ngModel)]="editSession.track" placeholder="Track"></md-input-container>
+            <md-input-container><input mdInput [(ngModel)]="editSession.startTime" placeholder="Start Time"></md-input-container>
+            <md-input-container><input mdInput [(ngModel)]="editSession.blocks" placeholder="# of Blocks"></md-input-container>
+            <md-input-container><input mdInput [(ngModel)]="editSession.notes" placeholder="Last Minute Notes"></md-input-container>
             <div>
                 <em>speakers</em>
                 <ul class="speakerlist">

@@ -1,6 +1,6 @@
 <div *ngIf="auth.isAdminOrVolunteer | async">
     <h2>Schedule</h2>
-    <button (click)="editSession = {}; showDialog = true" md-raised-button color="primary">New Session</button>
+    <button (click)="newSession()" md-raised-button color="primary">New Session</button>
     <div *ngFor="let session of schedule | async " style="border:1px solid #CCC;padding:16px;">
         <div style="font-weight: bold">{{session.title}}</div>
         <div [innerHTML]=session.description></div>

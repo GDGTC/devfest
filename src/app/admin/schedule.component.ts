@@ -35,6 +35,11 @@ export class ScheduleComponent {
         auth.isVolunteer.subscribe(status => this.isVolunteer = status);
 
     }
+
+    newSession() {
+        this.editSession = {};
+        this.showDialog = true;
+    }
     saveSession(session) {
         event.preventDefault();
         if (session.$key) {

@@ -61,4 +61,8 @@ export class SpeakersComponent {
         this.speakers.remove(key);
     }
 
+    clearEditSpeaker() {
+        this.editSpeaker = {};
+    }
+
 }

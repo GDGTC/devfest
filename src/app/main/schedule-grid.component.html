@@ -2,7 +2,7 @@
     <table class="schedule big" [style.display]="forceMobile ? 'none' : ''"><tr><td></td><td *ngFor="let room of data.rooms" style="height:55px;vertical-align:middle;"><div>{{room}}</div><div style="font-size: .75em">Floor {{ds.FLOORS[room]}}</div></td></tr>
         <tr *ngFor="let time of data.startTimes">
             <td style="width:55px;">{{ ds.customDateFormatter(time)}}</td>
-            <template [ngIf]="!data.gridData[time].all">
+            <ng-template [ngIf]="!data.gridData[time].all">
                 <ng-container *ngFor="let room of data.rooms">
                     <td *ngIf="data.gridData[time][room] && data.gridData[time][room].title" 
                         [rowSpan]="data.gridData[time][room].blocks"
@@ -18,8 +18,8 @@
                     </td>
                     <td *ngIf="data.gridData[time][room] == 'placeholder'"></td>
                 </ng-container>
-            </template>
-            <template [ngIf]="data.gridData[time].all">
+            </ng-template>
+            <ng-template [ngIf]="data.gridData[time].all">
                 <td [colSpan]="data.rooms.length" 
                     class="{{data.gridData[time].all.track}} session" 
                     [routerLink]="['/schedule',data.gridData[time]['all'].$key,(data.gridData[time]['all'].title | encodeURI)]">
@@ -31,14 +31,14 @@
                         </div>
                     </a>
                 </td>
-            </template>
+            </ng-template>
         </tr>
     </table>
 
     <div class="schedule small" [style.display]="forceMobile ? 'block' : ''">
             <div *ngFor="let time of data.startTimes">
             <div class="time">{{ ds.customDateFormatter(time)}}</div>
-            <template [ngIf]="!data.gridData[time].all">
+            <ng-template [ngIf]="!data.gridData[time].all">
                 <ng-container *ngFor="let room of data.rooms">
                     <a *ngIf="data.gridData[time][room]" 
                         class="{{data.gridData[time][room].track}} session"
@@ -54,8 +54,8 @@
                         <div *ngIf="data.gridData[time][room].notes"><em>{{data.gridData[time][room].notes}}</em></div>
                     </a>
                 </ng-container>
-            </template>
-            <template [ngIf]="data.gridData[time].all">
+            </ng-template>
+            <ng-template [ngIf]="data.gridData[time].all">
                 <a class="{{data.gridData[time].all.track}} session"
                     [routerLink]="['/schedule',data.gridData[time]['all'].$key,(data.gridData[time]['all'].title | encodeURI)]">
                     <div class="title">{{data.gridData[time]['all'].title}}</div>
@@ -64,7 +64,7 @@
                         {{(speaker | getSpeaker | async)?.name}}
                     </div>
                 </a>
-            </template>
+            </ng-template>
             </div>
     </div>
  </div>

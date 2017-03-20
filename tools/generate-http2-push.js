@@ -5,7 +5,16 @@ fs.readdir('dist/', (err, files) => {
         if(file.indexOf('.gz') != -1) {
             return false;
         }
-        if(file.indexOf('.bundle.') != -1) {
+        if(file.indexOf('favicon') != -1) {
+            return false
+        }
+        if(file.indexOf('index.html') != -1) {
+            return false;
+        }
+        if(fs.lstatSync(`dist/${file}`).isDirectory()) {
+            return false;
+        }
+        if(file.indexOf('.bundle.') != -1 || file.indexOf('.chunk.')) {
             return true;
         } else {
             return false;

@@ -13,7 +13,7 @@
     "headers": [
       {
         "source": "/",
-        "headers": [{"key": "Link", "value": "</2.60cb8eece5e68c8f52b9.chunk.js>;rel=preload;as=script,</inline.981bea33ef652279d698.bundle.js>;rel=preload;as=script,</main.690a8eba6fcfecbb2ed4.bundle.js>;rel=preload;as=script,</ngsw-manifest.json>;rel=preload;as=script,</polyfills.a1fd7937ec1c8439d38e.bundle.js>;rel=preload;as=script,</styles.6f458eb84834f9e90469.bundle.css>;rel=preload;as=style,</sw-register.19720059586f7f456234.bundle.js>;rel=preload;as=script,</vendor.e222a5a45c8d61d7eb69.bundle.js>;rel=preload;as=script,</worker-basic.min.js>;rel=preload;as=script,"}]
+        "headers": [{"key": "Link", "value": "</0.76f7d5333408476c35b6.chunk.js>;rel=preload;as=script,</1.1393c3fabcebbc93273a.chunk.js>;rel=preload;as=script,</2.df6eef19caa6c2bb6a5e.chunk.js>;rel=preload;as=script,</inline.f5c4f503564ef10c8c6c.bundle.js>;rel=preload;as=script,</main.6d245039509de818139e.bundle.js>;rel=preload;as=script,</ngsw-manifest.json>;rel=preload;as=script,</polyfills.a1fd7937ec1c8439d38e.bundle.js>;rel=preload;as=script,</styles.3247e45c4ad5ba425998.bundle.css>;rel=preload;as=style,</sw-register.19720059586f7f456234.bundle.js>;rel=preload;as=script,</vendor.a1c9c97091f5b902994b.bundle.js>;rel=preload;as=script,</webfont.js>;rel=preload;as=script,</worker-basic.min.js>;rel=preload;as=script,"}]
       }
     ]
   }

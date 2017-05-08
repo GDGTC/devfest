@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
-import { MdInputModule } from '@angular/material/input';
-import { MdButtonModule } from '@angular/material/button';
-import { MdCheckboxModule } from '@angular/material/checkbox';
-import { MdTabsModule } from '@angular/material/tabs';
+import { MdInputModule } from '@angular/material';
+import { MdButtonModule } from '@angular/material';
+import { MdCheckboxModule } from '@angular/material';
+import { MdTabsModule } from '@angular/material';
 
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 import { RouterModule } from '@angular/router';

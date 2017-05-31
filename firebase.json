@@ -13,7 +13,7 @@
     "headers": [
       {
         "source": "/",
-        "headers": [{"key": "Link", "value": "</0.76f7d5333408476c35b6.chunk.js>;rel=preload;as=script,</1.1393c3fabcebbc93273a.chunk.js>;rel=preload;as=script,</2.df6eef19caa6c2bb6a5e.chunk.js>;rel=preload;as=script,</inline.f5c4f503564ef10c8c6c.bundle.js>;rel=preload;as=script,</main.6d245039509de818139e.bundle.js>;rel=preload;as=script,</ngsw-manifest.json>;rel=preload;as=script,</polyfills.a1fd7937ec1c8439d38e.bundle.js>;rel=preload;as=script,</styles.3247e45c4ad5ba425998.bundle.css>;rel=preload;as=style,</sw-register.19720059586f7f456234.bundle.js>;rel=preload;as=script,</vendor.a1c9c97091f5b902994b.bundle.js>;rel=preload;as=script,</webfont.js>;rel=preload;as=script,</worker-basic.min.js>;rel=preload;as=script,"}]
+        "headers": [{"key": "Link", "value": "</0.8794fc0cc582b55946e2.chunk.js>;rel=preload;as=script,</1.ce18a1d0b2b2ffd10ad0.chunk.js>;rel=preload;as=script,</2.3c6c89f136ebcdcc3db9.chunk.js>;rel=preload;as=script,</inline.00cbf3bd03a93284ed65.bundle.js>;rel=preload;as=script,</main.bc66b78933c8dd62a16f.bundle.js>;rel=preload;as=script,</polyfills.37194e3b0702b7d787eb.bundle.js>;rel=preload;as=script,</styles.c82136d607f967a4507e.bundle.css>;rel=preload;as=style,</vendor.da54b581e8411f75cfb0.bundle.js>;rel=preload;as=script,</webfont.js>;rel=preload;as=script,"}]
       }
     ]
   }

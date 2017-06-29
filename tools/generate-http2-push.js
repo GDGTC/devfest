@@ -51,9 +51,9 @@ function updateWith(result) {
                 console.log("firebase.json updated successfully.");
             })
         } else {
-            console.log("Couldn't find a valid firebase config to update.");
+            console.log("Couldn't find a valid firebase config to update.\n",result);
             return;
         }
-        
+
     });
 }

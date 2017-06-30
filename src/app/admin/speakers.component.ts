@@ -14,7 +14,6 @@ const PATH = 'devfest2017'
     templateUrl: './speakers.component.html'
 })
 export class SpeakersComponent {
-    isAdmin: Observable<boolean>;
     uid: Observable<string>;
     name: Observable<string>;
 

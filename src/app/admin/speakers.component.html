@@ -1,4 +1,4 @@
-<div *ngIf="auth.isAdmin | async">
+<div *ngIf="authService.isAdmin | async">
     <h2>Speakers</h2>
     <button (click)="clearEditSpeaker()" md-raised-button color="primary">New Speaker</button>
     <div *ngFor="let speaker of speakers | async" style="border:1px solid #CCC;padding:16px;">

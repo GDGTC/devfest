@@ -13,7 +13,7 @@
     "headers": [
       {
         "source": "/",
-        "headers": [{"key": "Link", "value": "</0.a770c1dac918a2c47d42.chunk.js>;rel=preload;as=script,</1.94a6e74d1f9a7c451f8f.chunk.js>;rel=preload;as=script,</2.7a403768cddeab2142a4.chunk.js>;rel=preload;as=script,</3.90e8898cc8b3fb85e946.chunk.js>;rel=preload;as=script,</3rdpartylicenses.txt>;rel=preload;as=script,</inline.ae3e8021e0cc0b9d81dd.bundle.js>;rel=preload;as=script,</main.3278f979b256608f065d.bundle.js>;rel=preload;as=script,</ngsw-manifest.json>;rel=preload;as=script,</polyfills.6941ea5448bb406109a2.bundle.js>;rel=preload;as=script,</styles.c82136d607f967a4507e.bundle.css>;rel=preload;as=style,</sw-register.b6fc15889bd950620a2a.bundle.js>;rel=preload;as=script,</vendor.529b1f8dba2fd839c3ea.bundle.js>;rel=preload;as=script,</webfont.js>;rel=preload;as=script,</worker-basic.min.js>;rel=preload;as=script,"}]
+        "headers": [{"key": "Link", "value": "</0.dea581d6712f7d70aa94.chunk.js>;rel=preload;as=script,</1.06939f92103a81d2623d.chunk.js>;rel=preload;as=script,</2.0c7f9bfed47a02c3602c.chunk.js>;rel=preload;as=script,</3.90e8898cc8b3fb85e946.chunk.js>;rel=preload;as=script,</3rdpartylicenses.txt>;rel=preload;as=script,</inline.643c1cd0138d8f1d6552.bundle.js>;rel=preload;as=script,</main.c73f23ee9c1607935cbf.bundle.js>;rel=preload;as=script,</ngsw-manifest.json>;rel=preload;as=script,</polyfills.9a47508d4b7b18de7a9a.bundle.js>;rel=preload;as=script,</styles.3bfbe1b59011d4731522.bundle.css>;rel=preload;as=style,</sw-register.b6fc15889bd950620a2a.bundle.js>;rel=preload;as=script,</vendor.82d1f87949a8d8aa7303.bundle.js>;rel=preload;as=script,</webfont.js>;rel=preload;as=script,</worker-basic.min.js>;rel=preload;as=script,"}]
       }
     ]
   }

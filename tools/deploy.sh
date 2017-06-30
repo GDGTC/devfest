@@ -1,5 +1,5 @@
 #!/bin/bash
 
 ng build -prod
-node tools/generate-http2-push.js
+yarn run gfp
 firebase deploy

@@ -10,7 +10,9 @@ import { MdCardModule } from '@angular/material';
 
 import 'hammerjs';
 
-import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // Declarations
 import { TicketsComponent } from './tickets.component';
@@ -59,56 +61,24 @@ import { SharedModule } from '../shared/shared.module';
             authDomain: "devfestmn.firebaseapp.com",
             databaseURL: "https://devfestmn.firebaseio.com",
             storageBucket: "firebase-devfestmn.appspot.com",
-        }, { method: AuthMethods.Popup, provider: AuthProviders.Google }),
+        }),
+        AngularFireDatabaseModule,
+        AngularFireAuthModule,
         RouterModule.forChild([
-            {
-                path: 'tickets',
-                component: TicketsComponent,
-                data: { title: 'Tickets' },
-            },
-            {
-                path: 'sponsors',
-                component: SponsorsComponent,
-                data: { title: 'Sponsors' },
-            },
-            {
-                path: 'past',
-                component: PastComponent,
-                data: { title: 'Past DevFestMN Events' },
-            },
-            {
-                path: 'speakers',
-                component: SpeakersComponent,
-                data: { title: 'Speakers' },
-            },
-            {
-                path: 'speakers/:id/:seo',
-                component: SpeakersViewComponent,
-                data: { title: false },
-            },
-            {
-                path: 'schedule',
-                component: ScheduleComponent,
-                data: { title: 'Schedule' },
-            },
-            {
-                path: 'schedule/:id/feedback',
-                component: SessionFeedbackComponent,
-                data: { title: 'Session Feedback' },
-            },
-            {
-                path: 'schedule/:id/:seo',
-                component: SessionViewComponent,
-                data: { title: false },
-            },
+            { path: 'tickets', component: TicketsComponent, data: { title: 'Tickets' } },
+            { path: 'sponsors', component: SponsorsComponent, data: { title: 'Sponsors' } },
+            { path: 'past', component: PastComponent, data: { title: 'Past DevFestMN Events' } },
+            { path: 'speakers', component: SpeakersComponent, data: { title: 'Speakers', depth: 1 }, },
+            { path: 'speakers/:id/:seo', component: SpeakersViewComponent, data: { title: false, depth: 2 }, },
+            { path: 'schedule', component: ScheduleComponent, data: { title: 'Schedule', depth: 1 }, },
+            { path: 'schedule/:id/feedback', component: SessionFeedbackComponent, data: { title: 'Session Feedback', depth: 2 }, },
+            { path: 'schedule/:id/:seo', component: SessionViewComponent, data: { title: false, depth: 2 }, },
         ]),
-        MdIconModule.forRoot(),
-        MdButtonModule.forRoot(),
-        MdCardModule.forRoot(),
+        MdIconModule,
+        MdButtonModule,
+        MdCardModule,
         SharedModule,
 
-    ],
-    providers: [
     ],
 })
 export class MainModule { }

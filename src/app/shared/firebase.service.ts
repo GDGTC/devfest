@@ -1,6 +1,6 @@
 import { Injectable, Type } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 export interface HasKey {
     $key?: string;
@@ -12,14 +12,14 @@ export class FirebaseTypedService<T extends HasKey> {
     firebaseList: FirebaseListObservable<T[]>;
     list: Observable<T[]>;
 
-    constructor(private af: AngularFire) { }
+    constructor(private db: AngularFireDatabase) { }
 
     get(key): Observable<T> {
         if (key == 'new') {
             let empty: T;
             return Observable.of(empty);
         }
-        let observer: FirebaseObjectObservable<T> = this.af.database.object(this.endpoint + key);
+        let observer: FirebaseObjectObservable<T> = this.db.object(this.endpoint + key);
         return observer.map(item => {
             item.$key = key;
             return item
@@ -45,7 +45,7 @@ export class FirebaseTypedService<T extends HasKey> {
         if (key === 'new') {
             key = this.new(item).key;
         } else {
-            this.af.database.object(this.endpoint + key).update(item);
+            this.db.object(this.endpoint + key).update(item);
         }
         item.$key = key;
         item.$exists = exists;
@@ -55,7 +55,7 @@ export class FirebaseTypedService<T extends HasKey> {
     delete(item: T) {
         let key = item.$key;
         if (key) {
-            this.af.database.object(this.endpoint + key).remove();
+            this.db.object(this.endpoint + key).remove();
         }
 
     }
@@ -63,14 +63,14 @@ export class FirebaseTypedService<T extends HasKey> {
 
 @Injectable()
 export class FirebaseService {
-    constructor(private af: AngularFire) {
+    constructor(private db: AngularFireDatabase) {
     }
 
     // Factory that returns little generic FirebaseTypedService
     attach<V extends HasKey>(endpoint: string, query?): FirebaseTypedService<V> {
-        let service = new FirebaseTypedService<V>(this.af);
+        let service = new FirebaseTypedService<V>(this.db);
         service.endpoint = endpoint;
-        service.firebaseList = this.af.database.list(endpoint, query);
+        service.firebaseList = this.db.list(endpoint, query);
         service.list = service.firebaseList;
         return service;
     }

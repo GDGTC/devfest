@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AngularFire } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { DataService, Session } from '../shared/data.service';
 import { AuthService } from '../shared/auth.service';
 
@@ -33,7 +33,7 @@ export class UserFeedbackComponent {
 
     newSession: Subject<Session> = new Subject();
 
-    constructor(public af: AngularFire, public ds: DataService, public auth: AuthService) {
+    constructor(public db: AngularFireDatabase, public ds: DataService, public auth: AuthService) {
         let url = Observable.combineLatest(this.auth.uid, this.newSession)
         .map(combinedData => {
             let [uid, session] = combinedData;
@@ -44,7 +44,7 @@ export class UserFeedbackComponent {
             }
         });
 
-        url.switchMap(url => url ?af.database.object(url) : Observable.empty())
+        url.switchMap(url => url ?db.object(url) : Observable.empty())
         .subscribe(feedback => {
             this.feedback = feedback;
         });
@@ -52,7 +52,7 @@ export class UserFeedbackComponent {
         url
         .subscribe(url => {
             if(url) {
-                this.editableFeedback = af.database.object(url);
+                this.editableFeedback = db.object(url);
             }
         });
 

@@ -1,18 +1,20 @@
-import { NgModule, Pipe } from '@angular/core';
-import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseService, FirebaseTypedService } from '../shared/firebase.service';
 import { FireJoinPipe } from '../shared/fire-join.pipe';
 import { CommonModule } from '@angular/common';
 
 @Pipe({
-	name : "encodeURI"
+    name: "encodeURI"
 })
-export class EncodeURI{
-	transform(value){
-        if(value){
-            return value.replace(/[()]/g,'').replace(/ /g, '-');
+export class EncodeURI implements PipeTransform {
+    transform(value) {
+        if (value) {
+            return value.replace(/[()]/g, '').replace(/ /g, '-');
         }
-	}
+    }
 }
 
 @NgModule({
@@ -23,10 +25,12 @@ export class EncodeURI{
             authDomain: "devfestmn.firebaseapp.com",
             databaseURL: "https://devfestmn.firebaseio.com",
             storageBucket: "firebase-devfestmn.appspot.com",
-        }, {method: AuthMethods.Popup, provider: AuthProviders.Google})
+        }),
+        AngularFireDatabaseModule,
+        AngularFireAuthModule,
     ],
     exports: [
-        FireJoinPipe, 
+        FireJoinPipe,
         EncodeURI,
     ],
     declarations: [
@@ -34,4 +38,4 @@ export class EncodeURI{
         EncodeURI,
     ]
 })
-export class CustomPipesModule {}
+export class CustomPipesModule { }

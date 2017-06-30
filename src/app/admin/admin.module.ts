@@ -7,7 +7,10 @@ import { MdButtonModule } from '@angular/material';
 import { MdCheckboxModule } from '@angular/material';
 import { MdTabsModule } from '@angular/material';
 
-import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -33,7 +36,9 @@ import { VolunteersComponent } from './volunteers.component';
             authDomain: "devfestmn.firebaseapp.com",
             databaseURL: "https://devfestmn.firebaseio.com",
             storageBucket: "firebase-devfestmn.appspot.com",
-        }, { method: AuthMethods.Popup, provider: AuthProviders.Google }),
+        }),
+        AngularFireDatabaseModule,
+        AngularFireAuthModule,
         RouterModule.forChild([
             {
                 path: '', component: AdminComponent, children: [

@@ -24,7 +24,9 @@ export class SessionViewComponent {
         });
 
         this.session.subscribe(sessionData => {
-             title.setTitle(sessionData.title + ' | DevFestMN 2017');
+            if(sessionData) {
+                title.setTitle(sessionData.title + ' | DevFestMN 2017');
+            }
         });
 
 

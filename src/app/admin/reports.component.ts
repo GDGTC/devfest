@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { AuthService } from '../shared/auth.service';
 import { DataService } from '../shared/data.service';
-import { AngularFire } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
@@ -14,8 +14,8 @@ import 'rxjs/add/observable/combineLatest';
     <div *ngFor="let session of sessions | async">
         <div><strong>{{ session.title}}</strong></div>
         <div *ngIf="session.feedback">{{session.feedback.length}} Reviews
-            <div>Speaker: {{ session.scoreSpeaker }} / 
-            Content: {{ session.scoreContent }} / 
+            <div>Speaker: {{ session.scoreSpeaker }} /
+            Content: {{ session.scoreContent }} /
             Recommendation: {{ session.scoreRecommendation }}</div>
             <table border="1">
                 <tr><td>S</td><td>C</td><td>R</td></tr>
@@ -34,7 +34,7 @@ import 'rxjs/add/observable/combineLatest';
     <ol>
         <div *ngFor="let session of sessions | async">
             <div *ngFor="let feedback of session.feedback">
-            
+
                 <li>{{feedback.speaker}} / {{feedback.content}} / {{feedback.recommendation}} - {{feedback.uid}}</li>
             </div>
         </div>
@@ -46,8 +46,8 @@ export class ReportsComponent {
     feedback: Observable<any>;
     sessions: Observable<{title: string, scoreSpeaker: number, scoreContent: number, scoreRecommendation: number, feedback?: any[]}[]>;
 
-    constructor(public auth: AuthService, public af: AngularFire, public ds: DataService) {
-        this.feedback = af.database.object(ds.FIREPATH + '/feedback');
+    constructor(public auth: AuthService, public db: AngularFireDatabase, public ds: DataService) {
+        this.feedback =db.object(ds.FIREPATH + '/feedback');
         this.sessions = Observable.combineLatest(this.feedback, ds.sessionList)
         .map(data => {
             let [feedback, originalSession] = data;
@@ -85,9 +85,9 @@ export class ReportsComponent {
                 if(session.feedback) {
                     let length = session.feedback.length;
                     for(let feedback of session.feedback) {
-                        
+
                         if(feedback.speaker == 0 || feedback.content == 0 || feedback.recommendation == 0) {
-                            length--; 
+                            length--;
                         } else {
                             session.scoreSpeaker += feedback.speaker;
                             session.scoreContent += feedback.content;
@@ -105,10 +105,10 @@ export class ReportsComponent {
                 return a.scoreSpeaker + a.scoreContent + a.scoreRecommendation > b.scoreSpeaker + b.scoreContent + b.scoreRecommendation ?
                     -1 : 1
             })
-        
+
             return sessions;
         });
-        
+
 
 
     }

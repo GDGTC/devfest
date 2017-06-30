@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { DataService } from '../shared/data.service';
 
 @Component({
@@ -13,15 +13,15 @@ import { DataService } from '../shared/data.service';
     <div *ngFor="let volunteer of volunteerList | async">
         {{volunteer}} (<a href="#" (click)="set(volunteer, null)">x</a>)
     </div>
-    
+
     `
 })
 export class VolunteersComponent {
     volunteers: FirebaseObjectObservable<any>;
     volunteerList;
     id = '';
-    constructor(af: AngularFire, ds: DataService) {
-        this.volunteers = af.database.object(`${ds.FIREPATH}/volunteers/`);
+    constructor(db: AngularFireDatabase, ds: DataService) {
+        this.volunteers = db.object(`${ds.FIREPATH}/volunteers/`);
         this.volunteerList = this.volunteers.map( map => {
             let list = Object.keys(map);
             list = list.filter(x => x != '$key' && x != '$exists');

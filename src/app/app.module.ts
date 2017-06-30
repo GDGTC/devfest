@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 @NgModule({
   declarations: [
     AppComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -25,7 +24,7 @@ import { AppComponent } from './app.component';
         loadChildren: './main/main.module#MainModule',
       },
       {
-        path: 'admin', 
+        path: 'admin',
         loadChildren: './admin/admin.module#AdminModule',
         data: {title: 'Admin'},
       }

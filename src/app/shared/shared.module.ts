@@ -19,7 +19,6 @@ import { PickerComponent } from './picker.component';
         AuthService,
         DataService,
         FirebaseService,
-        
     ],
     imports: [
         CustomPipesModule,

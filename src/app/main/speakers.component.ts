@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { AngularFire } from 'angularfire2';
-
 import { Observable } from 'rxjs/Observable';
 
 import { DataService } from '../shared/data.service';

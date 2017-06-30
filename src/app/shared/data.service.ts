@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFire } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
 import './shareResults';
@@ -37,14 +37,14 @@ export class DataService {
     speakers: Observable<Speaker[]>;
 
     ROOMS = ['Large Auditorium', 'Small Auditorium', 'Lab', 'Classroom A', 'Classroom B', 'Classroom C', 'Classroom D'];
-    FLOORS = {'Large Auditorium': 1, 'Small Auditorium': 1, 'Lab': 3, 'Classroom A': 3, 'Classroom B': 3, 'Classroom C': 3, 'Classroom D': 3};
+    FLOORS = { 'Large Auditorium': 1, 'Small Auditorium': 1, 'Lab': 3, 'Classroom A': 3, 'Classroom B': 3, 'Classroom C': 3, 'Classroom D': 3 };
 
     FIREPATH = 'devfest2017';
-    
 
 
-    constructor(public af: AngularFire) {
-        this.sessionList = (<Observable<Session[]>>af.database.list(this.FIREPATH + '/schedule', { query: { orderByChild: 'title' } }));
+
+    constructor(public db: AngularFireDatabase) {
+        this.sessionList = (<Observable<Session[]>>db.list(this.FIREPATH + '/schedule', { query: { orderByChild: 'title' } }));
         this.sessionList.subscribe(next => {
             localStorage.setItem("sessionsCache", JSON.stringify(next));
         });
@@ -54,7 +54,7 @@ export class DataService {
             .filter(x => !!x)
             .shareResults();
 
-        this.speakers = af.database.list(this.FIREPATH + '/speakers', { query: { orderByChild: 'name'} });
+        this.speakers = db.list(this.FIREPATH + '/speakers', { query: { orderByChild: 'name' } });
         this.speakers.subscribe(next => {
             localStorage.setItem("speakerCache", JSON.stringify(next));
         })

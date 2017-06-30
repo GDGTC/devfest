@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/empty';
 
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthService {
@@ -17,25 +19,25 @@ export class AuthService {
     agenda: Observable<any>;
     feedback: Observable<any>;
 
-    constructor(public af: AngularFire) {
-        this.uid = af.auth.map(authState => {
-            if (authState && authState.google) {
-                
+    constructor(public auth: AngularFireAuth, public db: AngularFireDatabase) {
+        this.uid = auth.authState.map(authState => {
+            if (authState) {
+
                 return authState.uid;
             } else {
                 return false;
             }
         });
-        this.name = af.auth.map(authState => {
-            if (authState && authState.google) {
-                return authState.google.displayName;
+        this.name = auth.authState.map(authState => {
+            if (authState ) {
+                return authState.displayName;
             } else {
                 return false;
             }
         });
-        this.agenda = af.auth.switchMap(authState => {
+        this.agenda = auth.authState.switchMap(authState => {
             if (authState && authState.uid ) {
-                return af.database.list(`devfest2017/agendas/${authState.uid}`)
+                return db.list(`devfest2017/agendas/${authState.uid}`)
             } else {
                 return Observable.empty();
             }
@@ -47,25 +49,25 @@ export class AuthService {
             .filter(x => !!x)
             .shareResults();
 
-        this.isAdmin =  this.af.auth.switchMap( authState => {
+        this.isAdmin =  this.auth.authState.switchMap( authState => {
             if(!authState) {
                 return Observable.of(false);
             } else {
-                return this.af.database.object('/admin/'+authState.uid)
+                return this.db.object('/admin/'+authState.uid)
                 .catch((a, b) => {
                     // This permission error means we aren't an admin
                     return Observable.of(false)
                 });
             }
-        }).map( adminObject => 
+        }).map( adminObject =>
              (adminObject && adminObject['$value'] === true)
         );
 
-        this.isVolunteer = this.af.auth.switchMap( authState => {
+        this.isVolunteer = this.auth.authState.switchMap( authState => {
             if(!authState) {
                 return Observable.of(false);
             } else {
-                return this.af.database.object('devfest2017/volunteers/'+authState.uid)
+                return this.db.object('devfest2017/volunteers/'+authState.uid)
                 .catch((a,b) => {
                     return Observable.of(false);
                 })
@@ -75,11 +77,11 @@ export class AuthService {
         this.isAdminOrVolunteer = Observable.combineLatest(this.isAdmin, this.isVolunteer, (x, y) => (x || y))
     }
     login() {
-        this.af.auth.login();
+        this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     }
     logout() {
-        this.af.auth.logout();
+        this.auth.auth.signOut()
     }
 
- 
+
 }

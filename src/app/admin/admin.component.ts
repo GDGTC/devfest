@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AngularFire } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -12,7 +12,7 @@ const PATH = 'devfest2017'
     templateUrl: './admin.component.html'
 })
 export class AdminComponent {
-   
+
 
     schedule;
     speakers;
@@ -20,10 +20,10 @@ export class AdminComponent {
     editSession = {};
     editSpeaker = {};
 
-    constructor(public af: AngularFire, public auth: AuthService) {
+    constructor(public db: AngularFireDatabase, public auth: AuthService) {
 
-        this.schedule = af.database.list(PATH + '/schedule');
-        this.speakers = af.database.list(PATH + '/speakers');
+        this.schedule = db.list(PATH + '/schedule');
+        this.speakers = db.list(PATH + '/speakers');
     }
 
     saveSession(session) {

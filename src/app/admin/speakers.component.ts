@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { Speaker } from '../shared/data.service';
 import { AuthService } from '../shared/auth.service';
-import { AngularFire } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 import { Observable } from 'rxjs/Observable';
+
+import * as firebase from 'firebase/app';
 
 const PATH = 'devfest2017'
 
@@ -21,25 +24,25 @@ export class SpeakersComponent {
 
     showDialog = false;
 
-    constructor(public af: AngularFire, public auth: AuthService) {
-        this.uid = af.auth.map(authState => {
-            if (authState && authState.google) {
-                return authState.google.uid;
+    constructor(public auth: AngularFireAuth, public db: AngularFireDatabase, public authService: AuthService) {
+        this.uid = auth.authState.map(authState => {
+            if (authState) {
+                return authState.uid;
             } else {
                 return null;
             }
         });
-        this.name = af.auth.map(authState => {
-            if (authState && authState.google) {
-                return authState.google.displayName;
+        this.name = auth.authState.map(authState => {
+            if (authState) {
+                return authState.displayName;
             } else {
                 return null;
             }
         });
-        this.speakers = af.database.list(PATH + '/speakers', { query: { orderByChild: 'name' } });
+        this.speakers = db.list(PATH + '/speakers', { query: { orderByChild: 'name' } });
     }
     login() {
-        this.af.auth.login();
+        this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     }
     saveSpeaker(speaker) {
         event.preventDefault();

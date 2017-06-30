@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { AngularFire,FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { FirebaseService, FirebaseTypedService } from '../shared/firebase.service';
 import { AuthService } from '../shared/auth.service';
 import { Speaker } from '../main/shared/models';
@@ -27,10 +28,10 @@ export class ScheduleComponent {
 
     isVolunteer;
 
-    constructor(public af: AngularFire, public fs: FirebaseService, public auth: AuthService) {
+    constructor(public db: AngularFireDatabase, public fs: FirebaseService, public auth: AuthService) {
         this.speakerService = fs.attach<Speaker>(PATH + '/speakers/', {query: {orderByChild: 'name'}});
-        this.schedule = af.database.list(PATH + '/schedule',{ query: { orderByChild: 'startTime' } });
-        this.speakers = af.database.list(PATH + '/speakers', { query: { orderByChild: 'name' } });
+        this.schedule = db.list(PATH + '/schedule',{ query: { orderByChild: 'startTime' } });
+        this.speakers = db.list(PATH + '/speakers', { query: { orderByChild: 'name' } });
 
         auth.isVolunteer.subscribe(status => this.isVolunteer = status);
 
@@ -52,7 +53,7 @@ export class ScheduleComponent {
             if(this.isVolunteer) {
                 // Volunteers can only update the notes
                 console.log("volunteer update happening");
-                this.af.database.object(`${PATH}/schedule/${key}`).update({notes:session.notes});
+                this.db.object(`${PATH}/schedule/${key}`).update({notes:session.notes});
             } else {
                 this.schedule.update(key, session);
             }
@@ -92,7 +93,7 @@ export class ScheduleComponent {
 
     // Attempt at doing a Speaker Lookup.... abandoned
     findSpeakerName(speakerId:string){
-        console.log(this.speakers);              
+        console.log(this.speakers);
         var ans =  this.speakers.filter(speaker => {
             return speaker.$key == speakerId;
         });
@@ -106,7 +107,7 @@ export class ScheduleComponent {
         console.log(speakerId);
         var speakerPath = PATH + `/speakers/` + speakerId;
         console.log(speakerPath);
-        var speakers = this.af.database.object(speakerPath);
+        var speakers = this.db.object(speakerPath);
         console.log(speakers);
         return speakers;
     }

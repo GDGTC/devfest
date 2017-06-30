@@ -8,7 +8,9 @@
 		<!--<a routerLink="/sponsors">Sponsor</a>-->
 	</div>
 </div>
-<router-outlet></router-outlet>
+<div [@routeAnimation]="prepRouteState(routerOutlet)" class="routeContainer">
+    <router-outlet #routerOutlet="outlet"></router-outlet>
+</div>
 <footer>
 	<div class="blocks">
 		<div>

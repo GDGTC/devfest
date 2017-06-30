@@ -24,6 +24,13 @@ body {
     text-align:center;
 }
 
+.routeContainer {
+    position:relative;
+}
+.routeContainer>* {
+    display:block;
+}
+
 #header-bar {
     position:fixed;
     top:0;
@@ -73,7 +80,7 @@ section {
 #home section {
     padding: 32px 32px 64px;
     color: #333;
-    
+
 }
 section h2 {
     text-transform: uppercase;
@@ -322,7 +329,7 @@ footer .blocks a {
 
    .session-details {
        flex-direction: column-reverse;
-       
+
    }
    .session-details-right {
        margin: 0;

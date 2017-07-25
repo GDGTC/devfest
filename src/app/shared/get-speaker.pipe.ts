@@ -3,7 +3,7 @@ import { DataService, Session } from './data.service';
 
 /**
  * Take a speaker ID and returns a speaker
- * 
+ *
  * example template expression:
  * {{ (community | getSpeaker | async)?.name }}
  */
@@ -13,7 +13,7 @@ export class GetSpeakerPipe implements PipeTransform {
 
     transform(value: string): any {
         if (value) {
-            let speakers = this.ds.speakers;
+            let speakers = this.ds.getSpeakers();
             return speakers.map(list => {
                 if(list) {
                     return list.find(item => item.$key == value);

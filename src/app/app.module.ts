@@ -7,30 +7,20 @@ import { AppComponent } from './app.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-     RouterModule.forRoot([
-      {
-        path: '',
-        pathMatch: 'full',
-        loadChildren: './home/home.module#HomeModule',
-      },
-      {
-        path: '',
-        loadChildren: './main/main.module#MainModule',
-      },
-      {
-        path: 'admin',
-        loadChildren: './admin/admin.module#AdminModule',
-        data: {title: 'Admin'},
-      }
-    ]),
+    declarations: [
+        AppComponent,
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        RouterModule.forRoot([
+            { path: '', pathMatch: 'full', loadChildren: './home/home.module#HomeModule' },
+            { path: '2017', pathMatch: 'full', loadChildren: './home/home.module#HomeModule' },
+            { path: 'admin', loadChildren: './admin/admin.module#AdminModule', data: { title: 'Admin' } },
+            { path: '', loadChildren: './main/main.module#MainModule' },
+        ]),
 
-  ],
-  bootstrap: [AppComponent]
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

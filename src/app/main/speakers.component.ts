@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { DataService } from '../shared/data.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -16,8 +17,8 @@ export class SpeakersComponent {
     thisSpeaker = {};
     showDialog = false;
 
-    constructor(public ds: DataService) {
-        this.speakers = ds.speakers;
+    constructor(public ds: DataService, route: ActivatedRoute) {
+        this.speakers = route.params.switchMap(params => ds.getSpeakers(params['year']));
     }
 
 }

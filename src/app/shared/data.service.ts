@@ -32,38 +32,47 @@ export interface Speaker {
 
 @Injectable()
 export class DataService {
-    sessionList: Observable<Session[]>;
-    timeSlots;
-    speakers: Observable<Speaker[]>;
-
     ROOMS = ['Large Auditorium', 'Small Auditorium', 'Lab', 'Classroom A', 'Classroom B', 'Classroom C', 'Classroom D'];
     FLOORS = { 'Large Auditorium': 1, 'Small Auditorium': 1, 'Lab': 3, 'Classroom A': 3, 'Classroom B': 3, 'Classroom C': 3, 'Classroom D': 3 };
 
     FIREPATH = 'devfest2017';
-
+    defaultYear = '2017';
 
 
     constructor(public db: AngularFireDatabase) {
-        this.sessionList = (<Observable<Session[]>>db.list(this.FIREPATH + '/schedule', { query: { orderByChild: 'title' } }));
-        this.sessionList.subscribe(next => {
-            localStorage.setItem("sessionsCache", JSON.stringify(next));
+
+    }
+
+    getSchedule(year?: string): Observable<Session[]> {
+        if (!year) {
+            year = this.defaultYear;;
+        }
+        let sessionList = (<Observable<Session[]>>this.db.list('devfest' + year + '/schedule', { query: { orderByChild: 'title' } }));
+        sessionList.subscribe(next => {
+            localStorage.setItem('sessionsCache' + year, JSON.stringify(next));
         });
 
-        this.sessionList = this.sessionList
-            .startWith(JSON.parse(localStorage.getItem('sessionsCache')))
+        return sessionList
+            .startWith(JSON.parse(localStorage.getItem('sessionsCache' + year)))
             .filter(x => !!x)
             .shareResults();
+    }
 
-        this.speakers = db.list(this.FIREPATH + '/speakers', { query: { orderByChild: 'name' } });
-        this.speakers.subscribe(next => {
-            localStorage.setItem("speakerCache", JSON.stringify(next));
+    getSpeakers(year?: string): Observable<Speaker[]> {
+        if (!year) {
+            year = this.defaultYear;;
+        }
+        const ref = 'devfest' + year + '/speakers';
+
+        let speakers = this.db.list(ref, { query: { orderByChild: 'name' } });
+        speakers.subscribe(next => {
+            localStorage.setItem('speakerCache' + year, JSON.stringify(next));
         })
-        let speakerCache = localStorage.getItem("speakerCache");
-        this.speakers = this.speakers
+        let speakerCache = localStorage.getItem('speakerCache' + year);
+        return speakers
             .startWith(JSON.parse(speakerCache))
             .filter(x => !!x)
             .shareResults();
-
     }
 
 

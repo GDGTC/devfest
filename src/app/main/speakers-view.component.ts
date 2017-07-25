@@ -19,7 +19,7 @@ export class SpeakersViewComponent {
     constructor(route: ActivatedRoute, ds: DataService) {
 
         this.speaker = route.params.switchMap(params =>
-            ds.speakers.map(list => list.find(item => item.$key == params['id']))
+            ds.getSpeakers(params['year']).map(list => list.find(item => item.$key == params['id']))
         );
     }
 

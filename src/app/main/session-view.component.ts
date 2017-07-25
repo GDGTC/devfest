@@ -15,9 +15,9 @@ export class SessionViewComponent {
 
     constructor(route: ActivatedRoute, public ds: DataService, title: Title) {
         this.session = route.params.switchMap(params => {
-            return ds.sessionList.map(list =>
+            return ds.getSchedule(params['year']).map(list =>
                 list.find(item =>
-                    item.$key == params['id']
+                    item.$key === params['id']
                 )
             )
 

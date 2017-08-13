@@ -12,14 +12,16 @@ import 'rxjs/add/operator/switchMap';
 })
 export class SessionViewComponent {
     session;
+    year;
 
     constructor(route: ActivatedRoute, public ds: DataService, title: Title) {
         this.session = route.params.switchMap(params => {
+            this.year = params['year'];
             return ds.getSchedule(params['year']).map(list =>
                 list.find(item =>
                     item.$key === params['id']
                 )
-            )
+            );
 
         });
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
 import { environment } from '../../environments/environment';
@@ -88,8 +88,9 @@ export class DataService {
         return this.db.object(`devfest${year}/volunteers`);
     }
 
-    getAgendas(year, uid, session) {
-        this.db.object(`devfest${year}/agendas/${uid}/${session}/`);
+    getAgenda(year, uid, session): FirebaseObjectObservable<any> {
+        const path = `devfest${year}/agendas/${uid}/${session}/`;
+        return this.db.object(path);
     }
 
     /**

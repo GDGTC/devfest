@@ -34,8 +34,8 @@
                 <speaker-selector [session]=session style="overflow: scroll; max-height: 300px; display:block"></speaker-selector>
 
 
-            <button type="submit" *ngIf="session.$key" md-raised-button>Save Session</button>
-            <button type="submit" *ngIf="!session.$key" md-raised-button>Create Session</button>
+            <button type="submit" md-raised-button>{{session.$key ? 'Save' : 'Create' }} Session</button> <button (click)="delete(session)" md-button color="secondary">Delete</button>
+
         </form>
     </ng-container>
 <ng-template #loading>

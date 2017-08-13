@@ -18,8 +18,9 @@ export class SessionEditComponent {
         this.sessionData =
             route.params.switchMap(params => {
                 this.year = params['year'];
+
                 if(params['id'] === 'new') {
-                    return Observable.of({});
+                    return Observable.of({startTime: params['time'], room: params['room']});
                 }
                 return ds.getSchedule(params['year'])
                     .map(list =>

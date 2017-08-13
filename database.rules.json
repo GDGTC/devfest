@@ -1,87 +1,67 @@
 {
-  "rules": {
-    "images": {
-      ".write": true
-    },
-    "hunt": {
+    "rules": {
+      "images": {
+        ".write": true
+      },
+      "hunt": {
+        "users": {
+          "$user_id": {
+            ".write": "$user_id === auth.uid"
+          }
+        },
+        "leaderboard": {
+          ".write": true
+        }
+      },
+      "admin": {
+        ".read": "root.child('admin/'+auth.uid).exists()"
+      },
       "users": {
         "$user_id": {
           ".write": "$user_id === auth.uid"
         }
       },
-      "leaderboard": {
-        ".write": true
-      }
-    },
-    "admin": {
-      ".read": "root.child('admin/'+auth.uid).exists()"
-    },
-    "users": {
-      "$user_id": {
-        ".write": "$user_id === auth.uid"
-      }
-    },
-    "devfest2016": {
-      "sponsors": {
-        ".write": "root.child('admin/'+auth.uid).exists()"
+      "$year": {
+        "schedule": {
+          "$session_id": {
+              ".write": "root.child('admin/'+auth.uid).exists() || root.child('devfest'+$year+'/volunteers/'+auth.uid).exists()"
+          }
+        },
+        "speakers": {
+          ".write": "root.child('admin/'+auth.uid).exists()"
+        },
+        "agendas": {
+          "$user_id": {
+            ".write": "$user_id === auth.uid"
+          }
+        },
+        "feedback": {
+          "$user_id": {
+            ".write": "$user_id === auth.uid"
+          }
+        },
+        "volunteers": {
+            ".write": "root.child('devfest2017/volunteers/'+auth.uid).exists() || root.child('admin/'+auth.uid).exists()"
+        }
       },
-      "speakers": {
-        ".write": "root.child('admin/'+auth.uid).exists()"
-      },
-      "schedule": {
-        ".write": "root.child('admin/'+auth.uid).exists()",
-        ".indexOn": [
-          "timeslot",
-          "startTime"
-        ]
-      },
-      "comments": {
-        ".write": true
-      }
-    },
-    "devfest2017": {
-      "schedule": {
-        "$session_id": {
-          "$param": {
-            ".write": "($param == 'notes' && (root.child('devfest2017/volunteers/'+auth.uid).exists() || root.child('admin/'+auth.uid).exists())) || ($param != 'notes' && root.child('admin/'+auth.uid).exists())"
+      "agendas": {
+        "$year": {
+          "$user_id": {
+            ".read": "$user_id === auth.uid",
+            ".write": "$user_id === auth.uid"
           }
         }
       },
-      "speakers": {
-        ".write": "root.child('admin/'+auth.uid).exists()"
-      },
-      "agendas": {
-        "$user_id": {
-          ".write": "$user_id === auth.uid"
-        }
-      },
       "feedback": {
-        "$user_id": {
-          ".write": "$user_id === auth.uid"
+        "2016": {
+          "$user_id": {
+            ".write": "$user_id === auth.uid"
+          }
+        },
+        "2016mobile": {
+          ".write": true
         }
       },
-      "volunteers": {
-          ".write": "root.child('devfest2017/volunteers/'+auth.uid).exists() || root.child('admin/'+auth.uid).exists()"
-      }
-    },
-    "agendas": {
-      "$year": {
-        "$user_id": {
-          ".read": "$user_id === auth.uid",
-          ".write": "$user_id === auth.uid"
-        }
-      }
-    },
-    "feedback": {
-      "2016": {
-        "$user_id": {
-          ".write": "$user_id === auth.uid"
-        }
-      },
-      "2016mobile": {
-        ".write": true
-      }
-    },
-    ".read": true
+      ".read": true
+    }
   }
-}

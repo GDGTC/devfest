@@ -42,6 +42,7 @@ import { AdminHomeComponent } from './admin-home.component';
                 path: '', component: AdminComponent, children: [
                     { path: ':year/speakers/:id/edit', component: SpeakerEditComponent },
                     { path: ':year/sessions/:id/edit', component: SessionEditComponent },
+                    { path: ':year/sessions/:id/edit/:time/:room', component: SessionEditComponent },
                     { path: '', component: AdminHomeComponent },
                     { path: 'reports', component: ReportsComponent },
                     { path: 'volunteers', component: VolunteersComponent },

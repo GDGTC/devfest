@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { AuthService } from '../shared/auth.service';
 import { DataService } from '../shared/data.service';
@@ -12,7 +12,7 @@ import { DataService } from '../shared/data.service';
     template: `
     <div *ngIf="session" style="">
 
-        <h1 style="font-size:32px;font-family: Montserrat, sans-serif;margin-bottom:32px;">{{session.title}}</h1>
+        <h1 style="font-size:32px;font-family: Montserrat, sans-serif;margin-bottom:32px;">{{session.title}} <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',session.$key,'edit']"><img src="/a/edit.svg"></a></h1>
         <div class="session-details">
             <div>
                 <div class="speaker-list-container" style="margin-top:16px;width:325px;">
@@ -39,10 +39,10 @@ import { DataService } from '../shared/data.service';
                     <button *ngIf="!((sessionAgenda | async)?.value)" (click)="addToAgenda()"  class="cta" style="display:inline;">Add to My Agenda</button>
                     <button *ngIf="(sessionAgenda | async)?.value" (click)="removeFromAgenda()"  class="cta" style="display:inline;">Remove from My Agenda</button>
 
-                    <div>
+                    <!--<div>
                         <h3 style="margin-top:32px;">Provide Feedback</h3>
                         <user-feedback [session]="session"></user-feedback>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@ export class SessionDetailsComponent {
     @Input() session;
     @Input() year;
 
-    sessionAgenda;
+    sessionAgenda: FirebaseObjectObservable<any>;
     agendaInfo;
 
     constructor(router: Router, route: ActivatedRoute, public ds: DataService, public auth: AuthService, public db: AngularFireDatabase) {
@@ -68,7 +68,7 @@ export class SessionDetailsComponent {
 
         this.agendaInfo.subscribe(agendaData => {
             let [session, uid] = agendaData;
-            this.sessionAgenda = this.ds.getAgendas(this.year, uid, session);
+            this.sessionAgenda = this.ds.getAgenda(this.year, uid, session);
         });
     }
 

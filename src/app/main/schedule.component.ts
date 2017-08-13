@@ -32,7 +32,7 @@ export class ScheduleComponent {
             this.year = params['year'] || environment.defaultYear;
             return ds.getSchedule(params['year'])
                 .map(list => {
-                    let data = {}
+                    let data = {};
                     for (let session of list) {
                         let time = session.startTime;
                         if (typeof data[time] !== 'object') {
@@ -54,19 +54,25 @@ export class ScheduleComponent {
 
 
                     let pad = n => (n < 10) ? ('0' + n) : n;
-
                     // Look for holes
                     for (let time in data) {
                         if (data.hasOwnProperty(time)) {
                             let slot = data[time];
+                            // Holes can only exist if there isn't an "all" session
                             if (!slot.all) {
                                 for (let room of ds.ROOMS) {
                                     if (!slot[room]) {
-                                        let previous = time.substr(0, 11) + pad(parseInt(time.substr(11, 2), 10) - 2) + time.substr(13);
-                                        if (data[previous][room] && data[previous][room].blocks === 1) {
+                                        // Found a hole in this room, checking previous time slot
+                                        let previous = time.substr(0, 11) + pad(parseInt(time.substr(11, 2), 10) - 1) + time.substr(13);
+                                        // Placeholder if there's nothing in the previous time slot, or there is and it's a short one
+                                        if (!data[previous][room]) {
+                                            data[time][room] = 'placeholder';
+                                        } else if (!data[previous][room].blocks || data[previous][room].blocks < 2) {
                                             // This room has nothing in it!
                                             data[time][room] = 'placeholder';
+                                        } else {
                                         }
+
                                     }
                                 }
                             }

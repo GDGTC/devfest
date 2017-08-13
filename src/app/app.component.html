@@ -2,10 +2,11 @@
 	<a class="logo" routerLink="/">DevFest<strong>MN</strong></a>
 	<span style="flex-grow:1"></span>
 	<div>
-		<a [routerLink]="['./speakers']">Speakers</a>
-		<a [routerLink]="['./schedule']">Schedule</a>
-		<!--<a routerLink="/tickets">Tickets</a>-->
-		<!--<a routerLink="/sponsors">Sponsor</a>-->
+        <a [routerLink]="['speaker-cfp']">Speakers</a>
+        <!-- <a [routerLink]="['/2018/speakers']">Speakers</a> -->
+		<!-- <a [routerLink]="['/2018/schedule']">Schedule</a> -->
+		<!-- <a routerLink="/tickets">Tickets</a> -->
+		<a routerLink="/sponsors">Sponsor</a>
 	</div>
 </div>
 <div [@routeAnimation]="prepRouteState(routerOutlet)" class="routeContainer">
@@ -54,6 +55,6 @@
 			</svg>
 		</a>
 	</section>
-	<section> &copy; 2017 GDG Twin Cities<br> Built by Lloyd Cledwyn and Stephen Fluin, inspired by <a href="https://plus.google.com/+KylePaul"
+	<section> &copy; 2017 GDG Twin Cities<br> Built by Lloyd Cledwyn and <a href="https://twitter.com/stephenfluin">Stephen Fluin</a>, inspired by <a href="https://plus.google.com/+KylePaul"
 			target="_blank">Kyle Paul</a>.</section>
 </footer>

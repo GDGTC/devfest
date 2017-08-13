@@ -19,7 +19,7 @@ export class SessionFeedbackComponent {
 
     constructor(router: Router, route: ActivatedRoute, public ds: DataService, public auth: AuthService, title: Title) {
         this.session = route.params.switchMap(params => {
-            return ds.sessionList.map(list =>
+            return ds.getSchedule().map(list =>
                 list.find(item =>
                     item.$key == params['id']
                 )

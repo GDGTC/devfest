@@ -9,6 +9,7 @@ import 'rxjs/add/observable/combineLatest';
 
 @Component({
     template: `
+    <admin-nav></admin-nav>
 <div *ngIf="auth.isAdmin | async">
     <h2>Speaker</h2>
     <div *ngFor="let session of sessions | async">
@@ -47,8 +48,8 @@ export class ReportsComponent {
     sessions: Observable<{title: string, scoreSpeaker: number, scoreContent: number, scoreRecommendation: number, feedback?: any[]}[]>;
 
     constructor(public auth: AuthService, public db: AngularFireDatabase, public ds: DataService) {
-        this.feedback =db.object(ds.FIREPATH + '/feedback');
-        this.sessions = Observable.combineLatest(this.feedback, ds.sessionList)
+        this.feedback = ds.getFeedback();
+        this.sessions = Observable.combineLatest(this.feedback, ds.getSchedule())
         .map(data => {
             let [feedback, originalSession] = data;
 

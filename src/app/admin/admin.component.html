@@ -4,12 +4,9 @@
         <button type="button" (click)="auth.login()">Login</button>
     </div>
     <div *ngIf="auth.uid | async">
-        Welcome {{auth.name | async}} ({{auth.uid | async}}) (<a (click)="auth.logout()" href="#">logout</a>)
-
-
-        <admin-nav></admin-nav>
-        
-
+        You are signed in as {{auth.name | async}} ({{auth.uid | async}})
+        <span *ngIf="auth.isAdmin">You have awesome <strong>admin</strong> powers.</span>
+        (<a (click)="auth.logout()" href="#">logout</a>)
     </div>
 
     <router-outlet></router-outlet>

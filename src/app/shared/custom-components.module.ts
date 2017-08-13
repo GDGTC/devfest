@@ -5,6 +5,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseService, FirebaseTypedService } from '../shared/firebase.service';
 import { FireJoinPipe } from '../shared/fire-join.pipe';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../environments/environment';
+
 
 @Pipe({
     name: "encodeURI"
@@ -20,12 +22,7 @@ export class EncodeURI implements PipeTransform {
 @NgModule({
     imports: [
         CommonModule,
-        AngularFireModule.initializeApp({
-            apiKey: "AIzaSyBrWJx91j512T3q6AaTGNxu_3fq47bYhfg",
-            authDomain: "devfestmn.firebaseapp.com",
-            databaseURL: "https://devfestmn.firebaseio.com",
-            storageBucket: "firebase-devfestmn.appspot.com",
-        }),
+        AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireDatabaseModule,
         AngularFireAuthModule,
     ],

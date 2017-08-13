@@ -1,10 +1,14 @@
 import { Component, Input } from '@angular/core';
+import { AuthService } from 'app/shared/auth.service';
 
 @Component({
     selector: 'speaker-full',
     template: `
     <div *ngIf="speaker">
-        <div class="callout">{{speaker.name}} </div>
+        <div class="callout">{{speaker.name}}
+            <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'speakers',speaker.$key,'edit']">
+            <img src="/a/edit.svg"></a>
+        </div>
         <div style="display: flex;align-items: center;justify-content: center;">
             <div class="" [style.background-image]="'url('+speaker.imageUrl+')'" style="background-size: cover; width: 125px; height: 125px;border-radius: 50%"></div>
         </div>
@@ -16,4 +20,8 @@ import { Component, Input } from '@angular/core';
 })
 export class SpeakerFullComponent {
     @Input() speaker;
+    @Input() year;
+
+    constructor(public auth: AuthService) {
+    }
 }

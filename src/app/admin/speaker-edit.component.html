@@ -1,0 +1,24 @@
+<style>
+    md-input-container {
+        display:block;
+        margin:16px 0;
+    }
+</style>
+
+<ng-container *ngIf="speakerData | async as speaker; else loading">
+    <h1>{{ (speaker.$key ? 'Edit' : 'New') }} Speaker</h1>
+    <form ngNoForm (submit)="save(speaker)">
+        <md-input-container><input mdInput [(ngModel)]="speaker.name" placeholder="Name" style="width: 100%"></md-input-container>
+        <textarea [(ngModel)]="speaker.bio" placeholder="Bio" style="width: 100%; height: 5em;"></textarea>
+        <md-checkbox [(ngModel)]="speaker.confirmed" [checked]=speaker.confirmed >Confirmed</md-checkbox>
+        <md-input-container><input mdInput [(ngModel)]="speaker.company" placeholder="Company"></md-input-container>
+        <md-input-container><input mdInput [(ngModel)]="speaker.twitter" placeholder="Twitter"><span mdPrefix>@</span></md-input-container>
+        <md-input-container><input mdInput [(ngModel)]="speaker.imageUrl" placeholder="Image URL"></md-input-container>
+        <md-input-container><input mdInput [(ngModel)]="speaker.website" placeholder="Website"></md-input-container>
+        <button type="submit" *ngIf="speaker.$key" md-raised-button>Save Speaker</button>
+        <button type="submit" *ngIf="!speaker.$key" md-raised-button>Create Speaker</button>
+    </form>
+</ng-container>
+<ng-template #loading>
+    Loading speaker data...
+</ng-template>

@@ -4,7 +4,7 @@
     <div *ngFor="let session of schedule | async " style="border:1px solid #CCC;padding:16px;">
         <div style="font-weight: bold">{{session.title}}</div>
         <div [innerHTML]=session.description></div>
-        <div><em>track:</em>{{session.track}}            
+        <div><em>track:</em>{{session.track}}
         <em>room:</em>{{session.room}}</div>
         <div>{{session.startTime}} {{session.endTime}}</div>
         <div>{{session.category}}</div>
@@ -12,7 +12,7 @@
         <div>{{session.slidesUrl}}</div>
         <div>{{session.videoUrl}}</div>
         <div>
-            <em>speakers</em>  
+            <em>speakers</em>
             <ul class="speakerlist">
                 <li *ngFor="let speaker of session.speakers">
                     <!--{{speaker}}-->

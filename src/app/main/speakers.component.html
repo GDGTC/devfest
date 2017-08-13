@@ -4,7 +4,9 @@
     </div>
     <div class="callout">Confirmed Speakers</div>
 
+    <button *ngIf="auth.isAdmin | async" md-raised-button color="primary" (click)="addSpeaker()">Add Speaker</button>
     <div class="speaker-list-container">
-        <speaker-container *ngFor="let speaker of speakers | async" [speaker]="speaker"></speaker-container>
+        <speaker-container *ngFor="let speaker of speakers | async" [speaker]="speaker" [year]="year" [showEdit]="auth.isAdmin | async"></speaker-container>
     </div>
+    <button  md-raised-button color="primary" (click)="addSpeaker()">Add Speaker</button>
 </section>

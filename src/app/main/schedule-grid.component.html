@@ -9,7 +9,10 @@
                         class="{{data.gridData[time][room].track}} session"
                         [routerLink]="[data.gridData[time][room].$key,(data.gridData[time][room].title | encodeURI)]">
                         <a [routerLink]="[data.gridData[time][room].$key,(data.gridData[time][room].title | encodeURI)]">
-                            <div class="title">{{data.gridData[time][room].title}}</div>
+                            <div class="title">
+                                    {{data.gridData[time][room].title}}
+                                    <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',data.gridData[time][room].$key,'edit']"><img src="/a/edit.svg"></a>
+                            </div>
                             <div *ngFor="let speaker of data.gridData[time][room].speakers">
                                 {{(speaker | getSpeaker | async)?.name}}
                             </div>
@@ -24,7 +27,10 @@
                     class="{{data.gridData[time].all.track}} session"
                     [routerLink]="[data.gridData[time]['all'].$key,(data.gridData[time]['all'].title | encodeURI)]">
                     <a [routerLink]="[data.gridData[time]['all'].$key,(data.gridData[time]['all'].title | encodeURI)]">
-                        <div class="title">{{data.gridData[time]['all'].title}}</div>
+                        <div class="title">
+                            {{data.gridData[time]['all'].title}}
+                            <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',data.gridData[time]['all'].$key,'edit']"><img src="/a/edit.svg"></a>
+                        </div>
                         <div>{{data.gridData[time]['all'].room}}</div>
                         <div *ngFor="let speaker of data.gridData[time].all.speakers">
                             {{(speaker | getSpeaker | async)?.name}}
@@ -43,7 +49,10 @@
                     <a *ngIf="data.gridData[time][room]"
                         class="{{data.gridData[time][room].track}} session"
                         [routerLink]="['/schedule',data.gridData[time][room].$key,(data.gridData[time][room].title | encodeURI)]">
-                        <div class="title">{{data.gridData[time][room].title}}</div>
+                        <div class="title">
+                            {{data.gridData[time][room].title}}
+                            <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',data.gridData[time][room].$key,'edit']"><img src="/a/edit.svg"></a>
+                        </div>
                         <div>{{data.gridData[time][room].room}}</div>
                         <div *ngFor="let speaker of data.gridData[time][room].speakers">
                             {{(speaker | getSpeaker | async)?.name}}
@@ -58,7 +67,10 @@
             <ng-template [ngIf]="data.gridData[time].all">
                 <a class="{{data.gridData[time].all.track}} session"
                     [routerLink]="['/schedule',data.gridData[time]['all'].$key,(data.gridData[time]['all'].title | encodeURI)]">
-                    <div class="title">{{data.gridData[time]['all'].title}}</div>
+                    <div class="title">
+                        {{data.gridData[time]['all'].title}}
+                        <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',data.gridData[time]['all'].$key,'edit']"><img src="/a/edit.svg"></a>
+                    </div>
                     <div>{{data.gridData[time]['all'].room}}</div>
                     <div *ngFor="let speaker of data.gridData[time].all.speakers">
                         {{(speaker | getSpeaker | async)?.name}}

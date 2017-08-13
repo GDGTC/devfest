@@ -52,6 +52,7 @@ import { DataService } from '../shared/data.service';
 })
 export class SessionDetailsComponent {
     @Input() session;
+    @Input() year;
 
     sessionAgenda;
     agendaInfo;
@@ -59,6 +60,7 @@ export class SessionDetailsComponent {
     constructor(router: Router, route: ActivatedRoute, public ds: DataService, public auth: AuthService, public db: AngularFireDatabase) {
 
         this.agendaInfo = route.params.switchMap(params => {
+            this.year = params['year'];
             return auth.uid.map(uid =>
                 [params['id'], uid]
             );
@@ -66,12 +68,12 @@ export class SessionDetailsComponent {
 
         this.agendaInfo.subscribe(agendaData => {
             let [session, uid] = agendaData;
-            this.sessionAgenda = this.db.object(`${ds.FIREPATH}/agendas/${uid}/${session}/`);
+            this.sessionAgenda = this.ds.getAgendas(this.year, uid, session);
         });
     }
 
     addToAgenda() {
-        this.sessionAgenda.set({value:true});
+        this.sessionAgenda.set({ value: true });
     }
     removeFromAgenda() {
         this.sessionAgenda.remove();

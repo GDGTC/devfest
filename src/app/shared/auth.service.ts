@@ -29,8 +29,9 @@ export class AuthService {
             }
         });
         this.name = auth.authState.map(authState => {
+            console.log(authState);
             if (authState ) {
-                return authState.displayName;
+                return authState.displayName || authState.providerData[0].displayName;
             } else {
                 return false;
             }

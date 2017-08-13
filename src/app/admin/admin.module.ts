@@ -14,15 +14,18 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+import { environment } from '../../environments/environment';
 import { SharedModule } from '../shared/shared.module';
 
 import { AdminComponent } from './admin.component';
-import { SpeakersComponent } from './speakers.component';
 import { ScheduleComponent } from './schedule.component';
 import { AdminNavComponent } from './admin-nav.component';
 import { SpeakerSelector } from './speaker-selector.component';
 import { ReportsComponent } from './reports.component';
 import { VolunteersComponent } from './volunteers.component';
+import { SpeakerEditComponent } from './speaker-edit.component';
+import { SessionEditComponent } from './session-edit.component';
+import { AdminHomeComponent } from './admin-home.component';
 
 @NgModule({
     imports: [
@@ -31,19 +34,15 @@ import { VolunteersComponent } from './volunteers.component';
         MdButtonModule.forRoot(),
         MdCheckboxModule.forRoot(),
         MdTabsModule.forRoot(),
-        AngularFireModule.initializeApp({
-            apiKey: "AIzaSyBrWJx91j512T3q6AaTGNxu_3fq47bYhfg",
-            authDomain: "devfestmn.firebaseapp.com",
-            databaseURL: "https://devfestmn.firebaseio.com",
-            storageBucket: "firebase-devfestmn.appspot.com",
-        }),
+        AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireDatabaseModule,
         AngularFireAuthModule,
         RouterModule.forChild([
             {
                 path: '', component: AdminComponent, children: [
-                    { path: 'speakers', component: SpeakersComponent },
-                    { path: '', component: ScheduleComponent },
+                    { path: ':year/speakers/:id/edit', component: SpeakerEditComponent },
+                    { path: ':year/sessions/:id/edit', component: SessionEditComponent },
+                    { path: '', component: AdminHomeComponent },
                     { path: 'reports', component: ReportsComponent },
                     { path: 'volunteers', component: VolunteersComponent },
                 ]
@@ -54,12 +53,14 @@ import { VolunteersComponent } from './volunteers.component';
     ],
     declarations: [
         AdminComponent,
-        SpeakersComponent,
         AdminNavComponent,
         ScheduleComponent,
         SpeakerSelector,
         ReportsComponent,
         VolunteersComponent,
+        SpeakerEditComponent,
+        SessionEditComponent,
+        AdminHomeComponent,
     ]
 })
 export class AdminModule { }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
+
+import { environment } from '../../environments/environment';
 
 import './shareResults';
 import 'rxjs/add/operator/startWith';
@@ -19,14 +21,18 @@ export interface Session {
 }
 
 export interface Speaker {
-    $key: string;
-    name: string;
-    bio: string;
-    confirmed: boolean;
-    company: string;
-    twitter: string;
-    imageUrl: string;
-    website: string;
+    $key?: string;
+    name?: string;
+    bio?: string;
+    confirmed?: boolean;
+    company?: string;
+    twitter?: string;
+    imageUrl?: string;
+    website?: string;
+}
+
+export interface Feedback {
+
 }
 
 
@@ -35,19 +41,13 @@ export class DataService {
     ROOMS = ['Large Auditorium', 'Small Auditorium', 'Lab', 'Classroom A', 'Classroom B', 'Classroom C', 'Classroom D'];
     FLOORS = { 'Large Auditorium': 1, 'Small Auditorium': 1, 'Lab': 3, 'Classroom A': 3, 'Classroom B': 3, 'Classroom C': 3, 'Classroom D': 3 };
 
-    FIREPATH = 'devfest2017';
-    defaultYear = '2017';
-
-
-    constructor(public db: AngularFireDatabase) {
-
-    }
+    constructor(public db: AngularFireDatabase) { }
 
     getSchedule(year?: string): Observable<Session[]> {
         if (!year) {
-            year = this.defaultYear;;
+            year = environment.defaultYear;
         }
-        let sessionList = (<Observable<Session[]>>this.db.list('devfest' + year + '/schedule', { query: { orderByChild: 'title' } }));
+        let sessionList = <FirebaseListObservable<Session[]>>this.listPath(year, 'schedule', { query: { orderByChild: 'title' } });
         sessionList.subscribe(next => {
             localStorage.setItem('sessionsCache' + year, JSON.stringify(next));
         });
@@ -60,11 +60,10 @@ export class DataService {
 
     getSpeakers(year?: string): Observable<Speaker[]> {
         if (!year) {
-            year = this.defaultYear;;
+            year = environment.defaultYear;
         }
-        const ref = 'devfest' + year + '/speakers';
+        let speakers = this.listPath(year, 'speakers', { query: { orderByChild: 'name' } });
 
-        let speakers = this.db.list(ref, { query: { orderByChild: 'name' } });
         speakers.subscribe(next => {
             localStorage.setItem('speakerCache' + year, JSON.stringify(next));
         })
@@ -75,6 +74,23 @@ export class DataService {
             .shareResults();
     }
 
+    getFeedback(year?: string): Observable<Feedback[]> {
+        if (!year) {
+            year = environment.defaultYear;
+        }
+
+        return this.listPath(year, 'feedback');
+    }
+    getVolunteers(year?: string) {
+        if (!year) {
+            year = environment.defaultYear;
+        }
+        return this.db.object(`devfest${year}/volunteers`);
+    }
+
+    getAgendas(year, uid, session) {
+        this.db.object(`devfest${year}/agendas/${uid}/${session}/`);
+    }
 
     /**
      * Takes in an ISO 8601 datetime string
@@ -84,10 +100,28 @@ export class DataService {
         let dateTime = new Date(isoDateTime);
         let time = dateTime.getHours();
         time -= (6 - dateTime.getTimezoneOffset() / 60)
-        let indicator = (time >= 12 && time < 24) ? "PM" : "AM";
+        let indicator = (time >= 12 && time < 24) ? 'PM' : 'AM';
         if (time > 12) {
             time -= 12;
         }
         return `${time} ${indicator}`;
+    }
+
+    save(year: string, path: 'schedule' | 'speakers', item) {
+        let list = this.listPath(year, path);
+        if (item.$key) {
+            return list.update(item.$key, item);
+        } else {
+            return list.push(item);
+        }
+    }
+    delete(year: string, path: 'schedule' | 'speakers', item) {
+        let list = this.listPath(year, path);
+        list.remove(item.$key);
+
+    }
+
+    listPath(year: string | number, type: 'schedule' | 'speakers' | 'feedback' | 'volunteers', query?) {
+        return this.db.list(`devfest${year}/${type}`, query);
     }
 }

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+
 import { DataService } from '../shared/data.service';
+
 
 @Component({
     template: `
@@ -21,7 +23,7 @@ export class VolunteersComponent {
     volunteerList;
     id = '';
     constructor(db: AngularFireDatabase, ds: DataService) {
-        this.volunteers = db.object(`${ds.FIREPATH}/volunteers/`);
+        this.volunteers = ds.getVolunteers();
         this.volunteerList = this.volunteers.map( map => {
             let list = Object.keys(map);
             list = list.filter(x => x != '$key' && x != '$exists');

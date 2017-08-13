@@ -14,6 +14,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+import { environment } from '../../environments/environment';
+import { SharedModule } from '../shared/shared.module';
+
 // Declarations
 import { TicketsComponent } from './tickets.component';
 import { SponsorsComponent } from './sponsors.component';
@@ -29,11 +32,7 @@ import { UserFeedbackComponent } from './user-feedback.component';
 import { StarBarComponent } from './star-bar.component';
 import { ScheduleGridComponent } from './schedule-grid.component';
 import { SessionDetailsComponent } from './session-details.component';
-
-// Shared Module
-
-import { SharedModule } from '../shared/shared.module';
-
+import { SpeakerCfpComponent } from './speaker-cfp.component';
 
 @NgModule({
     declarations: [
@@ -51,23 +50,20 @@ import { SharedModule } from '../shared/shared.module';
         StarBarComponent,
         ScheduleGridComponent,
         SessionDetailsComponent,
+        SpeakerCfpComponent,
     ],
     imports: [
         CommonModule,
         FormsModule,
         HttpModule,
-        AngularFireModule.initializeApp({
-            apiKey: 'AIzaSyBrWJx91j512T3q6AaTGNxu_3fq47bYhfg',
-            authDomain: 'devfestmn.firebaseapp.com',
-            databaseURL: 'https://devfestmn.firebaseio.com',
-            storageBucket: 'firebase-devfestmn.appspot.com',
-        }),
+        AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireDatabaseModule,
         AngularFireAuthModule,
         RouterModule.forChild([
             { path: 'tickets', component: TicketsComponent, data: { title: 'Tickets' } },
             { path: 'sponsors', component: SponsorsComponent, data: { title: 'Sponsors' } },
             { path: 'past', component: PastComponent, data: { title: 'Past DevFestMN Events' } },
+            { path: 'speaker-cfp', component: SpeakerCfpComponent, data: { title: 'Speaker Call for Papers', depth: 1}},
             { path: 'speakers', component: SpeakersComponent, data: { title: 'Speakers', depth: 1 }, },
             { path: 'speakers/:id/:seo', component: SpeakersViewComponent, data: { title: false, depth: 2 }, },
             { path: 'schedule', component: ScheduleComponent, data: { title: 'Schedule', depth: 1 }, },

@@ -1,0 +1,43 @@
+<style>
+    md-input-container {
+        display:block;
+        margin:16px 0;
+    }
+</style>
+
+<ng-container *ngIf="sessionData | async as session; else loading">
+        <h1>{{ (session.$key ? 'Edit' : 'New') }} Session</h1>
+        <form ngNoForm (submit)="save(session)">
+                <md-input-container><input mdInput [(ngModel)]="session.title" placeholder="Title" style="width: 100%"></md-input-container>
+                <br>
+                <textarea [(ngModel)]="session.description" placeholder="Description" style="width:100%; height: 4em;"></textarea>
+                <br>
+                <md-input-container><input mdInput [(ngModel)]="session.room" placeholder="Room"></md-input-container>
+                <md-input-container><input mdInput [(ngModel)]="session.track" placeholder="Track"></md-input-container>
+                <md-input-container><input mdInput [(ngModel)]="session.startTime" placeholder="Start Time"></md-input-container>
+                <md-input-container><input mdInput [(ngModel)]="session.blocks" placeholder="# of Blocks"></md-input-container>
+                <md-input-container><input mdInput [(ngModel)]="session.notes" placeholder="Last Minute Notes"></md-input-container>
+                <div>
+                    <em>speakers</em>
+                    <ul class="speakerlist">
+                        <li *ngFor="let speaker of session.speakers">
+                            <img src="{{(speaker | fireJoin: '/devfest2017/speakers/' | async)?.imageUrl}}"/>
+                            {{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.name}}
+                            <button type="button" (click)="deleteSpeakerFromSession(speaker)"> -X-</button>
+                        </li>
+                    </ul>
+                </div>
+                <button md-raised-button type="submit" *ngIf="!session.$key">Create Session</button>
+                <button md-raised-button type="submit" *ngIf="session.$key">Save Session</button>
+                <br>
+                <em>Add speakers from the list below</em>
+                <speaker-selector [session]=session style="overflow: scroll; max-height: 300px; display:block"></speaker-selector>
+
+
+            <button type="submit" *ngIf="session.$key" md-raised-button>Save Session</button>
+            <button type="submit" *ngIf="!session.$key" md-raised-button>Create Session</button>
+        </form>
+    </ng-container>
+<ng-template #loading>
+    Loading session data...
+</ng-template>

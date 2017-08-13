@@ -7,11 +7,7 @@ import { MdTabChangeEvent } from '@angular/material';
   selector: 'admin-nav',
   template: `
     <md-tab-group  (focusChange)="select($event)">
-      <md-tab label="Schedule">
-      </md-tab>
-      <md-tab label="Speakers">
-      </md-tab>
-      <md-tab label="Reports">
+      <md-tab label="Feedback">
       </md-tab>
       <md-tab label="Volunteers">
       </md-tab>
@@ -24,16 +20,13 @@ export class AdminNavComponent {
   }
 
   select(event: MdTabChangeEvent) {
-    if(event.index == 0) {
-      this.router.navigate(['admin']);
-    } else if(event.index == 1) {
-      this.router.navigate(['admin', 'speakers']);
-    } else if(event.index == 2) {
+    if(event.index === 0) {
       this.router.navigate(['admin', 'reports']);
+    } else if(event.index === 1) {
+        this.router.navigate(['admin', 'volunteers']);
     } else {
-      this.router.navigate(['admin', 'volunteers']);
     }
-    
+
   }
 
 }

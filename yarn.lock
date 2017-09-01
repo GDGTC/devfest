@@ -1778,9 +1778,9 @@ findup-sync@~0.3.0:
   dependencies:
     glob "~5.0.0"
 
-firebase-http2-push-config@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/firebase-http2-push-config/-/firebase-http2-push-config-0.0.5.tgz#346aeb82b4c76a71b00837fb6f0be9b88f633f95"
+firebase-http2-push-config@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/firebase-http2-push-config/-/firebase-http2-push-config-0.0.8.tgz#3d57a5df0a72697930e6229ae3436e4bd087f327"
 
 firebase@^4.1.3:
   version "4.2.0"

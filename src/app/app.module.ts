@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 
 
 @NgModule({
@@ -21,6 +22,9 @@ import { AppComponent } from './app.component';
         ]),
 
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    providers: [
+        {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
+    ]
 })
 export class AppModule { }

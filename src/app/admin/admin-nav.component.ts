@@ -1,25 +1,25 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { MdTabChangeEvent } from '@angular/material';
+import { MatTabChangeEvent } from '@angular/material';
 
 @Component({
   selector: 'admin-nav',
   template: `
-    <md-tab-group  (focusChange)="select($event)">
-      <md-tab label="Feedback">
-      </md-tab>
-      <md-tab label="Volunteers">
-      </md-tab>
+    <mat-tab-group  (focusChange)="select($event)">
+      <mat-tab label="Feedback">
+      </mat-tab>
+      <mat-tab label="Volunteers">
+      </mat-tab>
 
-    </md-tab-group>
+    </mat-tab-group>
   `,
 })
 export class AdminNavComponent {
   constructor(public router: Router) {
   }
 
-  select(event: MdTabChangeEvent) {
+  select(event: MatTabChangeEvent) {
     if(event.index === 0) {
       this.router.navigate(['admin', 'reports']);
     } else if(event.index === 1) {

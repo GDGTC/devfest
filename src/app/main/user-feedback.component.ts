@@ -21,7 +21,7 @@ import 'rxjs/add/observable/empty';
         <star-bar (newSelection)="saveRecommendation($event)" [selected]="feedback.recommendation"></star-bar>
     </div>
     <div *ngIf="(auth.uid | async) === false">
-        <button (click)="auth.login()" md-raised-button color="primary">Login to provide feedback</button>
+        <button (click)="auth.login()" mat-raised-button color="primary">Login to provide feedback</button>
     </div>
     `,
 })

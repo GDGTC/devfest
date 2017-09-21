@@ -1,5 +1,5 @@
 <style>
-    md-input-container {
+    mat-form-field {
         display:block;
         margin:16px 0;
     }
@@ -8,15 +8,15 @@
 <ng-container *ngIf="sessionData | async as session; else loading">
         <h1>{{ (session.$key ? 'Edit' : 'New') }} Session</h1>
         <form ngNoForm (submit)="save(session)">
-                <md-input-container><input mdInput [(ngModel)]="session.title" placeholder="Title" style="width: 100%"></md-input-container>
+                <mat-form-field><input matInput [(ngModel)]="session.title" placeholder="Title" style="width: 100%"></mat-form-field>
                 <br>
                 <textarea [(ngModel)]="session.description" placeholder="Description" style="width:100%; height: 4em;"></textarea>
                 <br>
-                <md-input-container><input mdInput [(ngModel)]="session.room" placeholder="Room"></md-input-container>
-                <md-input-container><input mdInput [(ngModel)]="session.track" placeholder="Track"></md-input-container>
-                <md-input-container><input mdInput [(ngModel)]="session.startTime" placeholder="Start Time"></md-input-container>
-                <md-input-container><input mdInput [(ngModel)]="session.blocks" placeholder="# of Blocks"></md-input-container>
-                <md-input-container><input mdInput [(ngModel)]="session.notes" placeholder="Last Minute Notes"></md-input-container>
+                <mat-form-field><input matInput [(ngModel)]="session.room" placeholder="Room"></mat-form-field>
+                <mat-form-field><input matInput [(ngModel)]="session.track" placeholder="Track"></mat-form-field>
+                <mat-form-field><input matInput [(ngModel)]="session.startTime" placeholder="Start Time"></mat-form-field>
+                <mat-form-field><input matInput [(ngModel)]="session.blocks" placeholder="# of Blocks"></mat-form-field>
+                <mat-form-field><input matInput [(ngModel)]="session.notes" placeholder="Last Minute Notes"></mat-form-field>
                 <div>
                     <em>speakers</em>
                     <ul class="speakerlist">
@@ -27,14 +27,14 @@
                         </li>
                     </ul>
                 </div>
-                <button md-raised-button type="submit" *ngIf="!session.$key">Create Session</button>
-                <button md-raised-button type="submit" *ngIf="session.$key">Save Session</button>
+                <button mat-raised-button type="submit" *ngIf="!session.$key">Create Session</button>
+                <button mat-raised-button type="submit" *ngIf="session.$key">Save Session</button>
                 <br>
                 <em>Add speakers from the list below</em>
                 <speaker-selector [session]=session style="overflow: scroll; max-height: 300px; display:block"></speaker-selector>
 
 
-            <button type="submit" md-raised-button>{{session.$key ? 'Save' : 'Create' }} Session</button> <button (click)="delete(session)" md-button color="secondary">Delete</button>
+            <button type="submit" mat-raised-button>{{session.$key ? 'Save' : 'Create' }} Session</button> <button (click)="delete(session)" mat-button color="secondary">Delete</button>
 
         </form>
     </ng-container>

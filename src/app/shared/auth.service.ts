@@ -3,7 +3,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { Observable } from 'rxjs/Observable';
-
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/empty';
 
 import * as firebase from 'firebase/app';

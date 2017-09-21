@@ -22,7 +22,7 @@
                         <div *ngIf="data.gridData[time][room].notes"><em>{{data.gridData[time][room].notes}}</em></div>
                     </td>
                     <td *ngIf="data.gridData[time][room] === 'placeholder'">
-                        <button *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions','new','edit',time,room]" md-raised-button color="primary">Create Session</button>
+                        <button *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions','new','edit',time,room]" mat-raised-button color="primary">Create Session</button>
                     </td>
                 </ng-container>
             </ng-template>

@@ -1,5 +1,5 @@
 <style>
-    md-input-container {
+    mat-form-field {
         display:block;
         margin:16px 0;
     }
@@ -8,15 +8,15 @@
 <ng-container *ngIf="speakerData | async as speaker; else loading">
     <h1>{{ (speaker.$key ? 'Edit' : 'New') }} Speaker</h1>
     <form ngNoForm (submit)="save(speaker)">
-        <md-input-container><input mdInput [(ngModel)]="speaker.name" placeholder="Name" style="width: 100%"></md-input-container>
+        <mat-form-field><input matInput [(ngModel)]="speaker.name" placeholder="Name" style="width: 100%"></mat-form-field>
         <textarea [(ngModel)]="speaker.bio" placeholder="Bio" style="width: 100%; height: 5em;"></textarea>
-        <md-checkbox [(ngModel)]="speaker.confirmed" [checked]=speaker.confirmed >Confirmed</md-checkbox>
-        <md-input-container><input mdInput [(ngModel)]="speaker.company" placeholder="Company"></md-input-container>
-        <md-input-container><input mdInput [(ngModel)]="speaker.twitter" placeholder="Twitter"><span mdPrefix>@</span></md-input-container>
-        <md-input-container><input mdInput [(ngModel)]="speaker.imageUrl" placeholder="Image URL"></md-input-container>
-        <md-input-container><input mdInput [(ngModel)]="speaker.website" placeholder="Website"></md-input-container>
-        <button type="submit" *ngIf="speaker.$key" md-raised-button>Save Speaker</button>
-        <button type="submit" *ngIf="!speaker.$key" md-raised-button>Create Speaker</button>
+        <mat-checkbox [(ngModel)]="speaker.confirmed" [checked]=speaker.confirmed >Confirmed</mat-checkbox>
+        <mat-form-field><input matInput [(ngModel)]="speaker.company" placeholder="Company"></mat-form-field>
+        <mat-form-field><input matInput [(ngModel)]="speaker.twitter" placeholder="Twitter"><span matPrefix>@</span></mat-form-field>
+        <mat-form-field><input matInput [(ngModel)]="speaker.imageUrl" placeholder="Image URL"></mat-form-field>
+        <mat-form-field><input matInput [(ngModel)]="speaker.website" placeholder="Website"></mat-form-field>
+        <button type="submit" *ngIf="speaker.$key" mat-raised-button>Save Speaker</button>
+        <button type="submit" *ngIf="!speaker.$key" mat-raised-button>Create Speaker</button>
     </form>
 </ng-container>
 <ng-template #loading>

@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
-import { MdInputModule } from '@angular/material';
-import { MdButtonModule } from '@angular/material';
-import { MdCheckboxModule } from '@angular/material';
-import { MdTabsModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material';
+import { MatTabsModule } from '@angular/material';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -30,10 +30,10 @@ import { AdminHomeComponent } from './admin-home.component';
 @NgModule({
     imports: [
         CommonModule,
-        MdInputModule,
-        MdButtonModule,
-        MdCheckboxModule,
-        MdTabsModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatTabsModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireDatabaseModule,
         AngularFireAuthModule,

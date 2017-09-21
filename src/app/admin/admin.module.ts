@@ -30,10 +30,10 @@ import { AdminHomeComponent } from './admin-home.component';
 @NgModule({
     imports: [
         CommonModule,
-        MdInputModule.forRoot(),
-        MdButtonModule.forRoot(),
-        MdCheckboxModule.forRoot(),
-        MdTabsModule.forRoot(),
+        MdInputModule,
+        MdButtonModule,
+        MdCheckboxModule,
+        MdTabsModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireDatabaseModule,
         AngularFireAuthModule,

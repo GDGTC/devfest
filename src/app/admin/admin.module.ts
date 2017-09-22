@@ -18,7 +18,6 @@ import { environment } from '../../environments/environment';
 import { SharedModule } from '../shared/shared.module';
 
 import { AdminComponent } from './admin.component';
-import { ScheduleComponent } from './schedule.component';
 import { AdminNavComponent } from './admin-nav.component';
 import { SpeakerSelector } from './speaker-selector.component';
 import { ReportsComponent } from './reports.component';
@@ -55,7 +54,6 @@ import { AdminHomeComponent } from './admin-home.component';
     declarations: [
         AdminComponent,
         AdminNavComponent,
-        ScheduleComponent,
         SpeakerSelector,
         ReportsComponent,
         VolunteersComponent,

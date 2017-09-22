@@ -6,12 +6,10 @@ import { FirebaseService } from '../shared/firebase.service';
 import { CustomPipesModule } from '../shared/custom-components.module';
 import { GetSpeakerPipe } from './get-speaker.pipe';
 
-import { DialogComponent } from './dialog.component';
 import { PickerComponent } from './picker.component';
 
 @NgModule({
     declarations: [
-        DialogComponent,
         PickerComponent,
         GetSpeakerPipe,
     ],
@@ -27,7 +25,6 @@ import { PickerComponent } from './picker.component';
     exports: [
         CustomPipesModule,
         PickerComponent,
-        DialogComponent,
         GetSpeakerPipe,
     ],
 })

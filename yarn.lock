@@ -24,9 +24,9 @@
     minimist "^1.2.0"
     rxjs "^5.4.2"
 
-"@angular/animations@^4.0.0":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-4.4.3.tgz#396c4a5bfb22847f9e458245ba995f9c130c0cf3"
+"@angular/animations@^5.0.0-beta.7":
+  version "5.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-5.0.0-beta.7.tgz#3510375f5b5e04f3e7a94d972ae6690e177780c8"
   dependencies:
     tslib "^1.7.1"
 
@@ -36,14 +36,14 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/cli@^1.4.2":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-1.4.2.tgz#220a54c7e12303157cc289f4306fa46d080705ac"
+"@angular/cli@^1.5.0-beta.0":
+  version "1.5.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-1.5.0-beta.0.tgz#de46970a85e2678a58d7fea00dbd2d29e582015c"
   dependencies:
     "@angular-devkit/build-optimizer" "~0.0.18"
     "@angular-devkit/schematics" "~0.0.21"
     "@ngtools/json-schema" "1.1.0"
-    "@ngtools/webpack" "1.7.1"
+    "@ngtools/webpack" "1.8.0-beta.0"
     "@schematics/angular" "~0.0.30"
     autoprefixer "^6.5.3"
     chalk "^2.0.1"
@@ -89,6 +89,7 @@
     stylus "^0.54.5"
     stylus-loader "^3.0.1"
     typescript ">=2.0.0 <2.6.0"
+    uglifyjs-webpack-plugin "1.0.0-beta.1"
     url-loader "^0.5.7"
     webpack "~3.5.5"
     webpack-concat-plugin "1.4.0"
@@ -99,41 +100,43 @@
   optionalDependencies:
     node-sass "^4.3.0"
 
-"@angular/common@^4.0.0":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@angular/common/-/common-4.4.3.tgz#f92ac68b02bec5f0e6d3603a843294dc96c96074"
+"@angular/common@^5.0.0-beta.7":
+  version "5.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@angular/common/-/common-5.0.0-beta.7.tgz#d5a77a7bea1943296cff08a9ff60ebcbfb58ad8b"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/compiler-cli@^4.0.0":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-4.4.3.tgz#183af81f141186b8d660b06429592d40b7540a4a"
+"@angular/compiler-cli@^5.0.0-beta.7":
+  version "5.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-5.0.0-beta.7.tgz#ffc5a19ecdaf5901778b8f26bff4d6f14fd78c6b"
   dependencies:
-    "@angular/tsc-wrapped" "4.4.3"
+    "@angular/tsc-wrapped" "5.0.0-beta.7"
+    chokidar "^1.4.2"
     minimist "^1.2.0"
     reflect-metadata "^0.1.2"
+    tsickle "^0.24.0"
 
-"@angular/compiler@^4.0.0":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-4.4.3.tgz#8f01163dad7db3408497d99d387554b6b185ad66"
+"@angular/compiler@^5.0.0-beta.7":
+  version "5.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-5.0.0-beta.7.tgz#60551454f2d8bac9802203d9de7e1efb9bc7d02b"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/core@^4.0.0":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-4.4.3.tgz#e71d2b07beaacbab48ab7f51d4e2286ea5d70e15"
+"@angular/core@^5.0.0-beta.7":
+  version "5.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-5.0.0-beta.7.tgz#48e0c693148f1c96c1526c9be97b59e5299337c5"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/forms@^4.0.0":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-4.4.3.tgz#25b41bbab58bf1da872411c8517c10d7c5373d8e"
+"@angular/forms@^5.0.0-beta.7":
+  version "5.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-5.0.0-beta.7.tgz#e2fbdf6315ca837be37cb656a8c4a1e55020b4bb"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/http@^4.0.0":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@angular/http/-/http-4.4.3.tgz#b557ed24144aacc44b136cd477e84d2f57808903"
+"@angular/http@^5.0.0-beta.7":
+  version "5.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@angular/http/-/http-5.0.0-beta.7.tgz#0610b79f6da9a4fc8c782cb8de2a0b20dece6921"
   dependencies:
     tslib "^1.7.1"
 
@@ -143,21 +146,21 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/platform-browser-dynamic@^4.0.0":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-4.4.3.tgz#e41ddd8252432775310eab5940cdd8df0618f084"
+"@angular/platform-browser-dynamic@^5.0.0-beta.7":
+  version "5.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-5.0.0-beta.7.tgz#412b3147db3771b2f6cb48d382f762d6e98186e2"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/platform-browser@^4.0.0":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-4.4.3.tgz#23f9a45bd3dc7f44d97877fbf8e6032decfc9dcb"
+"@angular/platform-browser@^5.0.0-beta.7":
+  version "5.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-5.0.0-beta.7.tgz#5e62a118ca08a74cbcff75fa6ff500e13f464e6b"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/router@^4.0.0":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@angular/router/-/router-4.4.3.tgz#26cc94775a3860946aeaf1c2e8f60f4d44e90991"
+"@angular/router@^5.0.0-beta.7":
+  version "5.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@angular/router/-/router-5.0.0-beta.7.tgz#0720075aef093082d9b30c36efe1d71e8cacc9e0"
   dependencies:
     tslib "^1.7.1"
 
@@ -168,19 +171,19 @@
     base64-js "^1.1.2"
     jshashes "^1.0.5"
 
-"@angular/tsc-wrapped@4.4.3":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@angular/tsc-wrapped/-/tsc-wrapped-4.4.3.tgz#2d3f38210a1d4db03fc86dcf1e095812b85cd119"
+"@angular/tsc-wrapped@5.0.0-beta.7":
+  version "5.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@angular/tsc-wrapped/-/tsc-wrapped-5.0.0-beta.7.tgz#1d5863965350b4a637a2aa5f49404064596abded"
   dependencies:
-    tsickle "^0.21.0"
+    tsickle "^0.24.0"
 
 "@ngtools/json-schema@1.1.0", "@ngtools/json-schema@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@ngtools/json-schema/-/json-schema-1.1.0.tgz#c3a0c544d62392acc2813a42c8a0dc6f58f86922"
 
-"@ngtools/webpack@1.7.1":
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-1.7.1.tgz#383ddd689845cf42fc755975f6440f75535f5016"
+"@ngtools/webpack@1.8.0-beta.0":
+  version "1.8.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-1.8.0-beta.0.tgz#c690f152eac2f4ea28293bc8808ab8ecf6c23ccf"
   dependencies:
     enhanced-resolve "^3.1.0"
     loader-utils "^1.0.2"
@@ -786,7 +789,7 @@ charenc@~0.0.1:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
 
-chokidar@^1.6.0, chokidar@^1.7.0:
+chokidar@^1.4.2, chokidar@^1.6.0, chokidar@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
   dependencies:
@@ -4711,9 +4714,9 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
-tsickle@^0.21.0:
-  version "0.21.6"
-  resolved "https://registry.yarnpkg.com/tsickle/-/tsickle-0.21.6.tgz#53b01b979c5c13fdb13afb3fb958177e5991588d"
+tsickle@^0.24.0:
+  version "0.24.1"
+  resolved "https://registry.yarnpkg.com/tsickle/-/tsickle-0.24.1.tgz#039343b205bf517a333b0703978892f80a7d848e"
   dependencies:
     minimist "^1.2.0"
     mkdirp "^0.5.1"
@@ -4759,17 +4762,20 @@ type-is@~1.6.15:
     media-typer "0.3.0"
     mime-types "~2.1.15"
 
-"typescript@>=2.0.0 <2.6.0":
+"typescript@>=2.0.0 <2.6.0", typescript@^2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.5.2.tgz#038a95f7d9bbb420b1bf35ba31d4c5c1dd3ffe34"
-
-"typescript@>=2.1.0 <2.4.0":
-  version "2.3.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.3.4.tgz#3d38321828231e434f287514959c37a82b629f42"
 
 typescript@^2.3.3:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.4.2.tgz#f8395f85d459276067c988aa41837a8f82870844"
+
+uglify-es@^3.0.21:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/uglify-es/-/uglify-es-3.1.1.tgz#27615a1203cd0b351d8b5bda743ac92ed482b826"
+  dependencies:
+    commander "~2.11.0"
+    source-map "~0.5.1"
 
 uglify-js@3.0.x:
   version "3.0.27"
@@ -4798,6 +4804,14 @@ uglify-js@~2.3:
 uglify-to-browserify@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
+
+uglifyjs-webpack-plugin@1.0.0-beta.1:
+  version "1.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-1.0.0-beta.1.tgz#595c14d8b85bedd708ab7a6e811894fbe0e69890"
+  dependencies:
+    source-map "^0.5.6"
+    uglify-es "^3.0.21"
+    webpack-sources "^1.0.1"
 
 uglifyjs-webpack-plugin@^0.4.6:
   version "0.4.6"

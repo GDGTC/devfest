@@ -10,13 +10,13 @@ import 'rxjs/add/operator/filter';
 
 
 export interface Session {
-    $key: string;
-    room: string;
-    startTime: string;
-    title: string;
-    description: string;
-    track: string;
-    speakers: any[];
+    $key?: string;
+    room?: string;
+    startTime?: string;
+    title?: string;
+    description?: string;
+    track?: string;
+    speakers?: any[];
     blocks?: number;
 }
 

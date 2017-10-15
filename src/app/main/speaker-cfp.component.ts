@@ -16,6 +16,9 @@ import { Component, OnInit } from '@angular/core';
         li {
             margin-left:16px;
         }
+        a, a:visited {
+            color: blue;
+        }
     </style>
     <section style="text-align:left;">
         <div class="callout">Call for Speakers</div>

@@ -5,8 +5,4 @@ declare var google;
 @Component({
     templateUrl: './home.component.html'
 })
-export class HomeComponent {
-    constructor() {
-        console.log("hi mom");
-    }
-}
+export class HomeComponent { }

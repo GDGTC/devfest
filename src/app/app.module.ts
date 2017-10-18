@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,7 @@ import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
             { path: 'admin', loadChildren: './admin/admin.module#AdminModule', data: { title: 'Admin' } },
             { path: '', loadChildren: './main/main.module#MainModule' },
         ]),
-
+        ServiceWorkerModule.register('./ngsw-worker.js'),
     ],
     bootstrap: [AppComponent],
     providers: [

@@ -1,0 +1,20 @@
+{
+    "index": "/index.html",
+    "assetGroups": [{
+      "name": "site",
+      "mode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html"
+        ],
+        "urls": [
+        ],
+        "versionedFiles": [
+          "/*.bundle.css",
+          "/*.bundle.js",
+          "/*.chunk.js"
+        ]
+      }
+    }]
+  }

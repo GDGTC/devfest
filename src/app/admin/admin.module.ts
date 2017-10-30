@@ -8,7 +8,7 @@ import { MatCheckboxModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material';
 
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { RouterModule } from '@angular/router';

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import { DataService, Session } from '../shared/data.service';
 import { AuthService } from '../shared/auth.service';
 

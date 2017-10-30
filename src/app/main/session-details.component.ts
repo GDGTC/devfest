@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 
 import { AuthService } from '../shared/auth.service';
 import { DataService } from '../shared/data.service';

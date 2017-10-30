@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { AuthService } from '../shared/auth.service';
 import { DataService } from '../shared/data.service';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';

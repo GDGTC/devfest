@@ -13,7 +13,7 @@
     "headers": [
       {
         "source": "/",
-        "headers": [{"key": "Link", "value": "</inline.cdcc59b7019002f80771.bundle.js>;rel=preload;as=script,</main.111a7a3306fb8e427392.bundle.js>;rel=preload;as=script,</polyfills.ad2a8236b291ce4e4fc2.bundle.js>;rel=preload;as=script,</styles.78aee9ec653b9dfc9a6a.bundle.css>;rel=preload;as=style,</sw-register.fb086c61de6b1ccfc397.bundle.js>;rel=preload;as=script,"}]
+        "headers": [{"key": "Link", "value": "</inline.08d8b79e9680e9e1532b.bundle.js>;rel=preload;as=script,</main.7f082b5e62714ad5e8d1.bundle.js>;rel=preload;as=script,</polyfills.ad2a8236b291ce4e4fc2.bundle.js>;rel=preload;as=script,</styles.78aee9ec653b9dfc9a6a.bundle.css>;rel=preload;as=style,"}]
       }
     ]
   }

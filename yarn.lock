@@ -176,12 +176,11 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/service-worker@^1.0.0-beta.16":
-  version "1.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-1.0.0-beta.16.tgz#cb4fcd1d5b311195136fd284bcf2dbb870544d64"
+"@angular/service-worker@^5.0.0-rc.8":
+  version "5.0.0-rc.8"
+  resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-5.0.0-rc.8.tgz#912352336fb47ae4c70884b4182238f78694519c"
   dependencies:
-    base64-js "^1.1.2"
-    jshashes "^1.0.5"
+    tslib "^1.7.1"
 
 "@firebase/app@^0.1.1":
   version "0.1.1"
@@ -590,7 +589,7 @@ balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
 
-base64-js@^1.0.2, base64-js@^1.1.2:
+base64-js@^1.0.2:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.2.1.tgz#a91947da1f4a516ea38e5b4ec0ec3773675e0886"
 
@@ -2806,10 +2805,6 @@ jsesc@^1.3.0:
 jsesc@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
-
-jshashes@^1.0.5:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/jshashes/-/jshashes-1.0.7.tgz#bed8c97a0e9632fd0513916f55f76dd5486be59f"
 
 json-loader@^0.5.4:
   version "0.5.7"

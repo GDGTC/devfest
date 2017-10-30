@@ -2,10 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
 import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
-
 
 @NgModule({
     declarations: [
@@ -20,7 +19,7 @@ import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
             { path: 'admin', loadChildren: './admin/admin.module#AdminModule', data: { title: 'Admin' } },
             { path: '', loadChildren: './main/main.module#MainModule' },
         ]),
-
+        ServiceWorkerModule.register('./ngsw-worker.js')
     ],
     bootstrap: [AppComponent],
     providers: [

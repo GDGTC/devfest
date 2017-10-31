@@ -1,0 +1,32 @@
+{
+    "index": "/index.html",
+    "assetGroups": [{
+      "name": "site",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html"
+        ],
+        "urls": [
+        ],
+        "versionedFiles": [
+          "/*.bundle.css",
+          "/*.bundle.js",
+          "/*.chunk.js"
+        ]
+      }
+    }, {
+        "name": "images",
+        "installMode": "lazy",
+        "resources": {
+            "files": [
+                "/**/*.svg",
+                "/**/*.png",
+                "/**/*.gif",
+                "/**/*.js",
+                "/**/*.gif"
+            ]
+        }
+    }]
+  }

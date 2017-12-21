@@ -12,7 +12,7 @@ export const environment = {
         databaseURL: 'https://devfestmn.firebaseio.com',
         storageBucket: 'firebase-devfestmn.appspot.com',
     },
-    showRegister: 'https://devfestmn.eventbrite.com',
+    showRegister: 'https://devfestmn.eventbrite.com/?aff=devfestmnwebsite',
     showCFP: false,
     showSchedule: false,
 };

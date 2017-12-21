@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
+import { environment } from '../environments/environment';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,7 @@ import { AppComponent } from './app.component';
             { path: 'admin', loadChildren: './admin/admin.module#AdminModule', data: { title: 'Admin' } },
             { path: '', loadChildren: './main/main.module#MainModule' },
         ]),
-        ServiceWorkerModule.register('./ngsw-worker.js')
+        ServiceWorkerModule.register('./ngsw-worker.js', {enabled: environment.production})
     ],
     bootstrap: [AppComponent],
     providers: [

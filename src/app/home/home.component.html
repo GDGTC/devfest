@@ -18,8 +18,8 @@
 				</div><span> University of St Thomas</span></a>
 		</div>
 		<div style="display:flex;justify-content:space-around;width:350px;">
-            <!-- <a href="https://www.eventbrite.com/e/devfestmn-2017-a-google-developer-group-twin-cities-event-tickets-28756035075" target="_blank" class="cta all-caps">Register</a> -->
-			<a href="https://bit.ly/sponsorsheet-devfestmn2017" target="_blank" class="cta all-caps">Become a Sponsor</a>
+            <a *ngIf="environment.showRegister" routerLink="/tickets" class="cta all-caps">Register</a>
+			<a *ngIf="!environment.showRegister" href="https://bit.ly/sponsorsheet-devfestmn2017" target="_blank" class="cta all-caps">Become a Sponsor</a>
 		</div>
 	</div>
 	<section class=" center">

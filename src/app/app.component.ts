@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { trigger, transition, state, group, query, style, animate, animateChild } from '@angular/animations';
+import { environment } from '../environments/environment';
 
 import 'rxjs/add/operator/filter';
 
@@ -42,13 +43,15 @@ declare var ga: any;
     ]
 })
 export class AppComponent {
+    environment = environment;
+
     constructor(router: Router, title: Title) {
         router.events.filter(e => e instanceof NavigationEnd).subscribe((n: NavigationEnd) => {
             let pageTitle = router.routerState.snapshot.root.children[0].data['title'];
             if (pageTitle) {
-                title.setTitle(pageTitle + " | DevFestMN 2017");
+                title.setTitle(pageTitle + ' | DevFestMN');
             } else if (pageTitle !== false) {
-                title.setTitle("DevFestMN 2017");
+                title.setTitle('DevFestMN');
             }
             window.scrollTo(0, 0);
             ga('send', 'pageview', n.urlAfterRedirects);

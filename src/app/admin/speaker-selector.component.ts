@@ -4,7 +4,7 @@ import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 
 import { Observable } from 'rxjs/Observable';
 
-const PATH = 'devfest2017'
+const PATH = 'devfest2018'
 
 @Component({
     selector: 'speaker-selector',

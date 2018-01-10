@@ -22,8 +22,8 @@
                     <em>speakers</em>
                     <ul class="speakerlist">
                         <li *ngFor="let speaker of session.speakers">
-                            <img src="{{(speaker | fireJoin: '/devfest2017/speakers/' | async)?.imageUrl}}"/>
-                            {{(speaker | fireJoin:'/devfest2017/speakers/' | async)?.name}}
+                            <img src="{{(speaker | fireJoin: '/devfest2018/speakers/' | async)?.imageUrl}}"/>
+                            {{(speaker | fireJoin:'/devfest2018/speakers/' | async)?.name}}
                             <button type="button" (click)="deleteSpeakerFromSession(speaker)"> -X-</button>
                         </li>
                     </ul>

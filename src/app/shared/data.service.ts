@@ -38,9 +38,8 @@ export interface Feedback {
 
 @Injectable()
 export class DataService {
-    ROOMS = ['Large Auditorium', 'Small Auditorium', 'Lab', 'Classroom A', 'Classroom B', 'Classroom C', 'Classroom D'];
-    FLOORS = { 'Large Auditorium': 1, 'Small Auditorium': 1, 'Lab': 3, 'Classroom A': 3, 'Classroom B': 3, 'Classroom C': 3, 'Classroom D': 3 };
-
+    ROOMS = ['Large Auditorium', 'Small Auditorium', '235', '238', '244', '321', '334', '446', '458'];
+    FLOORS = { 'Large Auditorium': 'Schultze', 'Small Auditorium': 'Schultze', '235': 'Law', '238': 'Law', '244': 'Law', '321': 'Law', '334': 'Law', '446': 'Law', '458': 'Law'};
     constructor(public db: AngularFireDatabase) { }
 
     getSchedule(year?: string): Observable<Session[]> {

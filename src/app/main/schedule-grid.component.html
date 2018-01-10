@@ -1,6 +1,6 @@
  <div *ngIf="data">
     <!-- Show the big schedule table -->
-    <table class="schedule big" [style.display]="forceMobile ? 'none' : ''"><tr><td></td><td *ngFor="let room of data.rooms" style="height:55px;vertical-align:middle;"><div>{{room}}</div><div style="font-size: .75em">Floor {{ds.FLOORS[room]}}</div></td></tr>
+    <table class="schedule big" [style.display]="forceMobile ? 'none' : ''"><tr><td></td><td *ngFor="let room of data.rooms" style="height:55px;vertical-align:middle;"><div>{{room}}</div><div style="font-size: .75em">{{ds.FLOORS[room]}}</div></td></tr>
         <tr *ngFor="let time of data.startTimes">
             <td style="width:55px;">{{ ds.customDateFormatter(time)}}</td>
             <!-- Show one event spanning all rooms -->

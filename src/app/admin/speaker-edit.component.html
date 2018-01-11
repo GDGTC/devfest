@@ -17,6 +17,7 @@
         <mat-form-field><input matInput [(ngModel)]="speaker.website" placeholder="Website"></mat-form-field>
         <button type="submit" *ngIf="speaker.$key" mat-raised-button>Save Speaker</button>
         <button type="submit" *ngIf="!speaker.$key" mat-raised-button>Create Speaker</button>
+        <span *ngIf="speaker.$key" (click)="delete(speaker)" style="padding-left: 60px;">delete</span>
     </form>
 </ng-container>
 <ng-template #loading>

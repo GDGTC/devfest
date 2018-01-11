@@ -36,8 +36,10 @@ export class SpeakerEditComponent {
     }
 
     delete(speaker) {
-        this.ds.delete(this.year, 'speakers', speaker);
-        this.router.navigate(['/', this.year, 'speakers']);
+        if(confirm('Are you sure you want to delete this speaker?')) {
+            this.ds.delete(this.year, 'speakers', speaker);
+            this.router.navigate(['/', this.year, 'speakers']);
+        }
     }
 
 

@@ -8,8 +8,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { SFFBModule } from './sffb/sffb.module';
 
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -50,6 +51,7 @@ import { AdminHomeComponent } from './admin-home.component';
         ]),
         FormsModule,
         SharedModule,
+        SFFBModule,
     ],
     declarations: [
         AdminComponent,

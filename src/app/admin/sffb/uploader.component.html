@@ -1,0 +1,16 @@
+<h2>Upload a File</h2>
+  <form ngNoForm>
+    <input id="file" name="file" type="file" >
+    <button (click)="upload()" type="button">Upload</button>
+    </form>
+
+    <h2>File Gallery</h2>
+    <div style="overflow:hidden;" *ngIf="imageList | async as images; else loading">
+        <div *ngIf="images.length === 0">There are not any images in this folder yet.</div>
+        <div *ngFor="let img of images" style="position:relative;width:100px;height:100px;float:left;display:flex;justify-content:center;align-items:center;">
+            <img *ngIf="img && img.downloadURL && img.downloadURL | async" [src]="img.downloadURL | async" style="max-width:100px;max-height:100px;">
+
+            <button (click)="delete(img)" style="position:absolute;top:2px;right:2px;">[x]</button>
+        </div>
+    </div>
+    <ng-template #loading>Retrieving images...</ng-template>

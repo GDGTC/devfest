@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 
-import { AngularFireDatabase } from 'angularfire2/database-deprecated';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from '../shared/auth.service';
-
-const PATH = 'devfest2017'
+import { AngularFireList } from 'angularfire2/database/interfaces';
 
 @Component({
     templateUrl: './admin.component.html'
@@ -14,14 +13,14 @@ const PATH = 'devfest2017'
 export class AdminComponent {
 
 
-    schedule;
-    speakers;
+    schedule: AngularFireList<any>;
+    speakers: AngularFireList<any>;
 
     editSession = {};
     editSpeaker = {};
 
     constructor(public db: AngularFireDatabase, public auth: AuthService) {
-
+        const PATH = 'devfest2018';
         this.schedule = db.list(PATH + '/schedule');
         this.speakers = db.list(PATH + '/speakers');
     }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { environment } from '../../environments/environment';
+import { YearService } from 'app/year.service';
 declare var google;
 
 @Component({
@@ -8,4 +9,8 @@ declare var google;
 })
 export class HomeComponent {
     environment = environment;
+
+    constructor(yearService: YearService) {
+        yearService.reset();
+    }
  }

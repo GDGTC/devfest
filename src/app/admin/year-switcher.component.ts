@@ -7,8 +7,8 @@ import { YearService } from 'app/year.service';
 })
 export class YearSwitcherComponent {
     constructor(route: ActivatedRoute, yearService: YearService) {
-        if (route.snapshot.url.length > 1 && route.snapshot.url[1].path.match(/\d{4}/)) {
-            yearService.setYear(parseInt(route.snapshot.url[1].path, 10));
+        if (route.snapshot.url.length > 0 && route.snapshot.url[0].path.match(/\d{4}/)) {
+            yearService.setYear(parseInt(route.snapshot.url[0].path, 10));
         }
     }
 }

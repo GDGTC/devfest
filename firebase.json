@@ -1,21 +1,25 @@
 {
-  "database": {
-    "rules": "database.rules.json"
-  },
-  "hosting": {
-    "public": "dist",
-    "rewrites": [
-        {"source": "/worker-basic.min.js", "destination": "/ngsw-worker.js"},
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ],
-    "headers": [
-      {
-        "source": "/",
-        "headers": [{"key": "Link", "value": "</inline.cc8c202b645aed25fe6a.bundle.js>;rel=preload;as=script,</main.0850d2c9184bf661e725.bundle.js>;rel=preload;as=script,</polyfills.d8d030261d4351ef3651.bundle.js>;rel=preload;as=script,</styles.29f018615f24405d2745.bundle.css>;rel=preload;as=style,"}]
-      }
-    ]
-  }
+    "database": {
+        "rules": "database.rules.json"
+    },
+    "hosting": {
+        "public": "dist",
+        "rewrites": [
+            { "source": "/worker-basic.min.js", "destination": "/ngsw-worker.js" },
+            { "source": "/worker-basic.js", "destination": "/ngsw-worker.js" },
+            { "source": "**", "destination": "/index.html" }
+        ],
+        "headers": [
+            {
+                "source": "/",
+                "headers": [
+                    {
+                        "key": "Link",
+                        "value":
+                            "</inline.0285dde21ec896f86eab.bundle.js>;rel=preload;as=script,</main.173679a49793374c2d2c.bundle.js>;rel=preload;as=script,</polyfills.d8d030261d4351ef3651.bundle.js>;rel=preload;as=script,</styles.29f018615f24405d2745.bundle.css>;rel=preload;as=style,"
+                    }
+                ]
+            }
+        ]
+    }
 }

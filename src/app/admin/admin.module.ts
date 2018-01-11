@@ -12,7 +12,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { SFFBModule } from './sffb/sffb.module';
 
-import { RouterModule } from '@angular/router';
+import { RouterModule, UrlSegment } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { environment } from '../../environments/environment';
@@ -26,6 +26,7 @@ import { VolunteersComponent } from './volunteers.component';
 import { SpeakerEditComponent } from './speaker-edit.component';
 import { SessionEditComponent } from './session-edit.component';
 import { AdminHomeComponent } from './admin-home.component';
+import { YearSwitcherComponent } from './year-switcher.component';
 
 @NgModule({
     imports: [
@@ -40,9 +41,12 @@ import { AdminHomeComponent } from './admin-home.component';
         RouterModule.forChild([
             {
                 path: '', component: AdminComponent, children: [
-                    { path: ':year/speakers/:id/edit', component: SpeakerEditComponent },
-                    { path: ':year/sessions/:id/edit', component: SessionEditComponent },
-                    { path: ':year/sessions/:id/edit/:time/:room', component: SessionEditComponent },
+                    // Doing the years like this for admins is kind of Gross, but to fix it we need a separate admin service that knows how to use years
+                    { matcher: isYear, component: YearSwitcherComponent, children: [
+                        { path: 'speakers/:id/edit', component: SpeakerEditComponent },
+                        { path: 'sessions/:id/edit', component: SessionEditComponent },
+                        { path: 'sessions/:id/edit/:time/:room', component: SessionEditComponent },
+                    ]},
                     { path: '', component: AdminHomeComponent },
                     { path: 'reports', component: ReportsComponent },
                     { path: 'volunteers', component: VolunteersComponent },
@@ -62,6 +66,11 @@ import { AdminHomeComponent } from './admin-home.component';
         SpeakerEditComponent,
         SessionEditComponent,
         AdminHomeComponent,
+        YearSwitcherComponent,
     ]
 })
 export class AdminModule { }
+
+export function isYear(url: UrlSegment[]) {
+    return url.length >= 1 && url[0].path.match(/\d{4}/) ? ({consumed:[url[0]]}) : null;
+}

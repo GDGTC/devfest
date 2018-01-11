@@ -3,8 +3,8 @@
 	<span style="flex-grow:1"></span>
 	<div>
         <a *ngIf="environment.showCFP" [routerLink]="['speaker-cfp']">Speakers</a>
-        <a *ngIf="environment.showSchedule" [routerLink]="['/2018/speakers']">Speakers</a>
-		<a *ngIf="environment.showSchedule" [routerLink]="['/2018/schedule']">Schedule</a>
+        <a *ngIf="environment.showSpeakers" [routerLink]="['/speakers']">Speakers</a>
+		<a *ngIf="environment.showSchedule" [routerLink]="['/schedule']">Schedule</a>
 		<a *ngIf="environment.showRegister" routerLink="/tickets">Tickets</a>
 		<a routerLink="/sponsors">Sponsor</a>
 	</div>

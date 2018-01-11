@@ -68,7 +68,7 @@ export class SessionDetailsComponent {
 
         this.agendaInfo.subscribe(agendaData => {
             let [session, uid] = agendaData;
-            this.sessionAgenda = this.ds.getAgenda(this.year, uid, session);
+            this.sessionAgenda = this.ds.getAgenda(uid, session);
         });
     }
 

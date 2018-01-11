@@ -17,11 +17,10 @@ export class SpeakerEditComponent {
     constructor(public ds: DataService, public route: ActivatedRoute, public router: Router) {
         this.speakerData =
             route.params.switchMap(params => {
-                this.year = params['year'];
-                if(params['id'] === 'new') {
+                if( params['id'] === 'new') {
                     return Observable.of({});
                 }
-                return ds.getSpeakers(params['year'])
+                return ds.getSpeakers()
                     .map(list =>
                         list.find(item =>
                             item.$key === params['id']))
@@ -29,15 +28,16 @@ export class SpeakerEditComponent {
     }
 
     save(speaker) {
+        console.log('Saving speaker', speaker);
         event.preventDefault();
-        this.ds.save(this.year, 'speakers', speaker);
+        this.ds.save('speakers', speaker);
         this.router.navigate(['/', this.year, 'speakers']);
 
     }
 
     delete(speaker) {
         if(confirm('Are you sure you want to delete this speaker?')) {
-            this.ds.delete(this.year, 'speakers', speaker);
+            this.ds.delete( 'speakers', speaker);
             this.router.navigate(['/', this.year, 'speakers']);
         }
     }

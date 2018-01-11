@@ -7,6 +7,7 @@ import { DataService, Session } from '../shared/data.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/combineLatest';
 import { environment } from '../../environments/environment';
+import { YearService } from 'app/year.service';
 
 @Component({
     templateUrl: './schedule.component.html',
@@ -20,17 +21,16 @@ export class ScheduleComponent {
     // Where we store the reference to the currently selected data.
     filteredData: Observable<any>;
 
-    year: string;
 
-    constructor(public ds: DataService, public auth: AuthService, public route: ActivatedRoute) {
+
+    constructor(public ds: DataService, public auth: AuthService, public route: ActivatedRoute, public yearService: YearService) {
         this.filteredData = this.allSessions;
+
 
         /**
          * Session data should look like data[time][room] = session;
          */
-        this.allSessions = this.route.params.switchMap(params => {
-            this.year = params['year'] || environment.defaultYear;
-            return ds.getSchedule(params['year'])
+        this.allSessions = ds.getSchedule()
                 .map(list => {
                     let data = {};
                     for (let session of list) {
@@ -60,7 +60,7 @@ export class ScheduleComponent {
                             let slot = data[time];
                             // Holes can only exist if there isn't an "all" session
                             if (!slot.all) {
-                                for (let room of ds.ROOMS) {
+                                for (let room of ds.getVenueLayout().rooms) {
                                     if (!slot[room]) {
                                         // Found a hole in this room, checking previous time slot
                                         let previous = time.substr(0, 11) + pad(parseInt(time.substr(11, 2), 10) - 1) + time.substr(13);
@@ -81,12 +81,9 @@ export class ScheduleComponent {
                     }
 
                     let startTimes = Object.keys(data).sort();
-                    return { startTimes: startTimes, gridData: data, rooms: ds.ROOMS };
+                    return { startTimes: startTimes, gridData: data, rooms: ds.getVenueLayout().rooms };
                 })
                 .shareResults();
-        });
-
-
 
         this.filteredData = this.allSessions;
 
@@ -127,7 +124,7 @@ export class ScheduleComponent {
 
             // We do this to maintain the original order of the rooms
             let returnRooms = [];
-            for (let room of ds.ROOMS) {
+            for (let room of ds.getVenueLayout().rooms) {
                 if (rooms.indexOf(room) !== -1) {
                     returnRooms.push(room);
                 }

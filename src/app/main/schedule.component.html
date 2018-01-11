@@ -6,5 +6,5 @@
         <a (click)="filteredData = allSessions" [class.cta-unselected]="filteredData == myAgenda" class="cta" style="cursor:pointer;display:inline;border:1px solid #19a9e5;">Full Schedule</a>
     </div>
     <div></div>
-   <schedule-grid [data]="filteredData | async" [forceMobile]="filteredData == myAgenda" [year]="year"></schedule-grid>
+   <schedule-grid [data]="filteredData | async" [forceMobile]="filteredData == myAgenda" [year]="yearService.year"></schedule-grid>
 </section>

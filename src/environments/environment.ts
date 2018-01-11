@@ -14,5 +14,6 @@ export const environment = {
     },
     showRegister: 'https://devfestmn.eventbrite.com/?aff=devfestmnwebsite',
     showCFP: false,
-    showSchedule: true,
+    showSchedule: false,
+    showSpeakers: true,
 };

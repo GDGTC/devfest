@@ -7,13 +7,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 
 import { environment } from '../../environments/environment';
-
+import { YearService } from 'app/year.service';
 
 @Component({
     templateUrl: './speakers.component.html',
 })
 export class SpeakersComponent {
-
     speakers;
 
     thisSpeaker = {};
@@ -21,16 +20,11 @@ export class SpeakersComponent {
 
     year: string;
 
-    constructor(public ds: DataService, route: ActivatedRoute, public router: Router, public auth: AuthService) {
-        this.speakers = route.params.switchMap(params => {
-            this.year = params['year'] || environment.defaultYear;
-            return ds.getSpeakers(params['year'])
-        });
-
+    constructor(public ds: DataService, route: ActivatedRoute, public router: Router, public auth: AuthService, public yearService: YearService) {
+        this.speakers = ds.getSpeakers();
     }
 
     addSpeaker() {
-        this.router.navigate(['/admin',this.year,'speakers','new','edit']);
+        this.router.navigate(['/admin', this.yearService.year, 'speakers', 'new', 'edit']);
     }
-
 }

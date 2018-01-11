@@ -5,11 +5,12 @@ import { DataService } from '../shared/data.service';
 
 import 'rxjs/add/operator/switchMap';
 import { environment } from '../../environments/environment';
+import { YearService } from 'app/year.service';
 
 @Component({
     template: `
     <section>
-            <speaker-full [speaker]="speaker | async" [year]="year"></speaker-full>
+            <speaker-full [speaker]="speaker | async" [year]="yearService.year"></speaker-full>
     </section>
     `
 })
@@ -18,12 +19,10 @@ export class SpeakersViewComponent {
     speakerId;
     year;
 
-    constructor(route: ActivatedRoute, ds: DataService) {
+    constructor(route: ActivatedRoute, ds: DataService, public yearService: YearService) {
 
         this.speaker = route.params.switchMap(params => {
-            this.year = params['year'] || environment.defaultYear;
-            console.log('year is',this.year);
-            return ds.getSpeakers(params['year']).map(list => list.find(item => item.$key == params['id']))
+            return ds.getSpeakers().map(list => list.find(item => item.$key == params['id']))
         });
     }
 

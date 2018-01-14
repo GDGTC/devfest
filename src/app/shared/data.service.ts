@@ -144,10 +144,22 @@ export class DataService {
             return list.push(item);
         }
     }
+
     delete(path: 'schedule' | 'speakers', item) {
         console.log('Attempting to delete', item, 'of type', path);
         let list = this.listPath(path);
         list.remove(item.$key);
+    }
+
+    deleteSpeakerFromSession(session: Session, speakerKey: string) {
+        const list = this.db.list(`devfest${this.yearService.year}/schedule/${session.$key}/speakers`);
+        list.remove(speakerKey)
+        .then(() => {
+            console.log(`Speaker (${speakerKey} deleted from session (${session.$key}) .`);
+        })
+        .catch(err => {
+            console.error('Error deleting speaker from session', err);
+        })
     }
 
     listPath(type: 'schedule' | 'speakers' | 'feedback' | 'volunteers', query?) {

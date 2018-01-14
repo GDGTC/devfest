@@ -12,12 +12,15 @@ import { DataService } from '../shared/data.service';
     template: `
     <div *ngIf="session" style="">
 
-        <h1 style="font-size:32px;font-family: Montserrat, sans-serif;margin-bottom:32px;">{{session.title}} <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',session.$key,'edit']"><img src="/a/edit.svg"></a></h1>
+        <h1 style="font-size:32px;font-family: Montserrat, sans-serif;margin-bottom:32px;">
+            {{session.title}}
+            <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',session.$key,'edit']"><img src="/a/edit.svg"></a>
+        </h1>
         <div class="session-details">
             <div>
                 <div class="speaker-list-container" style="margin-top:16px;width:325px;">
-                    <div *ngFor="let speaker of session.speakers" >
-                        <speaker-container [speaker]="speaker | getSpeaker | async"></speaker-container>
+                    <div *ngFor="let speaker of session.speakers | arrayOrMap" >
+                        <speaker-container [speaker]="speaker.value | getSpeaker | async"></speaker-container>
                     </div>
                 </div>
             </div>

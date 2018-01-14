@@ -9,13 +9,13 @@ import { DataService, Session } from './data.service';
  */
 @Pipe({ name: 'getSpeaker' })
 export class GetSpeakerPipe implements PipeTransform {
-    constructor(private ds: DataService) { }
+    constructor(private ds: DataService) {}
 
     transform(value: string): any {
         if (value) {
             let speakers = this.ds.getSpeakers();
             return speakers.map(list => {
-                if(list) {
+                if (list) {
                     return list.find(item => item.$key == value);
                 } else {
                     return null;

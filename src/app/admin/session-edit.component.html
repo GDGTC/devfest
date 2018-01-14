@@ -21,10 +21,10 @@
                 <div>
                     <em>speakers</em>
                     <ul class="speakerlist">
-                        <li *ngFor="let speaker of session.speakers">
-                            <img src="{{(speaker | fireJoin: '/devfest2018/speakers/' | async)?.imageUrl}}"/>
-                            {{(speaker | fireJoin:'/devfest2018/speakers/' | async)?.name}}
-                            <button type="button" (click)="deleteSpeakerFromSession(speaker)"> -X-</button>
+                        <li *ngFor="let speaker of (session.speakers | arrayOrMap)">
+                            <img src="{{(speaker.value | fireJoin: '/devfest' + yearService.year + '/speakers/' | async)?.imageUrl}}" style="max-height:50px;"/>
+                            {{(speaker.value | fireJoin:'/devfest' + yearService.year + '/speakers/' | async)?.name}}
+                            <button type="button" (click)="deleteSpeakerFromSession(session, speaker.key)"> -X-</button>
                         </li>
                     </ul>
                 </div>
@@ -32,7 +32,7 @@
                 <button mat-raised-button type="submit" *ngIf="session.$key">Save Session</button>
                 <br>
                 <em>Add speakers from the list below</em>
-                <speaker-selector [session]=session style="overflow: scroll; max-height: 300px; display:block"></speaker-selector>
+                <speaker-selector [session]="session" style="overflow: scroll; max-height: 300px; display:block"></speaker-selector>
 
 
             <button type="submit" mat-raised-button>{{session.$key ? 'Save' : 'Create' }} Session</button> <button (click)="delete(session)" mat-button color="secondary">Delete</button>

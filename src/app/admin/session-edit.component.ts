@@ -37,4 +37,11 @@ export class SessionEditComponent {
         this.ds.delete('schedule', session);
         this.router.navigate(['/', this.yearService.year, 'schedule']);
     }
+
+    deleteSpeakerFromSession(session: Session, speakerKey: string) {
+       this.ds.deleteSpeakerFromSession(session, speakerKey);
+    }
+    getValues(obj) {
+        return Object.keys(obj).map(key => obj[key]);
+    }
 }

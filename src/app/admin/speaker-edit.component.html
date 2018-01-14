@@ -19,7 +19,7 @@
         <button type="submit" *ngIf="!speaker.$key" mat-raised-button>Create Speaker</button>
         <span *ngIf="speaker.$key" (click)="delete(speaker)" style="padding-left: 60px;">delete</span>
     </form>
-    <sffb-uploader *ngIf="speaker.$key" [folder]="'devfest' + year + '/speakers/' + speaker.$key"></sffb-uploader>
+    <sffb-uploader *ngIf="speaker.$key" [folder]="'devfest' + yearService.year + '/speakers/' + speaker.$key"></sffb-uploader>
 </ng-container>
 <ng-template #loading>
     Loading speaker data...

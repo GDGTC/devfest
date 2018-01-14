@@ -6,6 +6,7 @@ import { DataService } from '../shared/data.service';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import { YearService } from 'app/year.service';
 
 @Component({
     templateUrl: './session-view.component.html',
@@ -14,24 +15,15 @@ export class SessionViewComponent {
     session;
     year;
 
-    constructor(route: ActivatedRoute, public ds: DataService, title: Title) {
+    constructor(route: ActivatedRoute, public ds: DataService, title: Title, public yearService: YearService) {
         this.session = route.params.switchMap(params => {
-            this.year = params['year'];
-            return ds.getSchedule(params['year']).map(list =>
-                list.find(item =>
-                    item.$key === params['id']
-                )
-            );
-
+            return ds.getSchedule().map(list => list.find(item => item.$key === params['id']));
         });
 
         this.session.subscribe(sessionData => {
-            if(sessionData) {
+            if (sessionData) {
                 title.setTitle(sessionData.title + ' | DevFestMN 2017');
             }
         });
-
-
     }
-
 }

@@ -5,6 +5,7 @@ import { DataService } from '../shared/data.service';
 import { FirebaseService } from '../shared/firebase.service';
 import { CustomPipesModule } from '../shared/custom-components.module';
 import { GetSpeakerPipe } from './get-speaker.pipe';
+import { ArrayOrMapPipe } from './array-or-map.pipe';
 
 import { PickerComponent } from './picker.component';
 
@@ -12,6 +13,7 @@ import { PickerComponent } from './picker.component';
     declarations: [
         PickerComponent,
         GetSpeakerPipe,
+        ArrayOrMapPipe,
     ],
     providers: [
         AuthService,
@@ -26,6 +28,7 @@ import { PickerComponent } from './picker.component';
         CustomPipesModule,
         PickerComponent,
         GetSpeakerPipe,
+        ArrayOrMapPipe,
     ],
 })
 export class SharedModule { }

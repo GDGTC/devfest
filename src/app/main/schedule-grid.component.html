@@ -15,8 +15,8 @@
                                 {{data.gridData[time][room].title}}
                                 <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',data.gridData[time][room].$key,'edit']"><img src="/a/edit.svg"></a>
                             </div>
-                            <div *ngFor="let speaker of data.gridData[time][room].speakers">
-                                {{(speaker | getSpeaker | async)?.name}}
+                            <div *ngFor="let speaker of data.gridData[time][room].speakers | arrayOrMap">
+                                {{(speaker.value | getSpeaker | async)?.name}}
                             </div>
                         </a>
                         <div *ngIf="data.gridData[time][room].notes"><em>{{data.gridData[time][room].notes}}</em></div>
@@ -38,8 +38,8 @@
                             <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',data.gridData[time]['all'].$key,'edit']"><img src="/a/edit.svg"></a>
                         </div>
                         <div>{{data.gridData[time]['all'].room}}</div>
-                        <div *ngFor="let speaker of data.gridData[time].all.speakers">
-                            {{(speaker | getSpeaker | async)?.name}}
+                        <div *ngFor="let speaker of data.gridData[time].all.speakers | arrayOrMap">
+                            {{(speaker.value | getSpeaker | async)?.name}}
                         </div>
                     </a>
                 </td>
@@ -62,8 +62,8 @@
                             <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',data.gridData[time][room].$key,'edit']"><img src="/a/edit.svg"></a>
                         </div>
                         <div>{{data.gridData[time][room].room}}</div>
-                        <div *ngFor="let speaker of data.gridData[time][room].speakers">
-                            {{(speaker | getSpeaker | async)?.name}}
+                        <div *ngFor="let speaker of data.gridData[time][room].speakers | arrayOrMap">
+                            {{(speaker.value | getSpeaker | async)?.name}}
                         </div>
                         <div *ngIf="data.gridData[time][room].blocks == 2">
                             <em>Note: This session is 2 hours long.</em>
@@ -82,8 +82,8 @@
                         <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',data.gridData[time]['all'].$key,'edit']"><img src="/a/edit.svg"></a>
                     </div>
                     <div>{{data.gridData[time]['all'].room}}</div>
-                    <div *ngFor="let speaker of data.gridData[time].all.speakers">
-                        {{(speaker | getSpeaker | async)?.name}}
+                    <div *ngFor="let speaker of data.gridData[time].all.speakers | arrayOrMap">
+                        {{(speaker.value | getSpeaker | async)?.name}}
                     </div>
                 </a>
             </ng-template>

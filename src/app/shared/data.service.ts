@@ -12,6 +12,7 @@ import './shareResults';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/filter';
 import { YearService } from 'app/year.service';
+import { SafeHtml } from '@angular/platform-browser';
 
 export interface Session {
     $key?: string;
@@ -22,6 +23,7 @@ export interface Session {
     track?: string;
     speakers?: any[];
     blocks?: number;
+    renderedDescription?: SafeHtml;
 }
 
 export interface Speaker {

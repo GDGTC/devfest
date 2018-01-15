@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 
 import { AuthService } from '../shared/auth.service';
-import { DataService } from '../shared/data.service';
+import { DataService, Session } from '../shared/data.service';
 
 @Component({
     selector: 'session-details',
@@ -30,8 +30,8 @@ import { DataService } from '../shared/data.service';
                 <div style="margin-bottom:24px;"> {{ds.customDateFormatter(session.startTime)}}</div>
                 <div *ngIf="session.notes" style="margin-bottom:24px;"><strong><em>Note: {{session.notes}}</em></strong></div>
                 <div
-                    *ngIf="session.description"
-                    [innerHTML]="session.description" style="max-width:500px;display:inline-block;">
+                    *ngIf="session.renderedDescription"
+                    [innerHTML]="session.renderedDescription" style="max-width:500px;display:inline-block;">
                 </div>
                 <div *ngIf="(auth.uid | async) === false" style="margin-top:64px;">
                     <h3>Login for More</h3><p>Login to save this session to your agenda, or to provide feedback after the session ends.</p>
@@ -54,7 +54,7 @@ import { DataService } from '../shared/data.service';
     `
 })
 export class SessionDetailsComponent {
-    @Input() session;
+    @Input() session: Session;
     @Input() year;
 
     sessionAgenda: FirebaseObjectObservable<any>;

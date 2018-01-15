@@ -2,27 +2,50 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { DataService } from '../shared/data.service';
+import { Observable } from 'rxjs/Observable';
+import { map, switchMap } from 'rxjs/operators';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
+import * as Showdown from 'showdown';
+
+import { DataService, Session } from '../shared/data.service';
 import { YearService } from 'app/year.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     templateUrl: './session-view.component.html',
 })
 export class SessionViewComponent {
-    session;
-    year;
+    session: Observable<Session>;
 
-    constructor(route: ActivatedRoute, public ds: DataService, title: Title, public yearService: YearService) {
-        this.session = route.params.switchMap(params => {
-            return ds.getSchedule().map(list => list.find(item => item.$key === params['id']));
-        });
+    constructor(
+        route: ActivatedRoute,
+        ds: DataService,
+        title: Title,
+        public yearService: YearService,
+        sanitizer: DomSanitizer
+    ) {
+        this.session = route.params.pipe(
+            switchMap(params =>
+                ds.getSchedule().pipe(
+                    map(list => list.find(item => item.$key === params['id'])),
+                    map(item => {
+                        if (!item) {
+                            return {};
+                        }
+                        let converter = new Showdown.Converter({ extensions: [] });
+                        converter.setOption('noHeaderId', 'true');
+                        item.renderedDescription = sanitizer.bypassSecurityTrustHtml(
+                            converter.makeHtml(item.description || '')
+                        );
+                        return item;
+                    })
+                )
+            )
+        );
 
         this.session.subscribe(sessionData => {
             if (sessionData) {
-                title.setTitle(sessionData.title + ' | DevFestMN 2017');
+                title.setTitle(sessionData.title + ' | DevFestMN ' + yearService.year);
             }
         });
     }

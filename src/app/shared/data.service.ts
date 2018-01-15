@@ -24,6 +24,7 @@ export interface Session {
     speakers?: any[];
     blocks?: number;
     renderedDescription?: SafeHtml;
+    notes?: string;
 }
 
 export interface Speaker {

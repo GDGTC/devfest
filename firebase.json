@@ -5,9 +5,19 @@
     "hosting": {
         "public": "dist",
         "rewrites": [
-            { "source": "/worker-basic.min.js", "destination": "/ngsw-worker.js" },
-            { "source": "/worker-basic.js", "destination": "/ngsw-worker.js" },
-            { "source": "**", "destination": "/index.html" }
+            { "source": "/sitemap.txt", "function": "generateSitemap" },
+            {
+                "source": "/worker-basic.min.js",
+                "destination": "/ngsw-worker.js"
+            },
+            {
+                "source": "/worker-basic.js",
+                "destination": "/ngsw-worker.js"
+            },
+            {
+                "source": "**",
+                "destination": "/index.html"
+            }
         ],
         "headers": [
             {
@@ -16,10 +26,13 @@
                     {
                         "key": "Link",
                         "value":
-                            "</inline.061493aafef3f3bee227.bundle.js>;rel=preload;as=script,</main.a71ec0b24aa6ccb60da2.bundle.js>;rel=preload;as=script,</polyfills.d8d030261d4351ef3651.bundle.js>;rel=preload;as=script,</styles.31b6030277c73d00fc5d.bundle.css>;rel=preload;as=style,"
+                            "</inline.74706af40d07a531c707.bundle.js>;rel=preload;as=script,</main.591aa07753f4606a3a92.bundle.js>;rel=preload;as=script,</polyfills.d8d030261d4351ef3651.bundle.js>;rel=preload;as=script,</styles.31b6030277c73d00fc5d.bundle.css>;rel=preload;as=style,"
                     }
                 ]
             }
         ]
+    },
+    "functions": {
+        "predeploy": "npm --prefix functions run build"
     }
 }

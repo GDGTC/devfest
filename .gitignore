@@ -4,9 +4,11 @@
 /dist
 /dist-*
 /tmp
+/functions/lib
 
 # dependencies
 /node_modules
+/functions/node_modules
 
 # IDEs and editors
 /.idea

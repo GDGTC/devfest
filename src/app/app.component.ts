@@ -47,10 +47,8 @@ export class AppComponent {
 
     constructor(router: Router, meta: OurMeta) {
         router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe((n: NavigationEnd) => {
-            console.log('Navigation End');
             let pageTitle = this.getDeepestTitle(router.routerState.snapshot.root);
             if (pageTitle && pageTitle !== true) {
-                console.log('Setting title from app navigation');
                 meta.setTitle(pageTitle);
             } else if (pageTitle !== false) {
                 meta.clearTitle();
@@ -63,7 +61,6 @@ export class AppComponent {
             ga('send', 'pageview', n.urlAfterRedirects);
         });
         router.events.pipe(filter(e => e instanceof NavigationStart)).subscribe((n: NavigationStart) => {
-            console.log('Navigation Start');
         });
     }
 

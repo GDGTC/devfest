@@ -7,7 +7,6 @@ export class OurMeta {
     constructor(public title: Title, public meta: Meta) {}
 
     setTitle(title: string) {
-        console.log('Setting Title to', title);
         this.title.setTitle(`${title} | ${environment.siteName}`);
     }
     clearTitle() {

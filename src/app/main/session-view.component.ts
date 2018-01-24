@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
@@ -10,6 +9,7 @@ import * as Showdown from 'showdown';
 import { DataService, Session } from '../shared/data.service';
 import { YearService } from 'app/year.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { OurMeta } from 'app/our-meta.service';
 
 @Component({
     templateUrl: './session-view.component.html',
@@ -20,7 +20,7 @@ export class SessionViewComponent {
     constructor(
         route: ActivatedRoute,
         ds: DataService,
-        title: Title,
+        meta: OurMeta,
         public yearService: YearService,
         sanitizer: DomSanitizer
     ) {
@@ -45,7 +45,8 @@ export class SessionViewComponent {
 
         this.session.subscribe(sessionData => {
             if (sessionData) {
-                title.setTitle(sessionData.title + ' | DevFestMN ' + yearService.year);
+                console.log('setting session view metadata');
+                meta.setTitle(sessionData.title);
             }
         });
     }

@@ -22,7 +22,7 @@ export class SpeakersViewComponent {
     constructor(route: ActivatedRoute, ds: DataService, public yearService: YearService) {
 
         this.speaker = route.params.switchMap(params => {
-            return ds.getSpeakers().map(list => list.find(item => item.$key == params['id']))
+            return ds.getSpeakers().map(list => list.find(item => item.$key === params['id']))
         });
     }
 

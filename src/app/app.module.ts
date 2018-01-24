@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 import { UpdateService } from './update.service';
 import { YearSwitcherComponent } from './year-switcher.component';
 import { YearService } from './year.service';
+import { OurMeta } from 'app/our-meta.service';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { YearService } from './year.service';
     providers: [
         UpdateService,
         YearService,
+        OurMeta,
     ]
 })
 export class AppModule {

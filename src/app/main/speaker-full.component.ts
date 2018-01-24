@@ -1,27 +1,23 @@
 import { Component, Input } from '@angular/core';
 import { AuthService } from 'app/shared/auth.service';
+import { Speaker } from 'app/shared/data.service';
+import { OurMeta } from 'app/our-meta.service';
+import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
     selector: 'speaker-full',
-    template: `
-    <div *ngIf="speaker">
-        <div class="callout">{{speaker.name}}
-            <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'speakers',speaker.$key,'edit']">
-            <img src="/a/edit.svg"></a>
-        </div>
-        <div style="display: flex;align-items: center;justify-content: center;">
-            <div class="" [style.background-image]="'url('+speaker.imageUrl+')'" style="background-size: cover; width: 125px; height: 125px;border-radius: 50%"></div>
-        </div>
-        <div>{{speaker.company}}</div>
-        <div *ngIf="speaker.twitter"><a href="https://twitter.com/{{speaker.twitter}}" target="_new">@{{speaker.twitter}}</a></div>
-        <div style="border:1px solid #CCC;margin:32px;padding:32px;" [innerHTML]="speaker.bio" *ngIf="speaker.bio"></div>
-    </div>
-    `
+    templateUrl: 'speaker-full.component.html',
 })
-export class SpeakerFullComponent {
-    @Input() speaker;
+export class SpeakerFullComponent implements OnChanges {
+    @Input() speaker: Speaker;
     @Input() year;
 
-    constructor(public auth: AuthService) {
+    constructor(public auth: AuthService, public meta: OurMeta) {}
+    ngOnChanges() {
+        if (this.speaker) {
+            const encodedName = encodeURIComponent(this.speaker.name);
+            this.meta.setTitle(this.speaker.name);
+            this.meta.setCanonical(`${this.year}/speakers/${this.speaker.$key}/${encodedName}`);
+        }
     }
 }

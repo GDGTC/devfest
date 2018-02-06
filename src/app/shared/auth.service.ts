@@ -6,8 +6,10 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/empty';
+import { shareReplay } from 'rxjs/operators';
 
 import * as firebase from 'firebase/app';
+import { YearService } from 'app/year.service';
 
 @Injectable()
 export class AuthService {
@@ -20,7 +22,7 @@ export class AuthService {
     agenda: Observable<any>;
     feedback: Observable<any>;
 
-    constructor(public auth: AngularFireAuth, public db: AngularFireDatabase) {
+    constructor(public auth: AngularFireAuth, public db: AngularFireDatabase, yearService: YearService) {
         this.uid = auth.authState.map(authState => {
             if (authState) {
 
@@ -39,13 +41,16 @@ export class AuthService {
         });
         this.agenda = auth.authState.switchMap(authState => {
             if (authState && authState.uid) {
-                return db.list(`devfest2017/agendas/${authState.uid}`)
+                let year = yearService.year;
+                return db.list(`devfest${year}/agendas/${authState.uid}`)
             } else {
                 return Observable.empty();
             }
-        }).filter(agenda => !!agenda);
+        }).filter(agenda => !!agenda).pipe(shareReplay(1));
         this.agenda
-            .subscribe(next => localStorage.setItem('agendaCache', JSON.stringify(next)));
+            .subscribe(next => {
+                localStorage.setItem('agendaCache', JSON.stringify(next))
+            });
         this.agenda = this.agenda
             .startWith(JSON.parse(localStorage.getItem('agendaCache')))
             .filter(x => !!x)

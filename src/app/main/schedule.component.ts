@@ -5,17 +5,24 @@ import { AuthService } from '../shared/auth.service';
 import { DataService, Session } from '../shared/data.service';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/combineLatest';
+import { map, shareReplay } from 'rxjs/operators';
+import { combineLatest } from 'rxjs/observable/combineLatest';
 import { environment } from '../../environments/environment';
 import { YearService } from 'app/year.service';
+
+export interface Schedule {
+    startTimes: any[];
+    gridData: any;
+    rooms: any[];
+}
 
 @Component({
     templateUrl: './schedule.component.html',
 })
 export class ScheduleComponent {
     // Two versions of the same data, one filtered, one not
-    allSessions: Observable<any>;
-    myAgenda: Observable<any>;
+    allSessions: Observable<Schedule>;
+    populatedAgenda: Observable<any>;
 
     // Where we store the reference to the currently selected data.
     filteredData: Observable<any>;
@@ -31,9 +38,8 @@ export class ScheduleComponent {
         /**
          * Session data should look like data[time][room] = session;
          */
-        this.allSessions = ds
-            .getSchedule()
-            .map(list => {
+        this.allSessions = ds.getSchedule().pipe(
+            map(list => {
                 let data = {};
                 for (let session of list) {
                     let time = session.startTime;
@@ -91,53 +97,69 @@ export class ScheduleComponent {
 
                 let startTimes = Object.keys(data).sort();
                 return { startTimes: startTimes, gridData: data, rooms: ds.getVenueLayout().rooms };
-            })
-            .shareResults();
+            }),
+            shareReplay(1)
+        );
 
         this.filteredData = this.allSessions;
 
-        this.myAgenda = this.allSessions.combineLatest(this.auth.agenda, (allData, agenda) => {
-            let resultSessions = {};
-            let data = JSON.parse(JSON.stringify(allData.gridData));
-            let rooms = [];
-            let myAgendaKeys = [];
+        // Intersect the user's agenda against the session list
+        this.populatedAgenda = combineLatest(this.allSessions, this.auth.agenda).pipe(
+            map(([allData, rawAgenda]) => {
+                return this.filterToMyAgenda(allData, rawAgenda);
+            })
+        );
+    }
 
-            for (let session of agenda) {
-                myAgendaKeys.push(session.$key);
-            }
+    /**
+     * Take in a full schedule and a set of agenda keys, return a new schedule of just those sessions the user has selected.
+     */
+    filterToMyAgenda(allData: Schedule, rawAgenda: any[]): Schedule {
+        let result: Schedule = { startTimes: allData.startTimes, gridData: {}, rooms: [] };
 
-            for (let time in data) {
-                if (data.hasOwnProperty(time)) {
-                    let slot = data[time];
-                    if (!slot.all) {
-                        for (let room in slot) {
-                            if (slot.hasOwnProperty(room)) {
-                                let session = slot[room];
-                                if (myAgendaKeys.indexOf(session.$key) === -1) {
-                                    delete slot[room];
-                                } else {
-                                    // Track which rooms we actually need.
-                                    if (!(room in rooms)) {
-                                        rooms.push(room);
-                                    }
+        let resultSessions = {};
+        let allSessions = allData.gridData;
+        let rooms = [];
+        let myAgendaKeys = [];
+
+        for (let session of rawAgenda) {
+            myAgendaKeys.push(session.$key);
+        }
+
+        for (let time in allSessions) {
+            if (allSessions.hasOwnProperty(time)) {
+                resultSessions[time] = {};
+
+                let slot = allSessions[time];
+                if (!slot.all) {
+                    for (let room in slot) {
+                        if (slot.hasOwnProperty(room)) {
+                            let session = slot[room];
+                            if (myAgendaKeys.indexOf(session.$key) !== -1) {
+                                // Track which rooms we actually need.
+                                if (!(room in rooms)) {
+                                    rooms.push(room);
                                 }
+                                resultSessions[time][room] = session;
                             }
                         }
-                    } else {
-                        // Do nothing with 'all' sessions
                     }
+                } else {
+                    // Ignore user preferences for "all" sessions
+                    resultSessions[time].all = slot.all;
                 }
             }
+        }
 
-            // We do this to maintain the original order of the rooms
-            let returnRooms = [];
-            for (let room of ds.getVenueLayout().rooms) {
-                if (rooms.indexOf(room) !== -1) {
-                    returnRooms.push(room);
-                }
+        // We do this to maintain the original order of the rooms
+        let returnRooms = [];
+        for (let room of this.ds.getVenueLayout().rooms) {
+            if (rooms.indexOf(room) !== -1) {
+                returnRooms.push(room);
             }
-            let result = { startTimes: allData.startTimes, gridData: data, rooms: returnRooms };
-            return result;
-        });
+        }
+        result.gridData = resultSessions;
+        result.rooms = returnRooms;
+        return result;
     }
 }

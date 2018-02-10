@@ -5,9 +5,9 @@ import { AuthService } from '../shared/auth.service';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/observable/combineLatest';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/empty';
+import { map, switchMap } from 'rxjs/operators';
+import { combineLatest } from 'rxjs/observable/combineLatest';
+import { empty } from 'rxjs/observable/empty';
 import { YearService } from '../year.service';
 
 @Component({
@@ -40,16 +40,16 @@ export class UserFeedbackComponent implements OnChanges {
         public auth: AuthService,
         public yearService: YearService
     ) {
-        let url = Observable.combineLatest(this.auth.uid, this.newSession).map(combinedData => {
+        let url = combineLatest(this.auth.uid, this.newSession).pipe(map(combinedData => {
             let [uid, session] = combinedData;
             if (uid && session && session.$key) {
                 return `/devfest${yearService.year}/feedback/${uid}/${session.$key}/`;
             } else {
                 return null;
             }
-        });
+        }));
 
-        url.switchMap(url => (url ? db.object(url) : Observable.empty())).subscribe(feedback => {
+        url.pipe(switchMap(url => (url ? db.object(url) : empty()))).subscribe(feedback => {
             this.feedback = feedback;
         });
 

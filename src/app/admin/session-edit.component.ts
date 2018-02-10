@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { switchMap } from 'rxjs/operators';
 
 import { DataService, Session, Speaker } from '../shared/data.service';
 import { YearService } from 'app/year.service';
@@ -19,12 +20,12 @@ export class SessionEditComponent {
         public router: Router,
         public yearService: YearService
     ) {
-        this.sessionData = route.params.switchMap(params => {
+        this.sessionData = route.params.pipe(switchMap(params => {
             if (params['id'] === 'new') {
                 return Observable.of({ startTime: params['time'], room: params['room'] });
             }
             return ds.getSchedule().map(list => list.find(item => item.$key === params['id']));
-        });
+        }));
     }
 
     save(session) {

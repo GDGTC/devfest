@@ -4,8 +4,10 @@ import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/data
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/empty';
+import { switchMap } from 'rxjs/operators';
+
+import { combineLatest } from 'rxjs/observable/combineLatest';
 import { shareReplay } from 'rxjs/operators';
 
 import * as firebase from 'firebase/app';
@@ -39,14 +41,14 @@ export class AuthService {
                 return false;
             }
         });
-        this.agenda = auth.authState.switchMap(authState => {
+        this.agenda = auth.authState.pipe(switchMap(authState => {
             if (authState && authState.uid) {
                 let year = yearService.year;
                 return db.list(`devfest${year}/agendas/${authState.uid}`)
             } else {
                 return Observable.empty();
             }
-        }).filter(agenda => !!agenda).pipe(shareReplay(1));
+        })).filter(agenda => !!agenda).pipe(shareReplay(1));
         this.agenda
             .subscribe(next => {
                 localStorage.setItem('agendaCache', JSON.stringify(next))
@@ -56,25 +58,25 @@ export class AuthService {
             .filter(x => !!x)
             .shareResults();
 
-        this.isAdmin = this.auth.authState.switchMap(authState => {
+        this.isAdmin = this.auth.authState.pipe(switchMap(authState => {
             if (!authState) {
                 return Observable.of(false);
             } else {
                 return this.db.object('/admin/' + authState.uid);
             }
-        }).map(adminObject =>
+        })).map(adminObject =>
             (adminObject && adminObject['$value'] === true)
             );
 
-        this.isVolunteer = this.auth.authState.switchMap(authState => {
+        this.isVolunteer = this.auth.authState.pipe(switchMap(authState => {
             if (!authState) {
                 return Observable.of(false);
             } else {
                 return this.db.object('devfest2017/volunteers/' + authState.uid);
             }
-        }).map(volunteerObject => (volunteerObject && volunteerObject['$value'] === true));
+        })).map(volunteerObject => (volunteerObject && volunteerObject['$value'] === true));
 
-        this.isAdminOrVolunteer = Observable.combineLatest(this.isAdmin, this.isVolunteer, (x, y) => (x || y))
+        this.isAdminOrVolunteer = combineLatest(this.isAdmin, this.isVolunteer, (x, y) => (x || y))
     }
     login() {
         this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());

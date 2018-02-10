@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
-
+import { switchMap } from 'rxjs/operators';
 import { AuthService } from '../shared/auth.service';
 import { DataService, Session } from '../shared/data.service';
 
@@ -20,12 +20,12 @@ export class SessionDetailsComponent {
 
     constructor(router: Router, route: ActivatedRoute, public ds: DataService, public auth: AuthService, public db: AngularFireDatabase) {
 
-        this.agendaInfo = route.params.switchMap(params => {
+        this.agendaInfo = route.params.pipe(switchMap(params => {
             this.year = params['year'];
             return auth.uid.map(uid =>
                 [params['id'], uid]
             );
-        });
+        }));
 
         this.agendaInfo.subscribe(agendaData => {
             let [session, uid] = agendaData;

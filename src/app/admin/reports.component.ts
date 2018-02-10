@@ -5,7 +5,7 @@ import { DataService } from '../shared/data.service';
 import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/combineLatest';
+import { combineLatest } from 'rxjs/observable/combineLatest';
 
 @Component({
     template: `
@@ -49,7 +49,7 @@ export class ReportsComponent {
 
     constructor(public auth: AuthService, public db: AngularFireDatabase, public ds: DataService) {
         this.feedback = ds.getFeedback();
-        this.sessions = Observable.combineLatest(this.feedback, ds.getSchedule())
+        this.sessions = combineLatest(this.feedback, ds.getSchedule())
         .map(data => {
             let [feedback, originalSession] = data;
 

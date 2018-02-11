@@ -184,53 +184,85 @@
   dependencies:
     tslib "^1.7.1"
 
-"@firebase/app@0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@firebase/app/-/app-0.1.4.tgz#595b85390b1dc5846a88933d65d4fae7208f835d"
-  dependencies:
-    "@firebase/util" "0.1.4"
+"@firebase/app-types@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@firebase/app-types/-/app-types-0.1.1.tgz#1b794e101c779310763b1bfce8c24e7728fb9a91"
 
-"@firebase/auth@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@firebase/auth/-/auth-0.3.0.tgz#971c22d894205454e14850848012235c44459086"
-
-"@firebase/database@0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@firebase/database/-/database-0.1.5.tgz#6e5b0da6f0be15cba30c694e2ff24c6a5f03c182"
+"@firebase/app@0.1.8":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@firebase/app/-/app-0.1.8.tgz#0952d0c0cb2926aaa9b39459c7d9df653fa54330"
   dependencies:
-    "@firebase/util" "0.1.4"
+    "@firebase/app-types" "0.1.1"
+    "@firebase/util" "0.1.8"
+
+"@firebase/auth-types@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@firebase/auth-types/-/auth-types-0.1.1.tgz#1b38caa9971cc9d8ed6dd114976d18d986f24a9a"
+
+"@firebase/auth@0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@firebase/auth/-/auth-0.3.3.tgz#4efabc46e11b4d186458232b7743d203847827c9"
+  dependencies:
+    "@firebase/auth-types" "0.1.1"
+
+"@firebase/database-types@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@firebase/database-types/-/database-types-0.1.1.tgz#601b8040191766777b785c1675eac34ce57c669c"
+
+"@firebase/database@0.1.9":
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/@firebase/database/-/database-0.1.9.tgz#ea5f376d1a59d16f909dfb46c597b55e35d9834b"
+  dependencies:
+    "@firebase/database-types" "0.1.1"
+    "@firebase/util" "0.1.8"
     faye-websocket "0.11.1"
 
-"@firebase/firestore@0.2.1":
+"@firebase/firestore-types@0.2.1":
   version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@firebase/firestore/-/firestore-0.2.1.tgz#b60dbaa59626d6f84d4316fcdc5aa0c0eaa59e38"
+  resolved "https://registry.yarnpkg.com/@firebase/firestore-types/-/firestore-types-0.2.1.tgz#f2f35856b283a521c64ac4fa45d140010037e046"
+
+"@firebase/firestore@0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@firebase/firestore/-/firestore-0.3.2.tgz#d997bcd96edc36b9b4abadb5c50d940ecea5d7bf"
   dependencies:
-    "@firebase/webchannel-wrapper" "0.2.5"
+    "@firebase/firestore-types" "0.2.1"
+    "@firebase/webchannel-wrapper" "0.2.6"
     grpc "^1.7.1"
 
-"@firebase/messaging@0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@firebase/messaging/-/messaging-0.1.5.tgz#11ca0e9215ea54839cc80947eeec548cd21ac251"
-  dependencies:
-    "@firebase/util" "0.1.4"
+"@firebase/messaging-types@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@firebase/messaging-types/-/messaging-types-0.1.1.tgz#66d61d800081b3f7e4d26f1f8523f0a307e37730"
 
-"@firebase/polyfill@0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@firebase/polyfill/-/polyfill-0.1.3.tgz#9b0a2f93ad629e2c433b692e0cd5f34f35229c12"
+"@firebase/messaging@0.1.9":
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/@firebase/messaging/-/messaging-0.1.9.tgz#0b231da9d5b89c9d1a176ee532dda164fe59c263"
+  dependencies:
+    "@firebase/messaging-types" "0.1.1"
+    "@firebase/util" "0.1.8"
+
+"@firebase/polyfill@0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@firebase/polyfill/-/polyfill-0.1.4.tgz#a17538ab0359f0398f360c561dc444249b2095c6"
   dependencies:
     promise-polyfill "^6.0.2"
 
-"@firebase/storage@0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@firebase/storage/-/storage-0.1.4.tgz#3aca74b6dcb4e87569ecc07153ea0f4ecb883ca0"
+"@firebase/storage-types@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@firebase/storage-types/-/storage-types-0.1.1.tgz#c8e1cd328e96ef5b88e07b0a4f5ce1c68087126b"
 
-"@firebase/util@0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@firebase/util/-/util-0.1.4.tgz#80d7f6039ff6cb94215ddd44d3cb09f6d32902ea"
+"@firebase/storage@0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@firebase/storage/-/storage-0.1.6.tgz#a7a54ed9ec77bd47b9eb5b1353083bc3edd92e3e"
+  dependencies:
+    "@firebase/storage-types" "0.1.1"
 
-"@firebase/webchannel-wrapper@0.2.5":
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.2.5.tgz#11ccb45505cb56d4bc0a9a09712b14585248e784"
+"@firebase/util@0.1.8":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@firebase/util/-/util-0.1.8.tgz#7a7eb9d5fc56ba9e9b854bb2357d51f83b07df31"
+
+"@firebase/webchannel-wrapper@0.2.6":
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.2.6.tgz#a4b81ca8cdeb1acbc7923289a4a514f61b59db86"
 
 "@ngtools/json-schema@1.1.0", "@ngtools/json-schema@^1.1.0":
   version "1.1.0"
@@ -336,9 +368,9 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-angularfire2@5.0.0-rc.4:
-  version "5.0.0-rc.4"
-  resolved "https://registry.yarnpkg.com/angularfire2/-/angularfire2-5.0.0-rc.4.tgz#65c4d2ed768c3251b0b611ce51d6b42ac8afeabc"
+angularfire2@^5.0.0-rc.6:
+  version "5.0.0-rc.6"
+  resolved "https://registry.yarnpkg.com/angularfire2/-/angularfire2-5.0.0-rc.6.tgz#99dfecaf7fd9e6979e3c09f4dcf7e6768a8f91d1"
 
 ansi-html@0.0.7:
   version "0.0.7"
@@ -1931,17 +1963,17 @@ firebase-http2-push-config@^0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/firebase-http2-push-config/-/firebase-http2-push-config-0.0.8.tgz#3d57a5df0a72697930e6229ae3436e4bd087f327"
 
-firebase@4.8.0:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/firebase/-/firebase-4.8.0.tgz#c0b5bad5c1241222f3a6f06065ea121ebbc14fd3"
+firebase@^4.9.1:
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/firebase/-/firebase-4.9.1.tgz#7adda5cf05dbb9d65e316adb61e2c62abcef2586"
   dependencies:
-    "@firebase/app" "0.1.4"
-    "@firebase/auth" "0.3.0"
-    "@firebase/database" "0.1.5"
-    "@firebase/firestore" "0.2.1"
-    "@firebase/messaging" "0.1.5"
-    "@firebase/polyfill" "0.1.3"
-    "@firebase/storage" "0.1.4"
+    "@firebase/app" "0.1.8"
+    "@firebase/auth" "0.3.3"
+    "@firebase/database" "0.1.9"
+    "@firebase/firestore" "0.3.2"
+    "@firebase/messaging" "0.1.9"
+    "@firebase/polyfill" "0.1.4"
+    "@firebase/storage" "0.1.6"
     dom-storage "^2.0.2"
     xmlhttprequest "^1.8.0"
 

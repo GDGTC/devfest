@@ -13,6 +13,7 @@ import 'hammerjs';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore'
 
 import { environment } from '../../environments/environment';
 import { SharedModule } from '../shared/shared.module';
@@ -51,6 +52,7 @@ import { SessionDetailsComponent } from './session-details.component';
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireDatabaseModule,
         AngularFireAuthModule,
+        AngularFirestoreModule.enablePersistence(),
         RouterModule.forChild([
             { path: 'speakers', component: SpeakersComponent, data: { title: 'Speakers', depth: 1 }, },
             { path: 'speakers/:id/:seo', component: SpeakersViewComponent, data: { title: false, depth: 2 }, },

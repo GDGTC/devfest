@@ -1,6 +1,10 @@
 import { Injectable, Type } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
+import {
+    AngularFireDatabase,
+    FirebaseListObservable,
+    FirebaseObjectObservable,
+} from 'angularfire2/database-deprecated';
 
 export interface HasKey {
     $key?: string;
@@ -12,25 +16,27 @@ export class FirebaseTypedService<T extends HasKey> {
     firebaseList: FirebaseListObservable<T[]>;
     list: Observable<T[]>;
 
-    constructor(private db: AngularFireDatabase) { }
+    constructor(private db: AngularFireDatabase) {}
 
     get(key): Observable<T> {
-        if (key == 'new') {
+        if (key === 'new') {
             let empty: T;
             return Observable.of(empty);
         }
         let observer: FirebaseObjectObservable<T> = this.db.object(this.endpoint + key);
         return observer.map(item => {
             item.$key = key;
-            return item
+            return item;
         });
     }
     new(item: T): any {
         let result = this.firebaseList.push(item);
         console.log(result);
-        result.then(success => console.log("successfully added new item to " + this.endpoint, success), failure => console.log("failure", failure));
+        result.then(
+            success => console.log('successfully added new item to ' + this.endpoint, success),
+            failure => console.log('failure', failure)
+        );
         return result;
-
     }
 
     // This method is fighting angularfire. HERE BE DRAGONS
@@ -57,14 +63,12 @@ export class FirebaseTypedService<T extends HasKey> {
         if (key) {
             this.db.object(this.endpoint + key).remove();
         }
-
     }
 }
 
 @Injectable()
 export class FirebaseService {
-    constructor(private db: AngularFireDatabase) {
-    }
+    constructor(private db: AngularFireDatabase) {}
 
     // Factory that returns little generic FirebaseTypedService
     attach<V extends HasKey>(endpoint: string, query?): FirebaseTypedService<V> {
@@ -74,5 +78,4 @@ export class FirebaseService {
         service.list = service.firebaseList;
         return service;
     }
-
 }

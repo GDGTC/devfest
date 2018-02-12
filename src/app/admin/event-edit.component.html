@@ -1,0 +1,15 @@
+<style>
+    mat-form-field {
+        display:block;
+        margin:16px 0;
+    }
+</style>
+<h2>Edit Event</h2>
+<div *ngIf="eventData | async as event">
+    <form ngNoForm (submit)="save(event)">
+        <mat-form-field><input matInput [(ngModel)]="event.name" placeholder="Name" style="width: 100%"></mat-form-field>
+        <mat-form-field><input matInput [(ngModel)]="event.date" placeholder="Date (YYYY-MM-DD)"></mat-form-field>
+        <button type="submit" mat-raised-button>{{ event.id ? 'Save' : 'Create'}} Event</button>
+        <span *ngIf="event.id" (click)="delete(event)" style="padding-left: 60px;">delete</span>
+    </form>
+</div>

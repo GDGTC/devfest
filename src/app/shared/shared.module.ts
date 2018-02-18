@@ -7,11 +7,9 @@ import { CustomPipesModule } from '../shared/custom-components.module';
 import { GetSpeakerPipe } from './get-speaker.pipe';
 import { ArrayOrMapPipe } from './array-or-map.pipe';
 
-import { PickerComponent } from './picker.component';
 
 @NgModule({
     declarations: [
-        PickerComponent,
         GetSpeakerPipe,
         ArrayOrMapPipe,
     ],
@@ -26,7 +24,6 @@ import { PickerComponent } from './picker.component';
     ],
     exports: [
         CustomPipesModule,
-        PickerComponent,
         GetSpeakerPipe,
         ArrayOrMapPipe,
     ],

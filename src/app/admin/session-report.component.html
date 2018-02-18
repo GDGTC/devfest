@@ -1,0 +1,19 @@
+<h2>{{year}} Session Report</h2>
+<div *ngIf="auth.isAdmin | async">
+    <div *ngFor="let session of sessions | async" style="margin-bottom:32px;margin-top:32px;">
+        <ng-container *ngIf="session.speakers && session.speakers.length > 0">
+            <h3>{{session.name}}</h3>
+            <span *ngFor="let speaker of session.speakers; index as i; count as c;">
+                {{speaker}}{{ i
+                < c - 1 ? ',' : ''}} </span>
+            <br/>
+            <ng-container *ngIf="session.ratingsCount > 0; else noRatings">
+                <div>Total ratings: {{session.ratingsCount}}</div>
+                <div>How would you rate this speaker? {{session.speaker}} average</div>
+                <div>How would you rate the content? {{session.content}} average</div>
+                <div>Would you recommend this session? {{session.recommendation}} average</div>
+            </ng-container>
+            <ng-template #noRatings>This session did not receive any feedback.</ng-template>
+        </ng-container>
+    </div>
+</div>

@@ -22,11 +22,13 @@ import { AdminComponent } from './admin.component';
 import { AdminNavComponent } from './admin-nav.component';
 import { SpeakerSelector } from './speaker-selector.component';
 import { ReportsComponent } from './reports.component';
+import { SessionReportComponent } from './session-report.component';
 import { VolunteersComponent } from './volunteers.component';
 import { SpeakerEditComponent } from './speaker-edit.component';
 import { SessionEditComponent } from './session-edit.component';
 import { AdminHomeComponent } from './admin-home.component';
 import { YearSwitcherComponent } from './year-switcher.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -46,6 +48,7 @@ import { YearSwitcherComponent } from './year-switcher.component';
                         { path: 'speakers/:id/edit', component: SpeakerEditComponent },
                         { path: 'sessions/:id/edit', component: SessionEditComponent },
                         { path: 'sessions/:id/edit/:time/:room', component: SessionEditComponent },
+                        { path: 'session-report', component: SessionReportComponent },
                     ]},
                     { path: '', component: AdminHomeComponent },
                     { path: 'reports', component: ReportsComponent },
@@ -56,6 +59,7 @@ import { YearSwitcherComponent } from './year-switcher.component';
         FormsModule,
         SharedModule,
         SFFBModule,
+        HttpClientModule,
     ],
     declarations: [
         AdminComponent,
@@ -67,6 +71,7 @@ import { YearSwitcherComponent } from './year-switcher.component';
         SessionEditComponent,
         AdminHomeComponent,
         YearSwitcherComponent,
+        SessionReportComponent,
     ]
 })
 export class AdminModule { }

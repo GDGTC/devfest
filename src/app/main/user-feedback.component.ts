@@ -20,6 +20,9 @@ import { YearService } from '../year.service';
         <star-bar (newSelection)="saveContent($event)" [selected]="feedback.content"></star-bar>
         <div>Would you recommend this session?</div>
         <star-bar (newSelection)="saveRecommendation($event)" [selected]="feedback.recommendation"></star-bar>
+        <div>Comments</div>
+        <input #feedbackComment (blur)='saveComment(feedbackComment.value)' value='{{feedback.comment}}'>
+        <input type="submit" ng-click="save()" value="save">
     </div>
     <div *ngIf="(auth.uid | async) === false">
         <button (click)="auth.login()" mat-raised-button color="primary">Login to provide feedback</button>
@@ -28,7 +31,7 @@ import { YearService } from '../year.service';
 })
 export class UserFeedbackComponent implements OnChanges {
     @Input() session;
-    feedback: any = { speaker: 0, content: 0, recommendation: 0 };
+    feedback: any = { speaker: 0, content: 0, recommendation: 0, comment : " " };
     editableFeedback;
     uid;
 
@@ -77,7 +80,12 @@ export class UserFeedbackComponent implements OnChanges {
         this.feedback.recommendation = val;
         this.save();
     }
+    saveComment(val){
+        this.feedback.comment = val;
+        this.save();
+    }
     save() {
+        console.log(this.feedback);
         if (this.editableFeedback) {
             delete this.feedback.$key;
             delete this.feedback.$exists;

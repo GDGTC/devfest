@@ -25,21 +25,22 @@
             </div>
             <div *ngIf="session.renderedDescription" [innerHTML]="session.renderedDescription" style="max-width:500px;display:inline-block;">
             </div>
-            <div *ngIf="(auth.uid | async) === false" style="margin-top:64px;">
+            <div *ngIf="auth.uid | async">
+                <button *ngIf="!((sessionAgenda.valueChanges() | async)?.value)" (click)="addToAgenda()" class="cta" style="display:inline;">Add to My Agenda</button>
+                <button *ngIf="(sessionAgenda.valueChanges() | async)?.value" (click)="removeFromAgenda()" class="cta" style="display:inline;">Remove from My Agenda</button>
+
+                <div>
+                    <h3 style="margin-top:32px;">Provide Feedback</h3>
+                    <user-feedback [session]="session"></user-feedback>
+                </div>
+            </div>
+
+            <div *ngIf="auth.uid | async" style="margin-top:64px;">
                 <h3>Login for More</h3>
                 <p>Login to save this session to your agenda, or to provide feedback after the session ends.</p>
                 <button (click)="auth.login()" class="cta" style="display:inline;">Login</button>
             </div>
 
-            <div *ngIf="(auth.uid | async)">
-                <button *ngIf="!((sessionAgenda | async)?.value)" (click)="addToAgenda()" class="cta" style="display:inline;">Add to My Agenda</button>
-                <button *ngIf="(sessionAgenda | async)?.value" (click)="removeFromAgenda()" class="cta" style="display:inline;">Remove from My Agenda</button>
-
-                <div>
-                        <h3 style="margin-top:32px;">Provide Feedback</h3>
-                        <user-feedback [session]="session"></user-feedback>
-                    </div>
-            </div>
         </div>
     </div>
 </div>

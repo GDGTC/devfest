@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 
 import { AuthService } from '../shared/auth.service';
 import { DataService } from '../shared/data.service';
-import { AngularFireDatabase } from 'angularfire2/database-deprecated';
+import { AngularFireDatabase } from 'angularfire2/database';
 
-import { Observable } from 'rxjs/Observable';
-import { combineLatest } from 'rxjs/observable/combineLatest';
+import { Observable, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
     template: `
@@ -41,76 +41,73 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
         </div>
     </ol>
 </div>
-    `
+    `,
 })
 export class ReportsComponent {
     feedback: Observable<any>;
-    sessions: Observable<{title: string, scoreSpeaker: number, scoreContent: number, scoreRecommendation: number, feedback?: any[]}[]>;
+    sessions: Observable<
+        { title: string; scoreSpeaker: number; scoreContent: number; scoreRecommendation: number; feedback?: any[] }[]
+    >;
 
     constructor(public auth: AuthService, public db: AngularFireDatabase, public ds: DataService) {
         this.feedback = ds.getFeedback();
-        this.sessions = combineLatest(this.feedback, ds.getSchedule())
-        .map(data => {
-            let [feedback, originalSession] = data;
+        this.sessions = combineLatest(this.feedback, ds.getSchedule()).pipe(
+            map(data => {
+                let [feedback, originalSession] = data;
 
-            // clone the data
-            let sessions = JSON.parse(JSON.stringify(originalSession));
+                // clone the data
+                let sessions = JSON.parse(JSON.stringify(originalSession));
 
-            delete feedback.$key;
-            delete feedback.$exists;
-            delete feedback.$value;
+                delete feedback.$key;
+                delete feedback.$exists;
+                delete feedback.$value;
 
-            // Add feedback
-            for(let uid in feedback) {
-                //console.log("processing user",uid);
-                let user = feedback[uid];
-                for(let sessionKey in user) {
-                    let session = sessions.find(item => item.$key == sessionKey);
-                    //console.log(session);
+                // Add feedback
+                for (let uid in feedback) {
+                    //console.log("processing user",uid);
+                    let user = feedback[uid];
+                    for (let sessionKey in user) {
+                        let session = sessions.find(item => item.$key == sessionKey);
+                        //console.log(session);
 
-
-                    if(!Array.isArray(session.feedback)) {
-                        session.feedback = [];
-                    }
-                    user[sessionKey].uid = uid;
-                    session.feedback.push(user[sessionKey]);
-
-                }
-
-            }
-
-
-            // Summarize feedback
-            for(let session of sessions) {
-                session.scoreSpeaker = session.scoreContent = session.scoreRecommendation = 0;
-                if(session.feedback) {
-                    let length = session.feedback.length;
-                    for(let feedback of session.feedback) {
-
-                        if(feedback.speaker == 0 || feedback.content == 0 || feedback.recommendation == 0) {
-                            length--;
-                        } else {
-                            session.scoreSpeaker += feedback.speaker;
-                            session.scoreContent += feedback.content;
-                            session.scoreRecommendation += feedback.recommendation;
+                        if (!Array.isArray(session.feedback)) {
+                            session.feedback = [];
                         }
+                        user[sessionKey].uid = uid;
+                        session.feedback.push(user[sessionKey]);
                     }
-                    session.scoreSpeaker = session.scoreSpeaker / session.feedback.length;
-                    session.scoreContent = session.scoreContent / session.feedback.length;
-                    session.scoreRecommendation = session.scoreRecommendation / session.feedback.length;
                 }
-            }
 
-            // Sort Feedback
-            sessions = sessions.sort((a, b) => {
-                return a.scoreSpeaker + a.scoreContent + a.scoreRecommendation > b.scoreSpeaker + b.scoreContent + b.scoreRecommendation ?
-                    -1 : 1
+                // Summarize feedback
+                for (let session of sessions) {
+                    session.scoreSpeaker = session.scoreContent = session.scoreRecommendation = 0;
+                    if (session.feedback) {
+                        let length = session.feedback.length;
+                        for (let feedback of session.feedback) {
+                            if (feedback.speaker == 0 || feedback.content == 0 || feedback.recommendation == 0) {
+                                length--;
+                            } else {
+                                session.scoreSpeaker += feedback.speaker;
+                                session.scoreContent += feedback.content;
+                                session.scoreRecommendation += feedback.recommendation;
+                            }
+                        }
+                        session.scoreSpeaker = session.scoreSpeaker / session.feedback.length;
+                        session.scoreContent = session.scoreContent / session.feedback.length;
+                        session.scoreRecommendation = session.scoreRecommendation / session.feedback.length;
+                    }
+                }
+
+                // Sort Feedback
+                sessions = sessions.sort((a, b) => {
+                    return a.scoreSpeaker + a.scoreContent + a.scoreRecommendation >
+                        b.scoreSpeaker + b.scoreContent + b.scoreRecommendation
+                        ? -1
+                        : 1;
+                });
+
+                return sessions;
             })
-
-            return sessions;
-        });
-
-
-
+        );
     }
 }

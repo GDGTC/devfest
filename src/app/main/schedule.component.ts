@@ -4,9 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 import { DataService, Session } from '../shared/data.service';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable ,  combineLatest } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { combineLatest } from 'rxjs/observable/combineLatest';
 import { environment } from '../../environments/environment';
 import { YearService } from 'app/year.service';
 

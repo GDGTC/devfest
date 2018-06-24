@@ -1,89 +1,99 @@
+import { of as observableOf, empty as observableEmpty, Observable, combineLatest } from 'rxjs';
+
+import { startWith, map, filter, switchMap, shareReplay } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
-
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/empty';
-import { switchMap } from 'rxjs/operators';
-
-import { combineLatest } from 'rxjs/observable/combineLatest';
-import { shareReplay } from 'rxjs/operators';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import * as firebase from 'firebase/app';
 import { YearService } from 'app/year.service';
+import { Feedback } from './data.service';
 
 @Injectable()
 export class AuthService {
     isAdmin: Observable<boolean>;
     isVolunteer: Observable<boolean>;
     isAdminOrVolunteer: Observable<boolean>;
-    uid: Observable<string | false>;
-    name: Observable<string | false>;
+    uid: Observable<string>;
+    name: Observable<string>;
 
     agenda: Observable<any>;
-    feedback: Observable<any>;
+    feedback: Observable<Feedback>;
 
     constructor(public auth: AngularFireAuth, public db: AngularFireDatabase, yearService: YearService) {
-        this.uid = auth.authState.map(authState => {
-            if (authState) {
-
-                return authState.uid;
-            } else {
-                return false;
-            }
+        this.uid = auth.authState.pipe(
+            map(authState => {
+                if (authState) {
+                    return authState.uid;
+                } else {
+                    return null;
+                }
+            })
+        );
+        this.name = auth.authState.pipe(
+            map(authState => {
+                console.log(authState);
+                if (authState) {
+                    return authState.displayName || authState.providerData[0].displayName;
+                } else {
+                    return null;
+                }
+            })
+        );
+        this.agenda = auth.authState
+            .pipe(
+                switchMap(authState => {
+                    if (authState && authState.uid) {
+                        let year = yearService.year;
+                        return db.list(`devfest${year}/agendas/${authState.uid}`).valueChanges();
+                    } else {
+                        return observableEmpty();
+                    }
+                })
+            )
+            .pipe(filter(agenda => !!agenda))
+            .pipe(shareReplay(1));
+        this.agenda.subscribe(next => {
+            localStorage.setItem('agendaCache', JSON.stringify(next));
         });
-        this.name = auth.authState.map(authState => {
-            console.log(authState);
-            if (authState) {
-                return authState.displayName || authState.providerData[0].displayName;
-            } else {
-                return false;
-            }
-        });
-        this.agenda = auth.authState.pipe(switchMap(authState => {
-            if (authState && authState.uid) {
-                let year = yearService.year;
-                return db.list(`devfest${year}/agendas/${authState.uid}`)
-            } else {
-                return Observable.empty();
-            }
-        })).filter(agenda => !!agenda).pipe(shareReplay(1));
-        this.agenda
-            .subscribe(next => {
-                localStorage.setItem('agendaCache', JSON.stringify(next))
-            });
-        this.agenda = this.agenda
-            .startWith(JSON.parse(localStorage.getItem('agendaCache')))
-            .filter(x => !!x)
-            .shareResults();
+        this.agenda = this.agenda.pipe(
+            startWith(JSON.parse(localStorage.getItem('agendaCache'))),
+            filter(x => !!x),
+            shareReplay(1)
+        );
 
-        this.isAdmin = this.auth.authState.pipe(switchMap(authState => {
-            if (!authState) {
-                return Observable.of(false);
-            } else {
-                return this.db.object('/admin/' + authState.uid);
-            }
-        })).map(adminObject =>
-            (adminObject && adminObject['$value'] === true)
+        this.isAdmin = this.auth.authState
+            .pipe(
+                switchMap(authState => {
+                    if (!authState) {
+                        return observableOf(false);
+                    } else {
+                        return this.db
+                            .object('/admin/' + authState.uid)
+                            .valueChanges()
+                    }
+                }),
+                map(value => !!value)
             );
 
-        this.isVolunteer = this.auth.authState.pipe(switchMap(authState => {
-            if (!authState) {
-                return Observable.of(false);
-            } else {
-                return this.db.object('devfest2017/volunteers/' + authState.uid);
-            }
-        })).map(volunteerObject => (volunteerObject && volunteerObject['$value'] === true));
+        this.isVolunteer = this.auth.authState
+            .pipe(
+                switchMap(authState => {
+                    if (!authState) {
+                        return observableOf(false);
+                    } else {
+                        return this.db.object('devfest2017/volunteers/' + authState.uid).valueChanges();
+                    }
+                })
+            )
+            .pipe(map(volunteerObject => volunteerObject && volunteerObject['$value'] === true));
 
-        this.isAdminOrVolunteer = combineLatest(this.isAdmin, this.isVolunteer, (x, y) => (x || y))
+        this.isAdminOrVolunteer = combineLatest(this.isAdmin, this.isVolunteer, (x, y) => x || y);
     }
     login() {
         this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     }
     logout() {
-        this.auth.auth.signOut()
+        this.auth.auth.signOut();
     }
-
-
 }

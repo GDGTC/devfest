@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { DataService } from '../shared/data.service';
 
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 
-import { environment } from '../../environments/environment';
 import { YearService } from 'app/year.service';
 
 @Component({
@@ -23,7 +22,7 @@ export class SpeakersViewComponent {
     constructor(route: ActivatedRoute, ds: DataService, public yearService: YearService) {
 
         this.speaker = route.params.pipe(switchMap(params => {
-            return ds.getSpeakers().map(list => list.find(item => item.$key === params['id']))
+            return ds.getSpeakers().pipe(map(list => list.find(item => item.$key === params['id'])));
         }));
     }
 

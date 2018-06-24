@@ -1,8 +1,7 @@
 import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { FirebaseService, FirebaseTypedService } from '../shared/firebase.service';
 import { FireJoinPipe } from '../shared/fire-join.pipe';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../environments/environment';

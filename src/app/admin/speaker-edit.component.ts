@@ -1,8 +1,8 @@
+import { of as observableOf, Observable } from 'rxjs';
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import { switchMap } from 'rxjs/operators';
+
+import { switchMap, map } from 'rxjs/operators';
 import { DataService, Speaker } from '../shared/data.service';
 import { YearService } from 'app/year.service';
 
@@ -12,13 +12,20 @@ import { YearService } from 'app/year.service';
 export class SpeakerEditComponent {
     speakerData: Observable<Speaker>;
 
-    constructor(public ds: DataService, public route: ActivatedRoute, public router: Router, public yearService: YearService) {
-        this.speakerData = route.params.pipe(switchMap(params => {
-            if (params['id'] === 'new') {
-                return Observable.of({});
-            }
-            return ds.getSpeakers().map(list => list.find(item => item.$key === params['id']));
-        }));
+    constructor(
+        public ds: DataService,
+        public route: ActivatedRoute,
+        public router: Router,
+        public yearService: YearService
+    ) {
+        this.speakerData = route.params.pipe(
+            switchMap(params => {
+                if (params['id'] === 'new') {
+                    return observableOf({});
+                }
+                return ds.getSpeakers().pipe(map(list => list.find(item => item.$key === params['id'])));
+            })
+        );
     }
 
     save(speaker) {

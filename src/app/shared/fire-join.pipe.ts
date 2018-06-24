@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { FirebaseService } from './firebase.service';
+import { map } from 'rxjs/operators';
 
 /**
  * Take a firebase key and do another lookup
@@ -15,7 +16,7 @@ export class FireJoinPipe implements PipeTransform {
     transform(value: any, destination: string): any {
         if (value && destination) {
             let service = this.fs.attach<any>(destination);
-            return service.list.map(list => list.find(item => item.$key === value));
+            return service.list.pipe(map(list => list.find(item => item.$key === value)));
         }
     }
 }

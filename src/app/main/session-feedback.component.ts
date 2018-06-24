@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 
 import { DataService } from '../shared/data.service';
 import { OurMeta } from 'app/our-meta.service';
@@ -22,7 +22,7 @@ export class SessionFeedbackComponent {
         public meta: OurMeta
     ) {
         this.session = route.params.pipe(switchMap(params => {
-            return ds.getSchedule().map(list => list.find(item => item.$key === params['id']));
+            return ds.getSchedule().pipe(map(list => list.find(item => item.$key === params['id'])));
         }));
 
         this.session.subscribe(sessionData => {

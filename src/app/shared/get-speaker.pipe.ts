@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DataService, Session } from './data.service';
+import { DataService } from './data.service';
+import { map } from 'rxjs/operators';
 
 /**
  * Take a speaker ID and returns a speaker
@@ -14,13 +15,13 @@ export class GetSpeakerPipe implements PipeTransform {
     transform(value: string): any {
         if (value) {
             let speakers = this.ds.getSpeakers();
-            return speakers.map(list => {
+            return speakers.pipe(map(list => {
                 if (list) {
                     return list.find(item => item.$key == value);
                 } else {
                     return null;
                 }
-            });
+            }));
         }
     }
 }

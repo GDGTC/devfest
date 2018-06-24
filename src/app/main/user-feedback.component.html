@@ -1,0 +1,14 @@
+<div *ngIf="auth.uid | async; else login">
+    <div>How would you rate this speaker?</div>
+    <star-bar (newSelection)="saveSpeaker($event)" [selected]="feedback.speaker"></star-bar>
+    <div>How would you rate the content?</div>
+    <star-bar (newSelection)="saveContent($event)" [selected]="feedback.content"></star-bar>
+    <div>Would you recommend this session?</div>
+    <star-bar (newSelection)="saveRecommendation($event)" [selected]="feedback.recommendation"></star-bar>
+    <div>Comments</div>
+    <input #feedbackComment (blur)='saveComment(feedbackComment.value)' value='{{feedback.comment}}'>
+    <input type="submit" ng-click="save()" value="save">
+</div>
+<ng-template #login>
+    <button (click)="auth.login()" mat-raised-button color="primary">Login to provide feedback</button>
+</ng-template>

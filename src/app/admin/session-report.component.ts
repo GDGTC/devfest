@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { YearService } from '../year.service';
 import { NAMED_ENTITIES } from '@angular/compiler';
 import { AuthService } from '../shared/auth.service';

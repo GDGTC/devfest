@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
-import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { map } from 'rxjs/operators';
 
 import { DataService } from '../shared/data.service';
 
@@ -19,16 +19,16 @@ import { DataService } from '../shared/data.service';
     `
 })
 export class VolunteersComponent {
-    volunteers: FirebaseObjectObservable<any>;
+    volunteers: AngularFireObject<any>;
     volunteerList;
     id = '';
     constructor(db: AngularFireDatabase, ds: DataService) {
         this.volunteers = ds.getVolunteers();
-        this.volunteerList = this.volunteers.map( map => {
+        this.volunteerList = this.volunteers.valueChanges().pipe(map( map => {
             let list = Object.keys(map);
             list = list.filter(x => x != '$key' && x != '$exists');
             return list;
-        })
+        }));
 
     }
 

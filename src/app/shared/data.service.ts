@@ -1,16 +1,8 @@
+import { map, startWith, filter, shareReplay } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import {
-    AngularFireDatabase,
-    FirebaseListObservable,
-    FirebaseObjectObservable,
-} from 'angularfire2/database-deprecated';
-import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase, AngularFireObject, AngularFireList, QueryFn } from 'angularfire2/database';
+import { Observable } from 'rxjs';
 
-import { environment } from '../../environments/environment';
-
-import './shareResults';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/filter';
 import { YearService } from 'app/year.service';
 import { SafeHtml } from '@angular/platform-browser';
 
@@ -38,7 +30,13 @@ export interface Speaker {
     website?: string;
 }
 
-export interface Feedback {}
+export interface Feedback {
+    $key?: string;
+    speaker: number;
+    content: number;
+    recommendation: number;
+    comment: string;
+}
 
 @Injectable()
 export class DataService {
@@ -85,30 +83,30 @@ export class DataService {
     }
 
     getSchedule(): Observable<Session[]> {
-        let sessionList = <FirebaseListObservable<Session[]>>this.listPath('schedule', {
-            query: { orderByChild: 'title' },
-        });
+        let sessionList = this.listPath<Session[]>('schedule', ref => ref.orderByChild('title'));
         sessionList.subscribe(next => {
             localStorage.setItem('sessionsCache' + this.yearService.year, JSON.stringify(next));
         });
 
-        return sessionList
-            .startWith(JSON.parse(localStorage.getItem('sessionsCache' + this.yearService.year)))
-            .filter(x => !!x)
-            .shareResults();
+        return sessionList.pipe(
+            startWith(JSON.parse(localStorage.getItem('sessionsCache' + this.yearService.year))),
+            filter(x => !!x),
+            shareReplay(1)
+        );
     }
 
     getSpeakers(): Observable<Speaker[]> {
-        let speakers = this.listPath('speakers', { query: { orderByChild: 'name' } });
+        let speakers = this.listPath('speakers', ref => ref.orderByChild('name'));
 
         speakers.subscribe(next => {
             localStorage.setItem('speakerCache' + this.yearService.year, JSON.stringify(next));
         });
         let speakerCache = localStorage.getItem('speakerCache' + this.yearService.year);
-        return speakers
-            .startWith(JSON.parse(speakerCache))
-            .filter(x => !!x)
-            .shareResults();
+        return speakers.pipe(
+            startWith(JSON.parse(speakerCache)),
+            filter(x => !!x),
+            shareReplay(1)
+        );
     }
 
     getFeedback(): Observable<Feedback[]> {
@@ -118,8 +116,9 @@ export class DataService {
         return this.db.object(`devfest${this.yearService.year}/volunteers`);
     }
 
-    getAgenda(uid, session): FirebaseObjectObservable<any> {
+    getAgenda(uid: string, session: string): AngularFireObject<any> {
         const path = `devfest${this.yearService.year}/agendas/${uid}/${session}/`;
+        console.log("fetching agenda stored at",path);
         return this.db.object(path);
     }
 
@@ -140,32 +139,51 @@ export class DataService {
 
     save(path: 'schedule' | 'speakers', item) {
         console.log('Attempting to save', path, item);
-        let list = this.listPath(path);
+        let list = this.modifiableList(path);
+        let result;
         if (item.$key) {
-            return list.update(item.$key, item);
+            let key = item.$key;
+            delete item.$key;
+            result = list.update(key, item);
+            item.$key = key;
         } else {
-            return list.push(item);
+            result = list.push(item);
         }
+        return result;
     }
 
     delete(path: 'schedule' | 'speakers', item) {
         console.log('Attempting to delete', item, 'of type', path);
-        let list = this.listPath(path);
+        let list = this.modifiableList(path);
         list.remove(item.$key);
     }
 
     deleteSpeakerFromSession(session: Session, speakerKey: string) {
         const list = this.db.list(`devfest${this.yearService.year}/schedule/${session.$key}/speakers`);
         list.remove(speakerKey)
-        .then(() => {
-            console.log(`Speaker (${speakerKey} deleted from session (${session.$key}) .`);
-        })
-        .catch(err => {
-            console.error('Error deleting speaker from session', err);
-        })
+            .then(() => {
+                console.log(`Speaker (${speakerKey} deleted from session (${session.$key}) .`);
+            })
+            .catch(err => {
+                console.error('Error deleting speaker from session', err);
+            });
     }
 
-    listPath(type: 'schedule' | 'speakers' | 'feedback' | 'volunteers', query?) {
-        return this.db.list(`devfest${this.yearService.year}/${type}`, query);
+    listPath<T>(type: 'schedule' | 'speakers' | 'feedback' | 'volunteers', query?: QueryFn): Observable<T[]> {
+        return this.modifiableList<T>(type, query)
+            .snapshotChanges()
+            .pipe(
+                map(actions =>
+                    actions.map(action => {
+                        let value = action.payload.val();
+                        value['$key'] = action.key;
+                        return value;
+                    })
+                )
+            );
+    }
+
+    modifiableList<T>(type: 'schedule' | 'speakers' | 'feedback' | 'volunteers', query?: QueryFn): AngularFireList<T> {
+        return this.db.list<T>(`devfest${this.yearService.year}/${type}`, query);
     }
 }

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core
 
 import { AngularFireDatabase } from 'angularfire2/database';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { YearService } from 'app/year.service';
 
 @Component({

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { AuthService } from '../shared/auth.service';
 import { AngularFireList } from 'angularfire2/database/interfaces';

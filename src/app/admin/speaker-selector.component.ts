@@ -23,7 +23,7 @@ export class SpeakerSelectorComponent implements OnChanges {
     @Output() addSpeaker = new EventEmitter<string>();
     @Output() removeSpeaker = new EventEmitter<string>();
 
-    private speakers;
+    public speakers;
     schedule;
 
     constructor(public db: AngularFireDatabase, public yearService: YearService) {}

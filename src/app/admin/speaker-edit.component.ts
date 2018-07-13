@@ -23,7 +23,7 @@ export class SpeakerEditComponent {
                 if (params['id'] === 'new') {
                     return observableOf({});
                 }
-                return ds.getSpeakers().pipe(map(list => list.find(item => item.$key === params['id'])));
+                return ds.getSpeakers(this.yearService.year).pipe(map(list => list.find(item => item.$key === params['id'])));
             })
         );
     }

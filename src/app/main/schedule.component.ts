@@ -37,7 +37,7 @@ export class ScheduleComponent {
         /**
          * Session data should look like data[time][room] = session;
          */
-        this.allSessions = ds.getSchedule().pipe(
+        this.allSessions = ds.getSchedule(yearService.year).pipe(
             map(list => {
                 let data = {};
                 for (let session of list) {

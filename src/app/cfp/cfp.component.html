@@ -1,0 +1,30 @@
+<style>
+    mat-form-field {
+        display:block;
+        margin:16px;
+    }
+    form {
+        max-width:100%;
+        width:500px;
+        margin:0px auto;
+    }
+</style>
+<section>
+<h2>Call for Proposals </h2>
+<form [formGroup]="cfp" (submit)="submit(cfp)">
+    <mat-form-field>
+        <input matInput formControlName="name" placeholder="Name" autocomplete="name">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="email" placeholder="Email" autocomplete="email">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="title"  placeholder="Talk Title" autocomplete="on">
+    </mat-form-field>
+    <mat-form-field>
+        <textarea matInput formControlName="abstract" placeholder="Talk Abstract" autocomplete="on"></textarea>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary">Save</button>
+</form>
+
+</section>

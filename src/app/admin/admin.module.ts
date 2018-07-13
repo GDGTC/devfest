@@ -20,7 +20,7 @@ import { SessionEditComponent } from './session-edit.component';
 import { SessionReportComponent } from './session-report.component';
 import { SFFBModule } from './sffb/sffb.module';
 import { SpeakerEditComponent } from './speaker-edit.component';
-import { SpeakerSelector } from './speaker-selector.component';
+import { SpeakerSelectorComponent } from './speaker-selector.component';
 import { VolunteersComponent } from './volunteers.component';
 import { YearSwitcherComponent } from './year-switcher.component';
 
@@ -65,7 +65,7 @@ import { YearSwitcherComponent } from './year-switcher.component';
     declarations: [
         AdminComponent,
         AdminNavComponent,
-        SpeakerSelector,
+        SpeakerSelectorComponent,
         ReportsComponent,
         VolunteersComponent,
         SpeakerEditComponent,

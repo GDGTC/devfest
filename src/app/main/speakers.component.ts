@@ -22,7 +22,7 @@ export class SpeakersComponent {
         public auth: AuthService,
         public yearService: YearService
     ) {
-        this.speakers = ds.getSpeakers();
+        this.speakers = ds.getSpeakers(yearService.year);
     }
 
     addSpeaker() {

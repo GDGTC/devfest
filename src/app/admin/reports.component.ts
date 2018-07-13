@@ -6,6 +6,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { YearService } from '../year.service';
 
 @Component({
     template: `
@@ -49,9 +50,9 @@ export class ReportsComponent {
         { title: string; scoreSpeaker: number; scoreContent: number; scoreRecommendation: number; feedback?: any[] }[]
     >;
 
-    constructor(public auth: AuthService, public db: AngularFireDatabase, public ds: DataService) {
+    constructor(public auth: AuthService, public db: AngularFireDatabase, public ds: DataService, yearService: YearService) {
         this.feedback = ds.getFeedback();
-        this.sessions = combineLatest(this.feedback, ds.getSchedule()).pipe(
+        this.sessions = combineLatest(this.feedback, ds.getSchedule(yearService.year)).pipe(
             map(data => {
                 let [feedback, originalSession] = data;
 
@@ -64,17 +65,18 @@ export class ReportsComponent {
 
                 // Add feedback
                 for (let uid in feedback) {
-                    //console.log("processing user",uid);
-                    let user = feedback[uid];
-                    for (let sessionKey in user) {
-                        let session = sessions.find(item => item.$key == sessionKey);
-                        //console.log(session);
-
-                        if (!Array.isArray(session.feedback)) {
-                            session.feedback = [];
+                    if (feedback.hasOwnProperty(uid)) {
+                        let user = feedback[uid];
+                        for (let sessionKey in user) {
+                            if (user.hasOwnProperty(sessionKey)) {
+                                let session = sessions.find(item => item.$key === sessionKey);
+                                if (!Array.isArray(session.feedback)) {
+                                    session.feedback = [];
+                                }
+                                user[sessionKey].uid = uid;
+                                session.feedback.push(user[sessionKey]);
+                            }
                         }
-                        user[sessionKey].uid = uid;
-                        session.feedback.push(user[sessionKey]);
                     }
                 }
 
@@ -83,13 +85,13 @@ export class ReportsComponent {
                     session.scoreSpeaker = session.scoreContent = session.scoreRecommendation = 0;
                     if (session.feedback) {
                         let length = session.feedback.length;
-                        for (let feedback of session.feedback) {
-                            if (feedback.speaker == 0 || feedback.content == 0 || feedback.recommendation == 0) {
+                        for (let feedbackResult of session.feedback) {
+                            if (feedbackResult.speaker === 0 || feedbackResult.content === 0 || feedbackResult.recommendation === 0) {
                                 length--;
                             } else {
-                                session.scoreSpeaker += feedback.speaker;
-                                session.scoreContent += feedback.content;
-                                session.scoreRecommendation += feedback.recommendation;
+                                session.scoreSpeaker += feedbackResult.speaker;
+                                session.scoreContent += feedbackResult.content;
+                                session.scoreRecommendation += feedbackResult.recommendation;
                             }
                         }
                         session.scoreSpeaker = session.scoreSpeaker / session.feedback.length;

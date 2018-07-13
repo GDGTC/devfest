@@ -4,12 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, UrlSegment } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { OurMeta } from 'app/our-meta.service';
-import { environment } from '../environments/environment';
+import { OurMeta } from './our-meta.service';
+import { environment } from 'environments/environment';
 import { AppComponent } from './app.component';
 import { UpdateService } from './update.service';
 import { YearSwitcherComponent } from './year-switcher.component';
 import { YearService } from './year.service';
+import { AngularFireModule } from 'angularfire2';
 
 @NgModule({
     declarations: [AppComponent, YearSwitcherComponent],
@@ -21,8 +22,10 @@ import { YearService } from './year.service';
             { matcher: isMarketingContent, loadChildren: './content/content.module#ContentModule' },
             { matcher: isYear, component: YearSwitcherComponent, loadChildren: './main/main.module#MainModule' },
             { path: 'admin', loadChildren: './admin/admin.module#AdminModule', data: { title: 'Admin' } },
+            { path: 'cfp', loadChildren: './cfp/cfp.module#CFPModule', data: { title: 'Call For Papers' } },
             { path: '', component: YearSwitcherComponent, loadChildren: './main/main.module#MainModule' },
         ]),
+        AngularFireModule.initializeApp(environment.firebaseConfig),
         ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
         MatSnackBarModule,
     ],

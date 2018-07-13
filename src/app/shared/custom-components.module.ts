@@ -6,9 +6,8 @@ import { FireJoinPipe } from '../shared/fire-join.pipe';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../environments/environment';
 
-
 @Pipe({
-    name: "encodeURI"
+    name: 'encodeURI',
 })
 export class EncodeURI implements PipeTransform {
     transform(value) {
@@ -25,13 +24,7 @@ export class EncodeURI implements PipeTransform {
         AngularFireDatabaseModule,
         AngularFireAuthModule,
     ],
-    exports: [
-        FireJoinPipe,
-        EncodeURI,
-    ],
-    declarations: [
-        FireJoinPipe,
-        EncodeURI,
-    ]
+    exports: [FireJoinPipe, EncodeURI],
+    declarations: [FireJoinPipe, EncodeURI],
 })
-export class CustomPipesModule { }
+export class CustomPipesModule {}

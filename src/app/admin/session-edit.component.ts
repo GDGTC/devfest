@@ -14,7 +14,6 @@ import { YearService } from 'app/year.service';
 })
 export class SessionEditComponent {
     sessionData: Observable<Session>;
-    year: string;
 
     constructor(
         public ds: DataService,
@@ -26,7 +25,7 @@ export class SessionEditComponent {
             if (params['id'] === 'new') {
                 return observableOf({ startTime: params['time'], room: params['room'] });
             }
-            return ds.getSchedule().pipe(map(list => list.find(item => item.$key === params['id'])));
+            return ds.getSchedule(yearService.year).pipe(map(list => list.find(item => item.$key === params['id'])));
         }));
     }
 

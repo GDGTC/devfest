@@ -6,10 +6,8 @@ import { MatIconModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
-import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { environment } from '../../environments/environment';
 import { SharedModule } from '../shared/shared.module';
 import { ScheduleGridComponent } from './schedule-grid.component';
 import { ScheduleComponent } from './schedule.component';
@@ -41,7 +39,6 @@ import { UserFeedbackComponent } from './user-feedback.component';
         CommonModule,
         FormsModule,
         HttpModule,
-        AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireDatabaseModule,
         AngularFireAuthModule,
         RouterModule.forChild([

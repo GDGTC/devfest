@@ -18,12 +18,12 @@ import { YearService } from 'app/year.service';
     </div>
     <div *ngIf="!session.$key">Save your new session before adding speakers</div>`,
 })
-export class SpeakerSelector implements OnChanges {
-    @Input('session') session;
+export class SpeakerSelectorComponent implements OnChanges {
+    @Input() session;
     @Output() addSpeaker = new EventEmitter<string>();
     @Output() removeSpeaker = new EventEmitter<string>();
 
-    speakers;
+    private speakers;
     schedule;
 
     constructor(public db: AngularFireDatabase, public yearService: YearService) {}

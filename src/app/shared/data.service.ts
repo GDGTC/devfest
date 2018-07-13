@@ -1,10 +1,12 @@
-import { map, startWith, filter, shareReplay } from 'rxjs/operators';
+import { map, startWith, filter, shareReplay, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject, AngularFireList, QueryFn } from 'angularfire2/database';
 import { Observable } from 'rxjs';
 
 import { YearService } from 'app/year.service';
 import { SafeHtml } from '@angular/platform-browser';
+import { Schedule } from '../main/schedule.component';
+import { localstorageCache } from './localstorage-cache.operator';
 
 export interface Session {
     $key?: string;
@@ -40,7 +42,33 @@ export interface Feedback {
 
 @Injectable()
 export class DataService {
+    private speakersByYear: { [key: number]: Observable<Speaker[]> } = {};
+    private scheduleByYear: { [key: number]: Observable<Session[]> } = {};
+
     constructor(public db: AngularFireDatabase, public yearService: YearService) {}
+
+    getSpeakers(year: number) {
+        if (this.speakersByYear[year]) {
+            return this.speakersByYear[year];
+        }
+
+        this.speakersByYear[year] = this.listPath('speakers', ref => ref.orderByChild('name')).pipe(
+            filter(x => !!x),
+            localstorageCache('speakerCache' + year),
+        );
+        return this.speakersByYear[year];
+    }
+
+    getSchedule(year: number): Observable<Session[]> {
+        if (this.scheduleByYear[year]) {
+            return this.scheduleByYear[year];
+        }
+        this.scheduleByYear[year] = this.listPath<Session[]>('schedule', ref => ref.orderByChild('title')).pipe(
+            filter(x => !!x),
+            localstorageCache('sessionsCache' + year),
+        );
+        return this.scheduleByYear[year];
+    }
 
     // @TODO this method is called much too often
     getVenueLayout() {
@@ -82,32 +110,7 @@ export class DataService {
         return { floors: floors, rooms: rooms };
     }
 
-    getSchedule(): Observable<Session[]> {
-        let sessionList = this.listPath<Session[]>('schedule', ref => ref.orderByChild('title'));
-        sessionList.subscribe(next => {
-            localStorage.setItem('sessionsCache' + this.yearService.year, JSON.stringify(next));
-        });
 
-        return sessionList.pipe(
-            startWith(JSON.parse(localStorage.getItem('sessionsCache' + this.yearService.year))),
-            filter(x => !!x),
-            shareReplay(1)
-        );
-    }
-
-    getSpeakers(): Observable<Speaker[]> {
-        let speakers = this.listPath('speakers', ref => ref.orderByChild('name'));
-
-        speakers.subscribe(next => {
-            localStorage.setItem('speakerCache' + this.yearService.year, JSON.stringify(next));
-        });
-        let speakerCache = localStorage.getItem('speakerCache' + this.yearService.year);
-        return speakers.pipe(
-            startWith(JSON.parse(speakerCache)),
-            filter(x => !!x),
-            shareReplay(1)
-        );
-    }
 
     getFeedback(): Observable<Feedback[]> {
         return this.listPath('feedback');
@@ -118,7 +121,7 @@ export class DataService {
 
     getAgenda(uid: string, session: string): AngularFireObject<any> {
         const path = `devfest${this.yearService.year}/agendas/${uid}/${session}/`;
-        console.log("fetching agenda stored at",path);
+        console.log('fetching agenda stored at', path);
         return this.db.object(path);
     }
 

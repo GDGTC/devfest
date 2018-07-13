@@ -26,7 +26,7 @@ export class SessionViewComponent {
     ) {
         this.session = route.params.pipe(
             switchMap(params =>
-                ds.getSchedule().pipe(
+                ds.getSchedule(yearService.year).pipe(
                     map(list => list.find(item => item.$key === params['id'])),
                     map(item => {
                         if (!item) {

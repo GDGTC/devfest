@@ -15,7 +15,8 @@ import {
     map,
     shareReplay,
     startWith,
-    switchMap
+    switchMap,
+    tap
     } from 'rxjs/operators';
 import { Feedback } from './data.service';
 
@@ -32,8 +33,13 @@ export class AuthService {
     agenda: Observable<any>;
     feedback: Observable<Feedback>;
 
+    state = this.auth.authState.pipe(
+        shareReplay(1),
+    );
+
     constructor(public auth: AngularFireAuth, public db: AngularFireDatabase, yearService: YearService) {
-        this.uid = auth.authState.pipe(
+
+        this.uid = this.state.pipe(
             map(authState => {
                 if (authState) {
                     return authState.uid;
@@ -42,7 +48,7 @@ export class AuthService {
                 }
             })
         );
-        this.name = auth.authState.pipe(
+        this.name = this.state.pipe(
             map(authState => {
                 console.log(authState);
                 if (authState) {
@@ -52,7 +58,7 @@ export class AuthService {
                 }
             })
         );
-        this.agenda = auth.authState
+        this.agenda = this.state
             .pipe(
                 switchMap(authState => {
                     if (authState && authState.uid) {
@@ -65,16 +71,18 @@ export class AuthService {
             )
             .pipe(filter(agenda => !!agenda))
             .pipe(shareReplay(1));
+
         this.agenda.subscribe(next => {
             localStorage.setItem('agendaCache', JSON.stringify(next));
         });
+
         this.agenda = this.agenda.pipe(
             startWith(JSON.parse(localStorage.getItem('agendaCache'))),
             filter(x => !!x),
             shareReplay(1),
         );
 
-        this.isAdmin = this.auth.authState
+        this.isAdmin = this.state
             .pipe(
                 switchMap(authState => {
                     if (!authState) {
@@ -86,10 +94,12 @@ export class AuthService {
                     }
                 }),
                 map(value => !!value),
+                tap(x => localStorage['devfest-isAdmin'] = JSON.stringify(x)),
+                startWith(JSON.parse(localStorage['devfest-isAdmin'] || 'false')),
                 shareReplay(1),
             );
 
-        this.isVolunteer = this.auth.authState
+        this.isVolunteer = this.state
             .pipe(
                 switchMap(authState => {
                     if (!authState) {

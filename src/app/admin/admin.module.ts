@@ -1,34 +1,28 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatTabsModule } from '@angular/material/tabs';
-
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { SFFBModule } from './sffb/sffb.module';
-
-import { RouterModule, UrlSegment } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { MatButtonModule } from '@angular/material';
+import { MatTabsModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+import { RouterModule, UrlSegment } from '@angular/router';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../../environments/environment';
 import { SharedModule } from '../shared/shared.module';
-
-import { AdminComponent } from './admin.component';
-import { AdminNavComponent } from './admin-nav.component';
-import { SpeakerSelector } from './speaker-selector.component';
-import { ReportsComponent } from './reports.component';
-import { SessionReportComponent } from './session-report.component';
-import { VolunteersComponent } from './volunteers.component';
-import { SpeakerEditComponent } from './speaker-edit.component';
-import { SessionEditComponent } from './session-edit.component';
 import { AdminHomeComponent } from './admin-home.component';
+import { AdminNavComponent } from './admin-nav.component';
+import { AdminComponent } from './admin.component';
+import { ReportsComponent } from './reports.component';
+import { SessionEditComponent } from './session-edit.component';
+import { SessionReportComponent } from './session-report.component';
+import { SFFBModule } from './sffb/sffb.module';
+import { SpeakerEditComponent } from './speaker-edit.component';
+import { SpeakerSelector } from './speaker-selector.component';
+import { VolunteersComponent } from './volunteers.component';
 import { YearSwitcherComponent } from './year-switcher.component';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -42,18 +36,25 @@ import { HttpClientModule } from '@angular/common/http';
         AngularFireAuthModule,
         RouterModule.forChild([
             {
-                path: '', component: AdminComponent, children: [
-                    // Doing the years like this for admins is kind of Gross, but to fix it we need a separate admin service that knows how to use years
-                    { matcher: isYear, component: YearSwitcherComponent, children: [
-                        { path: 'speakers/:id/edit', component: SpeakerEditComponent },
-                        { path: 'sessions/:id/edit', component: SessionEditComponent },
-                        { path: 'sessions/:id/edit/:time/:room', component: SessionEditComponent },
-                        { path: 'session-report', component: SessionReportComponent },
-                    ]},
+                path: '',
+                component: AdminComponent,
+                children: [
+                    // Doing the years like this for admins is kind of Gross, but to fix
+                    // it we need a separate admin service that knows how to use years
+                    {
+                        matcher: isYear,
+                        component: YearSwitcherComponent,
+                        children: [
+                            { path: 'speakers/:id/edit', component: SpeakerEditComponent },
+                            { path: 'sessions/:id/edit', component: SessionEditComponent },
+                            { path: 'sessions/:id/edit/:time/:room', component: SessionEditComponent },
+                            { path: 'session-report', component: SessionReportComponent },
+                        ],
+                    },
                     { path: '', component: AdminHomeComponent },
                     { path: 'reports', component: ReportsComponent },
                     { path: 'volunteers', component: VolunteersComponent },
-                ]
+                ],
             },
         ]),
         FormsModule,
@@ -72,10 +73,10 @@ import { HttpClientModule } from '@angular/common/http';
         AdminHomeComponent,
         YearSwitcherComponent,
         SessionReportComponent,
-    ]
+    ],
 })
-export class AdminModule { }
+export class AdminModule {}
 
 export function isYear(url: UrlSegment[]) {
-    return url.length >= 1 && url[0].path.match(/\d{4}/) ? ({consumed:[url[0]]}) : null;
+    return url.length >= 1 && url[0].path.match(/\d{4}/) ? { consumed: [url[0]] } : null;
 }

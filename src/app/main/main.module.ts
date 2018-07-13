@@ -1,34 +1,27 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MatIconModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
+import { MatCardModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
-
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-
-import 'hammerjs';
-
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../../environments/environment';
 import { SharedModule } from '../shared/shared.module';
-
-// Declarations
-import { SpeakersComponent } from './speakers.component';
+import { ScheduleGridComponent } from './schedule-grid.component';
 import { ScheduleComponent } from './schedule.component';
-import { SessionViewComponent } from './session-view.component';
+import { SessionDetailsComponent } from './session-details.component';
 import { SessionFeedbackComponent } from './session-feedback.component';
-import { SpeakersViewComponent } from './speakers-view.component';
+import { SessionViewComponent } from './session-view.component';
 import { SpeakerContainerComponent } from './speaker-container.component';
 import { SpeakerFullComponent } from './speaker-full.component';
-import { UserFeedbackComponent } from './user-feedback.component';
+import { SpeakersViewComponent } from './speakers-view.component';
+import { SpeakersComponent } from './speakers.component';
 import { StarBarComponent } from './star-bar.component';
-import { ScheduleGridComponent } from './schedule-grid.component';
-import { SessionDetailsComponent } from './session-details.component';
+import { UserFeedbackComponent } from './user-feedback.component';
 
 @NgModule({
     declarations: [

@@ -1,13 +1,25 @@
-import { of as observableOf, empty as observableEmpty, Observable, combineLatest } from 'rxjs';
-
-import { startWith, map, filter, switchMap, shareReplay } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
-
-import * as firebase from 'firebase/app';
 import { YearService } from 'app/year.service';
+import * as firebase from 'firebase/app';
+import {
+    combineLatest,
+    empty as observableEmpty,
+    Observable,
+    of as observableOf
+    } from 'rxjs';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import {
+    filter,
+    map,
+    shareReplay,
+    startWith,
+    switchMap
+    } from 'rxjs/operators';
 import { Feedback } from './data.service';
+
+
 
 @Injectable()
 export class AuthService {
@@ -59,7 +71,7 @@ export class AuthService {
         this.agenda = this.agenda.pipe(
             startWith(JSON.parse(localStorage.getItem('agendaCache'))),
             filter(x => !!x),
-            shareReplay(1)
+            shareReplay(1),
         );
 
         this.isAdmin = this.auth.authState
@@ -73,7 +85,8 @@ export class AuthService {
                             .valueChanges()
                     }
                 }),
-                map(value => !!value)
+                map(value => !!value),
+                shareReplay(1),
             );
 
         this.isVolunteer = this.auth.authState

@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
-
-import { DataService } from '../shared/data.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../shared/auth.service';
-
 import { YearService } from 'app/year.service';
+import { AuthService } from '../shared/auth.service';
+import { DataService } from '../shared/data.service';
 
 @Component({
     templateUrl: './speakers.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SpeakersComponent {
     speakers;

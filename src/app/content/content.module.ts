@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { MatCardModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
-
-import { TicketsComponent } from './tickets.component';
-import { SponsorsComponent } from './sponsors.component';
 import { PastComponent } from './past.component';
 import { SpeakerCfpComponent } from './speaker-cfp.component';
+import { SponsorsComponent } from './sponsors.component';
+import { TicketsComponent } from './tickets.component';
 
 @NgModule({
     declarations: [

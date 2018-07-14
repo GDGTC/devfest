@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { trigger, transition, state, group, query, style, animate, animateChild } from '@angular/animations';
-import { environment } from '../environments/environment';
+import { environment } from 'environments/environment';
 
 import { filter } from 'rxjs/operators';
-import { OurMeta } from 'app/our-meta.service';
+import { OurMeta } from './our-meta.service';
 
 declare var ga: any;
 

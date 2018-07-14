@@ -2,8 +2,7 @@ import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core
 
 import { AngularFireDatabase } from 'angularfire2/database';
 
-import { Observable } from 'rxjs';
-import { YearService } from 'app/year.service';
+import { YearService } from '../year.service';
 
 @Component({
     selector: 'speaker-selector',

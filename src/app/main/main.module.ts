@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { SharedModule } from '../shared/shared.module';
 import { ScheduleGridComponent } from './schedule-grid.component';
@@ -39,8 +38,6 @@ import { UserFeedbackComponent } from './user-feedback.component';
         CommonModule,
         FormsModule,
         HttpModule,
-        AngularFireDatabaseModule,
-        AngularFireAuthModule,
         RouterModule.forChild([
             { path: 'speakers', component: SpeakersComponent, data: { title: 'Speakers', depth: 1 }, },
             { path: 'speakers/:id/:seo', component: SpeakersViewComponent, data: { title: false, depth: 2 }, },

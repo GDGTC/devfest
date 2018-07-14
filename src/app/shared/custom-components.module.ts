@@ -1,10 +1,9 @@
 import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { FireJoinPipe } from '../shared/fire-join.pipe';
+import { FireJoinPipe } from './fire-join.pipe';
 import { CommonModule } from '@angular/common';
-import { environment } from '../../environments/environment';
+import { environment } from 'environments/environment';
 
 @Pipe({
     name: 'encodeURI',
@@ -22,7 +21,6 @@ export class EncodeURI implements PipeTransform {
         CommonModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireDatabaseModule,
-        AngularFireAuthModule,
     ],
     exports: [FireJoinPipe, EncodeURI],
     declarations: [FireJoinPipe, EncodeURI],

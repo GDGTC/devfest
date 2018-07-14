@@ -2,7 +2,7 @@
 
     <h1 style="font-size:32px;font-family: Montserrat, sans-serif;margin-bottom:32px;">
         {{session.title}}
-        <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',session.$key,'edit']">
+        <a *ngIf="auth.isAdmin | async" [routerLink]="['/',year,'admin','sessions',session.$key,'edit']">
             <img src="/a/edit.svg">
         </a>
     </h1>

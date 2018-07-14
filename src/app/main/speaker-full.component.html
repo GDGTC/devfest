@@ -1,6 +1,6 @@
 <div *ngIf="speaker">
     <div class="callout">{{speaker.name}}
-        <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'speakers',speaker.$key,'edit']">
+        <a *ngIf="auth.isAdmin | async" [routerLink]="['/',year,'admin','speakers',speaker.$key,'edit']">
             <img src="/a/edit.svg">
         </a>
     </div>

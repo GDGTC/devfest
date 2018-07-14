@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { YearService } from 'app/year.service';
-import * as firebase from 'firebase/app';
+import { YearService } from '../year.service';
+import * as firebase from 'firebase';
 import {
     combineLatest,
     empty as observableEmpty,
@@ -19,10 +19,11 @@ import {
     tap
     } from 'rxjs/operators';
 import { Feedback } from './data.service';
+import { AuthenticatedModule } from '../authenticated/authenticated.module';
 
 
 
-@Injectable()
+@Injectable({providedIn: AuthenticatedModule})
 export class AuthService {
     isAdmin: Observable<boolean>;
     isVolunteer: Observable<boolean>;
@@ -50,7 +51,6 @@ export class AuthService {
         );
         this.name = this.state.pipe(
             map(authState => {
-                console.log(authState);
                 if (authState) {
                     return authState.displayName || authState.providerData[0].displayName;
                 } else {

@@ -67,7 +67,7 @@ export class FirebaseTypedService<T extends HasKey> {
     }
 }
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class FirebaseService {
     constructor(private db: AngularFireDatabase) {}
 

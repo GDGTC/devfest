@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { AuthService } from 'app/shared/auth.service';
-import { Speaker } from 'app/shared/data.service';
-import { OurMeta } from 'app/our-meta.service';
+import { AuthService } from '../shared/auth.service';
+import { Speaker } from '../shared/data.service';
+import { OurMeta } from '../our-meta.service';
 import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({

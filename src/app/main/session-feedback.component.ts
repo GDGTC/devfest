@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap, map } from 'rxjs/operators';
 
 import { DataService } from '../shared/data.service';
-import { OurMeta } from 'app/our-meta.service';
+import { OurMeta } from '../our-meta.service';
 import { YearService } from '../year.service';
 
 @Component({

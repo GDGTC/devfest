@@ -5,7 +5,7 @@ import { DataService } from '../shared/data.service';
 
 import { switchMap, map } from 'rxjs/operators';
 
-import { YearService } from 'app/year.service';
+import { YearService } from '../year.service';
 
 @Component({
     template: `

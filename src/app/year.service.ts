@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class YearService {
     year: number;
     constructor() {
@@ -11,6 +11,6 @@ export class YearService {
         this.year = year;
     }
     reset() {
-        this.year = new Date().getFullYear();
+        this.year = environment.defaultYear;
     }
 }

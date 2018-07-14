@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject, AngularFireList, QueryFn } from 'angularfire2/database';
 import { Observable } from 'rxjs';
 
-import { YearService } from 'app/year.service';
+import { YearService } from '../year.service';
 import { SafeHtml } from '@angular/platform-browser';
 import { Schedule } from '../main/schedule.component';
 import { localstorageCache } from './localstorage-cache.operator';
+import { AuthenticatedModule } from '../authenticated/authenticated.module';
 
 export interface Session {
     $key?: string;
@@ -40,7 +41,7 @@ export interface Feedback {
     comment: string;
 }
 
-@Injectable()
+@Injectable({providedIn: AuthenticatedModule})
 export class DataService {
     private speakersByYear: { [key: number]: Observable<Speaker[]> } = {};
     private scheduleByYear: { [key: number]: Observable<Session[]> } = {};
@@ -63,7 +64,7 @@ export class DataService {
         if (this.scheduleByYear[year]) {
             return this.scheduleByYear[year];
         }
-        this.scheduleByYear[year] = this.listPath<Session[]>('schedule', ref => ref.orderByChild('title')).pipe(
+        this.scheduleByYear[year] = this.listPath<Session>('schedule', ref => ref.orderByChild('title')).pipe(
             filter(x => !!x),
             localstorageCache('sessionsCache' + year),
         );

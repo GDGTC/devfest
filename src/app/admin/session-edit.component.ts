@@ -1,13 +1,13 @@
 
 import {of as observableOf,  Observable } from 'rxjs';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { switchMap } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 
-import { DataService, Session, Speaker } from '../shared/data.service';
-import { YearService } from 'app/year.service';
+import { DataService, Session } from '../shared/data.service';
+import { YearService } from '../year.service';
 
 @Component({
     templateUrl: './session-edit.component.html',

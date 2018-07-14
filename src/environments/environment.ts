@@ -5,7 +5,7 @@
 
 export const environment = {
     production: false,
-    defaultYear: '2018',
+    defaultYear: 2018,
     siteName: 'DevFestMN',
     firebaseConfig: {
         apiKey: 'AIzaSyBrWJx91j512T3q6AaTGNxu_3fq47bYhfg',

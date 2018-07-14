@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { YearService } from 'app/year.service';
+import { YearService } from '../year.service';
 
 @Component({
     template: '<router-outlet>',

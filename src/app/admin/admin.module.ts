@@ -8,9 +8,8 @@ import { MatCheckboxModule } from '@angular/material';
 import { MatInputModule } from '@angular/material';
 import { RouterModule, UrlSegment } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { environment } from '../../environments/environment';
+import { environment } from 'environments/environment';
 import { SharedModule } from '../shared/shared.module';
 import { AdminHomeComponent } from './admin-home.component';
 import { AdminNavComponent } from './admin-nav.component';
@@ -22,7 +21,6 @@ import { SFFBModule } from './sffb/sffb.module';
 import { SpeakerEditComponent } from './speaker-edit.component';
 import { SpeakerSelectorComponent } from './speaker-selector.component';
 import { VolunteersComponent } from './volunteers.component';
-import { YearSwitcherComponent } from './year-switcher.component';
 
 @NgModule({
     imports: [
@@ -33,24 +31,15 @@ import { YearSwitcherComponent } from './year-switcher.component';
         MatTabsModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireDatabaseModule,
-        AngularFireAuthModule,
         RouterModule.forChild([
             {
                 path: '',
                 component: AdminComponent,
                 children: [
-                    // Doing the years like this for admins is kind of Gross, but to fix
-                    // it we need a separate admin service that knows how to use years
-                    {
-                        matcher: isYear,
-                        component: YearSwitcherComponent,
-                        children: [
-                            { path: 'speakers/:id/edit', component: SpeakerEditComponent },
-                            { path: 'sessions/:id/edit', component: SessionEditComponent },
-                            { path: 'sessions/:id/edit/:time/:room', component: SessionEditComponent },
-                            { path: 'session-report', component: SessionReportComponent },
-                        ],
-                    },
+                    { path: 'speakers/:id/edit', component: SpeakerEditComponent },
+                    { path: 'sessions/:id/edit', component: SessionEditComponent },
+                    { path: 'sessions/:id/edit/:time/:room', component: SessionEditComponent },
+                    { path: 'session-report', component: SessionReportComponent },
                     { path: '', component: AdminHomeComponent },
                     { path: 'reports', component: ReportsComponent },
                     { path: 'volunteers', component: VolunteersComponent },
@@ -71,7 +60,6 @@ import { YearSwitcherComponent } from './year-switcher.component';
         SpeakerEditComponent,
         SessionEditComponent,
         AdminHomeComponent,
-        YearSwitcherComponent,
         SessionReportComponent,
     ],
 })

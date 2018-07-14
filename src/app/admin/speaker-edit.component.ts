@@ -1,10 +1,10 @@
 import { of as observableOf, Observable } from 'rxjs';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { switchMap, map } from 'rxjs/operators';
 import { DataService, Speaker } from '../shared/data.service';
-import { YearService } from 'app/year.service';
+import { YearService } from '../year.service';
 
 @Component({
     templateUrl: './speaker-edit.component.html',

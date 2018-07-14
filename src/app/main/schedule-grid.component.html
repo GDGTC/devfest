@@ -13,7 +13,7 @@
                         <a [routerLink]="[data.gridData[time][room].$key,(data.gridData[time][room].title | encodeURI)]">
                             <div class="title">
                                 {{data.gridData[time][room].title}}
-                                <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',data.gridData[time][room].$key,'edit']"><img src="/a/edit.svg"></a>
+                                <a *ngIf="auth.isAdmin | async" [routerLink]="['/',year,'admin','sessions',data.gridData[time][room].$key,'edit']"><img src="/a/edit.svg"></a>
                             </div>
                             <div *ngFor="let speaker of data.gridData[time][room].speakers | arrayOrMap">
                                 {{(speaker.value | getSpeaker | async)?.name}}
@@ -22,7 +22,7 @@
                         <div *ngIf="data.gridData[time][room].notes"><em>{{data.gridData[time][room].notes}}</em></div>
                     </td>
                     <td *ngIf="data.gridData[time][room] === 'placeholder'">
-                        <button *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions','new','edit',time,room]" mat-raised-button color="primary">Create Session</button>
+                        <button *ngIf="auth.isAdmin | async" [routerLink]="['/',year,'admin','sessions','new','edit',time,room]" mat-raised-button color="primary">Create Session</button>
                     </td>
                 </ng-container>
             </ng-template>
@@ -35,7 +35,7 @@
                     <a [routerLink]="[data.gridData[time]['all'].$key,(data.gridData[time]['all'].title | encodeURI)]">
                         <div class="title">
                             {{data.gridData[time]['all'].title}}
-                            <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',data.gridData[time]['all'].$key,'edit']"><img src="/a/edit.svg"></a>
+                            <a *ngIf="auth.isAdmin | async" [routerLink]="['/',year,'admin','sessions',data.gridData[time]['all'].$key,'edit']"><img src="/a/edit.svg"></a>
                         </div>
                         <div>{{data.gridData[time]['all'].room}}</div>
                         <div *ngFor="let speaker of data.gridData[time].all.speakers | arrayOrMap">
@@ -59,7 +59,7 @@
                         [routerLink]="['/schedule',data.gridData[time][room].$key,(data.gridData[time][room].title | encodeURI)]">
                         <div class="title">
                             {{data.gridData[time][room].title}}
-                            <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',data.gridData[time][room].$key,'edit']"><img src="/a/edit.svg"></a>
+                            <a *ngIf="auth.isAdmin | async" [routerLink]="['/',year,'admin','sessions',data.gridData[time][room].$key,'edit']"><img src="/a/edit.svg"></a>
                         </div>
                         <div>{{data.gridData[time][room].room}}</div>
                         <div *ngFor="let speaker of data.gridData[time][room].speakers | arrayOrMap">
@@ -79,7 +79,7 @@
                     [routerLink]="['/schedule',data.gridData[time]['all'].$key,(data.gridData[time]['all'].title | encodeURI)]">
                     <div class="title">
                         {{data.gridData[time]['all'].title}}
-                        <a *ngIf="auth.isAdmin | async" [routerLink]="['/admin',year,'sessions',data.gridData[time]['all'].$key,'edit']"><img src="/a/edit.svg"></a>
+                        <a *ngIf="auth.isAdmin | async" [routerLink]="['/',year,'admin','sessions',data.gridData[time]['all'].$key,'edit']"><img src="/a/edit.svg"></a>
                     </div>
                     <div>{{data.gridData[time]['all'].room}}</div>
                     <div *ngFor="let speaker of data.gridData[time].all.speakers | arrayOrMap">

@@ -1,36 +1,30 @@
 import { NgModule } from '@angular/core';
-import { MatSnackBarModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, UrlSegment } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { OurMeta } from './our-meta.service';
 import { environment } from 'environments/environment';
 import { AppComponent } from './app.component';
 import { UpdateService } from './update.service';
-import { YearSwitcherComponent } from './year-switcher.component';
-import { YearService } from './year.service';
-import { AngularFireModule } from 'angularfire2';
+import { MatSnackBarModule } from '@angular/material';
+
 
 @NgModule({
-    declarations: [AppComponent, YearSwitcherComponent],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot([
             { path: '', pathMatch: 'full', loadChildren: './home/home.module#HomeModule' },
             { matcher: isMarketingContent, loadChildren: './content/content.module#ContentModule' },
-            { matcher: isYear, component: YearSwitcherComponent, loadChildren: './main/main.module#MainModule' },
-            { path: 'admin', loadChildren: './admin/admin.module#AdminModule', data: { title: 'Admin' } },
-            { path: 'cfp', loadChildren: './cfp/cfp.module#CFPModule', data: { title: 'Call For Papers' } },
-            { path: '', component: YearSwitcherComponent, loadChildren: './main/main.module#MainModule' },
+            { path: '', loadChildren: './authenticated/authenticated.module#AuthenticatedModule' },
         ]),
-        AngularFireModule.initializeApp(environment.firebaseConfig),
         ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
         MatSnackBarModule,
+
     ],
     bootstrap: [AppComponent],
-    providers: [UpdateService, YearService, OurMeta],
+    providers: [],
 })
 export class AppModule {
     constructor(us: UpdateService) {}
@@ -39,7 +33,4 @@ export class AppModule {
 export function isMarketingContent(url: UrlSegment[]) {
     let result = url.length === 1 && url[0].path.match(/(tickets|sponsors|past|speaker-cfp)/) ? { consumed: [] } : null;
     return result;
-}
-export function isYear(url: UrlSegment[]) {
-    return url.length >= 1 && url[0].path.match(/\d{4}/) ? { consumed: [url[0]] } : null;
 }

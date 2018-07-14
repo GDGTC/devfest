@@ -5,13 +5,10 @@
             "name": "site",
             "installMode": "prefetch",
             "resources": {
-                "files": ["/favicon.ico", "/index.html"],
-                "urls": [],
-                "versionedFiles": [
-                    "/*.bundle.css",
+                "files": ["/favicon.ico", "/index.html", "/*.bundle.css",
                     "/*.bundle.js",
-                    "/*.chunk.js"
-                ]
+                    "/*.chunk.js"],
+                "urls": []
             }
         },
         {

@@ -7,9 +7,9 @@ import { map, switchMap } from 'rxjs/operators';
 import * as Showdown from 'showdown';
 
 import { DataService, Session } from '../shared/data.service';
-import { YearService } from 'app/year.service';
+import { YearService } from '../year.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { OurMeta } from 'app/our-meta.service';
+import { OurMeta } from '../our-meta.service';
 
 @Component({
     templateUrl: './session-view.component.html',

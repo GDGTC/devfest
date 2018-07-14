@@ -6,8 +6,8 @@ import { DataService, Session } from '../shared/data.service';
 
 import { Observable ,  combineLatest } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
-import { YearService } from 'app/year.service';
+import { environment } from 'environments/environment';
+import { YearService } from '../year.service';
 
 export interface Schedule {
     startTimes: any[];

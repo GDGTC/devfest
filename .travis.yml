@@ -1,0 +1,28 @@
+language: node_js
+node_js:
+ - "8.11"
+
+branches:
+  only:
+    - master
+
+before_script:
+  - yarn global add @angular/cli
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+script:
+  - ng build --prod
+
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  local-dir: ./dist/
+  on:
+    branch: master

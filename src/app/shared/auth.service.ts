@@ -20,6 +20,7 @@ import {
     } from 'rxjs/operators';
 import { Feedback } from './data.service';
 import { AuthenticatedModule } from '../authenticated/authenticated.module';
+import { localstorageCache } from './localstorage-cache.operator';
 
 
 
@@ -58,8 +59,7 @@ export class AuthService {
                 }
             })
         );
-        this.agenda = this.state
-            .pipe(
+        this.agenda = this.state.pipe(
                 switchMap(authState => {
                     if (authState && authState.uid) {
                         let year = yearService.year;
@@ -67,20 +67,9 @@ export class AuthService {
                     } else {
                         return observableEmpty();
                     }
-                })
-            )
-            .pipe(filter(agenda => !!agenda))
-            .pipe(shareReplay(1));
-
-        this.agenda.subscribe(next => {
-            localStorage.setItem('agendaCache', JSON.stringify(next));
-        });
-
-        this.agenda = this.agenda.pipe(
-            startWith(JSON.parse(localStorage.getItem('agendaCache'))),
-            filter(x => !!x),
-            shareReplay(1),
-        );
+                }),
+                localstorageCache(`agendaCache${yearService.year}`),
+            );
 
         this.isAdmin = this.state
             .pipe(
@@ -94,9 +83,7 @@ export class AuthService {
                     }
                 }),
                 map(value => !!value),
-                tap(x => localStorage['devfest-isAdmin'] = JSON.stringify(x)),
-                startWith(JSON.parse(localStorage['devfest-isAdmin'] || 'false')),
-                shareReplay(1),
+                localstorageCache('isAdmin'),
             );
 
         this.isVolunteer = this.state

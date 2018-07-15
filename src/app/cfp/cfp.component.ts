@@ -4,13 +4,14 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ThanksDialogComponent } from './thanks.dialog.component';
 import { MatDialog } from '@angular/material';
 import { AuthService } from '../shared/auth.service';
+import { YearService } from '../year.service';
+import { tap, switchMap, take, filter } from 'rxjs/operators';
 
 @Component({
     selector: 'app-cfp',
     templateUrl: './cfp.component.html',
 })
 export class CFPComponent {
-    proposals = this.store.collection('/proposals/');
     cfp = this.fb.group({
         name: ['', Validators.required],
         email: ['', Validators.required],
@@ -18,13 +19,27 @@ export class CFPComponent {
         abstract: ['', Validators.required],
     });
 
-    constructor(private store: AngularFirestore, private fb: FormBuilder, private dialog: MatDialog, private auth: AuthService) {
-        this.cfp.setValue({name: 'Test Person', email: 'email@example.org', title: 'Talk Title', abstract: 'Talk Abstract'});
+    constructor(
+        private store: AngularFirestore,
+        private fb: FormBuilder,
+        private dialog: MatDialog,
+        public auth: AuthService,
+        private yearService: YearService
+    ) {
+        auth.uid
+            .pipe(
+                tap(x => console.log('Id was', x)),
+                switchMap(uid => this.store.doc(`years/${this.yearService.year}/proposals/${uid}`).valueChanges()),
+                take(1),
+                filter(x => !!x),
+            )
+            .subscribe(priorSubmission => this.cfp.setValue(priorSubmission));
     }
 
-    submit(group) {
+    submit(group, uid: string) {
         if (group.valid) {
-            this.proposals.add(group.value);
+            const proposal = this.store.doc(`years/${this.yearService.year}/proposals/${uid}`);
+            proposal.set(group.value);
             this.dialog.open(ThanksDialogComponent);
         }
     }

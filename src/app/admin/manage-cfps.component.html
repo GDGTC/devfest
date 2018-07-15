@@ -1,0 +1,5 @@
+<h2>{{yearService.year}} CFPs</h2>
+<div *ngFor="let cfp of cfps | async" style="margin:16px 0;">
+    <h3>{{cfp.title}} by <a href="mailto:{{cfp.email}}">{{cfp.name}}</a></h3>
+    <p>{{cfp.abstract}}</p>
+</div>

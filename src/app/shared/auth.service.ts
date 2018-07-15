@@ -3,28 +3,13 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { YearService } from '../year.service';
 import * as firebase from 'firebase/app';
-import {
-    combineLatest,
-    empty as observableEmpty,
-    Observable,
-    of as observableOf
-    } from 'rxjs';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
-import {
-    filter,
-    map,
-    shareReplay,
-    startWith,
-    switchMap,
-    tap
-    } from 'rxjs/operators';
+import { combineLatest, empty as observableEmpty, Observable, of as observableOf } from 'rxjs';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { Feedback } from './data.service';
 import { AuthenticatedModule } from '../authenticated/authenticated.module';
 import { localstorageCache } from './localstorage-cache.operator';
 
-
-
-@Injectable({providedIn: AuthenticatedModule})
+@Injectable({ providedIn: AuthenticatedModule })
 export class AuthService {
     isAdmin: Observable<boolean>;
     isVolunteer: Observable<boolean>;
@@ -35,12 +20,9 @@ export class AuthService {
     agenda: Observable<any>;
     feedback: Observable<Feedback>;
 
-    state = this.auth.authState.pipe(
-        shareReplay(1),
-    );
+    state = this.auth.authState.pipe(shareReplay(1));
 
     constructor(public auth: AngularFireAuth, public db: AngularFireDatabase, yearService: YearService) {
-
         this.uid = this.state.pipe(
             map(authState => {
                 if (authState) {
@@ -60,31 +42,28 @@ export class AuthService {
             })
         );
         this.agenda = this.state.pipe(
-                switchMap(authState => {
-                    if (authState && authState.uid) {
-                        let year = yearService.year;
-                        return db.list(`devfest${year}/agendas/${authState.uid}`).valueChanges();
-                    } else {
-                        return observableEmpty();
-                    }
-                }),
-                localstorageCache(`agendaCache${yearService.year}`),
-            );
+            switchMap(authState => {
+                if (authState && authState.uid) {
+                    let year = yearService.year;
+                    return db.list(`devfest${year}/agendas/${authState.uid}`).valueChanges();
+                } else {
+                    return observableEmpty();
+                }
+            }),
+            localstorageCache(`agendaCache${yearService.year}`)
+        );
 
-        this.isAdmin = this.state
-            .pipe(
-                switchMap(authState => {
-                    if (!authState) {
-                        return observableOf(false);
-                    } else {
-                        return this.db
-                            .object('/admin/' + authState.uid)
-                            .valueChanges()
-                    }
-                }),
-                map(value => !!value),
-                localstorageCache('isAdmin'),
-            );
+        this.isAdmin = this.state.pipe(
+            switchMap(authState => {
+                if (!authState) {
+                    return observableOf(false);
+                } else {
+                    return this.db.object('/admin/' + authState.uid).valueChanges();
+                }
+            }),
+            map(value => !!value),
+            localstorageCache('isAdmin')
+        );
 
         this.isVolunteer = this.state
             .pipe(

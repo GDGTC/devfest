@@ -21,6 +21,8 @@ import { SFFBModule } from './sffb/sffb.module';
 import { SpeakerEditComponent } from './speaker-edit.component';
 import { SpeakerSelectorComponent } from './speaker-selector.component';
 import { VolunteersComponent } from './volunteers.component';
+import { ManageCFPsComponent } from './manage-cfps.component';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 @NgModule({
     imports: [
@@ -43,6 +45,7 @@ import { VolunteersComponent } from './volunteers.component';
                     { path: '', component: AdminHomeComponent },
                     { path: 'reports', component: ReportsComponent },
                     { path: 'volunteers', component: VolunteersComponent },
+                    { path: 'cfps', component: ManageCFPsComponent},
                 ],
             },
         ]),
@@ -50,6 +53,7 @@ import { VolunteersComponent } from './volunteers.component';
         SharedModule,
         SFFBModule,
         HttpClientModule,
+        AngularFirestoreModule,
     ],
     declarations: [
         AdminComponent,
@@ -61,6 +65,8 @@ import { VolunteersComponent } from './volunteers.component';
         SessionEditComponent,
         AdminHomeComponent,
         SessionReportComponent,
+        ManageCFPsComponent,
+
     ],
 })
 export class AdminModule {}

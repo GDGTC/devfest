@@ -1,0 +1,13 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /events/{document=**} {
+      allow read;
+      allow write; // : if request.auth.uid != null
+    }
+    match /years/{Year}/proposals/{Id} {
+    	allow read, create, write, delete:
+      	if request.auth.uid == Id ||
+          get(/databases/$(database)/documents/permissions/$(request.auth.uid)).data.admin == true
+    }
+  }
+}

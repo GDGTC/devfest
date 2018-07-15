@@ -15,7 +15,7 @@ cache:
     - node_modules
 
 script:
-  - ng build --prod
+  - ng build --prod --base-href=/devfest/
 
 
 deploy:

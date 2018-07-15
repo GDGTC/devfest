@@ -481,26 +481,6 @@ Apache-2.0
 Apache-2.0
 Apache-2.0
 
-@firebase/firestore@0.5.4
-Apache-2.0
-Apache-2.0
-
-@firebase/functions@0.2.4
-Apache-2.0
-Apache-2.0
-
-@firebase/webchannel-wrapper@0.2.8
-Apache-2.0
-Apache-2.0
-
-@firebase/storage@0.2.3
-Apache-2.0
-Apache-2.0
-
-@firebase/messaging@0.3.4
-Apache-2.0
-Apache-2.0
-
 @angular/forms@6.0.9
 MIT
 MIT
@@ -569,6 +549,14 @@ profits; or business interruption) however caused and on any theory of
 liability, whether in contract, strict liability, or tort (including
 negligence or otherwise) arising in any way out of the use of this
 software, even if advised of the possibility of such damage.
+
+@firebase/firestore@0.5.4
+Apache-2.0
+Apache-2.0
+
+@firebase/webchannel-wrapper@0.2.8
+Apache-2.0
+Apache-2.0
 
 core-js@2.5.7
 MIT

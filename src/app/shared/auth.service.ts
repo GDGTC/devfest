@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { YearService } from '../year.service';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 import {
     combineLatest,
     empty as observableEmpty,

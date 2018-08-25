@@ -15,6 +15,13 @@ interface Proposal {
 export class ManageCFPsComponent {
     cfps = this.store.collection<Proposal>(`/years/${this.yearService.year}/proposals/`).valueChanges();
     constructor(public yearService: YearService, private store: AngularFirestore) {}
+    reject(cfp) {
+        confirm('you sure bout dat?');
+        alert(`it would be so cool if this could email!`);
+    }
+    approve(cfp) {
+
+    }
 }
 
 @Pipe({ name: 'ignoreFields' })

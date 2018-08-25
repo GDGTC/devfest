@@ -4,5 +4,6 @@
     <p>{{cfp.date | date}}</p>
     <p *ngFor="let item of cfp | keyvalue | ignoreFields:['title','name','email','date']">
         <strong>{{item.key}}:</strong> {{item.value}}</p>
-
+    <button mat-raised-button color="warn" (click)="reject(cfp)">Reject Session (not yet implemented)</button>
+    <button mat-raised-button color="primary" (click)="approve(cfp)">Approve Session (not yet implemented)</button>
 </div>

@@ -1,4 +1,4 @@
 #!/bin/bash
-ng build -prod --named-chunks && \
+ng build --prod && \
 yarn run gfp && \
 firebase deploy

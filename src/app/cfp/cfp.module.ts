@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { CFPComponent } from './cfp.component';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatButtonModule, MatDialogModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatDialogModule, MatRadioModule } from '@angular/material';
 import { ThanksDialogComponent } from './thanks.dialog.component';
 
 @NgModule({
@@ -16,6 +16,7 @@ import { ThanksDialogComponent } from './thanks.dialog.component';
         MatInputModule,
         MatButtonModule,
         MatDialogModule,
+        MatRadioModule,
     ],
     declarations: [CFPComponent, ThanksDialogComponent],
     entryComponents: [ThanksDialogComponent],

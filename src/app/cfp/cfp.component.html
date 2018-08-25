@@ -9,6 +9,15 @@
         width: 500px;
         margin: 0px auto;
     }
+
+    mat-radio-button {
+        display: block;
+        text-align: left;
+    }
+    .required {
+        color: #f44336;
+    }
+
 </style>
 <section>
     <h2>Call for Proposals</h2>
@@ -16,18 +25,56 @@
     <form [formGroup]="cfp" (submit)="submit(cfp, uid)" *ngIf="auth.uid | async as uid; else login">
         <p>Welcome {{auth.name | async}}! We're excited to hear what you want to share.</p>
         <mat-form-field>
-            <input matInput formControlName="name" placeholder="Name" autocomplete="name">
+            <input matInput formControlName="name" placeholder="Name" autocomplete="name" required>
         </mat-form-field>
         <mat-form-field>
-            <input matInput formControlName="email" placeholder="Email" autocomplete="email">
+            <input matInput formControlName="email" placeholder="Email" autocomplete="email" required>
         </mat-form-field>
         <mat-form-field>
-            <input matInput formControlName="title" placeholder="Talk Title" autocomplete="on">
+            <span matPrefix>@</span>
+            <input matInput formControlName="twitter" placeholder="Twitter">
         </mat-form-field>
         <mat-form-field>
-            <textarea matInput formControlName="abstract" placeholder="Talk Abstract" autocomplete="on"></textarea>
+            <input matInput formControlName="phone" type="tel" placeholder="Phone #" autocomplete="tel">
         </mat-form-field>
-        <button type="submit" mat-raised-button color="primary">Save</button>
+        <mat-form-field>
+            <input matInput formControlName="company" placeholder="Company / Organization">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="technology" placeholder="Technology / Topic">
+        </mat-form-field>
+        <p>Presentation Type *</p>
+        <mat-radio-group formControlName="type" placeholder="Type">
+            <mat-radio-button value="session">45 minute presentation</mat-radio-button>
+            <mat-radio-button value="lightning-talk">10 minute Lightning Talk</mat-radio-button>
+            <mat-radio-button value="workshop">90 minute Workshop</mat-radio-button>
+        </mat-radio-group>
+
+        <mat-form-field>
+            <input matInput formControlName="title" placeholder="Presentation Title" required>
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput formControlName="abstract" placeholder="Presentation Abstract" required></textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+            <textarea matInput formControlName="bio" placeholder="Your Bio" required></textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput formControlName="references" placeholder="Where have you spoken before?"></textarea>
+        </mat-form-field>
+
+
+            <p>How did you hear about this event?</p>
+            <mat-radio-group formControlName="referrer" placeholder>
+                <mat-radio-button value="past-devfest">Past DevFest Events</mat-radio-button>
+                <mat-radio-button value="gdgtc">GDG TC</mat-radio-button>
+                <mat-radio-button value="google">Google Promotion</mat-radio-button>
+                <mat-radio-button value="meetup">Meetup.com</mat-radio-button>
+                <mat-radio-button value="other">Other</mat-radio-button>
+
+            </mat-radio-group>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
     </form>
     <ng-template #login>
         <p>You need to login to submit a CFP!</p>

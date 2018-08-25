@@ -21,7 +21,7 @@ import { SFFBModule } from './sffb/sffb.module';
 import { SpeakerEditComponent } from './speaker-edit.component';
 import { SpeakerSelectorComponent } from './speaker-selector.component';
 import { VolunteersComponent } from './volunteers.component';
-import { ManageCFPsComponent } from './manage-cfps.component';
+import { ManageCFPsComponent, IgnoreFields } from './manage-cfps.component';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 @NgModule({
@@ -66,7 +66,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
         AdminHomeComponent,
         SessionReportComponent,
         ManageCFPsComponent,
-
+        IgnoreFields,
     ],
 })
 export class AdminModule {}

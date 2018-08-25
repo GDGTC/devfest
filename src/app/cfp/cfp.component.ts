@@ -15,8 +15,16 @@ export class CFPComponent {
     cfp = this.fb.group({
         name: ['', Validators.required],
         email: ['', Validators.required],
+        twitter: [''],
+        phone: ['', Validators.pattern('^[0-9-+_ ]{7,}$')],
+        company: [''],
+        technology: [''],
+        type: ['', Validators.required],
         title: ['', Validators.required],
         abstract: ['', Validators.required],
+        bio: ['', Validators.required],
+        references: [''],
+        referrer: ['', Validators.required],
     });
 
     constructor(
@@ -31,15 +39,22 @@ export class CFPComponent {
                 tap(x => console.log('Id was', x)),
                 switchMap(uid => this.store.doc(`years/${this.yearService.year}/proposals/${uid}`).valueChanges()),
                 take(1),
-                filter(x => !!x),
+                filter(x => !!x)
             )
-            .subscribe(priorSubmission => this.cfp.setValue(priorSubmission));
+            .subscribe(priorSubmission => {
+                // for (const key in Object.keys(this.cfp.)) {
+                //     if (!priorSubmission[key]) {
+                //         priorSubmission[key] = '';
+                //     }
+                // }
+                this.cfp.patchValue(priorSubmission);
+            });
     }
 
     submit(group, uid: string) {
         if (group.valid) {
             const proposal = this.store.doc(`years/${this.yearService.year}/proposals/${uid}`);
-            proposal.set(group.value);
+            proposal.set({...group.value, date: new Date().toISOString()});
             this.dialog.open(ThanksDialogComponent);
         }
     }

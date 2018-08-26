@@ -9,7 +9,7 @@
     <div class="session-details">
         <div>
             <div class="speaker-list-container" style="margin-top:16px;width:325px;">
-                <div *ngFor="let speaker of session.speakers | arrayOrMap">
+                <div *ngFor="let speaker of session.speakers | keyvalue">
                     <speaker-container [speaker]="speaker.value | getSpeaker | async"></speaker-container>
                 </div>
             </div>

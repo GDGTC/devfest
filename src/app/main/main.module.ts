@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { SharedModule } from '../shared/shared.module';
 import { ScheduleGridComponent } from './schedule-grid.component';
 import { ScheduleComponent } from './schedule.component';
@@ -19,6 +18,8 @@ import { SpeakersViewComponent } from './speakers-view.component';
 import { SpeakersComponent } from './speakers.component';
 import { StarBarComponent } from './star-bar.component';
 import { UserFeedbackComponent } from './user-feedback.component';
+import { RealtimeDataModule } from '../realtime-data/realtime-data.module';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 @NgModule({
     declarations: [
@@ -36,6 +37,8 @@ import { UserFeedbackComponent } from './user-feedback.component';
     ],
     imports: [
         CommonModule,
+        RealtimeDataModule,
+        AngularFireDatabaseModule,
         FormsModule,
         HttpModule,
         RouterModule.forChild([

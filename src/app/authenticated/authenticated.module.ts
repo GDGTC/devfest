@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, UrlSegment } from '@angular/router';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { YearSwitcherComponent } from './year-switcher.component';
-import { environment } from 'environments/environment';
 
 @NgModule({
     declarations: [YearSwitcherComponent],
@@ -18,9 +14,6 @@ import { environment } from 'environments/environment';
             { path: 'cfp', loadChildren: '../cfp/cfp.module#CFPModule', data: { title: 'Call For Papers' } },
             { path: '', loadChildren: '../main/main.module#MainModule' },
         ]),
-        AngularFireModule.initializeApp(environment.firebaseConfig),
-        AngularFireAuthModule,
-        AngularFireDatabaseModule,
     ],
 })
 export class AuthenticatedModule {}

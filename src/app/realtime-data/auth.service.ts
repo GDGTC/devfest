@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, Injector } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { YearService } from '../year.service';
 import * as firebase from 'firebase/app';
 import { combineLatest, empty as observableEmpty, Observable, of as observableOf } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
-import { Feedback } from './data.service';
-import { AuthenticatedModule } from '../authenticated/authenticated.module';
-import { localstorageCache } from './localstorage-cache.operator';
+import { Feedback } from '../shared/data.service';
+import { localstorageCache } from '../shared/localstorage-cache.operator';
 
-@Injectable({ providedIn: AuthenticatedModule })
+@Injectable()
 export class AuthService {
     isAdmin: Observable<boolean>;
     isVolunteer: Observable<boolean>;
@@ -22,7 +21,11 @@ export class AuthService {
 
     state = this.auth.authState.pipe(shareReplay(1));
 
-    constructor(public auth: AngularFireAuth, public db: AngularFireDatabase, yearService: YearService) {
+    constructor(
+        private auth: AngularFireAuth,
+        private db: AngularFireDatabase,
+        yearService: YearService
+    ) {
         this.uid = this.state.pipe(
             map(authState => {
                 if (authState) {
@@ -45,7 +48,7 @@ export class AuthService {
             switchMap(authState => {
                 if (authState && authState.uid) {
                     let year = yearService.year;
-                    return db.list(`devfest${year}/agendas/${authState.uid}`).valueChanges();
+                    return this.db.list(`devfest${year}/agendas/${authState.uid}`).valueChanges();
                 } else {
                     return observableEmpty();
                 }
@@ -71,7 +74,9 @@ export class AuthService {
                     if (!authState) {
                         return observableOf(false);
                     } else {
-                        return this.db.object('devfest2017/volunteers/' + authState.uid).valueChanges();
+                        return this.db
+                            .object('devfest2017/volunteers/' + authState.uid)
+                            .valueChanges();
                     }
                 })
             )

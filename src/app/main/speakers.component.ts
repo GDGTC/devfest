@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { YearService } from '../year.service';
-import { AuthService } from '../shared/auth.service';
 import { DataService } from '../shared/data.service';
+import { AuthService } from '../realtime-data/auth.service';
 
 @Component({
     templateUrl: './speakers.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpeakersComponent {
     speakers;
@@ -26,6 +26,6 @@ export class SpeakersComponent {
     }
 
     addSpeaker() {
-        this.router.navigate(['/',this.yearService.year,'admin', 'speakers', 'new', 'edit']);
+        this.router.navigate(['/', this.yearService.year, 'admin', 'speakers', 'new', 'edit']);
     }
 }

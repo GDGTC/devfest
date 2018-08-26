@@ -15,7 +15,7 @@
                                 {{data.gridData[time][room].title}}
                                 <a *ngIf="auth.isAdmin | async" [routerLink]="['/',year,'admin','sessions',data.gridData[time][room].$key,'edit']"><img src="/a/edit.svg"></a>
                             </div>
-                            <div *ngFor="let speaker of data.gridData[time][room].speakers | arrayOrMap">
+                            <div *ngFor="let speaker of data.gridData[time][room].speakers | keyvalue">
                                 {{(speaker.value | getSpeaker | async)?.name}}
                             </div>
                         </a>
@@ -38,7 +38,7 @@
                             <a *ngIf="auth.isAdmin | async" [routerLink]="['/',year,'admin','sessions',data.gridData[time]['all'].$key,'edit']"><img src="/a/edit.svg"></a>
                         </div>
                         <div>{{data.gridData[time]['all'].room}}</div>
-                        <div *ngFor="let speaker of data.gridData[time].all.speakers | arrayOrMap">
+                        <div *ngFor="let speaker of data.gridData[time].all.speakers | keyvalue">
                             {{(speaker.value | getSpeaker | async)?.name}}
                         </div>
                     </a>
@@ -62,7 +62,7 @@
                             <a *ngIf="auth.isAdmin | async" [routerLink]="['/',year,'admin','sessions',data.gridData[time][room].$key,'edit']"><img src="/a/edit.svg"></a>
                         </div>
                         <div>{{data.gridData[time][room].room}}</div>
-                        <div *ngFor="let speaker of data.gridData[time][room].speakers | arrayOrMap">
+                        <div *ngFor="let speaker of data.gridData[time][room].speakers | keyvalue">
                             {{(speaker.value | getSpeaker | async)?.name}}
                         </div>
                         <div *ngIf="data.gridData[time][room].blocks == 2">
@@ -82,7 +82,7 @@
                         <a *ngIf="auth.isAdmin | async" [routerLink]="['/',year,'admin','sessions',data.gridData[time]['all'].$key,'edit']"><img src="/a/edit.svg"></a>
                     </div>
                     <div>{{data.gridData[time]['all'].room}}</div>
-                    <div *ngFor="let speaker of data.gridData[time].all.speakers | arrayOrMap">
+                    <div *ngFor="let speaker of data.gridData[time].all.speakers | keyvalue">
                         {{(speaker.value | getSpeaker | async)?.name}}
                     </div>
                 </a>

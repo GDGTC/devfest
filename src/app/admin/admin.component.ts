@@ -2,17 +2,13 @@ import { Component } from '@angular/core';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 
-import { Observable } from 'rxjs';
-
-import { AuthService } from '../shared/auth.service';
 import { AngularFireList } from 'angularfire2/database/interfaces';
+import { AuthService } from '../realtime-data/auth.service';
 
 @Component({
-    templateUrl: './admin.component.html'
+    templateUrl: './admin.component.html',
 })
 export class AdminComponent {
-
-
     schedule: AngularFireList<any>;
     speakers: AngularFireList<any>;
 
@@ -55,11 +51,10 @@ export class AdminComponent {
         }
         this.editSpeaker = {};
     }
-    deleteSpeaker(key){
+    deleteSpeaker(key) {
         this.speakers.remove(key);
     }
-    deleteSession(key){
+    deleteSession(key) {
         this.schedule.remove(key);
     }
-
 }

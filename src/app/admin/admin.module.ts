@@ -7,9 +7,6 @@ import { MatTabsModule } from '@angular/material';
 import { MatCheckboxModule } from '@angular/material';
 import { MatInputModule } from '@angular/material';
 import { RouterModule, UrlSegment } from '@angular/router';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { environment } from 'environments/environment';
 import { SharedModule } from '../shared/shared.module';
 import { AdminHomeComponent } from './admin-home.component';
 import { AdminNavComponent } from './admin-nav.component';
@@ -22,17 +19,16 @@ import { SpeakerEditComponent } from './speaker-edit.component';
 import { SpeakerSelectorComponent } from './speaker-selector.component';
 import { VolunteersComponent } from './volunteers.component';
 import { ManageCFPsComponent, IgnoreFields } from './manage-cfps.component';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { RealtimeDataModule } from '../realtime-data/realtime-data.module';
 
 @NgModule({
     imports: [
         CommonModule,
+        RealtimeDataModule,
         MatInputModule,
         MatButtonModule,
         MatCheckboxModule,
         MatTabsModule,
-        AngularFireModule.initializeApp(environment.firebaseConfig),
-        AngularFireDatabaseModule,
         RouterModule.forChild([
             {
                 path: '',
@@ -53,7 +49,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
         SharedModule,
         SFFBModule,
         HttpClientModule,
-        AngularFirestoreModule,
     ],
     declarations: [
         AdminComponent,

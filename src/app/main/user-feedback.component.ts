@@ -1,21 +1,23 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { DataService, Session, Feedback } from '../shared/data.service';
-import { AuthService } from '../shared/auth.service';
 
 import { Subject, combineLatest, empty } from 'rxjs';
 import { map, switchMap, tap, filter } from 'rxjs/operators';
 import { YearService } from '../year.service';
+import { AuthService } from '../realtime-data/auth.service';
 
 @Component({
     selector: 'user-feedback',
     templateUrl: 'user-feedback.component.html',
 })
 export class UserFeedbackComponent implements OnChanges {
-    @Input() session;
+    @Input()
+    session;
     feedback: Feedback = { $key: null, speaker: 0, content: 0, recommendation: 0, comment: ' ' };
     editableFeedback: AngularFireObject<any>;
     uid;
+    count = 0;
 
     newSession: Subject<Session> = new Subject();
 
@@ -37,26 +39,27 @@ export class UserFeedbackComponent implements OnChanges {
         );
 
         url.pipe(
-            tap(url => {console.log("fetching data for",url)}),
-            switchMap(url => (url ? db.object<Feedback>(url).valueChanges() : empty())),
-            filter(x => !!x),
+            tap(path => {
+                console.log('fetching data for', path);
+            }),
+            switchMap(path => (path ? db.object<Feedback>(path).valueChanges() : empty())),
+            filter(x => !!x)
         ).subscribe(feedback => {
             console.log('feedback is', feedback);
-                this.feedback = feedback;
-
+            this.feedback = feedback;
         });
 
-        url.subscribe(url => {
-            if (url) {
-                this.editableFeedback = db.object(url);
+        url.subscribe(path => {
+            if (path) {
+                this.editableFeedback = db.object(path);
             }
         });
     }
-    count = 0;
+
 
     ngOnChanges() {
         if (this.session && this.count++ < 10) {
-            console.log("nexting newSession");
+            console.log('nexting newSession');
             this.newSession.next(this.session);
         }
     }

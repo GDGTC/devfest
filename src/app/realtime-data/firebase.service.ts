@@ -1,6 +1,6 @@
 import { of as observableOf, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Injectable, Type } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
     AngularFireDatabase,
     AngularFireList,

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { AuthService } from '../shared/auth.service';
 import { DataService, Session } from '../shared/data.service';
 
 import { Observable ,  combineLatest } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { environment } from 'environments/environment';
 import { YearService } from '../year.service';
+import { AuthService } from '../realtime-data/auth.service';
 
 export interface Schedule {
     startTimes: any[];

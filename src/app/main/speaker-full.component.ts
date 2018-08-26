@@ -1,16 +1,18 @@
 import { Component, Input } from '@angular/core';
-import { AuthService } from '../shared/auth.service';
 import { Speaker } from '../shared/data.service';
 import { OurMeta } from '../our-meta.service';
 import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { AuthService } from '../realtime-data/auth.service';
 
 @Component({
     selector: 'speaker-full',
     templateUrl: 'speaker-full.component.html',
 })
 export class SpeakerFullComponent implements OnChanges {
-    @Input() speaker: Speaker;
-    @Input() year;
+    @Input()
+    speaker: Speaker;
+    @Input()
+    year;
 
     constructor(public auth: AuthService, public meta: OurMeta) {}
     ngOnChanges() {

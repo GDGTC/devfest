@@ -3,9 +3,9 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ThanksDialogComponent } from './thanks.dialog.component';
 import { MatDialog } from '@angular/material';
-import { AuthService } from '../shared/auth.service';
 import { YearService } from '../year.service';
 import { tap, switchMap, take, filter } from 'rxjs/operators';
+import { AuthService } from '../realtime-data/auth.service';
 
 @Component({
     selector: 'app-cfp',
@@ -42,11 +42,6 @@ export class CFPComponent {
                 filter(x => !!x)
             )
             .subscribe(priorSubmission => {
-                // for (const key in Object.keys(this.cfp.)) {
-                //     if (!priorSubmission[key]) {
-                //         priorSubmission[key] = '';
-                //     }
-                // }
                 this.cfp.patchValue(priorSubmission);
             });
     }

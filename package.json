@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-angular": "^0.7.5",
     "@angular/animations": "^6.1.4",
     "@angular/cdk": "^6.4.6",
     "@angular/cli": "^6.1.5",
@@ -41,7 +42,6 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.6.8",
     "codelyzer": "^4.4.1",
     "tslint": "^5.9.1"
   },
@@ -49,6 +49,6 @@
     "trailingComma": "es5",
     "tabWidth": 4,
     "singleQuote": true,
-    "printWidth": 120
+    "printWidth": 100
   }
 }

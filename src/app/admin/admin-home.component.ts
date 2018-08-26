@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../shared/auth.service';
+import { Component } from '@angular/core';
+import { AuthService } from '../realtime-data/auth.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -16,11 +16,8 @@ import { AuthService } from '../shared/auth.service';
   `,
   styles: []
 })
-export class AdminHomeComponent implements OnInit {
+export class AdminHomeComponent {
 
   constructor(public auth: AuthService) { }
-
-  ngOnInit() {
-  }
 
 }

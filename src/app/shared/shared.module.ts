@@ -1,23 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomPipesModule } from './custom-components.module';
+import { EncodeURI } from './encode-uri.pipe';
 import { GetSpeakerPipe } from './get-speaker.pipe';
-import { ArrayOrMapPipe } from './array-or-map.pipe';
+import { DataService } from './data.service';
 
 
 @NgModule({
     declarations: [
+        EncodeURI,
         GetSpeakerPipe,
-        ArrayOrMapPipe,
     ],
     imports: [
-        CustomPipesModule,
         CommonModule,
     ],
     exports: [
-        CustomPipesModule,
+        EncodeURI,
         GetSpeakerPipe,
-        ArrayOrMapPipe,
     ],
+    providers: [
+        DataService,
+    ]
 })
 export class SharedModule { }

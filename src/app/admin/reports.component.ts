@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
-import { AuthService } from '../shared/auth.service';
 import { DataService } from '../shared/data.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { YearService } from '../year.service';
+import { AuthService } from '../realtime-data/auth.service';
 
 @Component({
     template: `

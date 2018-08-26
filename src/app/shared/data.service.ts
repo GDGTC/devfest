@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 
 import { YearService } from '../year.service';
 import { SafeHtml } from '@angular/platform-browser';
-import { Schedule } from '../main/schedule.component';
 import { localstorageCache } from './localstorage-cache.operator';
 import { AuthenticatedModule } from '../authenticated/authenticated.module';
 
@@ -41,7 +40,7 @@ export interface Feedback {
     comment: string;
 }
 
-@Injectable({providedIn: AuthenticatedModule})
+@Injectable()
 export class DataService {
     private speakersByYear: { [key: number]: Observable<Speaker[]> } = {};
     private scheduleByYear: { [key: number]: Observable<Session[]> } = {};

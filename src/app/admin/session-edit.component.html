@@ -21,7 +21,7 @@
                 <div>
                     <em>speakers</em>
                     <ul class="speakerlist">
-                        <li *ngFor="let speaker of (session.speakers | arrayOrMap)">
+                        <li *ngFor="let speaker of (session.speakers | keyvalue)">
                             <img src="{{(speaker.value | fireJoin: '/devfest' + yearService.year + '/speakers/' | async)?.imageUrl}}" style="max-height:50px;"/>
                             {{(speaker.value | fireJoin:'/devfest' + yearService.year + '/speakers/' | async)?.name}}
                             <button type="button" (click)="deleteSpeakerFromSession(session, speaker.key)"> -X-</button>

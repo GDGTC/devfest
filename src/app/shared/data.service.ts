@@ -1,6 +1,6 @@
 import { map, startWith, filter, shareReplay, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireObject, AngularFireList, QueryFn } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject, AngularFireList, QueryFn } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 
 import { YearService } from '../year.service';

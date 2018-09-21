@@ -19,7 +19,7 @@ import { SpeakersComponent } from './speakers.component';
 import { StarBarComponent } from './star-bar.component';
 import { UserFeedbackComponent } from './user-feedback.component';
 import { RealtimeDataModule } from '../realtime-data/realtime-data.module';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
     declarations: [

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { switchMap, map } from 'rxjs/operators';
 import { DataService, Session } from '../shared/data.service';
 import { AuthService } from '../realtime-data/auth.service';

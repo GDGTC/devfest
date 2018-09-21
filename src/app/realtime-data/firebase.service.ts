@@ -5,7 +5,7 @@ import {
     AngularFireDatabase,
     AngularFireList,
     AngularFireObject,
-} from 'angularfire2/database';
+} from '@angular/fire/database';
 
 export interface HasKey {
     $key?: string;

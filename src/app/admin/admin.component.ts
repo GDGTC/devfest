@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 
-import { AngularFireList } from 'angularfire2/database/interfaces';
+import { AngularFireList } from '@angular/fire/database/interfaces';
 import { AuthService } from '../realtime-data/auth.service';
 
 @Component({

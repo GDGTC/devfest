@@ -1,6 +1,6 @@
 import { Injectable, Inject, Injector } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { YearService } from '../year.service';
 import * as firebase from 'firebase/app';
 import { combineLatest, empty as observableEmpty, Observable, of as observableOf } from 'rxjs';

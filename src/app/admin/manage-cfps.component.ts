@@ -1,6 +1,6 @@
 import { Component, Pipe, PipeTransform } from '@angular/core';
 import { YearService } from '../year.service';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 interface Proposal {
     name: string;

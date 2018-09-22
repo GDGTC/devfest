@@ -4,7 +4,7 @@ import { DataService } from '../shared/data.service';
 import { AngularFireDatabase } from '@angular/fire/database';
 
 import { Observable, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { YearService } from '../year.service';
 import { AuthService } from '../realtime-data/auth.service';
 
@@ -48,11 +48,12 @@ export class ReportsComponent {
     feedback: Observable<any>;
     sessions: Observable<
         { title: string; scoreSpeaker: number; scoreContent: number; scoreRecommendation: number; feedback?: any[] }[]
-    >;
+        >;
 
     constructor(public auth: AuthService, public db: AngularFireDatabase, public ds: DataService, yearService: YearService) {
         this.feedback = ds.getFeedback();
         this.sessions = combineLatest(this.feedback, ds.getSchedule(yearService.year)).pipe(
+            tap(data => console.log(data)),
             map(data => {
                 let [feedback, originalSession] = data;
 
@@ -64,18 +65,16 @@ export class ReportsComponent {
                 delete feedback.$value;
 
                 // Add feedback
-                for (let uid in feedback) {
-                    if (feedback.hasOwnProperty(uid)) {
-                        let user = feedback[uid];
-                        for (let sessionKey in user) {
-                            if (user.hasOwnProperty(sessionKey)) {
-                                let session = sessions.find(item => item.$key === sessionKey);
-                                if (!Array.isArray(session.feedback)) {
-                                    session.feedback = [];
-                                }
-                                user[sessionKey].uid = uid;
-                                session.feedback.push(user[sessionKey]);
+                for (let uid of Object.keys(feedback)) {
+                    let user = feedback[uid];
+                    for (let sessionKey of Object.keys(user)) {
+                        let session = sessions.find(item => item.$key === sessionKey);
+                        if (session) {
+                            if (!session.feedback) {
+                                session.feedback = [];
                             }
+                            user[sessionKey].uid = uid;
+                            session.feedback.push(user[sessionKey]);
                         }
                     }
                 }
@@ -109,7 +108,8 @@ export class ReportsComponent {
                 });
 
                 return sessions;
-            })
+            }),
+            tap(data => console.log('processed data', data)),
         );
     }
 }

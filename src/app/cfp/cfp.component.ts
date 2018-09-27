@@ -20,6 +20,7 @@ export class CFPComponent {
         company: [''],
         technology: [''],
         type: ['', Validators.required],
+        difficulty: ['', Validators.required],
         title: ['', Validators.required],
         abstract: ['', Validators.required],
         bio: ['', Validators.required],

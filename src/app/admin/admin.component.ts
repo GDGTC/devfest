@@ -4,6 +4,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 
 import { AngularFireList } from '@angular/fire/database/interfaces';
 import { AuthService } from '../realtime-data/auth.service';
+import { YearService } from '../year.service';
 
 @Component({
     templateUrl: './admin.component.html',
@@ -15,8 +16,8 @@ export class AdminComponent {
     editSession = {};
     editSpeaker = {};
 
-    constructor(public db: AngularFireDatabase, public auth: AuthService) {
-        const PATH = 'devfest2018';
+    constructor(public db: AngularFireDatabase, public auth: AuthService, public yearService: YearService) {
+        const PATH = `devfest${yearService.year}`;
         this.schedule = db.list(PATH + '/schedule');
         this.speakers = db.list(PATH + '/speakers');
     }

@@ -1,9 +1,12 @@
 import * as functions from 'firebase-functions';
 import * as fetch from 'node-fetch';
 
+import { environment } from '../../src/environments/environment.prod';
+
 export const generateSitemap = functions.https.onRequest((req, res) => {
-    const speakerData = fetch('https://devfestmn.firebaseio.com/devfest2018/speakers.json');
-    const sessionData = fetch('https://devfestmn.firebaseio.com/devfest2018/schedule.json');
+
+    const speakerData = fetch(`https://devfestmn.firebaseio.com/devfest${environment.defaultYear}/speakers.json`);
+    const sessionData = fetch(`https://devfestmn.firebaseio.com/devfest${environment.defaultYear}/schedule.json`);
 
     let sitemap = '';
 
@@ -17,11 +20,11 @@ export const generateSitemap = functions.https.onRequest((req, res) => {
 
         for(const key in speakers) {
             const name = encodeURIComponent(speakers[key].name);
-            sitemap += `https://devfest.mn/2018/speakers/${key}/${name}\n`;
+            sitemap += `https://devfest.mn/${environment.defaultYear}/speakers/${key}/${name}\n`;
         }
         for(const key in sessions) {
             const title = encodeURIComponent(sessions[key].title);
-            sitemap += `https://devfest.mn/2018/schedule/${key}/${title}\n`
+            sitemap += `https://devfest.mn/${environment.defaultYear}/schedule/${key}/${title}\n`
         }
         res.send(sitemap);
     })

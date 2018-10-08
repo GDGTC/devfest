@@ -30,6 +30,10 @@
     <form [formGroup]="cfp" (submit)="submit(cfp, uid)" *ngIf="auth.uid | async as uid; else login">
         <p>Welcome {{auth.name | async}}! We're excited to hear what you want to share.</p>
 
+
+        <p>If you have any questions about our CFP, <a routerLink="/speaker-cfp">read about</a> what we're looking for and our process for picking sessions.</p>
+
+
         <h3>About You</h3>
         <mat-form-field>
             <input matInput formControlName="name" placeholder="Name" autocomplete="name" required>
@@ -93,6 +97,9 @@
             <mat-radio-button value="other">Other</mat-radio-button>
 
         </mat-radio-group>
+        <div *ngIf="priorSubmissionDate">
+            Last submitted on {{priorSubmissionDate | date}}
+        </div>
         <button type="submit" mat-raised-button color="primary">Submit</button>
     </form>
 

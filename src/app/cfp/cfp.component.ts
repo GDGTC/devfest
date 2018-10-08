@@ -28,6 +28,8 @@ export class CFPComponent {
         referrer: ['', Validators.required],
     });
 
+    priorSubmissionDate: string = null;
+
     constructor(
         private store: AngularFirestore,
         private fb: FormBuilder,
@@ -44,6 +46,7 @@ export class CFPComponent {
             )
             .subscribe(priorSubmission => {
                 this.cfp.patchValue(priorSubmission);
+                this.priorSubmissionDate = priorSubmission.date;
             });
     }
 

@@ -7,6 +7,7 @@ interface Proposal {
     email: string;
     title: string;
     abstract: string;
+    date: string;
 }
 
 @Component({

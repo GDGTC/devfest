@@ -1,5 +1,5 @@
 import * as functions from 'firebase-functions';
-import * as fetch from 'node-fetch';
+import fetch from 'node-fetch';
 
 import { environment } from '../../src/environments/environment.prod';
 

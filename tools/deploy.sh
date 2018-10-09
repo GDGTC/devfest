@@ -1,4 +1,4 @@
 #!/bin/bash
-ng build --prod && \
+yarn build && \
 yarn run gfp && \
 firebase deploy

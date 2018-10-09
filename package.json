@@ -4,12 +4,11 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
+    "setup": "yarn && cd functions && yarn",
+    "build": "ng build --prod && cd functions && yarn build",
     "start": "ng serve",
     "serve": "ng serve",
-    "lint": "tslint \"src/**/*.ts\"",
-    "test": "ng test",
-    "pree2e": "webdriver-manager update",
-    "e2e": "protractor"
+    "lint": "tslint \"src/**/*.ts\""
   },
   "private": true,
   "dependencies": {

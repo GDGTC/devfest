@@ -31,7 +31,7 @@
     "@angular/service-worker": "^7.0.0-rc.0",
     "core-js": "^2.5.4",
     "firebase": "^5.5.1",
-    "firebase-http2-push-config": "^0.0.8",
+    "firebase-http2-push-config": "^0.0.11",
     "promise-polyfill": "^6.0.2",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.0.0-rc.0",

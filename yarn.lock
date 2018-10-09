@@ -2480,10 +2480,10 @@ find-up@^3.0.0:
   dependencies:
     locate-path "^3.0.0"
 
-firebase-http2-push-config@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/firebase-http2-push-config/-/firebase-http2-push-config-0.0.8.tgz#3d57a5df0a72697930e6229ae3436e4bd087f327"
-  integrity sha512-gJCQL2LrsSRH43sFRU8cBlwy5ua0Lv5ojeMemfepJ2JlPQSeN2f2tL0tFKS0B0qyOqn4lkznP5Um5qtV6tHfBg==
+firebase-http2-push-config@^0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/firebase-http2-push-config/-/firebase-http2-push-config-0.0.11.tgz#61716f3e213ea6c70d35e0ac3f9295d73347aa23"
+  integrity sha512-DlUQ7rrMkSHTjcF8Fmis6WX3HEnt8B8bN6wpcXQbAz3D2G+8s4Y2LIlk1lf38j/H1NnJtavpSPM0E4y4BQuc8A==
 
 firebase@^5.5.1:
   version "5.5.1"

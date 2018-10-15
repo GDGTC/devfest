@@ -1,31 +1,47 @@
-# Devfestmn
+# DevFestMN
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.29.
 
-## Development server
+## Summary
+
+1. `yarn setup`
+2. Create local branch and make changes
+3. `ng serve`
+4. Submit PR
+5. Marge PR into master
+6. Firebase authentication - may not be required
+7. Run `tools/deploy.sh`
+
+## Project Setup
+
+When you first checkout the repo, run `yarn setup` to install all dependencies.
+
+Install Firebase Tools by running `npm install -g firebase-tools` and run `firebase login` to authenticate for deployment permissions.
+
+## Development Server
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+Run `ng serve -o` to have the browser open once the initial build is complete.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+## Pushing to GitHub
 
-## Build
+Create a branch and push a pull request to GitHub. Once the PR has succesfully passed Travis tests, and has been approved and merged, the update will be automatically be pushed to GitHub pages `https://gdgtc.github.io/devfest/`.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+## Deploying to live http://devfest.mn website
 
-## Running unit tests
+Run `tools/deploy.sh`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Common Errors
 
-## Running end-to-end tests
+If you see an 'HTTP Error: 401, Request had invalid authentication credentials.' error:
+- First try running `firebase login`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+If 'Already logged in as ..':
+- Run `firebase logout`
+- Run `firebase login` and supply credentials
+- Try re-running `tools/deploy.sh`
 
-## Deploying to GitHub Pages
-
-Run `ng github-pages:deploy` to deploy to GitHub Pages.
-
-## Further help
+## Further Help
 
 To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

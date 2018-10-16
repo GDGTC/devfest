@@ -46,16 +46,19 @@ body {
     width: 100%;
     padding: 16px;
     color: #777;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
     transition: 0.2s;
     font-size: 18px;
     display: flex;
     z-index: 100;
 }
+
 #header-bar > div a,
 #header-bar > div a:visited {
     padding: 16px;
     font-size: 14px;
+    font-family: 'Montserrat', 'Arial', sans-serif;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 #hero-section {
@@ -70,8 +73,13 @@ body {
 }
 
 .logo {
-    font-family: Montserrat, sans-serif;
+    display: flex;
+}
+
+.logo span {
+    font-family: 'Montserrat', sans-serif;
     letter-spacing: 0.15em;
+    line-height: 24px;
 }
 
 section {
@@ -85,7 +93,7 @@ section {
 }
 
 #home #map img {
-    height:400px;
+    width: 100%;
     border-radius: 8px;
 }
 
@@ -139,7 +147,6 @@ section p {
     margin: 16px auto;
 }
 .cta {
-    display: flex;
     margin-top: 20px;
     padding: 8px 22px;
     border-radius: 25px;
@@ -456,8 +463,8 @@ a.button:visited {
         position: relative;
     }
 
-    #header-bar span {
-        display: none;
+    #home section {
+        padding: 18px 32px;
     }
 
     .session-details {

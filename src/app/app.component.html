@@ -1,5 +1,7 @@
 <div id="header-bar">
-	<a class="logo" routerLink="/">DevFest<strong>MN</strong></a>
+    <a class="logo big" routerLink="/">
+        <img src="a/icons/icon-32x32.png" style="height: 24px; margin-right: 12px;" alt="DevFestMN 2017">
+        <span>DevFest<strong>MN</strong></span></a>
 	<span style="flex-grow:1"></span>
 	<div>
         <a *ngIf="environment.showCFP" [routerLink]="['speaker-cfp']">Speakers</a>

@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    letter-spacing: 0.25px;
 }
 img {
     max-width: 100%;
@@ -82,12 +83,22 @@ section {
     padding: 32px 32px 64px;
     color: #333;
 }
+
+#home #map {
+    height:400px;
+}
+
+#home #map img {
+    border-radius: 8px;
+}
+
 section h2 {
     text-transform: uppercase;
     font-size: 20px;
     font-weight: normal;
     color: #777;
 }
+
 section h2:after {
     margin: 17px auto 0;
     width: 140px;

@@ -84,35 +84,55 @@ section {
     color: #333;
 }
 
-#home #map {
+#home #map img {
     height:400px;
+    border-radius: 8px;
 }
 
-#home #map img {
-    border-radius: 8px;
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-size: 36px;
+    margin: 18px 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 28px;
+    margin: 18px 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+h3 {
+    font-size: 20px;
+    margin: 18px 0;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 section h2 {
     text-transform: uppercase;
-    font-size: 20px;
-    font-weight: normal;
-    color: #777;
+    color: #19a9e5;
 }
 
-section h2:after {
+/* section h2:after {
     margin: 17px auto 0;
     width: 140px;
     height: 1px;
     background: #19a9e5;
     content: '';
     display: block;
-}
+} */
 
 section .callout {
     margin: 32px 0;
     font-size: 36px;
     color: #222;
-    font-family: Montserrat, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 section p {
     max-width: 945px;
@@ -228,13 +248,23 @@ a.button:visited {
 
 /* Sponsors */
 
+#home-section-sponsors h3 {
+    text-transform: uppercase;
+}
+
 .sponsor-bar {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 40px;
 }
+
+.sponsor-bar:last-child {
+    margin-bottom: 0;
+}
+
 .sponsor-bar * {
-    margin: 32px;
+    margin: 18px 32px;
     max-height: 100px;
 }
 

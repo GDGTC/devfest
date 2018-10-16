@@ -39,6 +39,8 @@ body {
     display: block;
 }
 
+/* Header Bar */
+
 #header-bar {
     position: fixed;
     top: 0;
@@ -61,6 +63,18 @@ body {
     text-transform: uppercase;
 }
 
+/* Hero */
+
+.logo {
+    display: flex;
+}
+
+.logo span {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.15em;
+    line-height: 24px;
+}
+
 #hero-section {
     background-image: url(/a/images/background.jpg);
     background-size: cover;
@@ -72,15 +86,7 @@ body {
     padding: 16px;
 }
 
-.logo {
-    display: flex;
-}
-
-.logo span {
-    font-family: 'Montserrat', sans-serif;
-    letter-spacing: 0.15em;
-    line-height: 24px;
-}
+/* Layout */
 
 section {
     text-align: center;
@@ -93,9 +99,29 @@ section {
 }
 
 #home #map img {
-    width: 100%;
+    width: 768px;
+    height: auto;
     border-radius: 8px;
 }
+
+@media screen and (max-width: 480px) {
+    #home #map img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Page Header Bannner */
+
+header.page-header-banner {
+    /* Replace later with hero image or background that matches style */
+    /* background-color: #19a9e5;
+    color: white; */
+    padding: 18px 0;
+    text-align: center;
+}
+
+/* Headers */
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
@@ -142,12 +168,15 @@ section .callout {
     color: #222;
     font-family: 'Montserrat', sans-serif;
 }
+
 section p {
     max-width: 945px;
     margin: 16px auto;
 }
+
+/* Call to Action */
+
 .cta {
-    margin-top: 20px;
     padding: 8px 22px;
     border-radius: 25px;
     color: #fff;
@@ -159,6 +188,7 @@ section p {
     color: rgb(119, 119, 119);
     background: none;
 }
+
 .cta.cta-unselected:active,
 .cta.cta-unselected:focus,
 .cta.cta-unselected:hover {
@@ -433,6 +463,12 @@ a.button:visited {
     margin-left: 50px;
     padding-left: 50px;
     margin-top: 16px;
+}
+
+/* Speaker CFP Page */
+#speaker-cfp section {
+    margin: auto;
+    text-align: left;
 }
 
 .small {

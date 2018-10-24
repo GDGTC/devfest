@@ -1,13 +1,25 @@
 <h2>{{yearService.year}} CFPs</h2>
-<div *ngFor="let cfp of cfps | async" style="margin:16px 0;">
+<div class="cfp-block" *ngFor="let cfp of cfps | async">
     <h3>{{cfp.title}} by <a href="mailto:{{cfp.email}}">{{cfp.name}}</a></h3>
-    <p>{{cfp.date | date}}</p>
-    <p *ngFor="let item of cfp | keyvalue | ignoreFields:['title','name','email','date']">
-        <strong>{{item.key}}:</strong> {{item.value}}</p>
+    <table>
+        <tr>
+            <td><strong>Date Submitted: </strong></td>
+            <td>{{cfp.date | date}}</td>
+        </tr>
+        <tr *ngFor="let item of cfp | keyvalue | ignoreFields:['title','name','email','date']">
+            <td><strong>{{item.key | titlecase}}:</strong></td>
+            <td>{{item.value}}</td>
+        </tr>
+    </table>
+
     <!-- <mat-form-field style="display:block;">
         <textarea matInput placeholder="private admin notes"></textarea>
         <button>Save Notes</button>
     </mat-form-field> -->
-    <button mat-raised-button color="warn" (click)="reject(cfp)">Reject Session (not yet implemented)</button>
-    <button mat-raised-button color="primary" (click)="approve(cfp)">Approve Session (not yet implemented)</button>
+
+    <div class="button-container">
+        <button class="button warn" (click)="reject(cfp)">Reject Session (not yet implemented)</button>
+        <button class="button" (click)="approve(cfp)">Approve Session (not yet implemented)</button>
+    </div>
+    <hr>
 </div>

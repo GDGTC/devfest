@@ -4,12 +4,17 @@
         <button type="button" (click)="auth.login()">Login</button>
     </div>
     <div *ngIf="auth.uid | async">
-        You are signed in as {{auth.name | async}} ({{auth.uid | async}})
-        <span *ngIf="auth.isAdmin">You have awesome <strong>admin</strong> powers.</span>
-        (<a (click)="auth.logout()" href="#">logout</a>)
+        <span><strong>Signed In As:</strong> {{auth.name | async}} ({{auth.uid | async}})</span>
+        <br>
+        <span *ngIf="auth.isAdmin">You have awesome
+            <strong>admin</strong> powers > <a (click)="auth.logout()" href="#"><strong>LOG OUT</strong></a></span>
+
     </div>
 
-    <div>Links: <a routerLink="cfps">CFPs</a> <a routerLink="reports">Reports</a></div>
+    <div class="button-container flex">
+        <a class="cta all-caps" routerLink="cfps">CFPs</a>
+        <a class="cta all-caps" routerLink="reports">Reports</a>
+    </div>
 
     <router-outlet></router-outlet>
 </div>

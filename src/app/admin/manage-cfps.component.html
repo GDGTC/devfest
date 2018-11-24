@@ -1,12 +1,12 @@
 <h2>{{yearService.year}} CFPs</h2>
 <div class="cfp-block" *ngFor="let cfp of cfps | async">
-    <h3>{{cfp.title}} by <a href="mailto:{{cfp.email}}">{{cfp.name}}</a></h3>
+    <h3><span [title]="cfp.id">{{cfp.title}}</span> by <a href="mailto:{{cfp.email}}">{{cfp.name}}</a></h3>
     <table>
         <tr>
             <td><strong>Date Submitted: </strong></td>
             <td>{{cfp.date | date}}</td>
         </tr>
-        <tr *ngFor="let item of cfp | keyvalue | ignoreFields:['title','name','email','date']">
+        <tr *ngFor="let item of cfp | keyvalue | ignoreFields:['title','name','email','date','id']">
             <td><strong>{{item.key | titlecase}}:</strong></td>
             <td>{{item.value}}</td>
         </tr>

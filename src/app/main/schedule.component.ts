@@ -74,10 +74,11 @@ export class ScheduleComponent {
                                     // Placeholder if there's nothing in the previous time slot, or there is and it's a short one
 
                                     if (!data[previous]) {
+                                        console.log( 'Looking for data at ID:', previous, ' in ', data);
+
                                         console.error(
-                                            `Hit an invalid schedule entry.` +
-                                                `We probably couldn't calculate something probably related to an invalid time.`
-                                        );
+                                            `Hit an invalid schedule entry!` +
+                                                `We probably couldn't calculate something probably related to an invalid time.`);
                                         continue;
                                     }
 

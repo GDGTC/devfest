@@ -10,8 +10,8 @@ export const environment = {
         storageBucket: 'firebase-devfestmn.appspot.com',
         messagingSenderId: '27347020178',
     },
-    showRegister: null,
-    showCFP: true,
+    showRegister: 'http://bit.ly/devfestmn-website-tickets',
+    showCFP: false,
     showSchedule: false,
     showSpeakers: false,
 };

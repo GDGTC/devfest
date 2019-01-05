@@ -20,6 +20,7 @@ import { SpeakerSelectorComponent } from './speaker-selector.component';
 import { VolunteersComponent } from './volunteers.component';
 import { ManageCFPsComponent, IgnoreFields } from './manage-cfps.component';
 import { RealtimeDataModule } from '../realtime-data/realtime-data.module';
+import { EventsComponent } from './events.component';
 
 @NgModule({
     imports: [
@@ -42,6 +43,7 @@ import { RealtimeDataModule } from '../realtime-data/realtime-data.module';
                     { path: 'reports', component: ReportsComponent },
                     { path: 'volunteers', component: VolunteersComponent },
                     { path: 'cfps', component: ManageCFPsComponent},
+                    { path: 'events', component: EventsComponent},
                 ],
             },
         ]),
@@ -62,6 +64,7 @@ import { RealtimeDataModule } from '../realtime-data/realtime-data.module';
         SessionReportComponent,
         ManageCFPsComponent,
         IgnoreFields,
+        EventsComponent,
     ],
 })
 export class AdminModule {}

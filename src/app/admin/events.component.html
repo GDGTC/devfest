@@ -1,1 +1,5 @@
-Hello Events Components
+<h2>Events</h2>
+<div *ngFor="let event of events | async">
+    <h3>{{event.title}}</h3>
+    <input [(ngModel)]="event.id">
+</div>

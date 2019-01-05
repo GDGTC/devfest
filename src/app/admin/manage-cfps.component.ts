@@ -52,8 +52,8 @@ export class ManageCFPsComponent {
         const scheduleEntry = {
             title: cfp.title,
             description: cfp.abstract,
-            startTime: '2018-01-01T08:00:00-06:00',
-            endTime: '2018-01-01T09:00:00-06:00',
+            startTime: '2019-02-02T08:00:00-06:00',
+            endTime: '2019-02-02T09:00:00-06:00',
             track: cfp.technology,
             difficulty: cfp.difficulty,
             speakers: [
@@ -65,6 +65,7 @@ export class ManageCFPsComponent {
 
         const originalCFP = this.store.doc<Proposal>(`/years/${this.yearService.year}/proposals/${cfp.id}`)
         originalCFP.update({approved: true});
+        alert('speaker and session created!');
 
 
     }

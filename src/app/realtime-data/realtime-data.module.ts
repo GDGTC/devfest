@@ -6,6 +6,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'environments/environment';
 import { FireJoinPipe } from './fire-join.pipe';
 import { AuthService } from './auth.service';
+import { FirebaseService } from './firebase.service';
 
 @NgModule({
     declarations: [
@@ -19,9 +20,11 @@ import { AuthService } from './auth.service';
     ],
     providers: [
         AuthService,
+        FirebaseService,
     ],
     exports: [
         FireJoinPipe,
+        AngularFireDatabaseModule,
     ]
 })
 export class RealtimeDataModule {

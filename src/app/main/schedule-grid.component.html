@@ -89,4 +89,22 @@
             </ng-template>
         </div>
     </div>
+    <div *ngIf="auth.isAdmin | async">
+            <ng-container *ngFor="let time of data.gridData | keyvalue">
+
+            <div *ngIf="time.value.undefined as slot">
+                <h3>Unassigned Session</h3>
+                <pre>{{data.rooms | json}}</pre>
+                    <div class="title">
+                        {{slot.title}}
+                        <a [routerLink]="['/',year,'admin','sessions',slot.$key,'edit']"><img src="/a/edit.svg"></a>
+                    </div>
+                    <div *ngFor="let speaker of slot.speakers | keyvalue">
+                        {{(speaker.value | getSpeaker | async)?.name}}
+                    </div>
+            </div>
+
+        </ng-container>
+
+    </div>
  </div>

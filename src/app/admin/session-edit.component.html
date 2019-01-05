@@ -8,13 +8,22 @@
 
 <ng-container *ngIf="sessionData | async as session; else loading">
         <h1>{{ (session.$key ? 'Edit' : 'New') }} Session</h1>
-        <form ngNoForm (submit)="save(session)">
+        <form ngNoForm (submit)="save(session)" autocomplete="off">
                 <mat-form-field><input matInput [(ngModel)]="session.title" placeholder="Title" style="width: 100%"></mat-form-field>
                 <br>
                 <textarea [(ngModel)]="session.description" placeholder="Description" style="width:100%; height: 4em;"></textarea>
                 <br>
-                <mat-form-field><input matInput [(ngModel)]="session.room" placeholder="Room"></mat-form-field>
-                <mat-form-field><input matInput [(ngModel)]="session.track" placeholder="Track"></mat-form-field>
+                <mat-form-field><input matInput [(ngModel)]="session.room" placeholder="Room" [matAutocomplete]="roomAuto" autocomplete="off"></mat-form-field>
+                <mat-autocomplete #roomAuto="matAutocomplete">
+                    <mat-option *ngFor="let room of ['Large Auditorium','Small Auditorium','235','238','244','321','334','446','458']" [value]="room">
+                        {{room}}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-form-field><input matInput [(ngModel)]="session.track" placeholder="Track" [matAutocomplete]="trackAuto" autocomplete="off"></mat-form-field>
+                <mat-autocomplete #trackAuto="matAutocomplete">
+                    <mat-option *ngFor="let track of ['all', 'Web','Android','Design','Cloud','IoT','General','Keynote']" [value]="track">{{track}}</mat-option>
+
+                </mat-autocomplete>
                 <mat-form-field><input matInput [(ngModel)]="session.startTime" placeholder="Start Time"></mat-form-field>
                 <mat-form-field><input matInput [(ngModel)]="session.blocks" placeholder="# of Blocks"></mat-form-field>
                 <mat-form-field><input matInput [(ngModel)]="session.notes" placeholder="Last Minute Notes"></mat-form-field>

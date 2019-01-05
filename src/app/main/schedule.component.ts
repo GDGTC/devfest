@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { DataService, Session } from '../shared/data.service';
 
-import { Observable ,  combineLatest } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { environment } from 'environments/environment';
 import { YearService } from '../year.service';
@@ -71,20 +71,19 @@ export class ScheduleComponent {
                                         time.substr(0, 11) +
                                         pad(parseInt(time.substr(11, 2), 10) - 1) +
                                         time.substr(13);
-                                    // Placeholder if there's nothing in the previous time slot, or there is and it's a short one
 
                                     if (!data[previous]) {
-                                        console.log( 'Looking for data at ID:', previous, ' in ', data);
-
-                                        console.error(
-                                            `Hit an invalid schedule entry!` +
-                                                `We probably couldn't calculate something probably related to an invalid time.`);
+                                       // This is fine, it just means we're probably at the beginning of a day
                                         continue;
                                     }
 
+                                    // Placeholder if there's nothing in the previous time slot, or there is and it's a short one
                                     if (!data[previous][room]) {
                                         data[time][room] = 'placeholder';
-                                    } else if (!data[previous][room].blocks || data[previous][room].blocks < 2) {
+                                    } else if (
+                                        !data[previous][room].blocks ||
+                                        data[previous][room].blocks < 2
+                                    ) {
                                         // This room has nothing in it!
                                         data[time][room] = 'placeholder';
                                     } else {

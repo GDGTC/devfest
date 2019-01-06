@@ -71,6 +71,7 @@ export class DataService {
     }
 
     // @TODO this method is called much too often
+    // We should get this from the data, but then how to control ordering?
     getVenueLayout() {
         let rooms, floors;
 

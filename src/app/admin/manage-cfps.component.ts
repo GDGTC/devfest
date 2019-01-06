@@ -44,7 +44,8 @@ export class ManageCFPsComponent {
             company: cfp.company,
             name: cfp.name,
             twitter: cfp.twitter,
-            speakerUserId: cfp.id
+            speakerUserId: cfp.id,
+            confirmed: true,
         };
 
         const speakerKey = speakers.push(speakerEntry).key;

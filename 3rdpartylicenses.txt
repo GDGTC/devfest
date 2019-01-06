@@ -296,9 +296,6 @@ Apache-2.0
 
 firebase/auth
 
-@firebase/webchannel-wrapper
-Apache-2.0
-
 @firebase/database
 Apache-2.0
 
@@ -559,6 +556,9 @@ firebase/database
 @firebase/app
 Apache-2.0
 
+@firebase/webchannel-wrapper
+Apache-2.0
+
 @firebase/util
 Apache-2.0
 
@@ -592,6 +592,9 @@ THE SOFTWARE.
 @angular/common
 MIT
 
+@angular/core
+MIT
+
 @angular/animations
 MIT
 
@@ -607,12 +610,6 @@ MIT
 MIT
 
 @angular/material/snack-bar
-
-@angular/core
-MIT
-
-@angular/compiler
-MIT
 
 core-js
 MIT
@@ -664,7 +661,16 @@ THE SOFTWARE.
 
 @angular/material/card
 
+@firebase/storage
+Apache-2.0
+
+firebase/storage
+
 @angular/material/checkbox
+
+@angular/material/core
+
+@angular/material/autocomplete
 
 @angular/material/tabs
 

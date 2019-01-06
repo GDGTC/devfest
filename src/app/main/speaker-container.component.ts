@@ -8,7 +8,7 @@
             <div class="thumb" [style.background-image]="'url('+speaker.imageUrl+')'"></div>
         </div>
         <div class="speaker-content">
-            <div style="font-size:20px;"><a [routerLink]="[speaker.$key,speaker.name]">{{speaker.name}}</a>
+            <div style="font-size:20px;"><a [routerLink]="['/',year,'speakers',speaker.$key,speaker.name]">{{speaker.name}}</a>
             <a *ngIf="showEdit" [routerLink]="['/',year,'admin','speakers',speaker.$key,'edit']"><img src="/a/edit.svg"></a>
             </div>
             <div>{{speaker.company}}</div>

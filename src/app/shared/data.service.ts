@@ -95,7 +95,7 @@ export class DataService {
                 'Classroom D': 3,
             };
         } else {
-            rooms = ['Large Auditorium', 'Small Auditorium', '235', '238', '244', '321', '334', '446', '458'];
+            rooms = ['235', '238', '244', '321', '334', '446', '458'];
             floors = {
                 'Large Auditorium': 'Schultze',
                 'Small Auditorium': 'Schultze',

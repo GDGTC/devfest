@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { ScheduleGridComponent } from './schedule-grid.component';
 import { ScheduleComponent } from './schedule.component';
+import { SessionsComponent} from './sessions.component';
 import { SessionDetailsComponent } from './session-details.component';
 import { SessionFeedbackComponent } from './session-feedback.component';
 import { SessionViewComponent } from './session-view.component';
@@ -34,6 +35,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
         StarBarComponent,
         ScheduleGridComponent,
         SessionDetailsComponent,
+        SessionsComponent
     ],
     imports: [
         CommonModule,
@@ -42,6 +44,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
         FormsModule,
         HttpModule,
         RouterModule.forChild([
+            { path: 'sessions', component: SessionsComponent, data: { title: 'Sessions', depth: 1 }, },
             { path: 'speakers', component: SpeakersComponent, data: { title: 'Speakers', depth: 1 }, },
             { path: 'speakers/:id/:seo', component: SpeakersViewComponent, data: { title: false, depth: 2 }, },
             { path: 'schedule', component: ScheduleComponent, data: { title: 'Schedule', depth: 1 }, },

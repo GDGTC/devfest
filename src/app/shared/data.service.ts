@@ -133,12 +133,13 @@ export class DataService {
     customDateFormatter(isoDateTime) {
         let dateTime = new Date(isoDateTime);
         let time = dateTime.getHours();
+        let min = dateTime.getMinutes();
         time -= 6 - dateTime.getTimezoneOffset() / 60;
         let indicator = time >= 12 && time < 24 ? 'PM' : 'AM';
         if (time > 12) {
             time -= 12;
         }
-        return `${time} ${indicator}`;
+        return `${time}:${min} ${indicator}`;
     }
 
     save(path: 'schedule' | 'speakers', item) {

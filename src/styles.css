@@ -473,6 +473,10 @@ button.button.warn {
     background-color: #19a9e5;
 }
 
+.schedule .lunch div {
+    color: black;
+}
+
 .schedule.small .session,
 .schedule.small .time {
     border-bottom: 1px solid white;

@@ -1,0 +1,14 @@
+<section>
+    <table>
+        <tr>
+            <td>Title</td>
+            <td>Room</td>
+            <td>startTime</td>
+        </tr>
+        <tr *ngFor="let session of sessions | async">
+            <td> <a [routerLink]="['/admin/sessions',session.$key,'edit']">{{session.title}}</a></td>
+            <td>{{session.room}}</td>
+            <td>{{session.startTime}}</td>
+        </tr>
+    </table>
+</section>

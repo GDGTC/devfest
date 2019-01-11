@@ -35,13 +35,13 @@
                 </div>
             </div>
             <ng-template #elseNotLoggedIn>
-                <div *ngIf="auth.uid | async" style="margin-top:64px;">
+                <div style="margin-top:64px;">
                     <h3>Login for More</h3>
                     <p>Login to save this session to your agenda, or to provide feedback after the session ends.</p>
                     <button (click)="auth.login()" class="cta" style="display:inline;">Login</button>
                 </div>
             </ng-template>
 
-        </div>
+        </div> 
     </div>
 </div>

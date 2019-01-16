@@ -25,14 +25,17 @@
             </div>
             <div *ngIf="session.renderedDescription" [innerHTML]="session.renderedDescription" style="max-width:500px;display:inline-block;">
             </div>
-            <div *ngIf="auth.uid | async; else elseNotLoggedIn">
-                <button *ngIf="!((sessionAgenda.valueChanges() | async)?.value)" (click)="addToAgenda()" class="cta" style="display:inline;">Add to My Agenda</button>
+            <div *ngIf="auth.uid | async">
+
+                <button *ngIf="!((sessionAgenda.valueChanges() | async)?.value)" (click)="addToAgenda()" class="cta" style="display:inline;" >Add to My Agenda</button>
                 <button *ngIf="(sessionAgenda.valueChanges() | async)?.value" (click)="removeFromAgenda()" class="cta" style="display:inline;">Remove from My Agenda</button>
 
                 <div>
                     <h3 style="margin-top:32px;">Provide Feedback</h3>
                     <user-feedback [session]="session"></user-feedback>
                 </div>
+            </div>
+            <div *ngIf="auth.uid | async; else elseNotLoggedIn">
             </div>
             <ng-template #elseNotLoggedIn>
                 <div style="margin-top:64px;">

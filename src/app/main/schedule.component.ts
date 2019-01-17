@@ -114,6 +114,7 @@ export class ScheduleComponent {
      * Take in a full schedule and a set of agenda keys, return a new schedule of just those sessions the user has selected.
      */
     filterToMyAgenda(allData: Schedule, rawAgenda: any[]): Schedule {
+
         let result: Schedule = { startTimes: allData.startTimes, gridData: {}, rooms: [] };
 
         let resultSessions = {};
@@ -122,7 +123,7 @@ export class ScheduleComponent {
         let myAgendaKeys = [];
 
         for (let session of rawAgenda) {
-            myAgendaKeys.push(session.$key);
+            myAgendaKeys.push(session.key);
         }
 
         for (let time in allSessions) {

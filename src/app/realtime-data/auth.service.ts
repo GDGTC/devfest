@@ -44,11 +44,20 @@ export class AuthService {
                 }
             })
         );
+        /** Used to filter the agenda of a user on the schedule */
         this.agenda = this.state.pipe(
             switchMap(authState => {
                 if (authState && authState.uid) {
                     let year = yearService.year;
-                    return this.db.list(`devfest${year}/agendas/${authState.uid}`).valueChanges();
+                    return this.db.list(`devfest${year}/agendas/${authState.uid}`).snapshotChanges().pipe(
+                        map(actions => actions.map(a => {
+                            const value = a.payload.val();
+                            const key = a.payload.key;
+                            console.log('payload includes', a.payload);
+                            return { key: key, ...value };
+                          })
+                    )
+                    );
                 } else {
                     return observableEmpty();
                 }

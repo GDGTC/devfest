@@ -3,9 +3,11 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import { DataService, Session } from '../shared/data.service';
 import { AuthService } from '../realtime-data/auth.service';
+
 
 @Component({
     selector: 'session-details',
@@ -18,9 +20,9 @@ export class SessionDetailsComponent {
     year;
 
     sessionAgenda: AngularFireObject<any>;
+    sessionAgendaRead: Observable<any>;
     agendaInfo = this.route.params.pipe(
         switchMap(params => {
-            this.year = params['year'];
             return this.auth.uid.pipe(map(uid => ({ id: params['id'], uid: uid })));
         })
     );
@@ -31,20 +33,28 @@ export class SessionDetailsComponent {
         public auth: AuthService,
         public db: AngularFireDatabase
     ) {
-        this.agendaInfo.subscribe(agendaData => {
+        this.sessionAgendaRead = this.agendaInfo.pipe(
+            switchMap(agendaData => {
             let { id, uid } = agendaData;
             if (id && uid) {
-                this.sessionAgenda = this.ds.getAgenda(uid, id);
-                console.log('Session agenda is set to', this.sessionAgenda);
+                const agenda = this.ds.getAgenda(uid, id);
+                this.sessionAgenda = agenda;
+                return agenda.valueChanges();
             } else {
-                this.sessionAgenda = null;
+                return null;
             }
-        });
+        }));
     }
 
     addToAgenda() {
         if (this.sessionAgenda) {
-            this.sessionAgenda.set({ value: true });
+            this.sessionAgenda.set({ value: true })
+            .then(() => {
+                console.log('Successfully updated the agenda.');
+            })
+            .catch(error => {
+                console.error('failure while saving user agenda', error);
+            });
         } else {
             console.error('Cannot modify agenda as we do not have a path or user');
         }

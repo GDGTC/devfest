@@ -543,6 +543,7 @@ button.button.warn {
     #header-bar #header-menu {
         display: flex;
         flex-direction: row;
+        justify-content: space-evenly;
     }
 
     #header-bar #header-menu a.button {
@@ -550,6 +551,10 @@ button.button.warn {
         align-items: center;
         margin: 0;
         padding: 8px;
+    }
+
+    #header-bar #header-menu .header-menu-item {
+        padding: 16px 8px;
     }
 
     #home section {

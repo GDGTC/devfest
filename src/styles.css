@@ -11,7 +11,6 @@ body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
-    padding-top: 60px;
 }
 
 img {
@@ -38,10 +37,12 @@ a:hover {
 
 .routeContainer {
     position: relative;
+    margin-top: 72px;
 }
 
 .routeContainer > * {
     display: block;
+    margin: 32px 0;
 }
 
 /* Header Bar */
@@ -68,16 +69,24 @@ a:hover {
     text-transform: uppercase;
 }
 
+#header-bar #header-menu a.button {
+    margin: 0;
+    padding: 8px 16px;
+}
+
 /* Hero */
 
 .logo {
     display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .logo span {
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 0.15em;
     line-height: 24px;
+    color: #333;
 }
 
 #hero-section {
@@ -515,9 +524,6 @@ button.button.warn {
 .small {
     display: none;
 }
-.big {
-    display: block;
-}
 
 @media (max-width: 1024px) {
     .small {
@@ -535,8 +541,16 @@ button.button.warn {
         padding-top: 0;
     }
 
+    .routeContainer {
+        margin-top: 0;
+    }
+
+    .routeContainer > * {
+        margin: 0;
+    }
+
     #header-bar {
-        flex-direction: column;
+        flex-direction: row;
         position: relative;
     }
 
@@ -549,7 +563,6 @@ button.button.warn {
     #header-bar #header-menu a.button {
         display: flex;
         align-items: center;
-        margin: 0;
         padding: 8px;
     }
 

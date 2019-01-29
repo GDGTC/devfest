@@ -540,6 +540,18 @@ button.button.warn {
         position: relative;
     }
 
+    #header-bar #header-menu {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #header-bar #header-menu a.button {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 8px;
+    }
+
     #home section {
         padding: 18px 32px;
     }

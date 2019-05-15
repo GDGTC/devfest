@@ -9,10 +9,10 @@ import { YearSwitcherComponent } from './year-switcher.component';
         CommonModule,
         RouterModule.forChild([
             // Trying to nest this module so it works similarly if you have a year or not.
-            { matcher: isYear, component: YearSwitcherComponent, loadChildren: './authenticated.module#AuthenticatedModule' },
-            { path: 'admin', loadChildren: '../admin/admin.module#AdminModule', data: { title: 'Admin' } },
-            { path: 'cfp', loadChildren: '../cfp/cfp.module#CFPModule', data: { title: 'Call For Papers' } },
-            { path: '', loadChildren: '../main/main.module#MainModule' },
+            { matcher: isYear, component: YearSwitcherComponent, loadChildren: () => import('./authenticated.module').then(m => m.AuthenticatedModule) },
+            { path: 'admin', loadChildren: () => import('../admin/admin.module').then(m => m.AdminModule), data: { title: 'Admin' } },
+            { path: 'cfp', loadChildren: () => import('../cfp/cfp.module').then(m => m.CFPModule), data: { title: 'Call For Papers' } },
+            { path: '', loadChildren: () => import('../main/main.module').then(m => m.MainModule) },
         ]),
     ],
 })

@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { MatIconModule } from '@angular/material';
-import { MatButtonModule } from '@angular/material';
-import { MatCardModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { ScheduleGridComponent } from './schedule-grid.component';
 import { ScheduleComponent } from './schedule.component';
-import { SessionsComponent} from './sessions.component';
+import { SessionsComponent } from './sessions.component';
 import { SessionDetailsComponent } from './session-details.component';
 import { SessionFeedbackComponent } from './session-feedback.component';
 import { SessionViewComponent } from './session-view.component';
@@ -42,7 +42,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
         RealtimeDataModule,
         AngularFireDatabaseModule,
         FormsModule,
-        HttpModule,
+        HttpClientModule,
         RouterModule.forChild([
             { path: 'sessions', component: SessionsComponent, data: { title: 'Sessions', depth: 1 }, },
             { path: 'speakers', component: SpeakersComponent, data: { title: 'Speakers', depth: 1 }, },

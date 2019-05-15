@@ -6,7 +6,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'environments/environment';
 import { AppComponent } from './app.component';
 import { UpdateService } from './update.service';
-import { MatSnackBarModule } from '@angular/material';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -15,9 +15,9 @@ import { MatSnackBarModule } from '@angular/material';
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot([
-            { path: '', pathMatch: 'full', loadChildren: './home/home.module#HomeModule' },
-            { matcher: isMarketingContent, loadChildren: './content/content.module#ContentModule' },
-            { path: '', loadChildren: './authenticated/authenticated.module#AuthenticatedModule' },
+            { path: '', pathMatch: 'full', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+            { matcher: isMarketingContent, loadChildren: () => import('./content/content.module').then(m => m.ContentModule) },
+            { path: '', loadChildren: () => import('./authenticated/authenticated.module').then(m => m.AuthenticatedModule) },
         ]),
         ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
         MatSnackBarModule,

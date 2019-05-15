@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
 import { PastComponent } from './past.component';
 import { SpeakerCfpComponent } from './speaker-cfp.component';

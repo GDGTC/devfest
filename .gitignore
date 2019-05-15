@@ -5,6 +5,7 @@
 /dist-*
 /tmp
 /functions/lib
+/.firebase/
 
 # dependencies
 /node_modules

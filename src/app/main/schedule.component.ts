@@ -24,7 +24,7 @@ export class ScheduleComponent {
     populatedAgenda: Observable<any>;
 
     // Where we store the reference to the currently selected data.
-    filteredData: Observable<any>;
+    filteredData: Observable<Schedule>;
 
     constructor(
         public ds: DataService,

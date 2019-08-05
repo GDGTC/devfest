@@ -71,6 +71,7 @@ import { EventsComponent } from './events.component';
 })
 export class AdminModule {}
 
-export function isYear(url: UrlSegment[]) {
-    return url.length >= 1 && url[0].path.match(/\d{4}/) ? { consumed: [url[0]] } : null;
-}
+// export function isYear(url: UrlSegment[]) {
+//     //return url.length >= 1 && url[0].path.match(/\d{4}/) ? { consumed: [url[0]] } : null;
+//     return url.length >= 1 && url[0].path ? { consumed: [url[0]] } : null;
+// }

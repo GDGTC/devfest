@@ -6,7 +6,7 @@
 	<div id="header-menu">
 		<a class="header-menu-item" *ngIf="environment.showRegister" routerLink="/tickets" class="button">Tickets</a>
 		<a class="header-menu-item" *ngIf="environment.showSchedule" [routerLink]="['/schedule']">Schedule</a>
-        <a class="header-menu-item" *ngIf="environment.showCFP" [routerLink]="['speaker-cfp']">Speakers</a>
+        <a class="header-menu-item" *ngIf="environment.showCFP" [routerLink]="['speaker-cfp']">Be a Speaker</a>
         <a class="header-menu-item" *ngIf="environment.showSpeakers" [routerLink]="['/speakers']">Speakers</a>
 		<a class="header-menu-item" routerLink="/sponsors">Sponsor</a>
 	</div>

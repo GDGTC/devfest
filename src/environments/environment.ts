@@ -5,7 +5,7 @@
 
 export const environment = {
     production: false,
-    defaultYear: 2019,
+    defaultYear: '2019',
     siteName: 'DevFestMN',
     firebaseConfig: {
         apiKey: 'AIzaSyBrWJx91j512T3q6AaTGNxu_3fq47bYhfg',
@@ -16,7 +16,7 @@ export const environment = {
         messagingSenderId: '27347020178',
     },
     showRegister: 'https://devfestmnai.eventbrite.com/?aff=devfestmnwebsite',
-    showCFP: false,
+    showCFP: true,
     showSchedule: false,
-    showSpeakers: false,
+    showSpeakers: true,
 };

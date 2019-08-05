@@ -42,12 +42,12 @@ export interface Feedback {
 
 @Injectable()
 export class DataService {
-    private speakersByYear: { [key: number]: Observable<Speaker[]> } = {};
-    private scheduleByYear: { [key: number]: Observable<Session[]> } = {};
+    private speakersByYear: { [key: string]: Observable<Speaker[]> } = {};
+    private scheduleByYear: { [key: string]: Observable<Session[]> } = {};
 
     constructor(public db: AngularFireDatabase, public yearService: YearService) {}
 
-    getSpeakers(year: number) {
+    getSpeakers(year: string) {
         if (this.speakersByYear[year]) {
             return this.speakersByYear[year];
         }
@@ -59,7 +59,7 @@ export class DataService {
         return this.speakersByYear[year];
     }
 
-    getSchedule(year: number): Observable<Session[]> {
+    getSchedule(year: string): Observable<Session[]> {
         if (this.scheduleByYear[year]) {
             return this.scheduleByYear[year];
         }
@@ -75,7 +75,7 @@ export class DataService {
     getVenueLayout() {
         let rooms, floors;
 
-        if (this.yearService.year < 2018) {
+        if (this.yearService.year < '2018') {
             rooms = [
                 'Large Auditorium',
                 'Small Auditorium',

@@ -3,11 +3,11 @@ import { environment } from 'environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class YearService {
-    year: number;
+    year: string;
     constructor() {
         this.reset();
     }
-    setYear(year: number) {
+    setYear(year: string) {
         this.year = year;
     }
     reset() {

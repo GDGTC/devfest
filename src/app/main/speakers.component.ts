@@ -10,6 +10,7 @@ import { AuthService } from '../realtime-data/auth.service';
 })
 export class SpeakersComponent {
     speakers;
+    rooms; 
 
     thisSpeaker = {};
     showDialog = false;
@@ -23,6 +24,7 @@ export class SpeakersComponent {
         public yearService: YearService
     ) {
         this.speakers = ds.getSpeakers(yearService.year);
+        this.rooms = ds.getRooms(yearService.year);
     }
 
     addSpeaker() {

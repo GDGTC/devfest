@@ -32,6 +32,12 @@ export interface Speaker {
     website?: string;
 }
 
+export interface Room {
+    $key?: string;
+    name?: string;
+    location?: string;
+}
+
 export interface Feedback {
     $key?: string;
     speaker: number;
@@ -44,6 +50,7 @@ export interface Feedback {
 export class DataService {
     private speakersByYear: { [key: string]: Observable<Speaker[]> } = {};
     private scheduleByYear: { [key: string]: Observable<Session[]> } = {};
+    private roomsByYear: { [key: string]: Observable<Session[]> } = {};
 
     constructor(public db: AngularFireDatabase, public yearService: YearService) {}
 
@@ -59,6 +66,17 @@ export class DataService {
         return this.speakersByYear[year];
     }
 
+    getRooms(year: string){
+        if (this.roomsByYear[year]) {
+            return this.roomsByYear[year];
+        }
+        this.roomsByYear[year] = this.listPath<Room>('rooms', ref => ref.orderByChild('name')).pipe(
+            filter(x => !!x),
+            localstorageCache('roomsCache' + year),
+        );
+        return this.roomsByYear[year];
+    }
+
     getSchedule(year: string): Observable<Session[]> {
         if (this.scheduleByYear[year]) {
             return this.scheduleByYear[year];
@@ -69,6 +87,7 @@ export class DataService {
         );
         return this.scheduleByYear[year];
     }
+
 
     // @TODO this method is called much too often
     // We should get this from the data, but then how to control ordering?
@@ -95,7 +114,7 @@ export class DataService {
                 'Classroom D': 3,
             };
         } else {
-            rooms = ['235', '238', '244', '321', '334', '446', '458'];
+            rooms = this.getRooms(this.yearService.year);
             floors = {
                 'Large Auditorium': 'Schultze',
                 'Small Auditorium': 'Schultze',
@@ -174,7 +193,7 @@ export class DataService {
             });
     }
 
-    listPath<T>(type: 'schedule' | 'speakers' | 'feedback' | 'volunteers', query?: QueryFn): Observable<T[]> {
+    listPath<T>(type: 'schedule' | 'speakers' | 'rooms' |  'feedback' | 'volunteers', query?: QueryFn): Observable<T[]> {
         return this.modifiableList<T>(type, query)
             .snapshotChanges()
             .pipe(
@@ -188,7 +207,7 @@ export class DataService {
             );
     }
 
-    modifiableList<T>(type: 'schedule' | 'speakers' | 'feedback' | 'volunteers', query?: QueryFn): AngularFireList<T> {
+    modifiableList<T>(type: 'schedule' | 'speakers' | 'rooms' |  'feedback' | 'volunteers', query?: QueryFn): AngularFireList<T> {
         return this.db.list<T>(`devfest${this.yearService.year}/${type}`, query);
     }
 }

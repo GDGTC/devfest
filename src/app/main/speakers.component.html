@@ -4,6 +4,13 @@
     </div>
     <div class="callout">Confirmed Speakers</div>
 
+    <div>
+        <h2>rooms</h2>
+        <div *ngFor="let room of rooms | async">
+                {{room.name}}
+        </div>
+</div>
+
     <button *ngIf="auth.isAdmin | async" mat-raised-button color="primary" (click)="addSpeaker()">Add Speaker</button>
     <div class="speaker-list-container">
         <speaker-container *ngFor="let speaker of speakers | async" [speaker]="speaker" [year]="yearService.year" [showEdit]="auth.isAdmin | async"></speaker-container>

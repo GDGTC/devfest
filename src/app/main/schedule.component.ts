@@ -15,6 +15,7 @@ export interface Schedule {
     rooms: any[];
 }
 
+
 @Component({
     templateUrl: './schedule.component.html',
 })
@@ -64,7 +65,8 @@ export class ScheduleComponent {
                         let slot = data[time];
                         // Holes can only exist if there isn't an "all" session
                         if (!slot.all) {
-                            for (let room of ds.getVenueLayout().rooms) {
+                            
+                            for (let room of ds.getRooms(yearService.year) ) {
                                 if (!slot[room]) {
                                     // Found a hole in this room, checking previous time slot
                                     let previous =

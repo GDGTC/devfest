@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { DataService, Session } from '../shared/data.service';
+import { DataService, Session, Room } from '../shared/data.service';
 
 import { Observable, combineLatest } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -27,6 +27,8 @@ export class ScheduleComponent {
     // Where we store the reference to the currently selected data.
     filteredData: Observable<any>;
 
+    rooms;
+
     constructor(
         public ds: DataService,
         public auth: AuthService,
@@ -34,6 +36,7 @@ export class ScheduleComponent {
         public yearService: YearService
     ) {
         this.filteredData = this.allSessions;
+        this.rooms = ds.getRooms(yearService.year);
 
         /**
          * Session data should look like data[time][room] = session;
@@ -66,7 +69,7 @@ export class ScheduleComponent {
                         // Holes can only exist if there isn't an "all" session
                         if (!slot.all) {
                             
-                            for (let room of ds.getRooms(yearService.year) ) {
+                            for (let room of ds.getVenueLayout().rooms ) {
                                 if (!slot[room]) {
                                     // Found a hole in this room, checking previous time slot
                                     let previous =

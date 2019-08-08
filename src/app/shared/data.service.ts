@@ -50,7 +50,7 @@ export interface Feedback {
 export class DataService {
     private speakersByYear: { [key: string]: Observable<Speaker[]> } = {};
     private scheduleByYear: { [key: string]: Observable<Session[]> } = {};
-    private roomsByYear: { [key: string]: Observable<Session[]> } = {};
+    private roomsByYear: { [key: string]: Observable<Room[]> } = {};
 
     constructor(public db: AngularFireDatabase, public yearService: YearService) {}
 
@@ -66,11 +66,11 @@ export class DataService {
         return this.speakersByYear[year];
     }
 
-    getRooms(year: string){
+    getRooms(year: string): Observable<Room[]>{
         if (this.roomsByYear[year]) {
             return this.roomsByYear[year];
         }
-        this.roomsByYear[year] = this.listPath<Room>('rooms', ref => ref.orderByChild('name')).pipe(
+        this.roomsByYear[year] = this.listPath('rooms', ref => ref.orderByChild('name')).pipe(
             filter(x => !!x),
             localstorageCache('roomsCache' + year),
         );
@@ -114,7 +114,19 @@ export class DataService {
                 'Classroom D': 3,
             };
         } else {
-            rooms = this.getRooms(this.yearService.year);
+            rooms = [
+                'Large Auditorium',
+                'Small Auditorium',
+                'Lab',
+                'Classroom A',
+                'Classroom B',
+                'Classroom C',
+                'Classroom D',
+            ];
+            // rooms = [];
+            // rooms = for await( const room of this.getRooms(this.yearService.year)) {
+            //     rooms.push(room.name);
+            // };
             floors = {
                 'Large Auditorium': 'Schultze',
                 'Small Auditorium': 'Schultze',

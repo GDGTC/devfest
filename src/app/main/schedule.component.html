@@ -1,6 +1,15 @@
 <section>
+
 	  <div class="callout">Current Schedule</div>
     <p class="schedule-announcement">Schedule times and rooms will be updated often. <br />This page will be the most current and accurate.</p>
+
+    <div>
+            <h2>rooms</h2>
+            <div *ngFor="let room of rooms | async">
+                    {{room.name}}
+            </div>
+    </div>
+    
     <div class="button-container" *ngIf="auth.uid | async" style="margin: 40px 0;line-height:40px;">
         <a (click)="filteredData = populatedAgenda" [class.cta-unselected]="filteredData != populatedAgenda" class="cta" style="cursor:pointer;display:inline;border:1px solid #19a9e5;">My Agenda</a>
         <a (click)="filteredData = allSessions" [class.cta-unselected]="filteredData == populatedAgenda" class="cta" style="cursor:pointer;display:inline;border:1px solid #19a9e5;white-space:nowrap">Full Schedule</a>

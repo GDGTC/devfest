@@ -8,6 +8,9 @@ import { FireJoinPipe } from './fire-join.pipe';
 import { AuthService } from './auth.service';
 import { FirebaseService } from './firebase.service';
 
+/**
+ * Provides AuthService, FireJoin pipe, and AngularFireDatabaseModule
+ */
 @NgModule({
     declarations: [
         FireJoinPipe,

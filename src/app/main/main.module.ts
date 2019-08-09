@@ -21,6 +21,7 @@ import { StarBarComponent } from './star-bar.component';
 import { UserFeedbackComponent } from './user-feedback.component';
 import { RealtimeDataModule } from '../realtime-data/realtime-data.module';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { BlankComponent } from './blank/blank.component';
 
 @NgModule({
     declarations: [
@@ -35,15 +36,20 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
         StarBarComponent,
         ScheduleGridComponent,
         SessionDetailsComponent,
-        SessionsComponent
+        SessionsComponent,
+        BlankComponent
     ],
     imports: [
         CommonModule,
         RealtimeDataModule,
-        AngularFireDatabaseModule,
+        SharedModule,
         FormsModule,
         HttpClientModule,
+        MatIconModule,
+        MatButtonModule,
+        MatCardModule,
         RouterModule.forChild([
+            { path: 'blank', component: BlankComponent, data: { title: 'blank', depth:1},},
             { path: 'sessions', component: SessionsComponent, data: { title: 'Sessions', depth: 1 }, },
             { path: 'speakers', component: SpeakersComponent, data: { title: 'Speakers', depth: 1 }, },
             { path: 'speakers/:id/:seo', component: SpeakersViewComponent, data: { title: false, depth: 2 }, },
@@ -51,11 +57,12 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
             { path: 'schedule/:id/feedback', component: SessionFeedbackComponent, data: { title: 'Session Feedback', depth: 2 }, },
             { path: 'schedule/:id/:seo', component: SessionViewComponent, data: { title: false, depth: 2 }, },
         ]),
-        MatIconModule,
-        MatButtonModule,
-        MatCardModule,
-        SharedModule,
+
 
     ],
 })
-export class MainModule { }
+export class MainModule {
+    constructor() {
+        console.log('constructing main module');
+    }
+ }

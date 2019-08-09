@@ -19,6 +19,8 @@ import { YearSwitcherComponent } from './year-switcher.component';
 export class AuthenticatedModule {}
 
 export function isYear(url: UrlSegment[]) {
-    return url.length >= 1 && url[0].path.match(/\d{4}/) ? { consumed: [url[0]] } : null;
+    const result = url.length >= 1 && url[0].path.match(/\d{4}/) ? { consumed: [url[0]] } : null;
+    console.log('auth module thinks we are year?',result);
+    return result;
 }
 

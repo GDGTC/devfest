@@ -5,6 +5,9 @@ import { GetSpeakerPipe } from './get-speaker.pipe';
 import { DataService } from './data.service';
 
 
+/**
+ * Provides DataService, getSpeaker Pipe, EncodeURI pipe
+ */
 @NgModule({
     declarations: [
         EncodeURI,

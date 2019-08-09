@@ -40,6 +40,9 @@ export interface Feedback {
     comment: string;
 }
 
+/**
+ * Provided in SharedModule, relies on AngularFireDatabase and YearService
+ */
 @Injectable()
 export class DataService {
     private speakersByYear: { [key: string]: Observable<Speaker[]> } = {};

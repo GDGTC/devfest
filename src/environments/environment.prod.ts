@@ -11,7 +11,7 @@ export const environment = {
         messagingSenderId: '27347020178',
     },
     showRegister: 'https://devfestmnai.eventbrite.com/?aff=devfestmnwebsite',
-    showCFP: false,
+    showCFP: true,
     showSchedule: false,
     showSpeakers: true,
 };

@@ -3,6 +3,7 @@
  @Component({
      selector: 'speaker-container',
      template: `
+     <div *ngIf="speaker">
       <div class="speaker-card" *ngIf="speaker.confirmed || showEdit">
         <div *ngIf="speaker.imageUrl">
             <div class="thumb" [style.background-image]="'url('+speaker.imageUrl+')'"></div>
@@ -15,6 +16,7 @@
             <div>{{speaker.company}}</div>
             <div *ngIf="speaker.twitter"><a href="https://twitter.com/{{speaker.twitter}}" target="_blank">@{{speaker.twitter}}</a></div>
         </div>
+    </div>
     </div>
 
      `

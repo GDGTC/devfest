@@ -31,6 +31,6 @@ export class AppModule {
 }
 
 export function isMarketingContent(url: UrlSegment[]) {
-    let result = url.length === 1 && url[0].path.match(/(tickets|sponsors|past|speaker-cfp)/) ? { consumed: [] } : null;
+    let result = url.length === 1 && url[0].path.match(/(tickets|sponsors|past|speaker-cfp|conduct)/) ? { consumed: [] } : null;
     return result;
 }

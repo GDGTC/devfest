@@ -6,6 +6,7 @@ import { PastComponent } from './past.component';
 import { SpeakerCfpComponent } from './speaker-cfp.component';
 import { SponsorsComponent } from './sponsors.component';
 import { TicketsComponent } from './tickets.component';
+import { CodeOfConductComponent } from './code-of-conduct/code-of-conduct.component';
 
 @NgModule({
     declarations: [
@@ -13,6 +14,7 @@ import { TicketsComponent } from './tickets.component';
         SponsorsComponent,
         PastComponent,
         SpeakerCfpComponent,
+        CodeOfConductComponent,
     ],
     imports: [
         CommonModule,
@@ -22,6 +24,7 @@ import { TicketsComponent } from './tickets.component';
             { path: 'sponsors', component: SponsorsComponent, data: { title: 'Sponsors' } },
             { path: 'past', component: PastComponent, data: { title: 'Past DevFestMN Events' } },
             { path: 'speaker-cfp', component: SpeakerCfpComponent, data: { title: 'Speaker Call for Papers', depth: 1}},
+            { path: 'conduct', component: CodeOfConductComponent, data: { title: 'Code of Conduct'}},
         ]),
 
     ],

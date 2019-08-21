@@ -9,6 +9,12 @@ declare var google;
 })
 export class HomeComponent {
     environment = environment;
+    faqSelection = 1;
+
+    setFaqSelection(question) {
+        this.faqSelection = question;
+    }
+
 
     constructor(yearService: YearService) {
         yearService.reset();

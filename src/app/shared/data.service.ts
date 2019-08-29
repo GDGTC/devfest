@@ -94,6 +94,11 @@ export class DataService {
                 'Classroom C': 3,
                 'Classroom D': 3,
             };
+        } else if (this.yearService.year == '2019ai'){
+            rooms = ['fountain'];
+            floors = {
+                '3rd': 'Lumber Exchange',
+            };
         } else {
             rooms = ['235', '238', '244', '321', '334', '446', '458'];
             floors = {

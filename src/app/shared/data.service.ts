@@ -144,7 +144,11 @@ export class DataService {
         if (time > 12) {
             time -= 12;
         }
-        return `${time}:${min} ${indicator}`;
+        if (min == 0){
+            return `${time} ${indicator}`;
+        }else {
+            return `${time}:${min} ${indicator}`;
+        }
     }
 
     save(path: 'schedule' | 'speakers', item) {

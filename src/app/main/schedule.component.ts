@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
 import { DataService, Session } from '../shared/data.service';
@@ -30,6 +31,7 @@ export class ScheduleComponent {
         public ds: DataService,
         public auth: AuthService,
         public route: ActivatedRoute,
+        public router: Router,
         public yearService: YearService
     ) {
         this.filteredData = this.allSessions;
@@ -162,4 +164,11 @@ export class ScheduleComponent {
         result.rooms = returnRooms;
         return result;
     }
+
+    addSession() {
+        this.router.navigate(['/', this.yearService.year, 'admin', 'sessions', 'new', 'edit']);
+    }
+    
 }
+
+

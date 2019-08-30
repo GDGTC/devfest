@@ -170,5 +170,3 @@ export class ScheduleComponent {
     }
     
 }
-
-

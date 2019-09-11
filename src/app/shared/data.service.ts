@@ -50,7 +50,7 @@ export interface Feedback {
 export class DataService {
     private speakersByYear: { [key: string]: Observable<Speaker[]> } = {};
     private scheduleByYear: { [key: string]: Observable<Session[]> } = {};
-    private roomsByYear: { [key: string]: Observable<Room[]> } = {};
+    private roomsByYear: { [key: string]: Room[] } = {};
 
     constructor(public db: AngularFireDatabase, public yearService: YearService) {}
 
@@ -66,7 +66,7 @@ export class DataService {
         return this.speakersByYear[year];
     }
 
-    getRooms(year: string): Observable<Room[]>{
+    getRooms(year: string): Room[]{
         if (this.roomsByYear[year]) {
             return this.roomsByYear[year];
         }

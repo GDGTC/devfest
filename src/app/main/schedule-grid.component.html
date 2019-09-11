@@ -1,11 +1,13 @@
  <div *ngIf="data">
     <!-- Show the big schedule table -->
-    <table class="schedule big" [style.display]="forceMobile ? 'none' : ''"><tr><td></td><td *ngFor="let room of data.rooms" style="height:55px;vertical-align:middle;"><div>{{room}}</div><div style="font-size: .75em">{{ds.getVenueLayout().floors[room]}}</div></td></tr>
+    <table class="schedule big" [style.display]="forceMobile ? 'none' : ''">
+        <tr><td></td>
+            <td *ngFor="let room of rooms" style="height:55px;vertical-align:middle;"><div>{{room.name}}</div><div style="font-size: .75em">room.name</div></td></tr>
         <tr *ngFor="let time of data.startTimes">
             <td style="width:55px;">{{ ds.customDateFormatter(time) }}</td>
             <!-- Show one event spanning all rooms -->
             <ng-template [ngIf]="!data.gridData[time].all">
-                <ng-container *ngFor="let room of data.rooms">
+                <ng-container *ngFor="let room of rooms">
                     <td *ngIf="data.gridData[time][room] && data.gridData[time][room].title"
                         [rowSpan]="data.gridData[time][room].blocks"
                         class="{{data.gridData[time][room].track}} session"
@@ -53,7 +55,7 @@
             <div class="time">{{ ds.customDateFormatter(time)}}</div>
             <!-- Show one event spanning all rooms -->
             <ng-template [ngIf]="!data.gridData[time].all">
-                <ng-container *ngFor="let room of data.rooms">
+                <ng-container *ngFor="let room of rooms">
                     <a *ngIf="data.gridData[time][room]"
                         class="{{data.gridData[time][room].track}} session"
                         [routerLink]="['/schedule',data.gridData[time][room].$key,(data.gridData[time][room].title | encodeURI)]">

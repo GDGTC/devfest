@@ -12,7 +12,7 @@ import { AuthService } from '../realtime-data/auth.service';
 export interface Schedule {
     startTimes: any[];
     gridData: any;
-    rooms: any[];
+    rooms: Room[];
 }
 
 
@@ -36,7 +36,7 @@ export class ScheduleComponent {
         public yearService: YearService
     ) {
         this.filteredData = this.allSessions;
-        this.rooms = ds.getRooms(yearService.year);
+        this.rooms = ds.getRooms(yearService.year); 
 
         /**
          * Session data should look like data[time][room] = session;
@@ -100,7 +100,7 @@ export class ScheduleComponent {
                 }
 
                 let startTimes = Object.keys(data).sort();
-                return { startTimes: startTimes, gridData: data, rooms: ds.getVenueLayout().rooms };
+                return { startTimes: startTimes, gridData: data, rooms: ds.getRooms(yearService.year)};
             }),
             shareReplay(1)
         );

@@ -200,7 +200,7 @@ section.section-background {
     border-bottom: 1px solid #d4d2d2;
 }
 
-#home section h2 {
+#home section h2,#home section h3 {
     text-align: center;
 }
 

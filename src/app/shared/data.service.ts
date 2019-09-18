@@ -151,6 +151,7 @@ export class DataService {
                 return `${time}:${min} ${indicator}`;
             }
         } else {
+            return ' ';
             if (isoDateTime.toString().toLowerCase().indexOf('am') == -1){
                 return 'PM';
             } else {

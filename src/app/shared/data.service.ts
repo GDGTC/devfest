@@ -137,18 +137,29 @@ export class DataService {
      */
     customDateFormatter(isoDateTime) {
         let dateTime = new Date(isoDateTime);
-        let time = dateTime.getHours();
-        let min = dateTime.getMinutes();
-        time -= 6 - dateTime.getTimezoneOffset() / 60;
-        let indicator = time >= 12 && time < 24 ? 'PM' : 'AM';
-        if (time > 12) {
-            time -= 12;
+        if (dateTime.toString() != "Invalid Date"){          //Check if is actually a DATE.... otherwise look for AMPM
+            let time = dateTime.getHours();
+            let min = dateTime.getMinutes();
+            time -= 6 - dateTime.getTimezoneOffset() / 60;
+            let indicator = time >= 12 && time < 24 ? 'PM' : 'AM';
+            if (time > 12) {
+                time -= 12;
+            }
+            if (min == 0){
+                return `${time} ${indicator}`;
+            }else {
+                return `${time}:${min} ${indicator}`;
+            }
+        } else {
+            if (isoDateTime.toString().toLowerCase().indexOf('am') == -1){
+                return 'PM';
+            } else {
+                return 'AM';
+            }
+
         }
-        if (min == 0){
-            return `${time} ${indicator}`;
-        }else {
-            return `${time}:${min} ${indicator}`;
-        }
+
+
     }
 
     save(path: 'schedule' | 'speakers', item) {

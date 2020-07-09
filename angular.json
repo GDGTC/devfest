@@ -28,6 +28,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -119,17 +125,20 @@
   "defaultProject": "devfestmn",
   "schematics": {
     "@schematics/angular:class": {
-      "spec": false
+      "skipTests": true
     },
     "@schematics/angular:component": {
-      "spec": true,
+      "skipTests": false,
       "inlineStyle": false,
       "inlineTemplate": false,
       "prefix": "app",
-      "styleext": "css"
+      "style": "css"
     },
     "@schematics/angular:directive": {
       "prefix": "app"
     }
+  },
+  "cli": {
+    "analytics": "76ba051d-daac-4e43-b834-638193fd14dc"
   }
 }

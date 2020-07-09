@@ -49,7 +49,7 @@ export class AuthService {
             switchMap(authState => {
                 if (authState && authState.uid) {
                     let year = yearService.year;
-                    return this.db.list(`devfest${year}/agendas/${authState.uid}`).snapshotChanges().pipe(
+                    return this.db.list<any>(`devfest${year}/agendas/${authState.uid}`).snapshotChanges().pipe(
                         map(actions => actions.map(a => {
                             const value = a.payload.val();
                             const key = a.payload.key;

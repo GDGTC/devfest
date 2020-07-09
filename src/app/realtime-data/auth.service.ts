@@ -94,9 +94,9 @@ export class AuthService {
         this.isAdminOrVolunteer = combineLatest(this.isAdmin, this.isVolunteer, (x, y) => x || y);
     }
     login() {
-        this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+        this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     }
     logout() {
-        this.auth.auth.signOut();
+        this.auth.signOut();
     }
 }
